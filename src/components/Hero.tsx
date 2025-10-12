@@ -9,7 +9,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <img
           src={heroImage}
-          alt="Luxury car in professional studio"
+          alt="Luxury car in professional studio - Real 360° car experience captured with smartphone"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60" />
@@ -23,15 +23,11 @@ const Hero = () => {
           </div>
           
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            Transform Your Automotive Sales with{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              360° Visual Solutions
-            </span>
+            Real 360° Car Experience – No 3D Model Required
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
-            UrbanUplink delivers cutting-edge 360-degree imaging technology for automotive dealerships. 
-            No 3D models needed—just real, immersive experiences that drive sales.
+            Capture and showcase vehicles using your smartphone – Anytime, Anywhere. Transform your dealership with AI-powered 360° imaging.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
