@@ -1,4 +1,6 @@
 import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import Image1 from "../assets/2 (1).png"
+import Image2 from "../assets/2 (2).png"
 
 const Footer = () => {
   return (
@@ -8,10 +10,11 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">U</span>
-              </div>
-              <span className="text-xl font-bold">UrbanUplink</span>
+              <div className="w-[50%] h-[25%] rounded-lg flex flex-row items-center justify-center">
+              <img className="w-[80%] ml-[5rem]" src={Image2} />
+             <img className="mt-[3rem] -ml-[2rem]" src={Image1} />
+            </div>
+             
             </div>
             <p className="text-sm text-secondary-foreground/80">
               Transforming automotive sales with real 360° imaging solutions.
