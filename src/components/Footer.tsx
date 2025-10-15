@@ -1,4 +1,5 @@
 import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
 import Image1 from "../assets/2 (1).png"
 import Image2 from "../assets/2 (2).png"
 
@@ -80,24 +81,19 @@ const Footer = () => {
             <h4 className="font-bold mb-4">Legal</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors">
+                <Link to="/privacy-policy" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors" data-testid="link-privacy-policy">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors">
+                <Link to="/terms-of-service" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors" data-testid="link-terms-of-service">
                   Terms of Service
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors">
-                  Cookie Policy
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors">
-                  GDPR
-                </a>
+                <Link to="/refund-policy" className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors" data-testid="link-refund-policy">
+                  Refund Policy
+                </Link>
               </li>
             </ul>
           </div>
