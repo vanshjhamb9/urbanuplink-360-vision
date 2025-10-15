@@ -41,7 +41,7 @@ const RefundPolicy = () => {
               <li>Verified unauthorized payments made without user consent</li>
             </ul>
             <p>
-              Requests for review under these circumstances must be submitted within 7 days of the transaction date to <a href="mailto:admin@urbanuplink.ai" className="text-primary hover:underline">admin@urbanuplink.ai</a> with supporting documentation.
+              Requests for review under these circumstances must be submitted within 7 days of the transaction date to <a href="mailto:admin@urbanuplink.ai" className="text-primary hover:underline" data-testid="link-refund-request-email">admin@urbanuplink.ai</a> with supporting documentation.
             </p>
           </section>
 
@@ -65,7 +65,7 @@ const RefundPolicy = () => {
               If you have questions regarding this Refund Policy or believe a billing error has occurred, please contact us at:
             </p>
             <p>
-              Email: <a href="mailto:admin@urbanuplink.ai" className="text-primary hover:underline">admin@urbanuplink.ai</a>
+              Email: <a href="mailto:admin@urbanuplink.ai" className="text-primary hover:underline" data-testid="link-contact-email">admin@urbanuplink.ai</a>
             </p>
             <p>We will review all concerns promptly and communicate transparently.</p>
             <p className="mt-6">

@@ -27,7 +27,7 @@ const TermsOfService = () => {
           <section>
             <h2 className="text-2xl font-semibold mb-3">2. Account Creation and Responsibilities</h2>
             <p>
-              To access certain features, you may need to create an account. You agree to provide accurate, complete, and up-to-date information when registering. You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account. If you suspect unauthorized access or any security breach, you must notify us immediately at admin@urbanuplink.ai.
+              To access certain features, you may need to create an account. You agree to provide accurate, complete, and up-to-date information when registering. You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account. If you suspect unauthorized access or any security breach, you must notify us immediately at <a href="mailto:admin@urbanuplink.ai" className="text-primary hover:underline" data-testid="link-security-email">admin@urbanuplink.ai</a>.
             </p>
           </section>
 
@@ -118,7 +118,7 @@ const TermsOfService = () => {
             <p>For any questions or concerns about these Terms, please contact us at:</p>
             <p>
               <strong>Urban Uplink Pvt. Ltd.</strong><br />
-              Email: <a href="mailto:admin@urbanuplink.ai" className="text-primary hover:underline">admin@urbanuplink.ai</a>
+              Email: <a href="mailto:admin@urbanuplink.ai" className="text-primary hover:underline" data-testid="link-contact-email">admin@urbanuplink.ai</a>
             </p>
             <p>We're committed to addressing all inquiries promptly and professionally.</p>
           </section>

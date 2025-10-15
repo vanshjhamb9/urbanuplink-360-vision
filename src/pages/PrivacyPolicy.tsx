@@ -86,7 +86,7 @@ const PrivacyPolicy = () => {
           <section>
             <h2 className="text-2xl font-semibold mb-3">Data Retention</h2>
             <p>
-              We retain your data while your account is active or as needed for services. Some data may be kept temporarily for legal or operational purposes. You may delete your account anytime via your dashboard or by contacting hello@urbanuplink.ai. Deleted data is removed, though anonymized information may remain for analytics.
+              We retain your data while your account is active or as needed for services. Some data may be kept temporarily for legal or operational purposes. You may delete your account anytime via your dashboard or by contacting <a href="mailto:hello@urbanuplink.ai" className="text-primary hover:underline" data-testid="link-account-deletion-email">hello@urbanuplink.ai</a>. Deleted data is removed, though anonymized information may remain for analytics.
             </p>
           </section>
 
@@ -100,7 +100,7 @@ const PrivacyPolicy = () => {
           <section>
             <h2 className="text-2xl font-semibold mb-3">Your Privacy Rights</h2>
             <p>
-              You control your data. You can access, correct, delete, or restrict use directly via your account. For help, contact admin@urbanuplink.ai.
+              You control your data. You can access, correct, delete, or restrict use directly via your account. For help, contact <a href="mailto:admin@urbanuplink.ai" className="text-primary hover:underline" data-testid="link-support-email">admin@urbanuplink.ai</a>.
             </p>
             <p>If you're in the EEA, we only process your data when:</p>
             <ol className="list-decimal pl-6 space-y-2">
@@ -118,7 +118,7 @@ const PrivacyPolicy = () => {
             <p>If you have questions or concerns, please contact our Grievance Officer:</p>
             <p>
               <strong>Ms. Rekha Krishnamurthy</strong><br />
-              Email: <a href="mailto:admin@urbanuplink.ai" className="text-primary hover:underline">admin@urbanuplink.ai</a>
+              Email: <a href="mailto:admin@urbanuplink.ai" className="text-primary hover:underline" data-testid="link-contact-email">admin@urbanuplink.ai</a>
             </p>
             <p>We aim to resolve all privacy-related issues promptly and transparently.</p>
             <p className="mt-6">Thank you for trusting Urban Uplink with your information.</p>
