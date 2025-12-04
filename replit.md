@@ -4,6 +4,30 @@
 
 UrbanUplink 360 Vision is a marketing website for an automotive 360° photography platform. The application showcases a SaaS solution that enables dealerships, auto auctions, fleet managers, and detailing businesses to capture and display vehicles using real 360-degree photography instead of expensive 3D modeling. The website is built as a multi-page React application with a focus on modern design, smooth animations, and responsive layouts to effectively communicate the product's value proposition.
 
+## Recent Changes (December 2024)
+
+### Theme Update
+- Updated color palette to green/purple theme aligned with Urban Uplink logo
+- Added Google Fonts (Inter, Plus Jakarta Sans) for better typography
+- New gradient styles: gradient-green-purple, shadow-purple-glow
+
+### Header Redesign
+- Transparent header that blends seamlessly with hero section
+- Scroll-based blur effect with dynamic background
+- Improved mobile navigation with overlay menu
+
+### New Interactive Sections
+1. **Background Removal Showcase** - Interactive before/after slider demonstrating AI-powered background removal
+2. **BG Replacement Tool** - 3-stage animated transformation (Raw > BG Removal > BG Replacement) with selectable backgrounds
+3. **360 Degree Showcase** - Workflow animation, 12-image grid that animates into a 360° spin video preview
+4. **Car Scroll Banner** - Dual-direction marquee of cars with different backgrounds and angles
+5. **Marketplace Showcase** - Full listing card with image carousel, interactive hotspots, 360 video, and vehicle specs
+6. **Use Case Scenarios** - Platform mockups for WhatsApp Status, Website, Instagram, and Facebook
+
+### Removed Features
+- Demo buttons removed throughout the site (website itself serves as the demo)
+- FloatingDemo component removed from homepage
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
