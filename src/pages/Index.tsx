@@ -1,30 +1,32 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import BackgroundRemovalShowcase from "@/components/BackgroundRemovalShowcase";
+import BGReplacementTool from "@/components/BGReplacementTool";
+import ThreeSixtyShowcase from "@/components/ThreeSixtyShowcase";
+import CarScrollBanner from "@/components/CarScrollBanner";
+import MarketplaceShowcase from "@/components/MarketplaceShowcase";
+import UseCaseScenarios from "@/components/UseCaseScenarios";
 import Features from "@/components/Features";
-import HowItWorks from "@/components/HowItWorks";
-import WhyUrbanUplink from "@/components/WhyUrbanUplink";
-import Industries from "@/components/Industries";
-import TechShowcase from "@/components/TechShowcase";
 import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import FloatingDemo from "@/components/FloatingDemo";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen font-sans">
       <Header />
       <main>
         <Hero />
-        <HowItWorks />
-        <WhyUrbanUplink />
+        <BackgroundRemovalShowcase />
+        <BGReplacementTool />
+        <ThreeSixtyShowcase />
+        <CarScrollBanner />
+        <MarketplaceShowcase />
+        <UseCaseScenarios />
         <Features />
-        <Industries />
-        <TechShowcase />
         <Testimonials />
         <CTA />
       </main>
-      <FloatingDemo />
       <Footer />
     </div>
   );
