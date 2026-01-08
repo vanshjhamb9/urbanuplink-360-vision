@@ -1,6 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Camera, Eraser, Image, Shield, Sparkles, Play, Pause, RotateCcw, Maximize2, Box } from "lucide-react";
 import heroImage from "@/assets/hero-car.jpg";
+
+// 360° car images - Replace with your Indian car images from all angles
+// Images should be in order: 0°, 30°, 60°, 90°, 120°, 150°, 180°, 210°, 240°, 270°, 300°, 330°
+// Each image should have the background removed (transparent PNG)
+const car360Images = Array(12).fill(heroImage); // Replace with actual 360° images
+const totalAngles = car360Images.length;
 
 const workflowSteps = [
   { icon: Camera, label: "Capture Images", color: "from-blue-500 to-cyan-500" },
@@ -23,6 +29,10 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
   const [gridComplete, setGridComplete] = useState(false);
   const [animationPhase, setAnimationPhase] = useState<"grid" | "transition" | "video">("grid");
   const [unityLoaded, setUnityLoaded] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStartX, setDragStartX] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -50,15 +60,68 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
     }
   }, [gridComplete, showVideo]);
 
+  // Auto-rotate 360° view
   useEffect(() => {
     if (!isPlaying || !showVideo) return;
     const rotationInterval = setInterval(() => {
-      setRotationAngle((prev) => (prev + 2) % 360);
+      setRotationAngle((prev) => {
+        const newAngle = (prev + 1) % 360;
+        // Update image index based on angle (12 images = 30° per image)
+        const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
+        setCurrentImageIndex(newIndex);
+        return newAngle;
+      });
     }, 50);
     return () => clearInterval(rotationInterval);
   }, [isPlaying, showVideo]);
 
-  const gridImages = Array(12).fill(heroImage);
+  // Handle drag to rotate
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setDragStartX(e.clientX);
+    setIsPlaying(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !containerRef.current) return;
+    const deltaX = e.clientX - dragStartX;
+    const sensitivity = 2; // Adjust rotation sensitivity
+    const angleChange = (deltaX / containerRef.current.offsetWidth) * 360 * sensitivity;
+    const newAngle = (rotationAngle + angleChange) % 360;
+    setRotationAngle(newAngle < 0 ? newAngle + 360 : newAngle);
+    const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
+    setCurrentImageIndex(newIndex);
+    setDragStartX(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Touch support
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    setDragStartX(e.touches[0].clientX);
+    setIsPlaying(false);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !containerRef.current) return;
+    const deltaX = e.touches[0].clientX - dragStartX;
+    const sensitivity = 2;
+    const angleChange = (deltaX / containerRef.current.offsetWidth) * 360 * sensitivity;
+    const newAngle = (rotationAngle + angleChange) % 360;
+    setRotationAngle(newAngle < 0 ? newAngle + 360 : newAngle);
+    const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
+    setCurrentImageIndex(newIndex);
+    setDragStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
+  const gridImages = car360Images;
 
   const resetAnimation = () => {
     setShowVideo(false);
@@ -193,54 +256,69 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                       />
                     </div>
                   ) : (
-                    <div className="w-full h-full relative bg-gradient-to-br from-slate-50 to-slate-200">
+                    <div 
+                      ref={containerRef}
+                      className="w-full h-full relative bg-gradient-to-br from-slate-50 to-slate-200 cursor-grab active:cursor-grabbing"
+                      onMouseDown={handleMouseDown}
+                      onMouseMove={handleMouseMove}
+                      onMouseUp={handleMouseUp}
+                      onMouseLeave={handleMouseUp}
+                      onTouchStart={handleTouchStart}
+                      onTouchMove={handleTouchMove}
+                      onTouchEnd={handleTouchEnd}
+                    >
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="relative w-full h-full flex items-center justify-center">
                           <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-slate-200/50" />
                           
+                          {/* 360° Car Rotation Display */}
                           <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                            <div 
-                              className="w-full h-full relative rounded-xl overflow-hidden"
-                              style={{
-                                maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='52' rx='44' ry='30' fill='black'/%3E%3C/svg%3E")`,
-                                WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='52' rx='44' ry='30' fill='black'/%3E%3C/svg%3E")`,
-                                maskSize: '100% 100%',
-                                WebkitMaskSize: '100% 100%',
-                                maskRepeat: 'no-repeat',
-                                WebkitMaskRepeat: 'no-repeat',
-                              }}
-                            >
-                              <img
-                                src={heroImage}
-                                alt="360 degree car view placeholder"
-                                className="w-full h-full object-cover"
-                                style={{
-                                  filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
-                                }}
-                              />
+                            {/* Car image with smooth transitions */}
+                            <div className="relative w-full h-full flex items-center justify-center">
+                              {car360Images.map((img, index) => (
+                                <img
+                                  key={index}
+                                  src={img}
+                                  alt={`360 degree car view - ${index * (360 / totalAngles)}°`}
+                                  className={`absolute w-full h-full object-contain transition-opacity duration-300 ${
+                                    index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                                  }`}
+                                  style={{
+                                    filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
+                                  }}
+                                />
+                              ))}
                             </div>
                             
+                            {/* Floor shadow */}
                             <div 
-                              className="absolute bottom-4 left-1/2 -translate-x-1/2 w-3/5 h-12"
+                              className="absolute bottom-4 left-1/2 -translate-x-1/2 w-3/5 h-12 pointer-events-none"
                               style={{
                                 background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, transparent 70%)',
                               }}
                             />
                           </div>
 
+                          {/* Rotation indicators */}
                           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <div className="relative w-4/5 h-4/5">
-                              <div className="absolute inset-0 border-2 border-dashed border-primary/30 rounded-full animate-spin" style={{ animationDuration: '20s' }} />
-                              <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-2 py-1 rounded">
+                              <div 
+                                className="absolute inset-0 border-2 border-dashed border-primary/30 rounded-full"
+                                style={{
+                                  transform: `rotate(${rotationAngle}deg)`,
+                                  transition: isDragging ? 'none' : 'transform 0.1s linear',
+                                }}
+                              />
+                              <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-2 py-1 rounded shadow-lg">
                                 0°
                               </div>
-                              <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 bg-primary text-white text-xs font-bold px-2 py-1 rounded">
+                              <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 bg-primary text-white text-xs font-bold px-2 py-1 rounded shadow-lg">
                                 180°
                               </div>
-                              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">
+                              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent text-white text-xs font-bold px-2 py-1 rounded shadow-lg">
                                 90°
                               </div>
-                              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">
+                              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-accent text-white text-xs font-bold px-2 py-1 rounded shadow-lg">
                                 270°
                               </div>
                             </div>
@@ -275,7 +353,9 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                               </button>
                               <div>
                                 <div className="text-white font-semibold">Interactive 360° View</div>
-                                <div className="text-white/70 text-sm">Unity WebGL - Drag to rotate</div>
+                                <div className="text-white/70 text-sm">
+                                  {isDragging ? 'Dragging to rotate' : isPlaying ? 'Auto-rotating' : 'Drag to rotate'}
+                                </div>
                               </div>
                             </div>
                             <div className="flex items-center gap-3">

@@ -1,6 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { Clock, Target, Zap } from "lucide-react";
-import heroImage from "@/assets/hero-car.jpg";
+import sierraExterior from "@/assets/sierra-exterior.jpg";
+import indianCarNoBg from "@/assets/indian-car-bg-removed.png";
+
+// Using single car image - Sierra Exterior for both before and after
+const carImageOriginal = sierraExterior;
 
 const BackgroundRemovalShowcase = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
@@ -99,27 +103,26 @@ const BackgroundRemovalShowcase = () => {
               {/* Clean studio gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-slate-50/90 via-gray-100/80 to-slate-200/90" />
               
-              {/* Car with CSS mask to simulate background removal - showing only the car */}
+              {/* Car with background removed - Using same image with improved masking */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div 
-                  className="relative w-full h-full"
-                  style={{
-                    maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='52' rx='42' ry='28' fill='black'/%3E%3C/svg%3E")`,
-                    WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='52' rx='42' ry='28' fill='black'/%3E%3C/svg%3E")`,
-                    maskSize: '100% 100%',
-                    WebkitMaskSize: '100% 100%',
-                    maskRepeat: 'no-repeat',
-                    WebkitMaskRepeat: 'no-repeat',
-                  }}
-                >
-                  <img
-                    src={heroImage}
-                    alt="Car with background removed"
-                    className="w-full h-full object-cover"
+                <div className="relative w-full h-full flex items-center justify-center p-8">
+                  {/* Using the same car image with clip-path for better edge cutting */}
+                  <div 
+                    className="relative w-full h-full"
                     style={{
-                      filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
+                      clipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
+                      WebkitClipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
                     }}
-                  />
+                  >
+                    <img
+                      src={carImageOriginal}
+                      alt="Car with background removed"
+                      className="w-full h-full object-cover"
+                      style={{
+                        filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               
@@ -138,7 +141,7 @@ const BackgroundRemovalShowcase = () => {
               style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
             >
               <img
-                src={heroImage}
+                src={carImageOriginal}
                 alt="Original car with background"
                 className="w-full h-full object-cover"
               />

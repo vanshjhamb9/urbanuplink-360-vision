@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { Check, Camera, Eraser, Image } from "lucide-react";
-import heroImage from "@/assets/hero-car.jpg";
+import sierraExterior from "@/assets/sierra-exterior.jpg";
+import indianCarNoBg from "@/assets/indian-car-bg-removed.png";
+
+// Using single car image - Sierra Exterior for all stages
+const carImageOriginal = sierraExterior;
 
 const stages = [
   {
@@ -120,7 +124,7 @@ const BGReplacementTool = () => {
               }`}
             >
               <img
-                src={heroImage}
+                src={carImageOriginal}
                 alt="Raw image with original background"
                 className="w-full h-full object-cover"
               />
@@ -155,29 +159,28 @@ const BGReplacementTool = () => {
                 }}
               />
               
-              {/* Car with mask applied - showing only the car on transparent BG */}
+              {/* Car with background removed - Using same image with improved masking */}
               <div 
                 className="absolute inset-0 flex items-center justify-center"
               >
-                <div 
-                  className="relative w-full h-full"
-                  style={{
-                    maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='52' rx='44' ry='30' fill='black'/%3E%3C/svg%3E")`,
-                    WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='52' rx='44' ry='30' fill='black'/%3E%3C/svg%3E")`,
-                    maskSize: '100% 100%',
-                    WebkitMaskSize: '100% 100%',
-                    maskRepeat: 'no-repeat',
-                    WebkitMaskRepeat: 'no-repeat',
-                  }}
-                >
-                  <img
-                    src={heroImage}
-                    alt="Car with background removed"
-                    className="w-full h-full object-cover"
+                <div className="relative w-full h-full flex items-center justify-center p-8">
+                  {/* Using the same car image with clip-path for better edge cutting */}
+                  <div 
+                    className="relative w-full h-full"
                     style={{
-                      filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.4))",
+                      clipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
+                      WebkitClipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
                     }}
-                  />
+                  >
+                    <img
+                      src={carImageOriginal}
+                      alt="Car with background removed"
+                      className="w-full h-full object-cover"
+                      style={{
+                        filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.4))",
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               
@@ -200,27 +203,26 @@ const BGReplacementTool = () => {
               {/* Subtle lighting effect */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/20" />
               
-              {/* Car with mask applied on new background */}
+              {/* Car with background removed on new background - Using same image with improved masking */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div 
-                  className="relative w-full h-full"
-                  style={{
-                    maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='52' rx='44' ry='30' fill='black'/%3E%3C/svg%3E")`,
-                    WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='52' rx='44' ry='30' fill='black'/%3E%3C/svg%3E")`,
-                    maskSize: '100% 100%',
-                    WebkitMaskSize: '100% 100%',
-                    maskRepeat: 'no-repeat',
-                    WebkitMaskRepeat: 'no-repeat',
-                  }}
-                >
-                  <img
-                    src={heroImage}
-                    alt="Car with new background"
-                    className="w-full h-full object-cover"
+                <div className="relative w-full h-full flex items-center justify-center p-8">
+                  {/* Using the same car image with clip-path for better edge cutting */}
+                  <div 
+                    className="relative w-full h-full"
                     style={{
-                      filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.35))",
+                      clipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
+                      WebkitClipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
                     }}
-                  />
+                  >
+                    <img
+                      src={carImageOriginal}
+                      alt="Car with new background"
+                      className="w-full h-full object-cover"
+                      style={{
+                        filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.35))",
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               
