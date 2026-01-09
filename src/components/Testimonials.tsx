@@ -1,13 +1,17 @@
 import { Quote, Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
+import priyaSharma from "@/assets/priya-sharma.png";
+import amitPatel from "@/assets/amit-patel.png";
+import mahindraXuv700 from "@/assets/mahindra-xuv700.png";
+
 const testimonials = [
   {
     name: "Rajesh Kumar",
     role: "Sales Director",
     company: "Tata Motors Showroom, Mumbai",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces",
-    carImage: "https://imgd.aeplcdn.com/1920x1080/n/cw/ec/193017/sierra-exterior-right-front-three-quarter-60.jpeg?isig=0&q=40",
+    image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=200&h=200&fit=crop&crop=faces",
+    carImage: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&h=500&fit=crop",
     quote: "UrbanUplink transformed our online sales. We've seen a 52% increase in qualified leads since implementing 360° views for our Tata Harrier and Sierra models.",
     rating: 5,
     tags: ["Tata Harrier", "SUV", "Mumbai"],
@@ -15,22 +19,22 @@ const testimonials = [
   {
     name: "Priya Sharma",
     role: "Marketing Manager",
-    company: "Mahindra Dealership, Delhi",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces",
-    carImage: "https://imgd.aeplcdn.com/1920x1080/n/cw/ec/193017/sierra-exterior-right-front-three-quarter-60.jpeg?isig=0&q=40",
+    company: "Capital Mahindra, Delhi",
+    image: priyaSharma,
+    carImage: mahindraXuv700,
     quote: "The ease of use is incredible. Our entire team was up and running in less than a day. Customer engagement with our XUV700 listings has skyrocketed by 68%.",
     rating: 5,
     tags: ["Mahindra XUV700", "Premium SUV", "Delhi"],
   },
   {
     name: "Amit Patel",
-    role: "Owner",
+    role: "Proprietor",
     company: "Maruti Suzuki Arena, Ahmedabad",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=faces",
-    carImage: "https://imgd.aeplcdn.com/1920x1080/n/cw/ec/193017/sierra-exterior-right-front-three-quarter-60.jpeg?isig=0&q=40",
-    quote: "Being able to show 360° views of our Swift and Baleno models has tripled our online inquiries. It's the best investment we've made for digital sales.",
+    image: amitPatel,
+    carImage: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=500&fit=crop",
+    quote: "Being able to show 360° views of our Brezza and Grand Vitara inventory has tripled our online inquiries. It's the best investment we've made for digital sales.",
     rating: 5,
-    tags: ["Maruti Swift", "Hatchback", "Ahmedabad"],
+    tags: ["Maruti Brezza", "Compact SUV", "Ahmedabad"],
   },
 ];
 
@@ -58,7 +62,7 @@ const Testimonials = () => {
             >
               {/* Quote decoration */}
               <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
-              
+
               <CardContent className="p-0 relative">
                 {/* Car Image */}
                 <div className="relative h-48 overflow-hidden">
@@ -83,7 +87,7 @@ const Testimonials = () => {
 
                 <div className="p-6">
                   <Quote className="w-8 h-8 text-accent/30 mb-3" />
-                  
+
                   {/* Rating */}
                   <div className="flex gap-1 mb-3">
                     {[...Array(testimonial.rating)].map((_, i) => (

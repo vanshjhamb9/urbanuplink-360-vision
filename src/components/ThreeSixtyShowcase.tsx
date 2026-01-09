@@ -158,46 +158,46 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-br from-background via-muted/30 to-background relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-gradient-to-br from-background via-muted/30 to-background relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-accent/30 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-primary/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/30 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full border border-primary/20">
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-semibold text-sm">
+        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-16">
+          <div className="inline-block mb-3 md:mb-4 px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full border border-primary/20">
+            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-semibold text-xs md:text-sm">
               Complete 360° Solution
             </span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
             See the{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               360° Magic
             </span>{" "}
             in Action
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base md:text-lg text-muted-foreground">
             Watch how we transform raw smartphone captures into stunning 360° experiences
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-12">
           {workflowSteps.map((step, index) => {
             const StepIcon = step.icon;
             return (
               <div
                 key={index}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-500 ${activeStep === index
-                    ? `bg-gradient-to-r ${step.color} text-white shadow-lg scale-110`
-                    : activeStep > index
-                      ? "bg-primary/20 text-primary"
-                      : "bg-muted text-muted-foreground"
+                className={`flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full transition-all duration-500 ${activeStep === index
+                  ? `bg-gradient-to-r ${step.color} text-white shadow-lg scale-105 md:scale-110`
+                  : activeStep > index
+                    ? "bg-primary/20 text-primary"
+                    : "bg-muted text-muted-foreground"
                   }`}
               >
-                <StepIcon className="w-4 h-4" />
-                <span className="text-sm font-medium hidden sm:inline">{step.label}</span>
+                <StepIcon className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                <span className="text-xs md:text-sm font-medium hidden sm:inline">{step.label}</span>
               </div>
             );
           })}
@@ -205,28 +205,28 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
 
         <div className="max-w-5xl mx-auto">
           <div className="relative">
-            <h3 className="text-2xl font-bold mb-6 text-center flex items-center justify-center gap-4">
+            <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center flex items-center justify-center gap-3 md:gap-4">
               {showVideo ? "360° Interactive View" : "12 Angles Captured"}
               <button
                 onClick={resetAnimation}
-                className="p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors"
+                className="p-1.5 md:p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors"
                 title="Replay animation"
               >
-                <RotateCcw className="w-4 h-4" />
+                <RotateCcw className="w-3.5 h-3.5 md:w-4 md:h-4" />
               </button>
             </h3>
 
-            <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-100 to-slate-200">
+            <div className="relative aspect-video rounded-xl md:rounded-2xl overflow-hidden shadow-xl md:shadow-2xl bg-gradient-to-br from-slate-100 to-slate-200">
               {!showVideo ? (
-                <div className="absolute inset-0 p-4">
-                  <div className={`grid grid-cols-4 gap-2 h-full transition-all duration-1000 ${animationPhase === "transition" ? "scale-50 opacity-0" : ""
+                <div className="absolute inset-0 p-2 md:p-4">
+                  <div className={`grid grid-cols-4 gap-1 md:gap-2 h-full transition-all duration-1000 ${animationPhase === "transition" ? "scale-50 opacity-0" : ""
                     }`}>
                     {gridImages.map((img, index) => (
                       <div
                         key={index}
-                        className={`relative rounded-lg overflow-hidden shadow-lg transition-all duration-700 ${gridComplete
-                            ? "opacity-100 scale-100"
-                            : "opacity-0 scale-75"
+                        className={`relative rounded md:rounded-lg overflow-hidden shadow md:shadow-lg transition-all duration-700 ${gridComplete
+                          ? "opacity-100 scale-100"
+                          : "opacity-0 scale-75"
                           }`}
                         style={{
                           transitionDelay: `${index * 100}ms`,
@@ -238,7 +238,7 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                           className="w-full h-full object-contain"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                        <div className="absolute bottom-1 left-1 text-white text-xs font-bold bg-gradient-to-r from-primary to-accent rounded px-1.5 py-0.5">
+                        <div className="absolute bottom-0.5 md:bottom-1 left-0.5 md:left-1 text-white text-[10px] md:text-xs font-bold bg-gradient-to-r from-primary to-accent rounded px-1 md:px-1.5 py-0.5">
                           {(index + 1) * 30}°
                         </div>
                       </div>
@@ -248,10 +248,10 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                   {animationPhase === "transition" && (
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
-                        <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center animate-pulse">
-                          <Play className="w-8 h-8 text-white ml-1" />
+                        <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-3 md:mb-4 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center animate-pulse">
+                          <Play className="w-6 h-6 md:w-8 md:h-8 text-white ml-1" />
                         </div>
-                        <p className="text-lg font-semibold">Generating 360° View...</p>
+                        <p className="text-base md:text-lg font-semibold">Generating 360° View...</p>
                       </div>
                     </div>
                   )}
@@ -281,7 +281,7 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                   ) : (
                     <div
                       ref={containerRef}
-                      className="w-full h-full relative bg-gradient-to-br from-slate-50 to-slate-200 cursor-grab active:cursor-grabbing"
+                      className="w-full h-full relative bg-gradient-to-br from-slate-50 to-slate-200 cursor-grab active:cursor-grabbing touch-none"
                       onMouseDown={handleMouseDown}
                       onMouseMove={handleMouseMove}
                       onMouseUp={handleMouseUp}
@@ -339,16 +339,16 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                                   transition: isDragging ? 'none' : 'transform 0.1s linear',
                                 }}
                               />
-                              <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-2 py-1 rounded shadow-lg">
+                              <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 bg-primary text-white text-[10px] md:text-xs font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded shadow-lg">
                                 0°
                               </div>
-                              <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 bg-primary text-white text-xs font-bold px-2 py-1 rounded shadow-lg">
+                              <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 bg-primary text-white text-[10px] md:text-xs font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded shadow-lg">
                                 180°
                               </div>
-                              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent text-white text-xs font-bold px-2 py-1 rounded shadow-lg">
+                              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent text-white text-[10px] md:text-xs font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded shadow-lg">
                                 90°
                               </div>
-                              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-accent text-white text-xs font-bold px-2 py-1 rounded shadow-lg">
+                              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-accent text-white text-[10px] md:text-xs font-bold px-1.5 py-0.5 md:px-2 md:py-1 rounded shadow-lg">
                                 270°
                               </div>
                             </div>
@@ -356,57 +356,57 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                         </div>
                       </div>
 
-                      <div className="absolute top-4 right-4 flex flex-col gap-2">
-                        <div className="px-3 py-1.5 bg-gradient-to-r from-primary to-accent rounded-full text-white text-sm font-medium flex items-center gap-2">
-                          <Box className="w-4 h-4" />
+                      <div className="absolute top-2 right-2 md:top-4 md:right-4 flex flex-col gap-1 md:gap-2">
+                        <div className="px-2 py-1 md:px-3 md:py-1.5 bg-gradient-to-r from-primary to-accent rounded-full text-white text-xs md:text-sm font-medium flex items-center gap-1.5 md:gap-2">
+                          <Box className="w-3 h-3 md:w-4 md:h-4" />
                           3D MODEL
                         </div>
-                        <div className="px-3 py-1.5 bg-amber-500 rounded-full text-white text-xs font-bold flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                        <div className="px-2 py-1 md:px-3 md:py-1.5 bg-amber-500 rounded-full text-white text-[10px] md:text-xs font-bold flex items-center gap-1.5 md:gap-2">
+                          <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-white animate-pulse" />
                           UNITY READY
                         </div>
                       </div>
 
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <div className="bg-black/60 backdrop-blur-lg rounded-xl p-4">
-                          <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-4">
+                      <div className="absolute bottom-2 left-2 right-2 md:bottom-4 md:left-4 md:right-4">
+                        <div className="hidden md:block bg-black/60 backdrop-blur-lg rounded-xl p-3 md:p-4">
+                          <div className="flex items-center justify-between mb-2 md:mb-3">
+                            <div className="flex items-center gap-2 md:gap-4">
                               <button
                                 onClick={() => setIsPlaying(!isPlaying)}
-                                className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center text-white hover:scale-110 transition-transform"
+                                className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center text-white hover:scale-110 transition-transform"
                               >
                                 {isPlaying ? (
-                                  <Pause className="w-5 h-5" />
+                                  <Pause className="w-3.5 h-3.5 md:w-5 md:h-5" />
                                 ) : (
-                                  <Play className="w-5 h-5 ml-0.5" />
+                                  <Play className="w-3.5 h-3.5 md:w-5 md:h-5 ml-0.5" />
                                 )}
                               </button>
                               <div>
-                                <div className="text-white font-semibold">Interactive 360° View</div>
-                                <div className="text-white/70 text-sm">
+                                <div className="text-white font-semibold text-sm md:text-base">Interactive 360° View</div>
+                                <div className="text-white/70 text-[10px] md:text-sm">
                                   {isDragging ? 'Dragging to rotate' : isPlaying ? 'Auto-rotating' : 'Drag to rotate'}
                                 </div>
                               </div>
                             </div>
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2 md:gap-3">
                               <div className="text-right">
-                                <div className="text-white font-bold text-xl">{rotationAngle}°</div>
-                                <div className="text-white/60 text-xs">Rotation</div>
+                                <div className="text-white font-bold text-sm md:text-xl">{Math.round(rotationAngle)}°</div>
+                                <div className="text-white/60 text-[10px] md:text-xs">Rotation</div>
                               </div>
-                              <button className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
-                                <Maximize2 className="w-5 h-5 text-white" />
+                              <button className="p-1.5 md:p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                                <Maximize2 className="w-4 h-4 md:w-5 md:h-5 text-white" />
                               </button>
                             </div>
                           </div>
 
-                          <div className="h-1.5 bg-white/20 rounded-full overflow-hidden">
+                          <div className="h-1 md:h-1.5 bg-white/20 rounded-full overflow-hidden">
                             <div
                               className="h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-100"
                               style={{ width: `${(rotationAngle / 360) * 100}%` }}
                             />
                           </div>
 
-                          <div className="mt-3 text-center text-white/60 text-xs">
+                          <div className="mt-2 md:mt-3 text-center text-white/60 text-[10px] md:text-xs">
                             Awaiting Unity 3D model integration • Placeholder preview shown
                           </div>
                         </div>
@@ -417,7 +417,7 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
               )}
             </div>
 
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="mt-6 md:mt-8 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {[
                 { label: "Capture Time", value: "< 5 min", Icon: Camera },
                 { label: "Processing", value: "< 2 min", Icon: Sparkles },
@@ -426,13 +426,13 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
               ].map((stat, index) => (
                 <div
                   key={index}
-                  className="text-center p-4 rounded-xl bg-card/50 backdrop-blur border border-border/50 hover:border-primary/30 transition-colors"
+                  className="text-center p-3 md:p-4 rounded-xl bg-card/50 backdrop-blur border border-border/50 hover:border-primary/30 transition-colors"
                 >
-                  <stat.Icon className="w-6 h-6 mx-auto mb-2 text-primary" />
-                  <div className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  <stat.Icon className="w-5 h-5 md:w-6 md:h-6 mx-auto mb-1.5 md:mb-2 text-primary" />
+                  <div className="text-lg md:text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-muted-foreground mt-1">
+                  <div className="text-xs md:text-sm text-muted-foreground mt-0.5 md:mt-1">
                     {stat.label}
                   </div>
                 </div>

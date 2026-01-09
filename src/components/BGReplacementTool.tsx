@@ -85,20 +85,18 @@ const BGReplacementTool = () => {
                   setCurrentStage(stage.id);
                   setIsAutoPlaying(false);
                 }}
-                className={`flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 rounded-full transition-all ${
-                  currentStage >= stage.id
+                className={`flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 rounded-full transition-all ${currentStage >= stage.id
                     ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg"
                     : "bg-card border border-border text-muted-foreground hover:border-primary/50"
-                }`}
+                  }`}
               >
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    currentStage > stage.id
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${currentStage > stage.id
                       ? "bg-white/20"
                       : currentStage === stage.id
-                      ? "bg-white/20"
-                      : "bg-muted"
-                  }`}
+                        ? "bg-white/20"
+                        : "bg-muted"
+                    }`}
                 >
                   {currentStage > stage.id ? (
                     <Check className="w-4 h-4" />
@@ -119,15 +117,14 @@ const BGReplacementTool = () => {
           {/* Main display area */}
           <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl">
             {/* Stage 1: Raw Image with original messy background */}
-            <div 
-              className={`absolute inset-0 transition-all duration-700 ${
-                currentStage === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-              }`}
+            <div
+              className={`absolute inset-0 transition-all duration-700 ${currentStage === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                }`}
             >
               <div className="absolute inset-0 flex items-center justify-center">
-              <img
+                <img
                   src={carImageOriginal}
-                alt="Raw image with original background"
+                  alt="Raw image with original background"
                   className="w-full h-full object-contain"
                   style={{
                     maxWidth: '100%',
@@ -145,13 +142,12 @@ const BGReplacementTool = () => {
             </div>
 
             {/* Stage 2: Background Removed - Checkerboard with masked car */}
-            <div 
-              className={`absolute inset-0 transition-all duration-700 ${
-                currentStage === 2 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-              }`}
+            <div
+              className={`absolute inset-0 transition-all duration-700 ${currentStage === 2 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                }`}
             >
               {/* Checkerboard pattern (transparency indicator) */}
-              <div 
+              <div
                 className="absolute inset-0"
                 style={{
                   backgroundImage: `
@@ -165,9 +161,9 @@ const BGReplacementTool = () => {
                   backgroundColor: '#f0f0f0'
                 }}
               />
-              
+
               {/* Car with background removed - Using transparent PNG for perfect edge cutting */}
-              <div 
+              <div
                 className="absolute inset-0 flex items-center justify-center"
               >
                 {/* Using transparent PNG for perfect background removal - same size and position as original */}
@@ -178,11 +174,11 @@ const BGReplacementTool = () => {
                   style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
-                      filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.4))",
-                    }}
-                  />
+                    filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.4))",
+                  }}
+                />
               </div>
-              
+
               {/* Transparency indicator badge */}
               <div className="absolute top-4 right-4 px-3 py-1.5 bg-gradient-to-r from-primary to-accent text-white rounded-full text-xs font-bold flex items-center gap-1.5">
                 <Eraser className="w-3 h-3" />
@@ -191,17 +187,16 @@ const BGReplacementTool = () => {
             </div>
 
             {/* Stage 3: Background Replaced with selected gradient */}
-            <div 
-              className={`absolute inset-0 transition-all duration-700 ${
-                currentStage === 3 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-              }`}
+            <div
+              className={`absolute inset-0 transition-all duration-700 ${currentStage === 3 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                }`}
             >
               {/* Selected background gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${backgrounds[selectedBg].gradient}`} />
-              
+
               {/* Subtle lighting effect */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/20" />
-              
+
               {/* Car with background removed on new background - Using transparent PNG for perfect edge cutting */}
               <div className="absolute inset-0 flex items-center justify-center">
                 {/* Using transparent PNG for perfect background removal - same size and position as original */}
@@ -212,30 +207,29 @@ const BGReplacementTool = () => {
                   style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
-                      filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.35))",
-                    }}
-                  />
+                    filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.35))",
+                  }}
+                />
               </div>
-              
+
               {/* Floor shadow/reflection */}
-              <div 
+              <div
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-20"
                 style={{
                   background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, transparent 70%)',
                 }}
               />
-              
+
               {/* Replaced indicator badge */}
-              <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 ${
-                backgrounds[selectedBg].textDark ? 'bg-black/70 text-white' : 'bg-white/90 text-black'
-              }`}>
+              <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 ${backgrounds[selectedBg].textDark ? 'bg-black/70 text-white' : 'bg-white/90 text-black'
+                }`}>
                 <Image className="w-3 h-3" />
                 {backgrounds[selectedBg].name.toUpperCase()}
               </div>
             </div>
 
             {/* Info bar at bottom */}
-            <div className="absolute bottom-6 left-6 right-6 z-20">
+            <div className="absolute bottom-6 left-6 right-6 z-20 hidden md:block">
               <div className="bg-black/60 backdrop-blur-lg rounded-xl p-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -254,11 +248,10 @@ const BGReplacementTool = () => {
                     {stages.map((_, index) => (
                       <div
                         key={index}
-                        className={`w-3 h-3 rounded-full transition-all ${
-                          currentStage > index
+                        className={`w-3 h-3 rounded-full transition-all ${currentStage > index
                             ? "bg-gradient-to-r from-primary to-accent"
                             : "bg-white/30"
-                        }`}
+                          }`}
                       />
                     ))}
                   </div>
@@ -281,13 +274,11 @@ const BGReplacementTool = () => {
                     setCurrentStage(3);
                     setIsAutoPlaying(false);
                   }}
-                  className={`group relative w-16 h-16 rounded-xl bg-gradient-to-br ${
-                    bg.gradient
-                  } transition-all overflow-hidden ${
-                    selectedBg === index && currentStage === 3
+                  className={`group relative w-16 h-16 rounded-xl bg-gradient-to-br ${bg.gradient
+                    } transition-all overflow-hidden ${selectedBg === index && currentStage === 3
                       ? "ring-4 ring-primary ring-offset-2 scale-110"
                       : "hover:scale-105 hover:ring-2 hover:ring-primary/50"
-                  }`}
+                    }`}
                   title={bg.name}
                 >
                   <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 text-white text-[10px] font-medium">
@@ -302,11 +293,10 @@ const BGReplacementTool = () => {
           <div className="flex justify-center mt-6">
             <button
               onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                isAutoPlaying 
-                  ? 'bg-primary/20 text-primary border border-primary/30' 
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${isAutoPlaying
+                  ? 'bg-primary/20 text-primary border border-primary/30'
                   : 'bg-muted text-muted-foreground border border-border hover:border-primary/30'
-              }`}
+                }`}
             >
               {isAutoPlaying ? '⏸ Auto-playing...' : '▶ Click to auto-play'}
             </button>

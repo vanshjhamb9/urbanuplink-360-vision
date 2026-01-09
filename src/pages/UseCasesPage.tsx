@@ -3,7 +3,13 @@ import Footer from "@/components/Footer";
 import FloatingDemo from "@/components/FloatingDemo";
 import { Building2, ShoppingCart, Wrench, TrendingUp, FileCheck, Camera, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import dealershipImage from "@/assets/dealership.jpg";
+import indianDealership from "@/assets/indian-dealership.png";
+import indianHandover from "@/assets/indian-dealership-handover.png";
+import indianAuction from "@/assets/indian-auction.png";
+import indianFleet from "@/assets/indian-fleet.png";
+import indianDetailing from "@/assets/indian-detailing.png";
+import indianInspection from "@/assets/indian-inspection.png";
+import indianStudio from "@/assets/indian-studio.png";
 
 const useCases = [
   {
@@ -17,7 +23,7 @@ const useCases = [
       "Stand out from competitors",
       "24/7 virtual showroom",
     ],
-    image: "https://images.unsplash.com/photo-1562882168-6bc0dc1d1948?w=800&h=600&fit=crop",
+    image: indianHandover,
   },
   {
     icon: ShoppingCart,
@@ -30,7 +36,7 @@ const useCases = [
       "Enable remote inspections",
       "Faster transaction closings",
     ],
-    image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&h=600&fit=crop",
+    image: indianAuction,
   },
   {
     icon: TrendingUp,
@@ -43,7 +49,7 @@ const useCases = [
       "Insurance claim evidence",
       "Maintenance history tracking",
     ],
-    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=600&fit=crop",
+    image: indianFleet,
   },
   {
     icon: Wrench,
@@ -56,7 +62,7 @@ const useCases = [
       "Customer satisfaction increase",
       "Premium pricing justification",
     ],
-    image: "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=800&h=600&fit=crop",
+    image: indianDetailing,
   },
   {
     icon: FileCheck,
@@ -69,7 +75,7 @@ const useCases = [
       "Remote inspection capability",
       "Historical condition records",
     ],
-    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
+    image: indianInspection,
   },
   {
     icon: Camera,
@@ -82,7 +88,7 @@ const useCases = [
       "Faster shoot-to-delivery",
       "Client retention increase",
     ],
-    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&h=600&fit=crop",
+    image: indianStudio,
   },
 ];
 
@@ -166,7 +172,7 @@ const UseCasesPage = () => {
         <div className="container px-4 md:px-6 mx-auto">
           <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl isolate">
             <img
-              src={dealershipImage}
+              src={indianDealership}
               alt="Modern dealership"
               className="absolute inset-0 w-full h-full object-cover -z-10 brightness-[0.4]"
             />
@@ -174,7 +180,7 @@ const UseCasesPage = () => {
 
             <div className="p-12 md:p-24 text-center max-w-4xl mx-auto">
               <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Join 500+ Businesses Using UrbanUplink
+                Join 500+ Businesses Across India
               </h3>
               <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
                 The industry standard for automotive 360° imaging. transformative results, guaranteed.

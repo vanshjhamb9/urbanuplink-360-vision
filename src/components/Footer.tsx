@@ -1,134 +1,70 @@
 import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
-import Image1 from "../assets/2 (1).png"
 import Image2 from "../assets/2 (2).png"
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 text-white py-12 relative overflow-hidden">
-      {/* Background overlay matching header car imagery */}
+    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950 text-white py-8 md:py-12 relative overflow-hidden font-sans">
+      {/* Background overlay */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 via-transparent to-accent/20" />
       </div>
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-[50%] h-[25%] rounded-lg flex flex-row items-center justify-center">
-                <img className="w-[80%] ml-[5rem]" src={Image2} />
-                <img className="mt-[3rem] -ml-[2rem]" src={Image1} />
-              </div>
 
-            </div>
-            <p className="text-sm text-white/80">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 mb-8">
+
+          {/* Brand - Full width on mobile, centered */}
+          <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
+            <img
+              src={Image2}
+              alt="Urban Uplink"
+              className="h-10 md:h-14 w-auto mb-3 object-contain brightness-110 contrast-125 drop-shadow-lg"
+            />
+            <p className="text-xs text-white/70 max-w-xs mx-auto md:mx-0">
               Transforming automotive sales with real 360° imaging solutions.
             </p>
           </div>
 
-          {/* Product */}
-          <div>
-            <h4 className="font-bold mb-4 text-white">Product</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#" className="text-white/80 hover:text-white transition-colors">
-                  Features
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white/80 hover:text-white transition-colors">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white/80 hover:text-white transition-colors">
-                  Use Cases
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white/80 hover:text-white transition-colors">
-                  Integrations
-                </a>
-              </li>
+          {/* Product - Compact List */}
+          <div className="flex flex-col items-center md:items-start">
+            <h4 className="font-bold mb-3 text-white text-sm md:text-base tracking-wide">Product</h4>
+            <ul className="space-y-2 text-xs md:text-sm text-white/70">
+              <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Use Cases</a></li>
             </ul>
           </div>
 
-          {/* Company */}
-          <div>
-            <h4 className="font-bold mb-4 text-white">Company</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#" className="text-white/80 hover:text-white transition-colors">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white/80 hover:text-white transition-colors">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="/contact" className="text-white/80 hover:text-white transition-colors">
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white/80 hover:text-white transition-colors">
-                  Blog
-                </a>
-              </li>
+          {/* Company - Compact List */}
+          <div className="flex flex-col items-center md:items-start">
+            <h4 className="font-bold mb-3 text-white text-sm md:text-base tracking-wide">Company</h4>
+            <ul className="space-y-2 text-xs md:text-sm text-white/70">
+              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+              <li><a href="/contact" className="hover:text-white transition-colors">Contact</a></li>
             </ul>
           </div>
 
-          {/* Legal */}
-          <div>
-            <h4 className="font-bold mb-4 text-white">Legal</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link to="/privacy-policy" className="text-white/80 hover:text-white transition-colors" data-testid="link-privacy-policy">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms-of-service" className="text-white/80 hover:text-white transition-colors" data-testid="link-terms-of-service">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link to="/refund-policy" className="text-white/80 hover:text-white transition-colors" data-testid="link-refund-policy">
-                  Refund Policy
-                </Link>
-              </li>
-            </ul>
+          {/* Legal - Stacks nicely on mobile */}
+          <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start">
+            <h4 className="font-bold mb-3 text-white text-sm md:text-base tracking-wide">Legal</h4>
+            <div className="flex flex-row md:flex-col gap-4 md:gap-2 text-xs md:text-sm text-white/70 justify-center">
+              <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
+              <Link to="/refund-policy" className="hover:text-white transition-colors">Refund Policy</Link>
+            </div>
           </div>
         </div>
 
-        {/* Top Banner */}
-        <div className="mb-8 text-center">
-          <p className="text-white/90 text-sm font-medium">
-            No credit card required • Free trial available • Cancel anytime
-          </p>
-        </div>
+        {/* Bottom Bar - Reduced height & cleaner */}
+        <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/60">
+          <p>© 2025 UrbanUplink. All rights reserved.</p>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-white/80">
-            © 2025 UrbanUplink. All rights reserved.
-          </p>
-
-          <div className="flex gap-4">
-            <a href="#" className="text-white/80 hover:text-white transition-colors hover:scale-110">
-              <Facebook className="w-5 h-5" />
-            </a>
-            <a href="#" className="text-white/80 hover:text-white transition-colors hover:scale-110">
-              <Twitter className="w-5 h-5" />
-            </a>
-            <a href="#" className="text-white/80 hover:text-white transition-colors hover:scale-110">
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a href="#" className="text-white/80 hover:text-white transition-colors hover:scale-110">
-              <Instagram className="w-5 h-5" />
-            </a>
+          <div className="flex gap-5">
+            <a href="#" className="hover:text-white transition-colors hover:scale-110"><Facebook className="w-4 h-4" /></a>
+            <a href="#" className="hover:text-white transition-colors hover:scale-110"><Twitter className="w-4 h-4" /></a>
+            <a href="#" className="hover:text-white transition-colors hover:scale-110"><Linkedin className="w-4 h-4" /></a>
+            <a href="#" className="hover:text-white transition-colors hover:scale-110"><Instagram className="w-4 h-4" /></a>
           </div>
         </div>
       </div>

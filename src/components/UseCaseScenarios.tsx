@@ -67,17 +67,17 @@ const UseCaseScenarios = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          <div className="space-y-4">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
+          {/* Controls - Horizontal scroll on mobile, Vertical list on desktop */}
+          <div className="flex lg:block overflow-x-auto gap-4 pb-6 lg:pb-0 lg:space-y-4 w-full snap-x px-1 lg:px-0 scrollbar-hide order-2 lg:order-1">
             {useCases.map((useCase) => (
               <button
                 key={useCase.id}
                 onClick={() => setActiveCase(useCase.id)}
-                className={`w-full text-left p-6 rounded-2xl transition-all duration-300 ${
-                  activeCase === useCase.id
-                    ? "bg-card shadow-xl border-2 border-primary/30 scale-105"
+                className={`text-left p-6 rounded-2xl transition-all duration-300 min-w-[85vw] sm:min-w-[350px] lg:min-w-0 flex-shrink-0 snap-center ${activeCase === useCase.id
+                    ? "bg-card shadow-xl border-2 border-primary/30 scale-100 lg:scale-105"
                     : "bg-card/50 border border-border hover:bg-card hover:shadow-lg"
-                }`}
+                  }`}
               >
                 <div className="flex items-start gap-4">
                   <div
@@ -110,7 +110,7 @@ const UseCaseScenarios = () => {
             ))}
           </div>
 
-          <div className="relative">
+          <div className="relative w-full order-1 lg:order-2">
             {currentCase.mockup === "phone" ? (
               <div className="relative mx-auto w-72">
                 <div className="bg-foreground rounded-[3rem] p-3 shadow-2xl">
@@ -125,7 +125,7 @@ const UseCaseScenarios = () => {
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
-                      
+
                       <div className="absolute top-4 left-4 right-4 flex items-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent" />
                         <div>

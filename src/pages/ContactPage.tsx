@@ -46,14 +46,14 @@ const ContactPage = () => {
         {
             icon: Phone,
             title: "Call Us",
-            details: "+91 98765 43210",
+            details: "+91 80 1234 5678",
             description: "Mon-Fri from 9am to 6pm IST",
         },
         {
             icon: MapPin,
             title: "Visit Us",
-            details: "Bangalore, India",
-            description: "Automotive Tech Hub",
+            details: "Indiranagar, Bangalore",
+            description: "Karnataka, India",
         },
     ];
 

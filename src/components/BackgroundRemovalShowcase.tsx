@@ -201,7 +201,7 @@ const BackgroundRemovalShowcase = () => {
             </div>
           </div>
 
-          <div className="mt-10 grid grid-cols-3 gap-6">
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center p-6 rounded-xl bg-card/50 backdrop-blur border border-border/50 hover:border-primary/30 transition-all hover:shadow-lg">
               <Clock className="w-8 h-8 mx-auto mb-3 text-primary" />
               <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">

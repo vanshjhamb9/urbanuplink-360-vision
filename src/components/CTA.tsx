@@ -46,7 +46,7 @@ const CTA = () => {
           <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-3 p-4 bg-primary-foreground/10 rounded-lg backdrop-blur">
               <Phone className="w-5 h-5" />
-              <span className="font-semibold">+1 (555) 360-VIEW</span>
+              <span className="font-semibold">+91 80 1234 5678</span>
             </div>
             <div className="flex items-center justify-center gap-3 p-4 bg-primary-foreground/10 rounded-lg backdrop-blur">
               <Mail className="w-5 h-5" />
