@@ -128,14 +128,7 @@ const Hero = () => {
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
-            <Button 
-              variant="outline" 
-              size="xl" 
-              className="group bg-white/90 backdrop-blur-sm text-primary hover:bg-white hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 border-primary/30 font-semibold"
-            >
-              Learn More
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
+          
           </div>
 
           <div className="mt-16 grid grid-cols-3 gap-8 pt-8 border-t border-white/20">

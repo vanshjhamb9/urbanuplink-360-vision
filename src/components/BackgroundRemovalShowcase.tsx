@@ -84,10 +84,30 @@ const BackgroundRemovalShowcase = () => {
             onMouseDown={() => setIsDragging(true)}
             onTouchStart={() => setIsDragging(true)}
           >
-            {/* AFTER - Clean studio background with isolated car */}
+            {/* BEFORE - Original with dealership background (NOW BOTTOM LAYER) */}
             <div className="absolute inset-0">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <img
+                  src={carImageOriginal}
+                  alt="Original car with background"
+                  className="w-full h-full object-contain"
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                  }}
+                />
+              </div>
+              {/* Subtle overlay to emphasize "messy" background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/5" />
+            </div>
+
+            {/* AFTER - Clean studio background with isolated car (NOW TOP LAYER with CLIP) */}
+            <div
+              className="absolute inset-0"
+              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+            >
               {/* Checkerboard pattern to show transparency concept */}
-              <div 
+              <div
                 className="absolute inset-0"
                 style={{
                   backgroundImage: `
@@ -103,7 +123,7 @@ const BackgroundRemovalShowcase = () => {
               />
               {/* Clean studio gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-slate-50/90 via-gray-100/80 to-slate-200/90" />
-              
+
               {/* Car with background removed - Using transparent PNG for perfect edge cutting */}
               <div className="absolute inset-0 flex items-center justify-center">
                 {/* Using transparent PNG for perfect background removal - same size and position as original */}
@@ -119,7 +139,7 @@ const BackgroundRemovalShowcase = () => {
                     }}
                   />
                   {/* AI Plate Masking */}
-                  <div 
+                  <div
                     className="absolute pointer-events-none overflow-hidden rounded-sm"
                     style={{
                       left: '50%',
@@ -135,34 +155,14 @@ const BackgroundRemovalShowcase = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Subtle floor shadow */}
-              <div 
+              <div
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-16"
                 style={{
                   background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, transparent 70%)',
                 }}
               />
-            </div>
-
-            {/* BEFORE - Original with dealership background */}
-            <div
-              className="absolute inset-0"
-              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-              <img
-                  src={carImageOriginal}
-                alt="Original car with background"
-                  className="w-full h-full object-contain"
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                  }}
-                />
-              </div>
-              {/* Subtle overlay to emphasize "messy" background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/5" />
             </div>
 
             {/* Slider handle */}

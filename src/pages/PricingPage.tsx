@@ -1,16 +1,21 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingDemo from "@/components/FloatingDemo";
 import { Check, Zap, Building2, Sparkles } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 const plans = [
   {
     name: "Starter",
     icon: Zap,
-    price: "299",
-    period: "month",
+    price: {
+      monthly: "24,999",
+      annually: "2,49,999",
+    },
     description: "Perfect for individual sellers and small dealerships getting started",
     features: [
       "Up to 50 vehicles/month",
@@ -28,8 +33,10 @@ const plans = [
   {
     name: "Pro",
     icon: Building2,
-    price: "799",
-    period: "month",
+    price: {
+      monthly: "64,999",
+      annually: "6,49,999",
+    },
     description: "Best for growing dealerships and automotive businesses",
     features: [
       "Up to 200 vehicles/month",
@@ -49,8 +56,10 @@ const plans = [
   {
     name: "Enterprise",
     icon: Sparkles,
-    price: "Custom",
-    period: "",
+    price: {
+      monthly: "Custom",
+      annually: "Custom",
+    },
     description: "For large dealership groups and automotive platforms",
     features: [
       "Unlimited vehicles",
@@ -84,126 +93,154 @@ const faqs = [
   },
   {
     question: "Do you offer annual billing?",
-    answer: "Yes! Save 20% with annual billing on Starter and Pro plans.",
+    answer: "Yes! Save ~20% with annual billing on Starter and Pro plans.",
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept all major credit cards, UPI, and bank transfers for annual plans.",
   },
 ];
 
 const PricingPage = () => {
+  const [isAnnual, setIsAnnual] = useState(false);
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
-      
+
       {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-to-br from-background via-primary/5 to-accent/5 overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-block mb-4 px-4 py-2 bg-accent/10 rounded-full border border-accent/20">
-              <span className="text-accent font-semibold text-sm">Pricing Plans</span>
-            </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-              Choose the Perfect Plan for Your Business
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-              Transparent pricing. No hidden fees. Cancel anytime.
-            </p>
+      <section className="relative py-20 lg:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5 pointer-events-none" />
+        <div className="container px-4 md:px-6 relative z-10 mx-auto text-center">
+          <div className="inline-flex items-center justify-center p-1.5 mb-6 rounded-full bg-accent/10 border border-accent/20">
+            <span className="px-3 py-1 text-sm font-semibold text-accent">Simple, Transparent Pricing</span>
+          </div>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+            Choose the Right Plan for Your Growth
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+            Scalable solutions for dealerships of all sizes. No hidden fees.
+          </p>
+
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <Label htmlFor="billing-mode" className={`text-sm font-medium ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>Monthly</Label>
+            <Switch
+              id="billing-mode"
+              checked={isAnnual}
+              onCheckedChange={setIsAnnual}
+            />
+            <Label htmlFor="billing-mode" className={`text-sm font-medium ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
+              Yearly <span className="text-accent text-xs ml-1 font-bold">(Save 20%)</span>
+            </Label>
           </div>
         </div>
       </section>
 
       {/* Pricing Cards */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <section className="pb-24">
+        <div className="container px-4 md:px-6 mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto items-start">
             {plans.map((plan, index) => (
               <Card
                 key={index}
-                className={`relative hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${
-                  plan.popular
-                    ? 'border-2 border-accent shadow-xl scale-105'
-                    : 'border-2 hover:border-accent/50'
-                }`}
+                className={`relative overflow-hidden transition-all duration-300 flex flex-col h-full ${plan.popular
+                  ? 'border-accent shadow-2xl scale-105 z-10 bg-gradient-to-b from-background to-accent/5'
+                  : 'border-border hover:border-accent/50 hover:shadow-lg bg-card'
+                  }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary to-accent text-primary-foreground text-sm font-bold rounded-full">
-                    Most Popular
-                  </div>
+                  <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-primary to-accent" />
                 )}
 
-                <CardContent className="p-8">
-                  {/* Icon */}
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-6">
-                    <plan.icon className="w-7 h-7 text-primary-foreground" />
+                <CardHeader className="pb-4">
+                  {plan.popular && (
+                    <div className="absolute top-4 right-4 bg-accent/10 text-accent text-xs font-bold px-3 py-1 rounded-full border border-accent/20">
+                      Most Popular
+                    </div>
+                  )}
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                    <plan.icon className="w-6 h-6 text-primary" />
                   </div>
+                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
+                  <CardDescription className="mt-2 min-h-[40px]">{plan.description}</CardDescription>
+                </CardHeader>
 
-                  {/* Plan Name */}
-                  <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                  <p className="text-muted-foreground text-sm mb-6">{plan.description}</p>
-
-                  {/* Price */}
-                  <div className="mb-8">
-                    {plan.price === "Custom" ? (
+                <CardContent className="flex-1">
+                  <div className="mb-6">
+                    {plan.price.monthly === "Custom" ? (
                       <div className="text-4xl font-bold">Custom</div>
                     ) : (
-                      <div>
-                        <span className="text-4xl font-bold">${plan.price}</span>
-                        <span className="text-muted-foreground">/{plan.period}</span>
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-xl font-bold">₹</span>
+                        <span className="text-4xl font-bold">
+                          {isAnnual ? plan.price.annually : plan.price.monthly}
+                        </span>
+                        <span className="text-muted-foreground text-sm font-normal">
+                          /{isAnnual ? 'year' : 'month'}
+                        </span>
                       </div>
+                    )}
+                    {isAnnual && plan.price.monthly !== "Custom" && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Billed annually
+                      </p>
                     )}
                   </div>
 
-                  {/* CTA Button */}
-                  <Button
-                    variant={plan.popular ? "gradient" : "outline"}
-                    className="w-full mb-8"
-                    size="lg"
-                  >
-                    {plan.cta}
-                  </Button>
-
-                  {/* Features */}
-                  <ul className="space-y-3">
+                  <ul className="space-y-3 mb-6">
                     {plan.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
-                        <span className="text-sm text-foreground/80">{feature}</span>
+                      <li key={idx} className="flex items-start gap-3 text-sm">
+                        <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground hover:text-foreground transition-colors">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </CardContent>
+
+                <CardFooter>
+                  <Button
+                    variant={plan.popular ? "default" : "outline"}
+                    className={`w-full ${plan.popular ? "bg-gradient-to-r from-primary to-accent hover:opacity-90 border-0" : ""}`}
+                    size="lg"
+                    asChild
+                  >
+                    <a href="/contact">{plan.cta}</a>
+                  </Button>
+                </CardFooter>
               </Card>
             ))}
           </div>
 
-          {/* Enterprise CTA */}
-          <div className="mt-16 text-center">
-            <Card className="max-w-4xl mx-auto border-2 border-accent/30 bg-gradient-to-br from-primary/5 to-accent/5">
-              <CardContent className="p-12">
-                <h3 className="text-3xl font-bold mb-4">Need a Custom Solution?</h3>
-                <p className="text-lg text-muted-foreground mb-6">
-                  Large dealership groups, OEMs, and automotive platforms get custom pricing and dedicated support.
+          {/* Enterprise Contact Section */}
+          <div className="mt-20">
+            <div className="bg-muted/30 rounded-3xl p-8 md:p-12 border border-border/50 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold mb-2">Enterprise Solutions</h3>
+                <p className="text-muted-foreground">
+                  Need volume pricing or custom integrations? we offer tailored packages for large dealership networks.
                 </p>
-                <Button variant="gradient" size="xl">
-                  Request Custom Quote
-                </Button>
-              </CardContent>
-            </Card>
+              </div>
+              <Button size="lg" variant="secondary" className="min-w-[200px]" asChild>
+                <a href="/contact">Talk to Sales</a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="py-24 bg-muted/30">
-        <div className="container mx-auto px-4 md:px-6">
+        <div className="container px-4 md:px-6 mx-auto">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
               Frequently Asked Questions
             </h2>
-            <div className="space-y-6">
+            <div className="grid gap-6">
               {faqs.map((faq, index) => (
-                <Card key={index} className="border-2 hover:border-accent/50 transition-all">
+                <Card key={index} className="border-0 shadow-sm bg-background/60 backdrop-blur hover:bg-background transition-colors">
                   <CardContent className="p-6">
-                    <h4 className="text-lg font-bold mb-2">{faq.question}</h4>
-                    <p className="text-muted-foreground">{faq.answer}</p>
+                    <h4 className="text-lg font-semibold mb-2">{faq.question}</h4>
+                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
                   </CardContent>
                 </Card>
               ))}

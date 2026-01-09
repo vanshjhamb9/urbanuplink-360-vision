@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import FeaturesPage from "./pages/FeaturesPage";
 import UseCasesPage from "./pages/UseCasesPage";
 import PricingPage from "./pages/PricingPage";
+import ContactPage from "./pages/ContactPage";
 import TeamPage from "./pages/TeamPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/learn-more" element={<LearnMorePage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />

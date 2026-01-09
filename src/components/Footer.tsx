@@ -16,10 +16,10 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-[50%] h-[25%] rounded-lg flex flex-row items-center justify-center">
-              <img className="w-[80%] ml-[5rem]" src={Image2} />
-             <img className="mt-[3rem] -ml-[2rem]" src={Image1} />
-            </div>
-             
+                <img className="w-[80%] ml-[5rem]" src={Image2} />
+                <img className="mt-[3rem] -ml-[2rem]" src={Image1} />
+              </div>
+
             </div>
             <p className="text-sm text-white/80">
               Transforming automotive sales with real 360° imaging solutions.
@@ -68,7 +68,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-white/80 hover:text-white transition-colors">
+                <a href="/contact" className="text-white/80 hover:text-white transition-colors">
                   Contact
                 </a>
               </li>
@@ -115,7 +115,7 @@ const Footer = () => {
           <p className="text-sm text-white/80">
             © 2025 UrbanUplink. All rights reserved.
           </p>
-          
+
           <div className="flex gap-4">
             <a href="#" className="text-white/80 hover:text-white transition-colors hover:scale-110">
               <Facebook className="w-5 h-5" />

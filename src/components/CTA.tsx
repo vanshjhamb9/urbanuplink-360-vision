@@ -37,7 +37,7 @@ const CTA = () => {
               className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
               asChild
             >
-              <a href="mailto:sales@urbanuplink.com">
+              <a href="/contact">
                 Contact Sales
               </a>
             </Button>
