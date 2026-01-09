@@ -69,42 +69,42 @@ const UseCaseScenarios = () => {
 
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
           {/* Controls - Horizontal scroll on mobile, Vertical list on desktop */}
-          <div className="flex lg:block overflow-x-auto gap-4 pb-6 lg:pb-0 lg:space-y-4 w-full snap-x px-1 lg:px-0 scrollbar-hide order-2 lg:order-1">
+          {/* Controls - Grid on mobile, Vertical list on desktop */}
+          <div className="grid grid-cols-2 lg:flex lg:flex-col gap-3 md:gap-4 order-2 lg:order-1 w-full">
             {useCases.map((useCase) => (
               <button
                 key={useCase.id}
                 onClick={() => setActiveCase(useCase.id)}
-                className={`text-left p-6 rounded-2xl transition-all duration-300 min-w-[85vw] sm:min-w-[350px] lg:min-w-0 flex-shrink-0 snap-center ${activeCase === useCase.id
-                    ? "bg-card shadow-xl border-2 border-primary/30 scale-100 lg:scale-105"
-                    : "bg-card/50 border border-border hover:bg-card hover:shadow-lg"
+                className={`text-left p-3 md:p-6 rounded-xl md:rounded-2xl transition-all duration-300 flex flex-col md:flex-row items-center md:items-start gap-2 md:gap-4 ${activeCase === useCase.id
+                  ? "bg-card shadow-lg md:shadow-xl border-2 border-primary/30 scale-[1.02] md:scale-105"
+                  : "bg-card/50 border border-border hover:bg-card hover:shadow-lg"
                   }`}
               >
-                <div className="flex items-start gap-4">
-                  <div
-                    className={`w-12 h-12 rounded-xl bg-gradient-to-br ${useCase.color} flex items-center justify-center flex-shrink-0`}
-                  >
-                    <useCase.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-lg mb-1">{useCase.title}</h3>
-                    <p className="text-muted-foreground text-sm">{useCase.description}</p>
-                    {activeCase === useCase.id && (
-                      <div className="flex gap-4 mt-4">
-                        <div className="flex items-center gap-2">
-                          <TrendingUp className="w-4 h-4 text-primary" />
-                          <span className="text-sm">
-                            <strong className="text-primary">{useCase.stats.reach}</strong> more reach
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Users className="w-4 h-4 text-accent" />
-                          <span className="text-sm">
-                            <strong className="text-accent">{useCase.stats.engagement}</strong> engagement
-                          </span>
-                        </div>
+                <div
+                  className={`w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-br ${useCase.color} flex items-center justify-center flex-shrink-0`}
+                >
+                  <useCase.icon className="w-4 h-4 md:w-6 md:h-6 text-white" />
+                </div>
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="font-bold text-xs md:text-lg leading-tight mb-0 md:mb-1">{useCase.title}</h3>
+                  <p className="text-muted-foreground text-xs md:text-sm hidden md:block">{useCase.description}</p>
+
+                  {activeCase === useCase.id && (
+                    <div className="hidden md:flex gap-4 mt-4">
+                      <div className="flex items-center gap-2">
+                        <TrendingUp className="w-4 h-4 text-primary" />
+                        <span className="text-sm">
+                          <strong className="text-primary">{useCase.stats.reach}</strong> more reach
+                        </span>
                       </div>
-                    )}
-                  </div>
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4 text-accent" />
+                        <span className="text-sm">
+                          <strong className="text-accent">{useCase.stats.engagement}</strong> engagement
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </button>
             ))}

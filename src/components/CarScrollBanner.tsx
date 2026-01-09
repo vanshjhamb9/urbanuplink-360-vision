@@ -120,11 +120,14 @@ const CarScrollBanner = () => {
       </div>
 
       <div className="relative">
-        <div className="flex animate-marquee hover:pause gap-6">
+        <div
+          className="flex animate-marquee hover:pause gap-4 md:gap-6"
+          style={{ animationDuration: '20s' }} // Faster speed
+        >
           {duplicatedCars.map((car, index) => (
             <div
               key={index}
-              className={`flex-shrink-0 w-80 rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-br ${car.background}`}
+              className={`flex-shrink-0 w-60 md:w-80 rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-br ${car.background}`}
             >
               <div className="relative aspect-[4/3] group">
                 <img
@@ -134,32 +137,32 @@ const CarScrollBanner = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <div className="absolute top-3 right-3 px-2 py-1 bg-white/90 backdrop-blur rounded-full text-xs font-semibold text-foreground shadow-sm">
+                <div className="absolute top-2 right-2 md:top-3 md:right-3 px-1.5 md:px-2 py-0.5 md:py-1 bg-white/90 backdrop-blur rounded-full text-[10px] md:text-xs font-semibold text-foreground shadow-sm">
                   {car.angle}
                 </div>
                 {/* Tags overlay */}
-                <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1">
+                <div className="absolute bottom-2 left-2 right-2 md:bottom-3 md:left-3 md:right-3 flex flex-wrap gap-1">
                   {car.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="px-2 py-0.5 bg-background/90 backdrop-blur-sm text-foreground text-xs font-semibold rounded-full shadow-sm"
+                      className="px-1.5 md:px-2 py-0.5 bg-background/90 backdrop-blur-sm text-foreground text-[10px] md:text-xs font-semibold rounded-full shadow-sm"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-              <div className="p-4 bg-white/50 backdrop-blur-sm">
-                <div className="flex items-start justify-between mb-2">
+              <div className="p-3 md:p-4 bg-white/50 backdrop-blur-sm">
+                <div className="flex items-start justify-between mb-1 md:mb-2">
                   <div className="flex-1">
-                    <div className="text-xs font-medium text-primary mb-1 uppercase tracking-wider">{car.brand}</div>
-                    <h3 className="font-bold text-lg leading-tight">{car.model}</h3>
+                    <div className="text-[10px] md:text-xs font-medium text-primary mb-0.5 md:mb-1 uppercase tracking-wider">{car.brand}</div>
+                    <h3 className="font-bold text-sm md:text-lg leading-tight">{car.model}</h3>
                   </div>
-                  <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold">
+                  <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold text-sm md:text-base">
                     {car.price}
                   </div>
                 </div>
-                <p className="text-xs text-muted-foreground line-clamp-2">
+                <p className="text-[10px] md:text-xs text-muted-foreground line-clamp-2">
                   {car.description}
                 </p>
               </div>
@@ -167,16 +170,19 @@ const CarScrollBanner = () => {
           ))}
         </div>
 
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
       </div>
 
-      <div className="relative mt-8">
-        <div className="flex animate-marquee-reverse hover:pause gap-6">
+      <div className="relative mt-4 md:mt-8">
+        <div
+          className="flex animate-marquee-reverse hover:pause gap-4 md:gap-6"
+          style={{ animationDuration: '20s' }} // Faster speed
+        >
           {[...duplicatedCars].reverse().map((car, index) => (
             <div
               key={index}
-              className={`flex-shrink-0 w-80 rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-br ${car.background}`}
+              className={`flex-shrink-0 w-60 md:w-80 rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-br ${car.background}`}
             >
               <div className="relative aspect-[4/3] group">
                 <img
@@ -186,31 +192,31 @@ const CarScrollBanner = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <div className="absolute top-3 right-3 px-2 py-1 bg-white/90 backdrop-blur rounded-full text-xs font-semibold text-foreground shadow-sm">
+                <div className="absolute top-2 right-2 md:top-3 md:right-3 px-1.5 md:px-2 py-0.5 md:py-1 bg-white/90 backdrop-blur rounded-full text-[10px] md:text-xs font-semibold text-foreground shadow-sm">
                   {car.angle}
                 </div>
-                <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1">
+                <div className="absolute bottom-2 left-2 right-2 md:bottom-3 md:left-3 md:right-3 flex flex-wrap gap-1">
                   {car.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="px-2 py-0.5 bg-background/90 backdrop-blur-sm text-foreground text-xs font-semibold rounded-full shadow-sm"
+                      className="px-1.5 md:px-2 py-0.5 bg-background/90 backdrop-blur-sm text-foreground text-[10px] md:text-xs font-semibold rounded-full shadow-sm"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-              <div className="p-4 bg-white/50 backdrop-blur-sm">
-                <div className="flex items-start justify-between mb-2">
+              <div className="p-3 md:p-4 bg-white/50 backdrop-blur-sm">
+                <div className="flex items-start justify-between mb-1 md:mb-2">
                   <div className="flex-1">
-                    <div className="text-xs font-medium text-primary mb-1 uppercase tracking-wider">{car.brand}</div>
-                    <h3 className="font-bold text-lg leading-tight">{car.model}</h3>
+                    <div className="text-[10px] md:text-xs font-medium text-primary mb-0.5 md:mb-1 uppercase tracking-wider">{car.brand}</div>
+                    <h3 className="font-bold text-sm md:text-lg leading-tight">{car.model}</h3>
                   </div>
-                  <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold">
+                  <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold text-sm md:text-base">
                     {car.price}
                   </div>
                 </div>
-                <p className="text-xs text-muted-foreground line-clamp-2">
+                <p className="text-[10px] md:text-xs text-muted-foreground line-clamp-2">
                   {car.description}
                 </p>
               </div>

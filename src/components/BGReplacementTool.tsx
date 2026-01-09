@@ -55,7 +55,7 @@ const BGReplacementTool = () => {
   }, [isAutoPlaying]);
 
   return (
-    <section className="py-24 bg-muted/30 relative overflow-hidden">
+    <section className=" py-24 bg-muted/30 relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full border border-primary/20">

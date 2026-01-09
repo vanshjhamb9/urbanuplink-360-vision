@@ -297,7 +297,7 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                           {/* 360° Car Rotation Display - Centered and smooth */}
                           <div className="relative w-full h-full flex items-center justify-center">
                             {/* Car image with smooth transitions and number plate masking */}
-                            <div className="relative w-full h-full flex items-center justify-center" style={{ maxWidth: '85%', maxHeight: '85%' }}>
+                            <div className="relative w-full h-full flex items-center justify-center max-w-none max-h-none scale-[1.35] md:scale-100 md:max-w-[85%] md:max-h-[85%]">
                               {car360Images.map((img, index) => (
                                 <div
                                   key={index}
