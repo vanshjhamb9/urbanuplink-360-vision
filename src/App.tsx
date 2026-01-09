@@ -11,6 +11,7 @@ import TeamPage from "./pages/TeamPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import RefundPolicy from "./pages/RefundPolicy";
+import LearnMorePage from "./pages/LearnMorePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/use-cases" element={<UseCasesPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/team" element={<TeamPage />} />
+          <Route path="/learn-more" element={<LearnMorePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/refund-policy" element={<RefundPolicy />} />

@@ -191,7 +191,7 @@ const UseCaseScenarios = () => {
                       <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-lg rounded-xl p-4">
                         <div className="flex items-center justify-between">
                           <div>
-                            <div className="text-white font-bold">360° Interactive View</div>
+                            <div className="text-white font-bold">360° Interactivess View</div>
                             <div className="text-white/70 text-sm">Drag to explore all angles</div>
                           </div>
                           <div className="flex gap-2">

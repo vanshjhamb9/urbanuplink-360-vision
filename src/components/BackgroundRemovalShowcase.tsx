@@ -107,16 +107,33 @@ const BackgroundRemovalShowcase = () => {
               {/* Car with background removed - Using transparent PNG for perfect edge cutting */}
               <div className="absolute inset-0 flex items-center justify-center">
                 {/* Using transparent PNG for perfect background removal - same size and position as original */}
-                <img
-                  src={carImageWithNoBg}
-                  alt="Car with background removed"
-                  className="w-full h-full object-contain"
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <img
+                    src={carImageWithNoBg}
+                    alt="Car with background removed"
+                    className="w-full h-full object-contain"
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
                       filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
                     }}
                   />
+                  {/* AI Plate Masking */}
+                  <div 
+                    className="absolute pointer-events-none overflow-hidden rounded-sm"
+                    style={{
+                      left: '50%',
+                      top: '78%',
+                      width: '18%',
+                      height: '3.5%',
+                      transform: 'translate(-50%, -50%)',
+                      zIndex: 20,
+                    }}
+                  >
+                    <div className="absolute inset-0 backdrop-blur-md bg-black/40" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/20 to-transparent h-1/2 w-full animate-pulse" />
+                  </div>
+                </div>
               </div>
               
               {/* Subtle floor shadow */}

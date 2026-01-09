@@ -189,13 +189,12 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
             return (
               <div
                 key={index}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-500 ${
-                  activeStep === index
+                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-500 ${activeStep === index
                     ? `bg-gradient-to-r ${step.color} text-white shadow-lg scale-110`
                     : activeStep > index
-                    ? "bg-primary/20 text-primary"
-                    : "bg-muted text-muted-foreground"
-                }`}
+                      ? "bg-primary/20 text-primary"
+                      : "bg-muted text-muted-foreground"
+                  }`}
               >
                 <StepIcon className="w-4 h-4" />
                 <span className="text-sm font-medium hidden sm:inline">{step.label}</span>
@@ -220,17 +219,15 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-slate-100 to-slate-200">
               {!showVideo ? (
                 <div className="absolute inset-0 p-4">
-                  <div className={`grid grid-cols-4 gap-2 h-full transition-all duration-1000 ${
-                    animationPhase === "transition" ? "scale-50 opacity-0" : ""
-                  }`}>
+                  <div className={`grid grid-cols-4 gap-2 h-full transition-all duration-1000 ${animationPhase === "transition" ? "scale-50 opacity-0" : ""
+                    }`}>
                     {gridImages.map((img, index) => (
                       <div
                         key={index}
-                        className={`relative rounded-lg overflow-hidden shadow-lg transition-all duration-700 ${
-                          gridComplete
+                        className={`relative rounded-lg overflow-hidden shadow-lg transition-all duration-700 ${gridComplete
                             ? "opacity-100 scale-100"
                             : "opacity-0 scale-75"
-                        }`}
+                          }`}
                         style={{
                           transitionDelay: `${index * 100}ms`,
                         }}
@@ -282,7 +279,7 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                       />
                     </div>
                   ) : (
-                    <div 
+                    <div
                       ref={containerRef}
                       className="w-full h-full relative bg-gradient-to-br from-slate-50 to-slate-200 cursor-grab active:cursor-grabbing"
                       onMouseDown={handleMouseDown}
@@ -296,7 +293,7 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="relative w-full h-full flex items-center justify-center">
                           <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-slate-200/50" />
-                          
+
                           {/* 360° Car Rotation Display - Centered and smooth */}
                           <div className="relative w-full h-full flex items-center justify-center">
                             {/* Car image with smooth transitions and number plate masking */}
@@ -304,9 +301,8 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                               {car360Images.map((img, index) => (
                                 <div
                                   key={index}
-                                  className={`absolute w-full h-full flex items-center justify-center transition-opacity duration-200 ${
-                                    index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                                  }`}
+                                  className={`absolute w-full h-full flex items-center justify-center transition-opacity duration-200 ${index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                                    }`}
                                 >
                                   <div className="relative w-full h-full" style={{ position: 'relative' }}>
                                     <img
@@ -319,21 +315,13 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                                         maxHeight: '100%',
                                       }}
                                     />
-                                    {/* Number plate masking overlay */}
-                                    <div 
-                                      className="absolute bottom-[8%] left-1/2 -translate-x-1/2 w-[25%] h-[4%] bg-gradient-to-b from-black/60 via-black/80 to-black/60 rounded-sm blur-sm"
-                                      style={{
-                                        maskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
-                                        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
-                                      }}
-                                    />
                                   </div>
                                 </div>
                               ))}
                             </div>
-                            
+
                             {/* Floor shadow - centered under car */}
-                            <div 
+                            <div
                               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-16 pointer-events-none"
                               style={{
                                 background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 40%, transparent 70%)',
@@ -344,7 +332,7 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                           {/* Rotation indicators */}
                           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                             <div className="relative w-4/5 h-4/5">
-                              <div 
+                              <div
                                 className="absolute inset-0 border-2 border-dashed border-primary/30 rounded-full"
                                 style={{
                                   transform: `rotate(${rotationAngle}deg)`,
@@ -417,7 +405,7 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                               style={{ width: `${(rotationAngle / 360) * 100}%` }}
                             />
                           </div>
-                          
+
                           <div className="mt-3 text-center text-white/60 text-xs">
                             Awaiting Unity 3D model integration • Placeholder preview shown
                           </div>

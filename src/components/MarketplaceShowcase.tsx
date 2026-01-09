@@ -6,6 +6,7 @@ import tataHarrier from "@/assets/2023-Tata-Harrier-facelift-dark-edition-front-
 import sierraExterior from "@/assets/sierra-exterior.jpg";
 import sierraInterior from "@/assets/sierra-interior.jpg";
 import bgRemoved from "@/assets/bg-removed.png";
+import tata_Harrier from "@/assets/tata_harrier.avif"
 
 const carImages = [
   { src: tataHarrier, angle: "Front View", label: "Front" },
@@ -77,6 +78,24 @@ const MarketplaceShowcase = () => {
                           maxHeight: '100%',
                         }}
                       />
+                      
+                      {/* Professional Plate Masking for Front/Rear views */}
+                      {(carImages[currentImage].label === "Front" || carImages[currentImage].label === "Rear") && (
+                        <div 
+                          className="absolute pointer-events-none overflow-hidden rounded-sm"
+                          style={{
+                            left: '50%',
+                            top: '78%',
+                            width: '22%',
+                            height: '4%',
+                            transform: 'translate(-50%, -50%)',
+                            zIndex: 20,
+                          }}
+                        >
+                          <div className="absolute inset-0 backdrop-blur-md bg-black/40" />
+                          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/20 to-transparent h-1/2 w-full animate-pulse" />
+                        </div>
+                      )}
 
                       <TooltipProvider>
                         {hotspots.map((hotspot, index) => (

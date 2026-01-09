@@ -96,6 +96,17 @@ const Header = () => {
               <span className="relative z-10">Team</span>
               <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </a>
+            <a
+              href="/learn-more"
+              className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${
+                isScrolled
+                  ? "text-foreground hover:text-primary"
+                  : "text-foreground/90 hover:text-primary"
+              }`}
+            >
+              <span className="relative z-10">Learn More</span>
+              <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </a>
             {/* CTA Button */}
             <a
               href="#contact"
@@ -161,6 +172,13 @@ const Header = () => {
               className="px-6 py-4 text-foreground hover:text-primary hover:bg-primary/10 transition-all font-semibold border-b border-border/50"
             >
               Team
+            </a>
+            <a 
+              href="/learn-more" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-6 py-4 text-foreground hover:text-primary hover:bg-primary/10 transition-all font-semibold border-b border-border/50"
+            >
+              Learn More
             </a>
             <a 
               href="#contact" 
