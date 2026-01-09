@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Check, Camera, Eraser, Image } from "lucide-react";
-import sierraExterior from "@/assets/sierra-exterior.jpg";
-import indianCarNoBg from "@/assets/indian-car-bg-removed.png";
+import tataHarrierOriginal from "@/assets/2023-Tata-Harrier-facelift-dark-edition-front-.jpg";
+import carNoBg from "@/assets/bg-removed.png";
 
-// Using single car image - Sierra Exterior for all stages
-const carImageOriginal = sierraExterior;
+// Using Tata Harrier - original with background and transparent PNG version
+const carImageOriginal = tataHarrierOriginal;
+const carImageWithNoBg = carNoBg; // Background-removed PNG
 
 const stages = [
   {
@@ -123,11 +124,17 @@ const BGReplacementTool = () => {
                 currentStage === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
               }`}
             >
+              <div className="absolute inset-0 flex items-center justify-center">
               <img
-                src={carImageOriginal}
+                  src={carImageOriginal}
                 alt="Raw image with original background"
-                className="w-full h-full object-cover"
-              />
+                  className="w-full h-full object-contain"
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                  }}
+                />
+              </div>
               {/* Overlay to emphasize "raw/unprocessed" look */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               {/* Raw indicator badge */}
@@ -159,29 +166,21 @@ const BGReplacementTool = () => {
                 }}
               />
               
-              {/* Car with background removed - Using same image with improved masking */}
+              {/* Car with background removed - Using transparent PNG for perfect edge cutting */}
               <div 
                 className="absolute inset-0 flex items-center justify-center"
               >
-                <div className="relative w-full h-full flex items-center justify-center p-8">
-                  {/* Using the same car image with clip-path for better edge cutting */}
-                  <div 
-                    className="relative w-full h-full"
-                    style={{
-                      clipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
-                      WebkitClipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
+                {/* Using transparent PNG for perfect background removal - same size and position as original */}
+                <img
+                  src={carImageWithNoBg}
+                  alt="Car with background removed"
+                  className="w-full h-full object-contain"
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                      filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.4))",
                     }}
-                  >
-                    <img
-                      src={carImageOriginal}
-                      alt="Car with background removed"
-                      className="w-full h-full object-cover"
-                      style={{
-                        filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.4))",
-                      }}
-                    />
-                  </div>
-                </div>
+                  />
               </div>
               
               {/* Transparency indicator badge */}
@@ -203,27 +202,19 @@ const BGReplacementTool = () => {
               {/* Subtle lighting effect */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/20" />
               
-              {/* Car with background removed on new background - Using same image with improved masking */}
+              {/* Car with background removed on new background - Using transparent PNG for perfect edge cutting */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center p-8">
-                  {/* Using the same car image with clip-path for better edge cutting */}
-                  <div 
-                    className="relative w-full h-full"
-                    style={{
-                      clipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
-                      WebkitClipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
+                {/* Using transparent PNG for perfect background removal - same size and position as original */}
+                <img
+                  src={carImageWithNoBg}
+                  alt="Car with new background"
+                  className="w-full h-full object-contain"
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                      filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.35))",
                     }}
-                  >
-                    <img
-                      src={carImageOriginal}
-                      alt="Car with new background"
-                      className="w-full h-full object-cover"
-                      style={{
-                        filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.35))",
-                      }}
-                    />
-                  </div>
-                </div>
+                  />
               </div>
               
               {/* Floor shadow/reflection */}

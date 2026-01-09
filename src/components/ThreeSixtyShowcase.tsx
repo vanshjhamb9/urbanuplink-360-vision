@@ -1,11 +1,37 @@
 import { useState, useEffect, useRef } from "react";
 import { Camera, Eraser, Image, Shield, Sparkles, Play, Pause, RotateCcw, Maximize2, Box } from "lucide-react";
-import heroImage from "@/assets/hero-car.jpg";
 
-// 360° car images - Replace with your Indian car images from all angles
-// Images should be in order: 0°, 30°, 60°, 90°, 120°, 150°, 180°, 210°, 240°, 270°, 300°, 330°
-// Each image should have the background removed (transparent PNG)
-const car360Images = Array(12).fill(heroImage); // Replace with actual 360° images
+// 360° car images - All angles with background removed
+// Images in order: 0° (1r.png), 30° (2r.png), 60° (3r.png), 90° (4r.png), 120° (5r.png), 150° (6r.png),
+//                  180° (7r.png), 210° (8r.png), 240° (9r.png), 270° (10r.png), 300° (11r.png), 330° (12r.png)
+import car360_1 from "@/assets/1r.png";
+import car360_2 from "@/assets/2r.png";
+import car360_3 from "@/assets/3r.png";
+import car360_4 from "@/assets/4r.png";
+import car360_5 from "@/assets/5r.png";
+import car360_6 from "@/assets/6r.png";
+import car360_7 from "@/assets/7r.png";
+import car360_8 from "@/assets/8r.png";
+import car360_9 from "@/assets/9r.png";
+import car360_10 from "@/assets/10r.png";
+import car360_11 from "@/assets/11r.png";
+import car360_12 from "@/assets/12r.png";
+
+const car360Images = [
+  car360_1,  // 0° / 360°
+  car360_2,  // 30°
+  car360_3,  // 60°
+  car360_4,  // 90°
+  car360_5,  // 120°
+  car360_6,  // 150°
+  car360_7,  // 180°
+  car360_8,  // 210°
+  car360_9,  // 240°
+  car360_10, // 270°
+  car360_11, // 300°
+  car360_12, // 330°
+];
+
 const totalAngles = car360Images.length;
 
 const workflowSteps = [
@@ -60,18 +86,18 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
     }
   }, [gridComplete, showVideo]);
 
-  // Auto-rotate 360° view
+  // Auto-rotate 360° view - Smoother rotation
   useEffect(() => {
     if (!isPlaying || !showVideo) return;
     const rotationInterval = setInterval(() => {
       setRotationAngle((prev) => {
-        const newAngle = (prev + 1) % 360;
+        const newAngle = (prev + 0.5) % 360; // Slower, smoother rotation
         // Update image index based on angle (12 images = 30° per image)
         const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
         setCurrentImageIndex(newIndex);
         return newAngle;
       });
-    }, 50);
+    }, 30); // Faster interval for smoother animation
     return () => clearInterval(rotationInterval);
   }, [isPlaying, showVideo]);
 
@@ -211,8 +237,8 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                       >
                         <img
                           src={img}
-                          alt={`Angle ${index + 1}`}
-                          className="w-full h-full object-cover"
+                          alt={`Angle ${(index) * 30}°`}
+                          className="w-full h-full object-contain"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                         <div className="absolute bottom-1 left-1 text-white text-xs font-bold bg-gradient-to-r from-primary to-accent rounded px-1.5 py-0.5">
@@ -271,30 +297,46 @@ const ThreeSixtyShowcase = ({ unityBuildUrl }: ThreeSixtyShowcaseProps) => {
                         <div className="relative w-full h-full flex items-center justify-center">
                           <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-slate-200/50" />
                           
-                          {/* 360° Car Rotation Display */}
-                          <div className="relative w-4/5 h-4/5 flex items-center justify-center">
-                            {/* Car image with smooth transitions */}
-                            <div className="relative w-full h-full flex items-center justify-center">
+                          {/* 360° Car Rotation Display - Centered and smooth */}
+                          <div className="relative w-full h-full flex items-center justify-center">
+                            {/* Car image with smooth transitions and number plate masking */}
+                            <div className="relative w-full h-full flex items-center justify-center" style={{ maxWidth: '85%', maxHeight: '85%' }}>
                               {car360Images.map((img, index) => (
-                                <img
+                                <div
                                   key={index}
-                                  src={img}
-                                  alt={`360 degree car view - ${index * (360 / totalAngles)}°`}
-                                  className={`absolute w-full h-full object-contain transition-opacity duration-300 ${
+                                  className={`absolute w-full h-full flex items-center justify-center transition-opacity duration-200 ${
                                     index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
                                   }`}
-                                  style={{
-                                    filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
-                                  }}
-                                />
+                                >
+                                  <div className="relative w-full h-full" style={{ position: 'relative' }}>
+                                    <img
+                                      src={img}
+                                      alt={`360 degree car view - ${index * (360 / totalAngles)}°`}
+                                      className="w-full h-full object-contain"
+                                      style={{
+                                        filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
+                                        maxWidth: '100%',
+                                        maxHeight: '100%',
+                                      }}
+                                    />
+                                    {/* Number plate masking overlay */}
+                                    <div 
+                                      className="absolute bottom-[8%] left-1/2 -translate-x-1/2 w-[25%] h-[4%] bg-gradient-to-b from-black/60 via-black/80 to-black/60 rounded-sm blur-sm"
+                                      style={{
+                                        maskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
+                                        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)',
+                                      }}
+                                    />
+                                  </div>
+                                </div>
                               ))}
                             </div>
                             
-                            {/* Floor shadow */}
+                            {/* Floor shadow - centered under car */}
                             <div 
-                              className="absolute bottom-4 left-1/2 -translate-x-1/2 w-3/5 h-12 pointer-events-none"
+                              className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-16 pointer-events-none"
                               style={{
-                                background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, transparent 70%)',
+                                background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.1) 40%, transparent 70%)',
                               }}
                             />
                           </div>

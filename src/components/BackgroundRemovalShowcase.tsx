@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { Clock, Target, Zap } from "lucide-react";
-import sierraExterior from "@/assets/sierra-exterior.jpg";
-import indianCarNoBg from "@/assets/indian-car-bg-removed.png";
+import tataHarrierOriginal from "@/assets/2023-Tata-Harrier-facelift-dark-edition-front-.jpg";
+import carNoBg from "@/assets/bg-removed.png";
 
-// Using single car image - Sierra Exterior for both before and after
-const carImageOriginal = sierraExterior;
+// Using Tata Harrier - original with background and transparent PNG version
+const carImageOriginal = tataHarrierOriginal;
+const carImageWithNoBg = carNoBg; // Background-removed PNG
 
 const BackgroundRemovalShowcase = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
@@ -103,27 +104,19 @@ const BackgroundRemovalShowcase = () => {
               {/* Clean studio gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-br from-slate-50/90 via-gray-100/80 to-slate-200/90" />
               
-              {/* Car with background removed - Using same image with improved masking */}
+              {/* Car with background removed - Using transparent PNG for perfect edge cutting */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-full h-full flex items-center justify-center p-8">
-                  {/* Using the same car image with clip-path for better edge cutting */}
-                  <div 
-                    className="relative w-full h-full"
-                    style={{
-                      clipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
-                      WebkitClipPath: 'polygon(15% 45%, 25% 42%, 35% 40%, 40% 38%, 45% 40%, 55% 40%, 60% 38%, 65% 40%, 75% 42%, 85% 45%, 88% 50%, 88% 65%, 85% 70%, 75% 72%, 65% 73%, 55% 73%, 45% 73%, 35% 73%, 25% 72%, 15% 70%, 12% 65%, 12% 50%)',
+                {/* Using transparent PNG for perfect background removal - same size and position as original */}
+                <img
+                  src={carImageWithNoBg}
+                  alt="Car with background removed"
+                  className="w-full h-full object-contain"
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                      filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
                     }}
-                  >
-                    <img
-                      src={carImageOriginal}
-                      alt="Car with background removed"
-                      className="w-full h-full object-cover"
-                      style={{
-                        filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
-                      }}
-                    />
-                  </div>
-                </div>
+                  />
               </div>
               
               {/* Subtle floor shadow */}
@@ -140,11 +133,17 @@ const BackgroundRemovalShowcase = () => {
               className="absolute inset-0"
               style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
             >
+              <div className="absolute inset-0 flex items-center justify-center">
               <img
-                src={carImageOriginal}
+                  src={carImageOriginal}
                 alt="Original car with background"
-                className="w-full h-full object-cover"
-              />
+                  className="w-full h-full object-contain"
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                  }}
+                />
+              </div>
               {/* Subtle overlay to emphasize "messy" background */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/5" />
             </div>

@@ -25,18 +25,16 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex h-24 items-center justify-between">
-          {/* Logo - Fixed size and better visibility */}
+          {/* Logo - Icon only with better visibility */}
           <div className="flex items-center gap-2 group cursor-pointer">
-            <div className="flex items-center gap-1">
+            <div className="relative">
               <img 
-                className="w-16 h-16 object-contain transition-transform duration-300 group-hover:scale-105" 
+                className="w-20 h-20 md:w-28 md:h-28 object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-lg" 
                 src={Image2} 
                 alt="Urban Uplink Logo" 
-              />
-              <img 
-                className="w-32 h-auto -ml-3 transition-transform duration-300 group-hover:scale-105" 
-                src={Image1} 
-                alt="Urban Uplink" 
+                style={{
+                  filter: 'brightness(1.1) contrast(1.2)',
+                }}
               />
             </div>
           </div>

@@ -2,20 +2,23 @@ import { useState } from "react";
 import { Play, ChevronLeft, ChevronRight, MapPin, Calendar, Fuel, Gauge, Info, Eye, Heart, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import heroImage from "@/assets/hero-car.jpg";
+import tataHarrier from "@/assets/2023-Tata-Harrier-facelift-dark-edition-front-.jpg";
+import sierraExterior from "@/assets/sierra-exterior.jpg";
+import sierraInterior from "@/assets/sierra-interior.jpg";
+import bgRemoved from "@/assets/bg-removed.png";
 
 const carImages = [
-  { src: heroImage, angle: "Front" },
-  { src: heroImage, angle: "Side" },
-  { src: heroImage, angle: "Rear" },
-  { src: heroImage, angle: "Interior" },
+  { src: tataHarrier, angle: "Front View", label: "Front" },
+  { src: sierraExterior, angle: "Side View", label: "Side" },
+  { src: bgRemoved, angle: "Rear View", label: "Rear" },
+  { src: sierraInterior, angle: "Interior", label: "Interior" },
 ];
 
 const carSpecs = [
   { icon: Calendar, label: "Year", value: "2024" },
-  { icon: Gauge, label: "Mileage", value: "12,500 km" },
-  { icon: Fuel, label: "Fuel", value: "Petrol" },
-  { icon: MapPin, label: "Location", value: "Mumbai" },
+  { icon: Gauge, label: "Mileage", value: "8,500 km" },
+  { icon: Fuel, label: "Fuel", value: "Diesel" },
+  { icon: MapPin, label: "Location", value: "Mumbai, MH" },
 ];
 
 const hotspots = [
@@ -68,7 +71,11 @@ const MarketplaceShowcase = () => {
                       <img
                         src={carImages[currentImage].src}
                         alt={carImages[currentImage].angle}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
+                        style={{
+                          maxWidth: '100%',
+                          maxHeight: '100%',
+                        }}
                       />
 
                       <TooltipProvider>
@@ -134,7 +141,7 @@ const MarketplaceShowcase = () => {
                           : "border-transparent opacity-70 hover:opacity-100"
                       }`}
                     >
-                      <img src={img.src} alt={img.angle} className="w-full h-full object-cover" />
+                      <img src={img.src} alt={img.angle} className="w-full h-full object-contain bg-muted/30 rounded" />
                     </button>
                   ))}
                   <button
@@ -143,7 +150,7 @@ const MarketplaceShowcase = () => {
                       showVideo ? "border-primary scale-105" : "border-transparent opacity-70 hover:opacity-100"
                     }`}
                   >
-                    <img src={heroImage} alt="360 Video" className="w-full h-full object-cover" />
+                    <img src={tataHarrier} alt="360 Video" className="w-full h-full object-contain bg-muted/30 rounded" />
                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                       <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center">
                         <Play className="w-4 h-4 text-white ml-0.5" />
@@ -157,16 +164,16 @@ const MarketplaceShowcase = () => {
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full">
-                      Featured
+                      Featured Listing
                     </span>
-                    <h3 className="text-2xl font-bold mt-2">2024 Premium Sports Sedan</h3>
-                    <p className="text-muted-foreground">Luxury Performance Edition</p>
+                    <h3 className="text-2xl font-bold mt-2">2024 Tata Harrier Dark Edition</h3>
+                    <p className="text-muted-foreground">Adventure Plus AWD - Premium SUV</p>
                   </div>
                   <div className="text-right">
                     <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                      ₹45.5L
+                      ₹24.5L
                     </div>
-                    <p className="text-sm text-muted-foreground">Ex-showroom</p>
+                    <p className="text-sm text-muted-foreground">Ex-showroom Mumbai</p>
                   </div>
                 </div>
 

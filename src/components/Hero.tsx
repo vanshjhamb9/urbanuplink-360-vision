@@ -1,14 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import tataHarrier from "@/assets/2023-Tata-Harrier-facelift-dark-edition-front-.jpg";
 import sierraExterior from "@/assets/sierra-exterior.jpg";
 import sierraInterior from "@/assets/sierra-interior.jpg";
 
-// Indian car images for header carousel
+// Indian car images for header carousel - Using Tata Harrier as primary
 const heroImages = [
+  tataHarrier,
   sierraExterior,
   sierraInterior,
-  sierraExterior, // Can add more images if needed
 ];
 
 const Hero = () => {
@@ -44,11 +45,15 @@ const Hero = () => {
               index === currentImageIndex ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            <img
+        <img
               src={img}
               alt={`Luxury car ${index + 1} - Real 360° car experience captured with smartphone`}
-              className="w-full h-full object-cover"
-            />
+          className="w-full h-full object-contain md:object-cover"
+          style={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+          }}
+        />
           </div>
         ))}
         {/* Lighter overlays to keep background visible */}

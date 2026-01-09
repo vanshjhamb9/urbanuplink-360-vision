@@ -3,28 +3,34 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const testimonials = [
   {
-    name: "Michael Chen",
+    name: "Rajesh Kumar",
     role: "Sales Director",
-    company: "Premium Auto Group",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces",
-    quote: "UrbanUplink transformed our online sales. We've seen a 45% increase in qualified leads since implementing 360° views.",
+    company: "Tata Motors Showroom, Mumbai",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces",
+    carImage: "https://imgd.aeplcdn.com/1920x1080/n/cw/ec/193017/sierra-exterior-right-front-three-quarter-60.jpeg?isig=0&q=40",
+    quote: "UrbanUplink transformed our online sales. We've seen a 52% increase in qualified leads since implementing 360° views for our Tata Harrier and Sierra models.",
     rating: 5,
+    tags: ["Tata Harrier", "SUV", "Mumbai"],
   },
   {
-    name: "Sarah Williams",
+    name: "Priya Sharma",
     role: "Marketing Manager",
-    company: "AutoMax Dealerships",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces",
-    quote: "The ease of use is incredible. Our entire team was up and running in less than a day. Customer engagement has skyrocketed.",
+    company: "Mahindra Dealership, Delhi",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces",
+    carImage: "https://imgd.aeplcdn.com/1920x1080/n/cw/ec/193017/sierra-exterior-right-front-three-quarter-60.jpeg?isig=0&q=40",
+    quote: "The ease of use is incredible. Our entire team was up and running in less than a day. Customer engagement with our XUV700 listings has skyrocketed by 68%.",
     rating: 5,
+    tags: ["Mahindra XUV700", "Premium SUV", "Delhi"],
   },
   {
-    name: "David Kumar",
+    name: "Amit Patel",
     role: "Owner",
-    company: "Elite Car Detailing",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces",
-    quote: "Being able to show before-and-after 360° views has tripled our referrals. It's the best investment we've made.",
+    company: "Maruti Suzuki Arena, Ahmedabad",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=faces",
+    carImage: "https://imgd.aeplcdn.com/1920x1080/n/cw/ec/193017/sierra-exterior-right-front-three-quarter-60.jpeg?isig=0&q=40",
+    quote: "Being able to show 360° views of our Swift and Baleno models has tripled our online inquiries. It's the best investment we've made for digital sales.",
     rating: 5,
+    tags: ["Maruti Swift", "Hatchback", "Ahmedabad"],
   },
 ];
 
@@ -53,32 +59,55 @@ const Testimonials = () => {
               {/* Quote decoration */}
               <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
               
-              <CardContent className="p-8 relative">
-                <Quote className="w-10 h-10 text-accent/30 mb-4" />
-                
-                {/* Rating */}
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-accent text-accent" />
-                  ))}
+              <CardContent className="p-0 relative">
+                {/* Car Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={testimonial.carImage}
+                    alt={`${testimonial.tags[0]} showcase`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  {/* Tags */}
+                  <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2">
+                    {testimonial.tags.map((tag, tagIndex) => (
+                      <span
+                        key={tagIndex}
+                        className="px-2 py-1 bg-primary/90 backdrop-blur-sm text-white text-xs font-semibold rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Quote */}
-                <p className="text-foreground/90 mb-6 leading-relaxed italic">
-                  "{testimonial.quote}"
-                </p>
+                <div className="p-6">
+                  <Quote className="w-8 h-8 text-accent/30 mb-3" />
+                  
+                  {/* Rating */}
+                  <div className="flex gap-1 mb-3">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                    ))}
+                  </div>
 
-                {/* Author */}
-                <div className="flex items-center gap-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover ring-2 ring-accent/30"
-                  />
-                  <div>
-                    <div className="font-bold text-foreground">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {testimonial.role}, {testimonial.company}
+                  {/* Quote */}
+                  <p className="text-foreground/90 mb-4 leading-relaxed italic text-sm">
+                    "{testimonial.quote}"
+                  </p>
+
+                  {/* Author */}
+                  <div className="flex items-center gap-3 pt-4 border-t border-border/50">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-10 h-10 rounded-full object-cover ring-2 ring-accent/30"
+                    />
+                    <div>
+                      <div className="font-bold text-foreground text-sm">{testimonial.name}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {testimonial.role}, {testimonial.company}
+                      </div>
                     </div>
                   </div>
                 </div>

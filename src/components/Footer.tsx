@@ -5,8 +5,12 @@ import Image2 from "../assets/2 (2).png"
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 text-white py-12">
-      <div className="container mx-auto px-4 md:px-6">
+    <footer className="bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 text-white py-12 relative overflow-hidden">
+      {/* Background overlay matching header car imagery */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 via-transparent to-accent/20" />
+      </div>
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div>
