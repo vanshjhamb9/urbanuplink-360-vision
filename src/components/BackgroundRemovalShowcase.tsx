@@ -139,20 +139,7 @@ const   BackgroundRemovalShowcase = () => {
                     }}
                   />
                   {/* AI Plate Masking */}
-                  <div
-                    className="absolute pointer-events-none overflow-hidden rounded-sm"
-                    style={{
-                      left: '50%',
-                      top: '78%',
-                      width: '18%',
-                      height: '3.5%',
-                      transform: 'translate(-50%, -50%)',
-                      zIndex: 20,
-                    }}
-                  >
-                    <div className="absolute inset-0 backdrop-blur-md bg-black/40" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/20 to-transparent h-1/2 w-full animate-pulse" />
-                  </div>
+                 
                 </div>
               </div>
 
