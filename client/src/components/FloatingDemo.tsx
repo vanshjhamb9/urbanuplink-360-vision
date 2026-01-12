@@ -7,9 +7,12 @@ const FloatingDemo = () => {
       <Button
         size="lg"
         className="bg-gradient-to-r from-primary via-accent to-primary-glow shadow-2xl hover:shadow-glow animate-pulse hover:animate-none group"
+        asChild
       >
-        Request a Demo
-        <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+        <a href="https://calendly.com/admin-urbanuplink/30min" target="_blank" rel="noopener noreferrer">
+          Request a Demo
+          <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+        </a>
       </Button>
     </div>
   );

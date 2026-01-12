@@ -37,8 +37,8 @@ const CTA = () => {
               className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
               asChild
             >
-              <a href="/contact">
-                Contact Sales
+              <a href="https://calendly.com/admin-urbanuplink/30min" target="_blank" rel="noopener noreferrer">
+                Schedule a Demo
               </a>
             </Button>
           </div>

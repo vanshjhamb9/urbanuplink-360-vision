@@ -74,6 +74,7 @@ const plans = [
       "Volume discounts",
     ],
     cta: "Contact Sales",
+    link: "https://calendly.com/admin-urbanuplink/30min",
     popular: false,
   },
 ];

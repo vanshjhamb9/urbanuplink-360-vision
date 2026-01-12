@@ -145,6 +145,16 @@ const Hero = () => {
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </a>
               </Button>
+              <Button
+                variant="outline"
+                size="xl"
+                className="group w-full sm:w-auto hover:shadow-xl hover:scale-105 transition-all duration-300 border-primary/20 lg:border-white/20 bg-background/50 lg:bg-white/10 backdrop-blur-sm lg:text-white hover:bg-white hover:text-primary"
+                asChild
+              >
+                <a href="https://calendly.com/admin-urbanuplink/30min" target="_blank" rel="noopener noreferrer">
+                  Request Demo
+                </a>
+              </Button>
             </div>
 
             {/* Stats Grid */}

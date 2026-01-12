@@ -21,11 +21,11 @@ const Hero = () => {
           <div className="inline-block mb-4 px-4 py-2 bg-accent/10 rounded-full border border-accent/20">
             <span className="text-accent font-semibold text-sm">Real 360° Experience</span>
           </div>
-          
+
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             Real 360° Car Experience – No 3D Model Required
           </h1>
-          
+
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
             Capture and showcase vehicles using your smartphone – Anytime, Anywhere. Transform your dealership with AI-powered 360° imaging.
           </p>
@@ -35,8 +35,10 @@ const Hero = () => {
               Get Started
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="outline" size="xl">
-              Watch Demo
+            <Button variant="outline" size="xl" asChild>
+              <a href="https://calendly.com/admin-urbanuplink/30min" target="_blank" rel="noopener noreferrer">
+                Request Demo
+              </a>
             </Button>
           </div>
 

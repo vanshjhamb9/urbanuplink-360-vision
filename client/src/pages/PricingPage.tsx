@@ -64,6 +64,7 @@ const plans = [
       "Custom contracts",
       "Volume discounts",
     ],
+    link: "https://calendly.com/admin-urbanuplink/30min",
     cta: "Contact Sales",
     popular: false,
   },
@@ -92,7 +93,7 @@ const PricingPage = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="relative py-24 bg-gradient-to-br from-background via-primary/5 to-accent/5 overflow-hidden">
         <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -117,11 +118,10 @@ const PricingPage = () => {
             {plans.map((plan, index) => (
               <Card
                 key={index}
-                className={`relative hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${
-                  plan.popular
+                className={`relative hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${plan.popular
                     ? 'border-2 border-accent shadow-xl scale-105'
                     : 'border-2 hover:border-accent/50'
-                }`}
+                  }`}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-primary to-accent text-primary-foreground text-sm font-bold rounded-full">
@@ -156,8 +156,15 @@ const PricingPage = () => {
                     variant={plan.popular ? "gradient" : "outline"}
                     className="w-full mb-8"
                     size="lg"
+                    asChild={!!plan.link}
                   >
-                    {plan.cta}
+                    {plan.link ? (
+                      <a href={plan.link} target="_blank" rel="noopener noreferrer">
+                        {plan.cta}
+                      </a>
+                    ) : (
+                      plan.cta
+                    )}
                   </Button>
 
                   {/* Features */}
@@ -182,8 +189,10 @@ const PricingPage = () => {
                 <p className="text-lg text-muted-foreground mb-6">
                   Large dealership groups, OEMs, and automotive platforms get custom pricing and dedicated support.
                 </p>
-                <Button variant="gradient" size="xl">
-                  Request Custom Quote
+                <Button variant="gradient" size="xl" asChild>
+                  <a href="https://calendly.com/admin-urbanuplink/30min" target="_blank" rel="noopener noreferrer">
+                    Request Custom Quote
+                  </a>
                 </Button>
               </CardContent>
             </Card>

@@ -24,9 +24,12 @@ const CTA = () => {
               variant="secondary"
               size="xl"
               className="group bg-background text-foreground hover:bg-background/90"
+              asChild
             >
-              Schedule a Demo
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              <a href="https://calendly.com/admin-urbanuplink/30min" target="_blank" rel="noopener noreferrer">
+                Schedule a Demo
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </a>
             </Button>
             <Button
               variant="outline"

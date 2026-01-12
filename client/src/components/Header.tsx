@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, ArrowRight } from "lucide-react";
 import Image1 from "../assets/2 (1).png"
 import Image2 from "../assets/2 (2).png"
 
@@ -10,12 +10,12 @@ const Header = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
-          
+
             <div className="w-[30%] h-[25%] rounded-lg flex items-center justify-center">
               <img className="w-[60%] ml-[5rem]" src={Image2} />
-             <img className="mt-[4rem] -ml-[2rem]" src={Image1} />
+              <img className="mt-[4rem] -ml-[2rem]" src={Image1} />
             </div>
-            
+
           </div>
 
           {/* Desktop Navigation */}
@@ -38,7 +38,14 @@ const Header = () => {
           </nav>
 
           {/* CTA Buttons */}
-          
+          <div className="hidden md:flex items-center gap-4">
+            <Button variant="default" size="sm" asChild>
+              <a href="https://calendly.com/admin-urbanuplink/30min" target="_blank" rel="noopener noreferrer">
+                Request Demo
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </header>
