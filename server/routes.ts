@@ -25,7 +25,7 @@ export function registerRoutes(app: Express) {
 
       const { data, error } = await resend.emails.send({
         from: "UrbanUplink Contact <onboarding@resend.dev>",
-        to: ["admin@urbanuplink.ai"], // You can change this to your email
+        to: ["vanshjhamb9@gmail.com"], // You can change this to your email
         subject: `New Contact: ${subject}`,
         replyTo: email,
         html: `
