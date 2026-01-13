@@ -23,18 +23,30 @@ export function registerRoutes(app: Express) {
         return res.status(500).json({ message: "Email service not configured" });
       }
 
+      // Basic HTML escaping function to prevent XSS
+      const escapeHtml = (text: string) => {
+        const map: Record<string, string> = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;',
+        };
+        return text.replace(/[&<>"']/g, (m) => map[m]);
+      };
+
       const { data, error } = await resend.emails.send({
         from: "UrbanUplink Contact <onboarding@resend.dev>",
         to: ["vanshjhamb9@gmail.com"], // You can change this to your email
-        subject: `New Contact: ${subject}`,
+        subject: subject ? `New Contact: ${escapeHtml(subject)}` : 'New Contact Form Submission',
         replyTo: email,
         html: `
           <h3>New Message from Contact Form</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Subject:</strong> ${subject}</p>
+          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+          ${subject ? `<p><strong>Subject:</strong> ${escapeHtml(subject)}</p>` : ''}
           <p><strong>Message:</strong></p>
-          <p>${message}</p>
+          <p>${escapeHtml(message)}</p>
         `,
       });
 
