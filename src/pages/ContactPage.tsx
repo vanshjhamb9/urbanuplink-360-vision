@@ -21,19 +21,43 @@ const ContactPage = () => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate form submission
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setFormData({ name: "", email: "", subject: "", message: "" });
-            toast({
-                title: "Message Sent!",
-                description: "We'll get back to you as soon as possible.",
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
             });
-        }, 1500);
+
+            const data = await response.json();
+
+            if (response.ok) {
+                toast({
+                    title: "Message Sent!",
+                    description: "We'll get back to you as soon as possible.",
+                });
+                setFormData({ name: "", email: "", subject: "", message: "" });
+            } else {
+                toast({
+                    title: "Error",
+                    description: data.message || "Something went wrong. Please try again.",
+                    variant: "destructive",
+                });
+            }
+        } catch (error) {
+            toast({
+                title: "Error",
+                description: "Failed to connect to the server. Please try again later.",
+                variant: "destructive",
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const contactInfo = [
