@@ -17,10 +17,11 @@ const Header = () => {
   return (
     <>
       <header
-        className={`fixed top-0 z-50 w-full transition-all duration-500 ${isScrolled
-          ? "bg-transparent md:bg-white/95 md:backdrop-blur-xl md:shadow-xl md:border-b md:border-primary/20"
-          : "bg-transparent md:bg-white/80 md:backdrop-blur-md"
-          }`}
+        className={`fixed top-0 z-50 w-full transition-all duration-500 ${
+          isScrolled
+            ? "bg-white/95 backdrop-blur-xl shadow-xl border-b border-primary/20"
+            : "bg-transparent"
+        }`}
       >
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex h-16 md:h-24 items-center justify-between">
@@ -32,7 +33,7 @@ const Header = () => {
                   src={Image2}
                   alt="Urban Uplink Logo"
                   style={{
-                    filter: 'brightness(1.1) contrast(1.2)',
+                    filter: "brightness(1.1) contrast(1.2)",
                   }}
                 />
               </a>
@@ -40,27 +41,45 @@ const Header = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-1">
-              <a href="/" className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}>
+              <a
+                href="/"
+                className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}
+              >
                 <span className="relative z-10">Home</span>
                 <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
-              <a href="/features" className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}>
+              <a
+                href="/features"
+                className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}
+              >
                 <span className="relative z-10">Features</span>
                 <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
-              <a href="/use-cases" className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}>
+              <a
+                href="/use-cases"
+                className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}
+              >
                 <span className="relative z-10">Use Cases</span>
                 <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
-              <a href="/pricing" className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}>
+              <a
+                href="/pricing"
+                className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}
+              >
                 <span className="relative z-10">Pricing</span>
                 <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
-              <a href="/learn-more" className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}>
+              <a
+                href="/learn-more"
+                className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}
+              >
                 <span className="relative z-10">Learn More</span>
                 <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
-              <a href="/contact" className={`ml-4 px-6 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 bg-gradient-to-r from-primary to-accent text-white hover:shadow-lg hover:scale-105 ${isScrolled ? "shadow-md" : "shadow-lg"}`}>
+              <a
+                href="/contact"
+                className={`ml-4 px-6 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 bg-gradient-to-r from-primary to-accent text-white hover:shadow-lg hover:scale-105 ${isScrolled ? "shadow-md" : "shadow-lg"}`}
+              >
                 Get Started
               </a>
             </nav>
@@ -77,10 +96,11 @@ const Header = () => {
 
               {/* Mobile Menu Button */}
               <button
-                className={`p-2 rounded-lg transition-colors ${isScrolled
-                  ? "text-foreground hover:bg-primary/10"
-                  : "text-foreground hover:bg-primary/10"
-                  }`}
+                className={`p-2 rounded-lg transition-colors ${
+                  isScrolled
+                    ? "text-foreground hover:bg-primary/10"
+                    : "text-foreground hover:bg-primary/10"
+                }`}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               >
                 <Menu className="w-6 h-6" />
@@ -111,25 +131,49 @@ const Header = () => {
             </div>
 
             <div className="flex flex-col gap-2">
-              <a href="/" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3">
+              <a
+                href="/"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
+              >
                 Home
               </a>
-              <a href="/features" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3">
+              <a
+                href="/features"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
+              >
                 Features
               </a>
-              <a href="/use-cases" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3">
+              <a
+                href="/use-cases"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
+              >
                 Use Cases
               </a>
-              <a href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3">
+              <a
+                href="/pricing"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
+              >
                 Pricing
               </a>
-              <a href="/learn-more" onClick={() => setIsMobileMenuOpen(false)} className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3">
+              <a
+                href="/learn-more"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
+              >
                 Learn More
               </a>
             </div>
 
             <div className="mt-auto pt-6 border-t border-border">
-              <a href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="block w-full text-center px-6 py-3 rounded-xl font-bold bg-gradient-to-r from-primary to-accent text-white shadow-lg">
+              <a
+                href="/contact"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block w-full text-center px-6 py-3 rounded-xl font-bold bg-gradient-to-r from-primary to-accent text-white shadow-lg"
+              >
                 Get Started
               </a>
               <p className="text-center text-xs text-muted-foreground mt-4">

@@ -6,35 +6,44 @@ const testimonials = [
     name: "Michael Chen",
     role: "Sales Director",
     company: "Premium Auto Group",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces",
-    quote: "UrbanUplink transformed our online sales. We've seen a 45% increase in qualified leads since implementing 360° views.",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=faces",
+    quote:
+      "UrbanUplink transformed our online sales. We've seen a 45% increase in qualified leads since implementing 360° views.",
     rating: 5,
   },
   {
     name: "Sarah Williams",
     role: "Marketing Manager",
     company: "AutoMax Dealerships",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces",
-    quote: "The ease of use is incredible. Our entire team was up and running in less than a day. Customer engagement has skyrocketed.",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces",
+    quote:
+      "The ease of use is incredible. Our entire team was up and running in less than a day. Customer engagement has skyrocketed.",
     rating: 5,
   },
   {
     name: "David Kumar",
     role: "Owner",
     company: "Elite Car Detailing",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces",
-    quote: "Being able to show before-and-after 360° views has tripled our referrals. It's the best investment we've made.",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces",
+    quote:
+      "Being able to show before-and-after 360° views has tripled our referrals. It's the best investment we've made.",
     rating: 5,
   },
 ];
 
 const Testimonials = () => {
   return (
-    <section className="py-24 bg-gradient-to-br from-background via-primary/5 to-background">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-24 relative overflow-hidden bg-background">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block mb-4 px-4 py-2 bg-accent/10 rounded-full border border-accent/20">
-            <span className="text-accent font-semibold text-sm">Customer Success</span>
+            <span className="text-accent font-semibold text-sm">
+              Customer Success
+            </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Trusted by Industry Leaders
@@ -52,10 +61,10 @@ const Testimonials = () => {
             >
               {/* Quote decoration */}
               <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
-              
+
               <CardContent className="p-8 relative">
                 <Quote className="w-10 h-10 text-accent/30 mb-4" />
-                
+
                 {/* Rating */}
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -76,7 +85,9 @@ const Testimonials = () => {
                     className="w-12 h-12 rounded-full object-cover ring-2 ring-accent/30"
                   />
                   <div>
-                    <div className="font-bold text-foreground">{testimonial.name}</div>
+                    <div className="font-bold text-foreground">
+                      {testimonial.name}
+                    </div>
                     <div className="text-sm text-muted-foreground">
                       {testimonial.role}, {testimonial.company}
                     </div>

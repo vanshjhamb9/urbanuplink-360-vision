@@ -5,39 +5,46 @@ const features = [
   {
     icon: Camera,
     title: "Real 360° Photography",
-    description: "Authentic 360-degree views without expensive 3D modeling. Capture reality, showcase excellence.",
+    description:
+      "Authentic 360-degree views without expensive 3D modeling. Capture reality, showcase excellence.",
   },
   {
     icon: Zap,
     title: "Lightning Fast Processing",
-    description: "From capture to publish in minutes. Our AI-powered platform delivers industry-leading turnaround times.",
+    description:
+      "From capture to publish in minutes. Our AI-powered platform delivers industry-leading turnaround times.",
   },
   {
     icon: TrendingUp,
     title: "Proven Sales Growth",
-    description: "Dealerships using UrbanUplink see up to 40% increase in online engagement and conversion rates.",
+    description:
+      "Dealerships using UrbanUplink see up to 40% increase in online engagement and conversion rates.",
   },
   {
     icon: Shield,
     title: "Enterprise Security",
-    description: "Bank-level encryption and secure cloud storage. Your inventory data is protected 24/7.",
+    description:
+      "Bank-level encryption and secure cloud storage. Your inventory data is protected 24/7.",
   },
   {
     icon: Palette,
     title: "Brand Customization",
-    description: "Fully white-labeled solutions that match your dealership's brand identity perfectly.",
+    description:
+      "Fully white-labeled solutions that match your dealership's brand identity perfectly.",
   },
   {
     icon: Globe,
     title: "Multi-Platform Integration",
-    description: "Seamlessly integrate with your existing website, social media, and automotive marketplaces.",
+    description:
+      "Seamlessly integrate with your existing website, social media, and automotive marketplaces.",
   },
 ];
 
 const Features = () => {
   return (
-    <section className="py-24 bg-muted/30">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="py-24 relative overflow-hidden bg-background">
+      <div className="absolute inset-0 bg-gradient-to-tl from-primary/5 via-transparent to-accent/5" />
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Complete 360° Solution for{" "}

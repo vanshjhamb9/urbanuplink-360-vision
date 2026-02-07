@@ -22,7 +22,15 @@ const TechShowcase = () => {
               <img
                 src={techImage}
                 alt="360-degree car photography technology"
-                className="relative rounded-2xl shadow-2xl w-full"
+                className="relative rounded-2xl shadow-2xl w-full hidden"
+              />
+              <video
+                src="https://cdn.pixabay.com/video/2016/09/21/5398-183786522_large.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="relative rounded-2xl shadow-2xl w-full object-cover aspect-video"
               />
             </div>
           </div>
@@ -30,17 +38,20 @@ const TechShowcase = () => {
           {/* Content Side */}
           <div className="order-1 lg:order-2">
             <div className="inline-block mb-4 px-4 py-2 bg-accent/10 rounded-full border border-accent/20">
-              <span className="text-accent font-semibold text-sm">Technology That Works</span>
+              <span className="text-accent font-semibold text-sm">
+                Technology That Works
+              </span>
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Revolutionary 360° Imaging Without the Complexity
             </h2>
-            
+
             <p className="text-lg text-muted-foreground mb-8">
-              UrbanUplink uses advanced camera arrays and AI-powered stitching to create 
-              seamless 360-degree experiences. Unlike traditional 3D modeling that takes 
-              days and costs thousands, our solution captures reality in minutes.
+              UrbanUplink uses advanced camera arrays and AI-powered stitching
+              to create seamless 360-degree experiences. Unlike traditional 3D
+              modeling that takes days and costs thousands, our solution
+              captures reality in minutes.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
@@ -57,11 +68,13 @@ const TechShowcase = () => {
             <div className="p-6 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20">
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                <span className="font-semibold text-foreground">Real-time Processing</span>
+                <span className="font-semibold text-foreground">
+                  Real-time Processing
+                </span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Our AI processes images as they're captured, delivering publish-ready 360° 
-                views in under 10 minutes.
+                Our AI processes images as they're captured, delivering
+                publish-ready 360° views in under 10 minutes.
               </p>
             </div>
           </div>

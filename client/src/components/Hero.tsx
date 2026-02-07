@@ -6,20 +6,26 @@ const Hero = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
+      {/* Background Video with Overlay */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={heroImage}
-          alt="Luxury car in professional studio - Real 360° car experience captured with smartphone"
+        <video
+          src="https://cdn.pixabay.com/video/2024/02/09/199958-911694865_large.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60" />
+        <div className="absolute inset-0 bg-background/60" />
       </div>
 
       {/* Content */}
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-3xl">
           <div className="inline-block mb-4 px-4 py-2 bg-accent/10 rounded-full border border-accent/20">
-            <span className="text-accent font-semibold text-sm">Real 360° Experience</span>
+            <span className="text-accent font-semibold text-sm">
+              Real 360° Experience
+            </span>
           </div>
 
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
@@ -27,7 +33,8 @@ const Hero = () => {
           </h1>
 
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
-            Capture and showcase vehicles using your smartphone – Anytime, Anywhere. Transform your dealership with AI-powered 360° imaging.
+            Capture and showcase vehicles using your smartphone – Anytime,
+            Anywhere. Transform your dealership with AI-powered 360° imaging.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -36,7 +43,11 @@ const Hero = () => {
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button variant="outline" size="xl" asChild>
-              <a href="https://calendly.com/admin-urbanuplink/30min" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://calendly.com/admin-urbanuplink/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Request Demo
               </a>
             </Button>
@@ -53,7 +64,9 @@ const Hero = () => {
             </div>
             <div>
               <div className="text-3xl font-bold text-primary mb-1">40%</div>
-              <div className="text-sm text-muted-foreground">Sales Increase</div>
+              <div className="text-sm text-muted-foreground">
+                Sales Increase
+              </div>
             </div>
           </div>
         </div>

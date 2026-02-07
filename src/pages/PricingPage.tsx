@@ -3,7 +3,14 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingDemo from "@/components/FloatingDemo";
 import { Check, Zap, Building2, Sparkles } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -16,7 +23,8 @@ const plans = [
       monthly: "24,999",
       annually: "2,49,999",
     },
-    description: "Perfect for individual sellers and small dealerships getting started",
+    description:
+      "Perfect for individual sellers and small dealerships getting started",
     features: [
       "Up to 50 vehicles/month",
       "Mobile capture app access",
@@ -82,15 +90,18 @@ const plans = [
 const faqs = [
   {
     question: "Can I change plans later?",
-    answer: "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately.",
+    answer:
+      "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately.",
   },
   {
     question: "Is there a free trial?",
-    answer: "Absolutely! All plans come with a 30-day free trial. No credit card required.",
+    answer:
+      "Absolutely! All plans come with a 30-day free trial. No credit card required.",
   },
   {
     question: "What happens if I exceed my vehicle limit?",
-    answer: "You'll be notified when approaching your limit. You can upgrade anytime or purchase additional vehicle credits.",
+    answer:
+      "You'll be notified when approaching your limit. You can upgrade anytime or purchase additional vehicle credits.",
   },
   {
     question: "Do you offer annual billing?",
@@ -98,7 +109,8 @@ const faqs = [
   },
   {
     question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards, UPI, and bank transfers for annual plans.",
+    answer:
+      "We accept all major credit cards, UPI, and bank transfers for annual plans.",
   },
 ];
 
@@ -110,11 +122,13 @@ const PricingPage = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5 pointer-events-none" />
         <div className="container px-4 md:px-6 relative z-10 mx-auto text-center">
           <div className="inline-flex items-center justify-center p-1.5 mb-6 rounded-full bg-accent/10 border border-accent/20">
-            <span className="px-3 py-1 text-sm font-semibold text-accent">Simple, Transparent Pricing</span>
+            <span className="px-3 py-1 text-sm font-semibold text-accent">
+              Simple, Transparent Pricing
+            </span>
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
             Choose the Right Plan for Your Growth
@@ -124,14 +138,25 @@ const PricingPage = () => {
           </p>
 
           <div className="flex items-center justify-center gap-4 mb-12">
-            <Label htmlFor="billing-mode" className={`text-sm font-medium ${!isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>Monthly</Label>
+            <Label
+              htmlFor="billing-mode"
+              className={`text-sm font-medium ${!isAnnual ? "text-foreground" : "text-muted-foreground"}`}
+            >
+              Monthly
+            </Label>
             <Switch
               id="billing-mode"
               checked={isAnnual}
               onCheckedChange={setIsAnnual}
             />
-            <Label htmlFor="billing-mode" className={`text-sm font-medium ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
-              Yearly <span className="text-accent text-xs ml-1 font-bold">(Save 20%)</span>
+            <Label
+              htmlFor="billing-mode"
+              className={`text-sm font-medium ${isAnnual ? "text-foreground" : "text-muted-foreground"}`}
+            >
+              Yearly{" "}
+              <span className="text-accent text-xs ml-1 font-bold">
+                (Save 20%)
+              </span>
             </Label>
           </div>
         </div>
@@ -144,10 +169,11 @@ const PricingPage = () => {
             {plans.map((plan, index) => (
               <Card
                 key={index}
-                className={`relative overflow-hidden transition-all duration-300 flex flex-col h-full ${plan.popular
-                  ? 'border-accent shadow-2xl scale-105 z-10 bg-gradient-to-b from-background to-accent/5'
-                  : 'border-border hover:border-accent/50 hover:shadow-lg bg-card'
-                  }`}
+                className={`relative overflow-hidden transition-all duration-300 flex flex-col h-full ${
+                  plan.popular
+                    ? "border-accent shadow-2xl scale-105 z-10 bg-gradient-to-b from-background to-accent/5"
+                    : "border-border hover:border-accent/50 hover:shadow-lg bg-card"
+                }`}
               >
                 {plan.popular && (
                   <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-primary to-accent" />
@@ -163,7 +189,9 @@ const PricingPage = () => {
                     <plan.icon className="w-6 h-6 text-primary" />
                   </div>
                   <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                  <CardDescription className="mt-2 min-h-[40px]">{plan.description}</CardDescription>
+                  <CardDescription className="mt-2 min-h-[40px]">
+                    {plan.description}
+                  </CardDescription>
                 </CardHeader>
 
                 <CardContent className="flex-1">
@@ -177,7 +205,7 @@ const PricingPage = () => {
                           {isAnnual ? plan.price.annually : plan.price.monthly}
                         </span>
                         <span className="text-muted-foreground text-sm font-normal">
-                          /{isAnnual ? 'year' : 'month'}
+                          /{isAnnual ? "year" : "month"}
                         </span>
                       </div>
                     )}
@@ -192,7 +220,9 @@ const PricingPage = () => {
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-3 text-sm">
                         <Check className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
-                        <span className="text-muted-foreground hover:text-foreground transition-colors">{feature}</span>
+                        <span className="text-muted-foreground hover:text-foreground transition-colors">
+                          {feature}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -216,12 +246,20 @@ const PricingPage = () => {
           <div className="mt-20">
             <div className="bg-muted/30 rounded-3xl p-8 md:p-12 border border-border/50 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
               <div className="flex-1">
-                <h3 className="text-2xl font-bold mb-2">Enterprise Solutions</h3>
+                <h3 className="text-2xl font-bold mb-2">
+                  Enterprise Solutions
+                </h3>
                 <p className="text-muted-foreground">
-                  Need volume pricing or custom integrations? we offer tailored packages for large dealership networks.
+                  Need volume pricing or custom integrations? we offer tailored
+                  packages for large dealership networks.
                 </p>
               </div>
-              <Button size="lg" variant="secondary" className="min-w-[200px]" asChild>
+              <Button
+                size="lg"
+                variant="secondary"
+                className="min-w-[200px]"
+                asChild
+              >
                 <a href="/contact">Talk to Sales</a>
               </Button>
             </div>
@@ -238,10 +276,17 @@ const PricingPage = () => {
             </h2>
             <div className="grid gap-6">
               {faqs.map((faq, index) => (
-                <Card key={index} className="border-0 shadow-sm bg-background/60 backdrop-blur hover:bg-background transition-colors">
+                <Card
+                  key={index}
+                  className="border-0 shadow-sm bg-background/60 backdrop-blur hover:bg-background transition-colors"
+                >
                   <CardContent className="p-6">
-                    <h4 className="text-lg font-semibold mb-2">{faq.question}</h4>
-                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                    <h4 className="text-lg font-semibold mb-2">
+                      {faq.question}
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {faq.answer}
+                    </p>
                   </CardContent>
                 </Card>
               ))}
