@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
+
+// Testing the environent 
 const features = [
   {
     icon: Camera,
