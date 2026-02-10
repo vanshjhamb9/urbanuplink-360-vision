@@ -168,14 +168,7 @@ const CarScrollBanner = () => {
               </div>
               <div className="p-3 md:p-4 bg-white/50 backdrop-blur-sm">
                 <div className="flex items-start justify-between mb-1 md:mb-2">
-                  <div className="flex-1">
-                    <div className="text-[10px] md:text-xs font-medium text-primary mb-0.5 md:mb-1 uppercase tracking-wider">
-                      {car.brand}
-                    </div>
-                    <h3 className="font-bold text-sm md:text-lg leading-tight">
-                      {car.model}
-                    </h3>
-                  </div>
+                  <div className="flex-1"></div>
                   <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold text-sm md:text-base">
                     {car.price}
                   </div>
@@ -226,14 +219,7 @@ const CarScrollBanner = () => {
               </div>
               <div className="p-3 md:p-4 bg-white/50 backdrop-blur-sm">
                 <div className="flex items-start justify-between mb-1 md:mb-2">
-                  <div className="flex-1">
-                    <div className="text-[10px] md:text-xs font-medium text-primary mb-0.5 md:mb-1 uppercase tracking-wider">
-                      {car.brand}
-                    </div>
-                    <h3 className="font-bold text-sm md:text-lg leading-tight">
-                      {car.model}
-                    </h3>
-                  </div>
+                  <div className="flex-1"></div>
                   <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold text-sm md:text-base">
                     {car.price}
                   </div>
