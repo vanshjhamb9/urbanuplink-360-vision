@@ -10,7 +10,10 @@ export default defineConfig(({ mode }) => ({
     port: 5000,
     strictPort: true,
   },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [react(), mode === "development" && componentTagger()].filter(
+    Boolean,
+  ),
+  assetsInclude: ["**/*.JPG"],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

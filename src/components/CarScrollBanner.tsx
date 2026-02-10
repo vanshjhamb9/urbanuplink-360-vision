@@ -1,15 +1,16 @@
-import tataHarrier from "@/assets/cretakingdriversideside.avif";
-import sierraExterior from "@/assets/sierra-exterior.jpg";
-import mahindraXuv700 from "@/assets/mahindra-xuv700.png";
-import mahindraThar from "@/assets/mahindra-thar.png";
-import tataNexon from "@/assets/tata-nexon.png";
-import marutiGrandVitara from "@/assets/maruti-grand-vitara.png";
-import hyundaiCreta from "@/assets/2025_creta_a9fcc943fb.jpg";
+import img0 from "@/assets/output/processed_000.JPG";
+import img1 from "@/assets/output/processed_001.JPG";
+import img2 from "@/assets/output/processed_002.JPG";
+import img3 from "@/assets/output/processed_003.JPG";
+import img4 from "@/assets/output/processed_004.JPG";
+import img5 from "@/assets/output/processed_005.JPG";
+import img6 from "@/assets/output/processed_006.JPG";
+import img7 from "@/assets/output/processed_007.JPG";
 
 // Indian car showcase gallery with images, content, and tags
 const carShowcase = [
   {
-    image: mahindraXuv700,
+    image: img0,
     background: "from-blue-100 to-indigo-100",
     angle: "Front Profile",
     model: "Mahindra XUV700",
@@ -21,7 +22,7 @@ const carShowcase = [
     dark: false,
   },
   {
-    image: tataHarrier,
+    image: img1,
     background: "from-slate-100 to-white",
     angle: "Front View",
     model: "Tata Harrier",
@@ -33,7 +34,7 @@ const carShowcase = [
     dark: false,
   },
   {
-    image: mahindraThar,
+    image: img2,
     background: "from-red-100 to-orange-100",
     angle: "Off-Road Action",
     model: "Mahindra Thar",
@@ -45,7 +46,7 @@ const carShowcase = [
     dark: false,
   },
   {
-    image: tataNexon,
+    image: img3,
     background: "from-teal-100 to-cyan-100",
     angle: "Side Profile",
     model: "Tata Nexon.ev",
@@ -57,7 +58,7 @@ const carShowcase = [
     dark: false,
   },
   {
-    image: marutiGrandVitara,
+    image: img4,
     background: "from-sky-100 to-blue-200",
     angle: "Front Quarter",
     model: "Grand Vitara",
@@ -69,7 +70,7 @@ const carShowcase = [
     dark: false,
   },
   {
-    image: sierraExterior,
+    image: img5,
     background: "from-emerald-100 to-green-100",
     angle: "Concept",
     model: "Tata Sierra",
@@ -81,7 +82,7 @@ const carShowcase = [
     dark: false,
   },
   {
-    image: hyundaiCreta,
+    image: img6,
     background: "from-gray-100 to-slate-200",
     angle: "Front View",
     model: "Hyundai Creta",
@@ -90,6 +91,18 @@ const carShowcase = [
     price: "₹19.5L",
     year: "2024",
     description: "The undisputed SUV king of India",
+    dark: false,
+  },
+  {
+    image: img7,
+    background: "from-purple-100 to-pink-100",
+    angle: "Front Profile",
+    model: "Kia Seltos",
+    brand: "Kia",
+    tags: ["SUV", "Sporty", "Tech"],
+    price: "₹18.9L",
+    year: "2024",
+    description: "Badass by design, wild by nature",
     dark: false,
   },
 ];
@@ -114,7 +127,8 @@ const CarScrollBanner = () => {
             </span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Explore the finest machines from India's leading automotive giants. From rugged 4x4s to futuristic EVs.
+            Explore the finest machines from India's leading automotive giants.
+            From rugged 4x4s to futuristic EVs.
           </p>
         </div>
       </div>
@@ -122,7 +136,7 @@ const CarScrollBanner = () => {
       <div className="relative">
         <div
           className="flex animate-marquee hover:pause gap-4 md:gap-6"
-          style={{ animationDuration: '20s' }} // Faster speed
+          style={{ animationDuration: "20s" }} // Faster speed
         >
           {duplicatedCars.map((car, index) => (
             <div
@@ -155,8 +169,12 @@ const CarScrollBanner = () => {
               <div className="p-3 md:p-4 bg-white/50 backdrop-blur-sm">
                 <div className="flex items-start justify-between mb-1 md:mb-2">
                   <div className="flex-1">
-                    <div className="text-[10px] md:text-xs font-medium text-primary mb-0.5 md:mb-1 uppercase tracking-wider">{car.brand}</div>
-                    <h3 className="font-bold text-sm md:text-lg leading-tight">{car.model}</h3>
+                    <div className="text-[10px] md:text-xs font-medium text-primary mb-0.5 md:mb-1 uppercase tracking-wider">
+                      {car.brand}
+                    </div>
+                    <h3 className="font-bold text-sm md:text-lg leading-tight">
+                      {car.model}
+                    </h3>
                   </div>
                   <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold text-sm md:text-base">
                     {car.price}
@@ -177,7 +195,7 @@ const CarScrollBanner = () => {
       <div className="relative mt-4 md:mt-8">
         <div
           className="flex animate-marquee-reverse hover:pause gap-4 md:gap-6"
-          style={{ animationDuration: '20s' }} // Faster speed
+          style={{ animationDuration: "20s" }} // Faster speed
         >
           {[...duplicatedCars].reverse().map((car, index) => (
             <div
@@ -209,8 +227,12 @@ const CarScrollBanner = () => {
               <div className="p-3 md:p-4 bg-white/50 backdrop-blur-sm">
                 <div className="flex items-start justify-between mb-1 md:mb-2">
                   <div className="flex-1">
-                    <div className="text-[10px] md:text-xs font-medium text-primary mb-0.5 md:mb-1 uppercase tracking-wider">{car.brand}</div>
-                    <h3 className="font-bold text-sm md:text-lg leading-tight">{car.model}</h3>
+                    <div className="text-[10px] md:text-xs font-medium text-primary mb-0.5 md:mb-1 uppercase tracking-wider">
+                      {car.brand}
+                    </div>
+                    <h3 className="font-bold text-sm md:text-lg leading-tight">
+                      {car.model}
+                    </h3>
                   </div>
                   <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold text-sm md:text-base">
                     {car.price}
