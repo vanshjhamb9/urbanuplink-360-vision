@@ -110,7 +110,7 @@ const Hero = () => {
 
       {/* CONTENT SECTION */}
       <div className="relative z-30 flex-1 flex flex-col justify-center lg:h-screen lg:justify-center">
-        <div className="container mx-auto px-6 py-8 mt-[2rem] lg:py-0 lg:px-6">
+        <div className="container mx-auto px-6 py-8 mt-[6rem] lg:py-0 lg:px-6">
           <div className="max-w-3xl mx-auto lg:mx-0 lg:text-center w-full"> {/* Align left on mobile, center on desktop? User asked for 'different layout'. Let's center everything for consistency or try left aligned on mobile for readability. Centered usually looks best for 'Hero'. Let's stick to Centered for now as it's safer. */}
 
             <div className="flex justify-center lg:justify-center mb-6">

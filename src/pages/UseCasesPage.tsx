@@ -14,14 +14,14 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import indianDealership from "@/assets/indian-dealership.png";
-import indianHandover from "@/assets/indian-dealership-handover.png";
-import indianAuction from "@/assets/indian-auction.png";
+import indianHandover from "@/assets/automotive dealership.jpg";
+import indianAuction from "@/assets/used car platform.jpg";
 import indianFleet from "@/assets/indian-fleet.png";
 import indianDetailing from "@/assets/indian-detailing.png";
 import indianInspection from "@/assets/indian-inspection.png";
-import indianStudio from "@/assets/indian-studio.png";
+import indianStudio from "@/assets/car-photo-studio.jpg";
 import image25 from "@/assets/image25.png";
-import insuranceInspectionImg from "@/assets/insurance-inspection.png";
+import insuranceInspectionImg from "@/assets/insurance-inspection.jpg";
 
 const useCases = [
   {
@@ -222,7 +222,7 @@ const UseCasesPage = () => {
 
             <div className="p-12 md:p-24 text-center max-w-4xl mx-auto">
               <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Join 500+ Businesses Across India
+                Do not wish to restrict to Indian audience alone 
               </h3>
               <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
                 The industry standard for automotive 360° imaging.

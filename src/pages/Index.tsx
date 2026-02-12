@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import BackgroundRemovalShowcase from "@/components/BackgroundRemovalShowcase";
-import BGReplacementTool from "@/components/BGReplacementTool";
+import BeforeAfterComparison from "@/components/BeforeAfterComparison";
 import ThreeSixtyShowcase from "@/components/ThreeSixtyShowcase";
 import CarScrollBanner from "@/components/CarScrollBanner";
 import MarketplaceShowcase from "@/components/MarketplaceShowcase";
@@ -10,6 +10,7 @@ import Features from "@/components/Features";
 import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import BGReplacementTool from "@/components/BGReplacementTool";
 
 const Index = () => {
   return (
@@ -19,6 +20,7 @@ const Index = () => {
         <Hero />
         <BackgroundRemovalShowcase />
         <BGReplacementTool />
+        {/* <BeforeAfterComparison /> */}
         <ThreeSixtyShowcase />
         <CarScrollBanner />
         <MarketplaceShowcase />

@@ -18,11 +18,6 @@ const features = [
     description: "Dealerships using UrbanUplink see up to 40% increase in online engagement and conversion rates.",
   },
   {
-    icon: Shield,
-    title: "Enterprise Security",
-    description: "Bank-level encryption and secure cloud storage. Your inventory data is protected 24/7.",
-  },
-  {
     icon: Palette,
     title: "Brand Customization",
     description: "Fully white-labeled solutions that match your dealership's brand identity perfectly.",

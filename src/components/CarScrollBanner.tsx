@@ -13,96 +13,64 @@ const carShowcase = [
     image: img0,
     background: "from-blue-100 to-indigo-100",
     angle: "Front Profile",
-    model: "Mahindra XUV700",
-    brand: "Mahindra",
-    tags: ["SUV", "Tech", "Premium"],
     price: "₹26.9L",
     year: "2024",
-    description: "Adrenox intelligence with luxury features",
     dark: false,
   },
   {
     image: img1,
     background: "from-slate-100 to-white",
     angle: "Front View",
-    model: "Tata Harrier",
-    brand: "Tata",
-    tags: ["SUV", "Safety", "Bold"],
     price: "₹24.5L",
     year: "2024",
-    description: "Dark Edition with enhanced road presence",
     dark: false,
   },
   {
     image: img2,
     background: "from-red-100 to-orange-100",
-    angle: "Off-Road Action",
-    model: "Mahindra Thar",
-    brand: "Mahindra",
-    tags: ["4x4", "Off-Road", "Iconic"],
+    angle: "Front Quarter",
     price: "₹17.5L",
     year: "2024",
-    description: "The ultimate off-road legend",
     dark: false,
   },
   {
     image: img3,
     background: "from-teal-100 to-cyan-100",
     angle: "Side Profile",
-    model: "Tata Nexon.ev",
-    brand: "Tata",
-    tags: ["EV", "Electric", "Future"],
     price: "₹19.9L",
     year: "2024",
-    description: "India's #1 Electric SUV",
     dark: false,
   },
   {
     image: img4,
     background: "from-sky-100 to-blue-200",
-    angle: "Front Quarter",
-    model: "Grand Vitara",
-    brand: "Maruti Suzuki",
-    tags: ["Hybrid", "Efficient", "Nexa"],
+    angle: "Front View",
     price: "₹20.1L",
     year: "2024",
-    description: "Intelligent Electric Hybrid technology",
     dark: false,
   },
   {
     image: img5,
     background: "from-emerald-100 to-green-100",
-    angle: "Concept",
-    model: "Tata Sierra",
-    brand: "Tata",
-    tags: ["Concept", "Electric", "Legacy"],
+    angle: "Front Side",
     price: "Coming Soon",
     year: "2025",
-    description: "The return of a legend in electric avatar",
     dark: false,
   },
   {
     image: img6,
     background: "from-gray-100 to-slate-200",
     angle: "Front View",
-    model: "Hyundai Creta",
-    brand: "Hyundai",
-    tags: ["SUV", "Popular", "Tech"],
     price: "₹19.5L",
     year: "2024",
-    description: "The undisputed SUV king of India",
     dark: false,
   },
   {
     image: img7,
     background: "from-purple-100 to-pink-100",
     angle: "Front Profile",
-    model: "Kia Seltos",
-    brand: "Kia",
-    tags: ["SUV", "Sporty", "Tech"],
     price: "₹18.9L",
     year: "2024",
-    description: "Badass by design, wild by nature",
     dark: false,
   },
 ];
@@ -128,7 +96,6 @@ const CarScrollBanner = () => {
           </h2>
           <p className="text-lg text-muted-foreground">
             Explore the finest machines from India's leading automotive giants.
-            From rugged 4x4s to futuristic EVs.
           </p>
         </div>
       </div>
@@ -146,7 +113,7 @@ const CarScrollBanner = () => {
               <div className="relative aspect-[4/3] group">
                 <img
                   src={car.image}
-                  alt={`${car.model} - ${car.angle}`}
+                  alt={`${car.angle}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -154,28 +121,14 @@ const CarScrollBanner = () => {
                 <div className="absolute top-2 right-2 md:top-3 md:right-3 px-1.5 md:px-2 py-0.5 md:py-1 bg-white/90 backdrop-blur rounded-full text-[10px] md:text-xs font-semibold text-foreground shadow-sm">
                   {car.angle}
                 </div>
-                {/* Tags overlay */}
-                <div className="absolute bottom-2 left-2 right-2 md:bottom-3 md:left-3 md:right-3 flex flex-wrap gap-1">
-                  {car.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="px-1.5 md:px-2 py-0.5 bg-background/90 backdrop-blur-sm text-foreground text-[10px] md:text-xs font-semibold rounded-full shadow-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
               </div>
               <div className="p-3 md:p-4 bg-white/50 backdrop-blur-sm">
-                <div className="flex items-start justify-between mb-1 md:mb-2">
+                <div className="flex items-center justify-between">
                   <div className="flex-1"></div>
                   <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold text-sm md:text-base">
                     {car.price}
                   </div>
                 </div>
-                <p className="text-[10px] md:text-xs text-muted-foreground line-clamp-2">
-                  {car.description}
-                </p>
               </div>
             </div>
           ))}
@@ -198,7 +151,7 @@ const CarScrollBanner = () => {
               <div className="relative aspect-[4/3] group">
                 <img
                   src={car.image}
-                  alt={`${car.model} - ${car.angle}`}
+                  alt={`${car.angle}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -206,27 +159,14 @@ const CarScrollBanner = () => {
                 <div className="absolute top-2 right-2 md:top-3 md:right-3 px-1.5 md:px-2 py-0.5 md:py-1 bg-white/90 backdrop-blur rounded-full text-[10px] md:text-xs font-semibold text-foreground shadow-sm">
                   {car.angle}
                 </div>
-                <div className="absolute bottom-2 left-2 right-2 md:bottom-3 md:left-3 md:right-3 flex flex-wrap gap-1">
-                  {car.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="px-1.5 md:px-2 py-0.5 bg-background/90 backdrop-blur-sm text-foreground text-[10px] md:text-xs font-semibold rounded-full shadow-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
               </div>
               <div className="p-3 md:p-4 bg-white/50 backdrop-blur-sm">
-                <div className="flex items-start justify-between mb-1 md:mb-2">
+                <div className="flex items-center justify-between">
                   <div className="flex-1"></div>
                   <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold text-sm md:text-base">
                     {car.price}
                   </div>
                 </div>
-                <p className="text-[10px] md:text-xs text-muted-foreground line-clamp-2">
-                  {car.description}
-                </p>
               </div>
             </div>
           ))}

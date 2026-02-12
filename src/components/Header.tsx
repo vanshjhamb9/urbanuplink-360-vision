@@ -19,23 +19,26 @@ const Header = () => {
       <header
         className={`fixed top-0 z-50 w-full transition-all duration-500 ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-xl shadow-xl border-b border-primary/20"
+            ? "bg-gray-100/95 backdrop-blur-xl shadow-xl border-b border-primary/20"
             : "bg-transparent"
         }`}
       >
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex h-16 md:h-24 items-center justify-between">
+          <div className="flex h-20 md:h-28 items-center justify-between">
             {/* Logo - Centered on Mobile */}
-            <div className="flex-1 md:flex-none flex items-center md:items-start">
-              <a href="/" className="relative group cursor-pointer block">
+            <div className="flex-1 md:flex-none flex items-center md:items-start gap-4">
+              <a href="/" className="relative group cursor-pointer block flex items-center gap-3">
                 <img
-                  className="w-10 h-10 md:w-28 md:h-28 object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-lg"
+                  className="w-14 h-14 md:w-32 md:h-32 -mt-[1rem] object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-lg"
                   src={Image2}
                   alt="Urban Uplink Logo"
                   style={{
                     filter: "brightness(1.1) contrast(1.2)",
                   }}
                 />
+                <span className={`font-display -ml-[2rem] font-bold text-xl md:text-2xl tracking-tight transition-colors duration-300 ${isScrolled ? "text-slate-800" : "text-white drop-shadow-md"}`}>
+                  Urban Uplink
+                </span>
               </a>
             </div>
 

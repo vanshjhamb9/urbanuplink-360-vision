@@ -15,11 +15,16 @@ const Footer = () => {
 
           {/* Brand - Full width on mobile, centered */}
           <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
-            <img
-              src={Image2}
-              alt="Urban Uplink"
-              className="h-10 md:h-14 w-auto mb-3 object-contain brightness-110 contrast-125 drop-shadow-lg"
-            />
+            <div className="flex items-center gap-3 mb-3">
+              <img
+                src={Image2}
+                alt="Urban Uplink"
+                className="h-12 md:h-16 w-auto object-contain brightness-110 contrast-125 drop-shadow-lg"
+              />
+              <span className="font-display font-bold text-xl text-white tracking-tight">
+                Urban Uplink
+              </span>
+            </div>
             <p className="text-xs text-white/70 max-w-xs mx-auto md:mx-0">
               Transforming automotive sales with real 360° imaging solutions.
             </p>

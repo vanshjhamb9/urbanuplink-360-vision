@@ -75,7 +75,7 @@ const BGReplacementTool = () => {
           </p>
         </div>
 
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Stage buttons */}
           <div className="flex justify-center gap-2 md:gap-4 mb-8 flex-wrap">
             {stages.map((stage, index) => (
@@ -114,192 +114,209 @@ const BGReplacementTool = () => {
             ))}
           </div>
 
-          {/* Main display area */}
-          <div className="relative aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl">
-            {/* Stage 1: Raw Image with original messy background */}
-            <div
-              className={`absolute inset-0 transition-all duration-700 ${currentStage === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                }`}
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img
-                  src={carImageOriginal}
-                  alt="Raw image with original background"
-                  className="w-full h-full object-contain"
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                  }}
-                />
-              </div>
-              {/* Overlay to emphasize "raw/unprocessed" look */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-              {/* Raw indicator badge */}
-              <div className="absolute top-4 right-4 px-3 py-1.5 bg-orange-500 text-white rounded-full text-xs font-bold flex items-center gap-1.5">
-                <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                RAW
-              </div>
-            </div>
-
-            {/* Stage 2: Background Removed - Checkerboard with masked car */}
-            <div
-              className={`absolute inset-0 transition-all duration-700 ${currentStage === 2 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                }`}
-            >
-              {/* Checkerboard pattern (transparency indicator) */}
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+            {/* Main display area */}
+            <div className="lg:col-span-3 relative aspect-[16/9] rounded-2xl overflow-hidden shadow-2xl">
+              {/* Stage 1: Raw Image with original messy background */}
               <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage: `
-                    linear-gradient(45deg, #d4d4d4 25%, transparent 25%),
-                    linear-gradient(-45deg, #d4d4d4 25%, transparent 25%),
-                    linear-gradient(45deg, transparent 75%, #d4d4d4 75%),
-                    linear-gradient(-45deg, transparent 75%, #d4d4d4 75%)
-                  `,
-                  backgroundSize: '30px 30px',
-                  backgroundPosition: '0 0, 0 15px, 15px -15px, -15px 0px',
-                  backgroundColor: '#f0f0f0'
-                }}
-              />
-
-              {/* Car with background removed - Using transparent PNG for perfect edge cutting */}
-              <div
-                className="absolute inset-0 flex items-center justify-center"
+                className={`absolute inset-0 transition-all duration-700 ${currentStage === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                  }`}
               >
-                {/* Using transparent PNG for perfect background removal - same size and position as original */}
-                <img
-                  src={carImageWithNoBg}
-                  alt="Car with background removed"
-                  className="w-full h-full object-contain"
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.4))",
-                  }}
-                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <img
+                    src={carImageOriginal}
+                    alt="Raw image with original background"
+                    className="w-full h-full object-contain"
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                    }}
+                  />
+                </div>
+                {/* Overlay to emphasize "raw/unprocessed" look */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                {/* Raw indicator badge */}
+                <div className="absolute top-4 right-4 px-3 py-1.5 bg-orange-500 text-white rounded-full text-xs font-bold flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                  RAW
+                </div>
               </div>
 
-              {/* Transparency indicator badge */}
-              <div className="absolute top-4 right-4 px-3 py-1.5 bg-gradient-to-r from-primary to-accent text-white rounded-full text-xs font-bold flex items-center gap-1.5">
-                <Eraser className="w-3 h-3" />
-                BG REMOVED
-              </div>
-            </div>
-
-            {/* Stage 3: Background Replaced with selected gradient */}
-            <div
-              className={`absolute inset-0 transition-all duration-700 ${currentStage === 3 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                }`}
-            >
-              {/* Selected background gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${backgrounds[selectedBg].gradient}`} />
-
-              {/* Subtle lighting effect */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/20" />
-
-              {/* Car with background removed on new background - Using transparent PNG for perfect edge cutting */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                {/* Using transparent PNG for perfect background removal - same size and position as original */}
-                <img
-                  src={carImageWithNoBg}
-                  alt="Car with new background"
-                  className="w-full h-full object-contain"
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.35))",
-                  }}
-                />
-              </div>
-
-              {/* Floor shadow/reflection */}
+              {/* Stage 2: Background Removed - Checkerboard with masked car */}
               <div
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-20"
-                style={{
-                  background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, transparent 70%)',
-                }}
-              />
+                className={`absolute inset-0 transition-all duration-700 ${currentStage === 2 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                  }`}
+              >
+                {/* Checkerboard pattern (transparency indicator) */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: `
+                      linear-gradient(45deg, #d4d4d4 25%, transparent 25%),
+                      linear-gradient(-45deg, #d4d4d4 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, #d4d4d4 75%),
+                      linear-gradient(-45deg, transparent 75%, #d4d4d4 75%)
+                    `,
+                    backgroundSize: '30px 30px',
+                    backgroundPosition: '0 0, 0 15px, 15px -15px, -15px 0px',
+                    backgroundColor: '#f0f0f0'
+                  }}
+                />
 
-              {/* Replaced indicator badge */}
-              <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 ${backgrounds[selectedBg].textDark ? 'bg-black/70 text-white' : 'bg-white/90 text-black'
-                }`}>
-                <Image className="w-3 h-3" />
-                {backgrounds[selectedBg].name.toUpperCase()}
+                {/* Car with background removed - Using transparent PNG for perfect edge cutting */}
+                <div
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  {/* Using transparent PNG for perfect background removal - same size and position as original */}
+                  <img
+                    src={carImageWithNoBg}
+                    alt="Car with background removed"
+                    className="w-full h-full object-contain"
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.4))",
+                    }}
+                  />
+                </div>
+
+                {/* Transparency indicator badge */}
+                <div className="absolute top-4 right-4 px-3 py-1.5 bg-gradient-to-r from-primary to-accent text-white rounded-full text-xs font-bold flex items-center gap-1.5">
+                  <Eraser className="w-3 h-3" />
+                  BG REMOVED
+                </div>
               </div>
-            </div>
 
-            {/* Info bar at bottom */}
-            <div className="absolute bottom-6 left-6 right-6 z-20 hidden md:block">
-              <div className="bg-black/60 backdrop-blur-lg rounded-xl p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-white font-semibold text-lg flex items-center gap-2">
-                      {(() => {
-                        const StageIcon = stages[currentStage - 1].icon;
-                        return StageIcon ? <StageIcon className="w-5 h-5" /> : null;
-                      })()}
-                      {stages[currentStage - 1].title}
-                    </h3>
-                    <p className="text-white/70 text-sm">
-                      {stages[currentStage - 1].description}
-                    </p>
-                  </div>
-                  <div className="flex gap-2">
-                    {stages.map((_, index) => (
-                      <div
-                        key={index}
-                        className={`w-3 h-3 rounded-full transition-all ${currentStage > index
-                            ? "bg-gradient-to-r from-primary to-accent"
-                            : "bg-white/30"
-                          }`}
-                      />
-                    ))}
+              {/* Stage 3: Background Replaced with selected gradient */}
+              <div
+                className={`absolute inset-0 transition-all duration-700 ${currentStage === 3 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                  }`}
+              >
+                {/* Selected background gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${backgrounds[selectedBg].gradient}`} />
+
+                {/* Subtle lighting effect */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/20" />
+
+                {/* Car with background removed on new background - Using transparent PNG for perfect edge cutting */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  {/* Using transparent PNG for perfect background removal - same size and position as original */}
+                  <img
+                    src={carImageWithNoBg}
+                    alt="Car with new background"
+                    className="w-full h-full object-contain"
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.35))",
+                    }}
+                  />
+                </div>
+
+                {/* Floor shadow/reflection */}
+                <div
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-20"
+                  style={{
+                    background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, transparent 70%)',
+                  }}
+                />
+
+                {/* Replaced indicator badge */}
+                <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 ${backgrounds[selectedBg].textDark ? 'bg-black/70 text-white' : 'bg-white/90 text-black'
+                  }`}>
+                  <Image className="w-3 h-3" />
+                  {backgrounds[selectedBg].name.toUpperCase()}
+                </div>
+              </div>
+
+              {/* Info bar at bottom */}
+              <div className="absolute bottom-6 left-6 right-6 z-20 hidden md:block">
+                <div className="bg-black/60 backdrop-blur-lg rounded-xl p-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-white font-semibold text-lg flex items-center gap-2">
+                        {(() => {
+                          const StageIcon = stages[currentStage - 1].icon;
+                          return StageIcon ? <StageIcon className="w-5 h-5" /> : null;
+                        })()}
+                        {stages[currentStage - 1].title}
+                      </h3>
+                      <p className="text-white/70 text-sm">
+                        {stages[currentStage - 1].description}
+                      </p>
+                    </div>
+                    <div className="flex gap-2">
+                      {stages.map((_, index) => (
+                        <div
+                          key={index}
+                          className={`w-3 h-3 rounded-full transition-all ${currentStage > index
+                              ? "bg-gradient-to-r from-primary to-accent"
+                              : "bg-white/30"
+                            }`}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Background selection - visible on stage 3 */}
-          <div className={`mt-8 transition-all duration-500 ${currentStage === 3 ? 'opacity-100' : 'opacity-50'}`}>
-            <p className="text-center text-sm text-muted-foreground mb-4">
-              Choose a background:
-            </p>
-            <div className="flex justify-center gap-4">
-              {backgrounds.map((bg, index) => (
+            {/* Controls Side Panel */}
+            <div className="lg:col-span-1 flex flex-col gap-6 justify-center h-full py-4">
+              {/* Background selection - visible on stage 3 */}
+              <div className={`transition-all duration-500 ${currentStage === 3 ? 'opacity-100' : 'opacity-50 pointer-events-none'}`}>
+                <p className="text-center lg:text-left text-sm text-muted-foreground mb-4 font-medium">
+                  Choose a background
+                </p>
+                <div className="flex flex-wrap lg:grid lg:grid-cols-2 justify-center lg:justify-start gap-3">
+                  {backgrounds.map((bg, index) => (
+                    <button
+                      key={bg.id}
+                      onClick={() => {
+                        setSelectedBg(index);
+                        setCurrentStage(3);
+                        setIsAutoPlaying(false);
+                      }}
+                      className={`group relative w-16 h-16 lg:w-full lg:aspect-square rounded-xl bg-gradient-to-br ${bg.gradient
+                        } transition-all overflow-hidden ${selectedBg === index && currentStage === 3
+                          ? "ring-4 ring-primary ring-offset-2 scale-105"
+                          : "hover:scale-105 hover:ring-2 hover:ring-primary/50"
+                        }`}
+                      title={bg.name}
+                    >
+                      <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 text-white text-[10px] font-medium p-1 text-center">
+                        {bg.name}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Auto-play indicator */}
+              <div className="flex justify-center lg:justify-start">
                 <button
-                  key={bg.id}
-                  onClick={() => {
-                    setSelectedBg(index);
-                    setCurrentStage(3);
-                    setIsAutoPlaying(false);
-                  }}
-                  className={`group relative w-16 h-16 rounded-xl bg-gradient-to-br ${bg.gradient
-                    } transition-all overflow-hidden ${selectedBg === index && currentStage === 3
-                      ? "ring-4 ring-primary ring-offset-2 scale-110"
-                      : "hover:scale-105 hover:ring-2 hover:ring-primary/50"
+                  onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                  className={`w-full px-4 py-3 rounded-xl text-sm font-medium transition-all flex items-center justify-center gap-2 ${isAutoPlaying
+                      ? 'bg-primary/10 text-primary border border-primary/20'
+                      : 'bg-muted text-muted-foreground border border-border hover:border-primary/30'
                     }`}
-                  title={bg.name}
                 >
-                  <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 text-white text-[10px] font-medium">
-                    {bg.name}
-                  </span>
+                  {isAutoPlaying ? (
+                    <>
+                      <span className="relative flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                      </span>
+                      Auto-playing...
+                    </>
+                  ) : (
+                    <>
+                      <span>▶</span> Click to auto-play
+                    </>
+                  )}
                 </button>
-              ))}
+              </div>
             </div>
-          </div>
-
-          {/* Auto-play indicator */}
-          <div className="flex justify-center mt-6">
-            <button
-              onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${isAutoPlaying
-                  ? 'bg-primary/20 text-primary border border-primary/30'
-                  : 'bg-muted text-muted-foreground border border-border hover:border-primary/30'
-                }`}
-            >
-              {isAutoPlaying ? '⏸ Auto-playing...' : '▶ Click to auto-play'}
-            </button>
           </div>
         </div>
       </div>

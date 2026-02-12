@@ -22,6 +22,7 @@ const plans = [
     price: {
       monthly: "24,999",
       annually: "2,49,999",
+      earlyBird: "12,499",
     },
     description:
       "Perfect for individual sellers and small dealerships getting started",
@@ -44,6 +45,7 @@ const plans = [
     price: {
       monthly: "64,999",
       annually: "6,49,999",
+      earlyBird: "50,000",
     },
     description: "Best for growing dealerships and automotive businesses",
     features: [
@@ -67,6 +69,7 @@ const plans = [
     price: {
       monthly: "Custom",
       annually: "Custom",
+      earlyBird: null,
     },
     description: "For large dealership groups and automotive platforms",
     features: [
@@ -199,14 +202,29 @@ const PricingPage = () => {
                     {plan.price.monthly === "Custom" ? (
                       <div className="text-4xl font-bold">Custom</div>
                     ) : (
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-xl font-bold">₹</span>
-                        <span className="text-4xl font-bold">
-                          {isAnnual ? plan.price.annually : plan.price.monthly}
-                        </span>
-                        <span className="text-muted-foreground text-sm font-normal">
-                          /{isAnnual ? "year" : "month"}
-                        </span>
+                      <div className="space-y-2">
+                        {!isAnnual && plan.price.earlyBird && (
+                           <div className="inline-block bg-slate-900 text-white text-xs font-bold px-2 py-1 rounded mb-1 shadow-sm">
+                             Early bird offer {plan.price.earlyBird}
+                           </div>
+                        )}
+                        <div className="flex items-baseline gap-1">
+                          <span className="text-xl font-bold">₹</span>
+                          <span className={`text-4xl font-bold ${!isAnnual && plan.price.earlyBird ? 'text-accent' : ''}`}>
+                            {isAnnual 
+                              ? plan.price.annually 
+                              : (plan.price.earlyBird || plan.price.monthly)
+                            }
+                          </span>
+                          <span className="text-muted-foreground text-sm font-normal">
+                            /{isAnnual ? "year" : "month"}
+                          </span>
+                        </div>
+                        {!isAnnual && plan.price.earlyBird && (
+                          <div className="text-sm text-muted-foreground line-through decoration-red-500/50">
+                            ₹{plan.price.monthly}
+                          </div>
+                        )}
                       </div>
                     )}
                     {isAnnual && plan.price.monthly !== "Custom" && (

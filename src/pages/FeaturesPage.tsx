@@ -37,7 +37,6 @@ const features = [
       "One-click background removal",
       "Library of professional backgrounds",
       "Custom background uploads",
-      "Automatic lighting adjustment",
     ],
   },
   {
@@ -62,18 +61,6 @@ const features = [
       "Touch & swipe support",
       "Customizable UI controls",
       "Fullscreen mode",
-    ],
-  },
-  {
-    icon: Cloud,
-    title: "Cloud-Based Storage & Sharing",
-    description:
-      "Securely store unlimited vehicles in the cloud. Share links instantly or embed viewers anywhere.",
-    details: [
-      "Unlimited storage",
-      "CDN-powered delivery",
-      "One-click sharing",
-      "Privacy controls",
     ],
   },
   {
