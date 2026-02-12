@@ -20,7 +20,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 mt-[2rem] relative z-10">
         <div className="max-w-3xl">
           <div className="inline-block mb-4 px-4 py-2 bg-accent/10 rounded-full border border-accent/20">
             <span className="text-accent font-semibold text-sm">
