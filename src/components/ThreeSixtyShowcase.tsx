@@ -249,7 +249,6 @@ const ThreeSixtyShowcase = () => {
               </div>
             </div>
 
-            {/* Right: Details Panel */}
             <div className="p-8 lg:p-10 flex flex-col h-full bg-white">
                <div className="flex items-start justify-between mb-2">
                   <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
