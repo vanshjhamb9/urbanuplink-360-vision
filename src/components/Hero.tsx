@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
-import tataHarrier from "@/assets/2023-Tata-Harrier-facelift-dark-edition-front-.jpg";
-import sierraExterior from "@/assets/sierra-exterior.jpg";
-import sierraInterior from "@/assets/sierra-interior.jpg";
+import tataHarrier from "@/assets/header1.png";
+import sierraExterior from "@/assets/header2.png";
+import sierraInterior from "@/assets/header3.png";
 
 // Indian car images for header carousel - Using Tata Harrier as primary
 const heroImages = [

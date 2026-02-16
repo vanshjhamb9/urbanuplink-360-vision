@@ -1,7 +1,13 @@
 import jeepImage from "@/assets/Jeep Grand Cherokee.png";
-import harrierImage from "@/assets/tata_harrier.avif";
+import harrierImage from "@/assets/bg-removed/Output/processed_010.png";
 import logoIcon from "@/assets/2 (2).png";
-import carBgImage from "@/assets/bgimage_car.webp";
+import carBgImage from "@/assets/Bgimage360.webp";
+import carBgImage1 from "@/assets/bg-removed/Output/processed_001.png";
+import carBgImage2 from "@/assets/bg-removed/Output/processed_002.png";
+import carBgImage3 from "@/assets/bg-removed/Output/processed_003.png";
+import carBgImage4 from "@/assets/bg-removed/Output/processed_004.png";
+import carBgImage5 from "@/assets/bg-removed/Output/processed_005.png";
+import carBgImage6 from "@/assets/bg-removed/Output/processed_007.png";
 
 // Indian car showcase gallery with images, content, and tags
 const carShowcase = [
@@ -17,14 +23,14 @@ const carShowcase = [
   {
     image: harrierImage,
     background: "from-blue-50 to-indigo-50",
-    angle: "Harrier Side View",
-    name: "Tata Harrier",
-    price: "₹24.5L",
+    angle: "BYD Front Quarter",
+    name: "BYD Atto 3",
+    price: "₹33.9L",
     year: "2024",
     dark: false,
   },
   {
-    image: jeepImage,
+    image: carBgImage6,
     background: "from-slate-100 to-white",
     angle: "Jeep Low Angle",
     name: "Jeep Grand Cherokee",
@@ -33,20 +39,47 @@ const carShowcase = [
     dark: false,
   },
   {
-    image: harrierImage,
+    image: carBgImage1,
     background: "from-indigo-50 to-blue-100",
-    angle: "Harrier Quarter View",
-    name: "Tata Harrier",
-    price: "₹26.2L",
+    angle: "BMW Quarter View",
+    name: "BMW X7",
+    price: "₹1.27Cr",
     year: "2024",
     dark: false,
   },
   {
-    image: jeepImage,
+    image: carBgImage2,
     background: "from-white to-slate-50",
-    angle: "Jeep Dynamic View",
-    name: "Jeep Grand Cherokee",
-    price: "₹80.1L",
+    angle: "Citroen Front View",
+    name: "Citroen C3",
+    price: "₹6.4L",
+    year: "2024",
+    dark: false,
+  },
+  {
+    image: carBgImage3,
+    background: "from-white to-slate-50",
+    angle: "Citroen Side View",
+    name: "Citroen C3",
+    price: "₹6.8L",
+    year: "2024",
+    dark: false,
+  },
+  {
+    image: carBgImage4,
+    background: "from-white to-slate-50",
+    angle: "Creta Front View",
+    name: "Hyundai Creta",
+    price: "₹11.0L",
+    year: "2024",
+    dark: false,
+  },
+  {
+    image: carBgImage5,
+    background: "from-white to-slate-50",
+    angle: "Ioniq Front View",
+    name: "Hyundai Ioniq 5",
+    price: "₹44.9L",
     year: "2024",
     dark: false,
   },

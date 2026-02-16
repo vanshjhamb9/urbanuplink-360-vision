@@ -256,13 +256,13 @@ const ThreeSixtyShowcase = () => {
                     Featured Listing
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-bold text-slate-900 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">₹19.5L</div>
+                    <div className="text-3xl font-bold text-slate-900 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">₹24.8L</div>
                     <div className="text-xs text-slate-500 font-medium">On-road Mumbai</div>
                   </div>
                </div>
 
-               <h3 className="text-3xl font-bold text-slate-900 mb-1 tracking-tight">2023 Hyundai Creta</h3>
-               <p className="text-slate-500 mb-8 font-medium">SX(O) Knight Edition • Automatic</p>
+               <h3 className="text-3xl font-bold text-slate-900 mb-1 tracking-tight">2023 Toyota Innova Crysta</h3>
+               <p className="text-slate-500 mb-8 font-medium">ZX 2.4 Diesel • Automatic</p>
 
                <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
@@ -280,7 +280,7 @@ const ThreeSixtyShowcase = () => {
                      </div>
                      <div>
                         <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Mileage</div>
-                        <div className="font-bold text-slate-800">12,400 km</div>
+                        <div className="font-bold text-slate-800">18,500 km</div>
                      </div>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
@@ -289,7 +289,7 @@ const ThreeSixtyShowcase = () => {
                      </div>
                      <div>
                         <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Fuel</div>
-                        <div className="font-bold text-slate-800">Petrol</div>
+                        <div className="font-bold text-slate-800">Diesel</div>
                      </div>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">

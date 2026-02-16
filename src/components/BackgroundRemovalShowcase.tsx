@@ -170,14 +170,15 @@ const   BackgroundRemovalShowcase = () => {
             </div>
 
             {/* Labels */}
-            <div className="absolute top-4 left-4 px-4 py-2 bg-black/70 backdrop-blur-sm rounded-full text-white text-sm font-semibold flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-red-400" />
+             <div className="absolute top-4 right-4 px-4 py-2 bg-gradient-to-r from-primary to-accent rounded-full text-white text-sm font-semibold flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-white" />
               Before
             </div>
-            <div className="absolute top-4 right-4 px-4 py-2 bg-gradient-to-r from-primary to-accent rounded-full text-white text-sm font-semibold flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-white" />
+            <div className="absolute top-4 left-4 px-4 py-2 bg-black/70 backdrop-blur-sm rounded-full text-white text-sm font-semibold flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-red-400" />
               After
             </div>
+           
 
             {/* Instruction */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-full text-white text-xs font-medium flex items-center gap-2">

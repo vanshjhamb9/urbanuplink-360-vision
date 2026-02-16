@@ -52,12 +52,21 @@ export default async function handler(
       return text.replace(/[&<>"']/g, (m) => map[m]);
     };
 
+    // Configure email addresses
+    // For production: Verify your domain at resend.com/domains and set RESEND_FROM_EMAIL
+    // Example: RESEND_FROM_EMAIL=UrbanUplink Contact <contact@urbanuplink.in>
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'UrbanUplink Contact <onboarding@resend.dev>';
+    
+    // Recipient email - can be configured or defaults to admin email
+    // Set RESEND_TO_EMAIL in .env to send to a specific address, or it will use admin@urbanuplink.ai
+    const recipientEmail = process.env.RESEND_TO_EMAIL || 'admin@urbanuplink.ai';
+
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'UrbanUplink Contact <onboarding@resend.dev>',
-      to: ['vanshjhamb9@gmail.com'],
+      from: fromEmail,
+      to: [recipientEmail],
       subject: subject ? `New Contact: ${escapeHtml(subject)}` : 'New Contact Form Submission',
-      replyTo: email,
+      replyTo: email, // This allows you to reply directly to the form submitter
       html: `
         <h3>New Message from Contact Form</h3>
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
