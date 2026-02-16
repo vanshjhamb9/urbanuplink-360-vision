@@ -1,75 +1,52 @@
-import img0 from "@/assets/output/processed_000.JPG";
-import img1 from "@/assets/output/processed_001.JPG";
-import img2 from "@/assets/output/processed_002.JPG";
-import img3 from "@/assets/output/processed_003.JPG";
-import img4 from "@/assets/output/processed_004.JPG";
-import img5 from "@/assets/output/processed_005.JPG";
-import img6 from "@/assets/output/processed_006.JPG";
-import img7 from "@/assets/output/processed_007.JPG";
+import jeepImage from "@/assets/Jeep Grand Cherokee.png";
+import harrierImage from "@/assets/tata_harrier.avif";
+import logoIcon from "@/assets/2 (2).png";
+import carBgImage from "@/assets/bgimage_car.webp";
 
 // Indian car showcase gallery with images, content, and tags
 const carShowcase = [
   {
-    image: img0,
-    background: "from-blue-100 to-indigo-100",
-    angle: "Front Profile",
-    price: "₹26.9L",
+    image: jeepImage,
+    background: "from-slate-50 to-blue-50",
+    angle: "Jeep Front Profile",
+    name: "Jeep Grand Cherokee",
+    price: "₹80.5L",
     year: "2024",
     dark: false,
   },
   {
-    image: img1,
-    background: "from-slate-100 to-white",
-    angle: "Front View",
+    image: harrierImage,
+    background: "from-blue-50 to-indigo-50",
+    angle: "Harrier Side View",
+    name: "Tata Harrier",
     price: "₹24.5L",
     year: "2024",
     dark: false,
   },
   {
-    image: img2,
-    background: "from-red-100 to-orange-100",
-    angle: "Front Quarter",
-    price: "₹17.5L",
+    image: jeepImage,
+    background: "from-slate-100 to-white",
+    angle: "Jeep Low Angle",
+    name: "Jeep Grand Cherokee",
+    price: "₹78.9L",
     year: "2024",
     dark: false,
   },
   {
-    image: img3,
-    background: "from-teal-100 to-cyan-100",
-    angle: "Side Profile",
-    price: "₹19.9L",
+    image: harrierImage,
+    background: "from-indigo-50 to-blue-100",
+    angle: "Harrier Quarter View",
+    name: "Tata Harrier",
+    price: "₹26.2L",
     year: "2024",
     dark: false,
   },
   {
-    image: img4,
-    background: "from-sky-100 to-blue-200",
-    angle: "Front View",
-    price: "₹20.1L",
-    year: "2024",
-    dark: false,
-  },
-  {
-    image: img5,
-    background: "from-emerald-100 to-green-100",
-    angle: "Front Side",
-    price: "Coming Soon",
-    year: "2025",
-    dark: false,
-  },
-  {
-    image: img6,
-    background: "from-gray-100 to-slate-200",
-    angle: "Front View",
-    price: "₹19.5L",
-    year: "2024",
-    dark: false,
-  },
-  {
-    image: img7,
-    background: "from-purple-100 to-pink-100",
-    angle: "Front Profile",
-    price: "₹18.9L",
+    image: jeepImage,
+    background: "from-white to-slate-50",
+    angle: "Jeep Dynamic View",
+    name: "Jeep Grand Cherokee",
+    price: "₹80.1L",
     year: "2024",
     dark: false,
   },
@@ -108,23 +85,41 @@ const CarScrollBanner = () => {
           {duplicatedCars.map((car, index) => (
             <div
               key={index}
-              className={`flex-shrink-0 w-60 md:w-80 rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-br ${car.background}`}
+              className={`flex-shrink-0 w-60 md:w-80 rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-white border border-slate-100`}
             >
-              <div className="relative aspect-[4/3] group">
+              <div className="relative aspect-[4/3] group overflow-hidden">
+                {/* Showroom Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-white" />
+                <img 
+                  src={carBgImage} 
+                  className="absolute inset-0 w-full h-full object-cover opacity-80" 
+                  alt="" 
+                />
+                
+                {/* Centered Logo on the wall - Positioned higher to be visible */}
+                <div className="absolute inset-x-0 top-6 flex items-center justify-center pointer-events-none opacity-60 group-hover:opacity-80 transition-opacity duration-500 z-0">
+                  <img src={logoIcon} className="w-20 md:w-28 h-auto object-contain" alt="" />
+                </div>
+
+                {/* Car Image - With extra top padding to reveal logo */}
                 <img
                   src={car.image}
                   alt={`${car.angle}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="relative z-10 w-full h-full object-contain pt-10 pb-2 px-2 md:pt-12 md:pb-4 md:px-4 transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <div className="absolute top-2 right-2 md:top-3 md:right-3 px-1.5 md:px-2 py-0.5 md:py-1 bg-white/90 backdrop-blur rounded-full text-[10px] md:text-xs font-semibold text-foreground shadow-sm">
+                <div className="absolute top-4 right-2 md:top-3 md:right-3 px-1.5 md:px-2 py-0.5 md:py-1 bg-white/90 backdrop-blur rounded-full text-[10px] md:text-xs font-semibold text-foreground shadow-sm z-20">
                   {car.angle}
                 </div>
               </div>
-              <div className="p-3 md:p-4 bg-white/50 backdrop-blur-sm">
+              <div className="p-3 md:p-4 bg-white">
                 <div className="flex items-center justify-between">
-                  <div className="flex-1"></div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-sm md:text-base text-slate-800 truncate">{car.name}</h4>
+                    <p className="text-[10px] md:text-xs text-slate-500">{car.year} Model</p>
+                  </div>
                   <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold text-sm md:text-base">
                     {car.price}
                   </div>
@@ -146,23 +141,41 @@ const CarScrollBanner = () => {
           {[...duplicatedCars].reverse().map((car, index) => (
             <div
               key={index}
-              className={`flex-shrink-0 w-60 md:w-80 rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-br ${car.background}`}
+              className={`flex-shrink-0 w-60 md:w-80 rounded-xl md:rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 hover:shadow-2xl bg-white border border-slate-100`}
             >
-              <div className="relative aspect-[4/3] group">
+              <div className="relative aspect-[4/3] group overflow-hidden">
+                {/* Showroom Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-white" />
+                <img 
+                  src={carBgImage} 
+                  className="absolute inset-0 w-full h-full object-cover opacity-80" 
+                  alt="" 
+                />
+                
+                {/* Centered Logo on the wall - Positioned higher to be visible */}
+                <div className="absolute inset-x-0 top-6 flex items-center justify-center pointer-events-none opacity-60 group-hover:opacity-80 transition-opacity duration-500 z-0">
+                  <img src={logoIcon} className="w-20 md:w-28 h-auto object-contain" alt="" />
+                </div>
+
+                {/* Car Image - With extra top padding to reveal logo */}
                 <img
                   src={car.image}
                   alt={`${car.angle}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="relative z-10 w-full h-full object-contain pt-10 pb-2 px-2 md:pt-12 md:pb-4 md:px-4 transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <div className="absolute top-2 right-2 md:top-3 md:right-3 px-1.5 md:px-2 py-0.5 md:py-1 bg-white/90 backdrop-blur rounded-full text-[10px] md:text-xs font-semibold text-foreground shadow-sm">
+                <div className="absolute top-2 right-2 md:top-3 md:right-3 px-1.5 md:px-2 py-0.5 md:py-1 bg-white/90 backdrop-blur rounded-full text-[10px] md:text-xs font-semibold text-foreground shadow-sm z-20">
                   {car.angle}
                 </div>
               </div>
-              <div className="p-3 md:p-4 bg-white/50 backdrop-blur-sm">
+              <div className="p-3 md:p-4 bg-white">
                 <div className="flex items-center justify-between">
-                  <div className="flex-1"></div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-sm md:text-base text-slate-800 truncate">{car.name}</h4>
+                    <p className="text-[10px] md:text-xs text-slate-500">{car.year} Model</p>
+                  </div>
                   <div className="text-right ml-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-bold text-sm md:text-base">
                     {car.price}
                   </div>

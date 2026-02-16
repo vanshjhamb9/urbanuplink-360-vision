@@ -87,18 +87,18 @@ const features = [
       "Custom domains",
     ],
   },
-  {
-    icon: Smartphone,
-    title: "Multi-Platform Integration",
-    description:
-      "Seamlessly integrate with your existing website, CRM, and automotive marketplace platforms.",
-    details: [
-      "WordPress plugin",
-      "API access",
-      "Marketplace integrations",
-      "CRM connectors",
-    ],
-  },
+  // {
+  //   icon: Smartphone,
+  //   title: "Multi-Platform Integration",
+  //   description:
+  //     "Seamlessly integrate with your existing website, CRM, and automotive marketplace platforms.",
+  //   details: [
+  //     "WordPress plugin",
+  //     "API access",
+  //     "Marketplace integrations",
+  //     "CRM connectors",
+  //   ],
+  // },
 ];
 
 const FeaturesPage = () => {

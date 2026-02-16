@@ -2,18 +2,19 @@ import { useState, useEffect, useRef } from "react";
 import { Camera, Eraser, Image, Shield, Sparkles, Play, Pause, RotateCcw, Maximize2, Box, Calendar, Gauge, Fuel, MapPin, Heart, Share2, CheckCircle2 } from "lucide-react";
 
 // 360° car images - All angles with background removed
-import car360_1 from "@/assets/1r.png";
-import car360_2 from "@/assets/2r.png";
-import car360_3 from "@/assets/3r.png";
-import car360_4 from "@/assets/4r.png";
-import car360_5 from "@/assets/5r.png";
-import car360_6 from "@/assets/6r.png";
-import car360_7 from "@/assets/7r.png";
-import car360_8 from "@/assets/8r.png";
-import car360_9 from "@/assets/9r.png";
-import car360_10 from "@/assets/10r.png";
-import car360_11 from "@/assets/11r.png";
-import car360_12 from "@/assets/12r.png";
+import car360_1 from "@/assets/processed_000.png";
+import car360_2 from "@/assets/processed_001.png";
+import car360_3 from "@/assets/processed_002.png";
+import car360_4 from "@/assets/processed_003.png";
+import car360_5 from "@/assets/processed_004.png";
+import car360_6 from "@/assets/processed_005.png";
+import car360_7 from "@/assets/processed_006.png";
+import car360_8 from "@/assets/processed_007.png";
+import car360_9 from "@/assets/processed_008.png";
+import car360_10 from "@/assets/processed_010.png";
+import car360_11 from "@/assets/processed_011.png";
+import carBg360 from "@/assets/Bgimage360.webp";
+import logoImage from "@/assets/2 (2).png";
 
 const car360Images = [
   car360_1,  // 0°
@@ -27,7 +28,6 @@ const car360Images = [
   car360_9,  // 240°
   car360_10, // 270°
   car360_11, // 300°
-  car360_12, // 330°
 ];
 
 const totalAngles = car360Images.length;
@@ -133,7 +133,17 @@ const ThreeSixtyShowcase = () => {
         <div className="max-w-7xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Left: 360 Viewer */}
-            <div className="relative bg-gradient-to-br from-slate-50 to-slate-100 p-8 min-h-[400px] lg:min-h-[600px] flex items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-100">
+            <div className="relative p-0 min-h-[400px] lg:min-h-[600px] flex items-center justify-center border-b lg:border-b-0 lg:border-r border-slate-100 bg-white overflow-hidden">
+              {/* Showroom Background */}
+              <div className="absolute inset-0 z-0">
+                <img src={carBg360} className="w-full h-full object-cover" alt="" />
+                <div className="absolute inset-0 bg-white/10" />
+              </div>
+
+              {/* Centered Logo on the background wall - Positioned higher to be visible */}
+              <div className="absolute inset-x-0 top-20 flex items-center justify-center pointer-events-none z-0 opacity-50">
+                <img src={logoImage} className="w-40 md:w-64 h-auto object-contain" alt="Urban Uplink" />
+              </div>
               <div
                 ref={containerRef}
                 className="w-full h-full relative cursor-grab active:cursor-grabbing touch-none flex items-center justify-center perspective-1000"
@@ -146,7 +156,7 @@ const ThreeSixtyShowcase = () => {
                 onTouchEnd={handleMouseUp}
               >
                 {/* 360 Images */}
-                <div className="relative w-full aspect-[4/3] flex items-center justify-center">
+                <div className="relative w-full aspect-[4/3] flex items-center justify-center mt-[4rem]">
                   {car360Images.map((img, index) => (
                     <img
                       key={index}
@@ -183,8 +193,6 @@ const ThreeSixtyShowcase = () => {
                   ))}
                 </div>
 
-                {/* Floor Shadow */}
-                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-2/3 h-12 bg-black/20 blur-xl rounded-[100%] pointer-events-none" />
 
                 {/* Controls Overlay */}
                 <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between z-30 pointer-events-none">

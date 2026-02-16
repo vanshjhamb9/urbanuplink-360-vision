@@ -15,6 +15,15 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
+
+// Services:
+// 1.	BG Removal + Replacement (99/12 Images)
+// 2.	360 Spin (299/Car or 12 images)
+// 3.	BG Replacement + 360 + Hotspots + Number plate masking (Original Price-598 Combo Price-499)
+// 4.	Manual Quality Check (INR 200/Car Minimum 200 Cars/Month volume)
+// 5.	White labeling of app (TBD)
+// 6.	Custom SDK/API (TBD)
+
 const plans = [
   {
     name: "Starter",
@@ -30,7 +39,7 @@ const plans = [
       "Up to 50 vehicles/month",
       "Mobile capture app access",
       "AI background enhancement",
-      "Cloud storage (100GB)",
+      // "Cloud storage (100GB)",
       "Basic 360° viewer",
       "Email support",
       "Standard processing speed",
@@ -55,7 +64,6 @@ const plans = [
       "Custom branding",
       "Advanced analytics",
       "API access",
-      "Cloud storage (500GB)",
       "Priority support",
       "No watermarks",
       "CRM integration",
