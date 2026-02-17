@@ -63,18 +63,18 @@ const features = [
       "Fullscreen mode",
     ],
   },
-  {
-    icon: Shield,
-    title: "Enterprise Security",
-    description:
-      "Bank-level encryption and secure cloud infrastructure. Your data is protected 24/7 with automatic backups.",
-    details: [
-      "256-bit encryption",
-      "SOC 2 compliant",
-      "Automatic backups",
-      "Role-based access control",
-    ],
-  },
+  // {
+  //   icon: Shield,
+  //   title: "Enterprise Security",
+  //   description:
+  //     "Bank-level encryption and secure cloud infrastructure. Your data is protected 24/7 with automatic backups.",
+  //   details: [
+  //     "256-bit encryption",
+  //     "SOC 2 compliant",
+  //     "Automatic backups",
+  //     "Role-based access control",
+  //   ],
+  // },
   {
     icon: Palette,
     title: "Brand Customization",
