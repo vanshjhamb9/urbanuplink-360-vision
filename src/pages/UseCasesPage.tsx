@@ -10,7 +10,6 @@ import {
   Camera,
   CheckCircle2,
   Sparkles,
-  Layout,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import indianDealership from "@/assets/indian-dealership.png";
@@ -20,8 +19,8 @@ import indianFleet from "@/assets/Fleet Management.png";
 import indianDetailing from "@/assets/Premium Detailing.png";
 import indianInspection from "@/assets/indian-inspection.png";
 import indianStudio from "@/assets/car-photo-studio.jpg";
-import image25 from "@/assets/image25.png";
-import insuranceInspectionImg from "@/assets/insurance-inspection.jpg";
+import aiPoweredBg from "@/assets/AI-poweredbg.webp";
+import insuranceInspectionWebp from "@/assets/Insurance&inspection.webp";
 
 const useCases = [
   {
@@ -92,7 +91,7 @@ const useCases = [
       "Remote inspection capability",
       "Historical condition records",
     ],
-    image: insuranceInspectionImg,
+    image: insuranceInspectionWebp,
   },
   {
     icon: Camera,
@@ -120,7 +119,7 @@ const useCases = [
       "Eliminate distracting environments",
       "Cost-effective studio alternative",
     ],
-    image: image25, // Fallback for missing image24.png
+    image: aiPoweredBg,
   },
 ];
 
@@ -148,60 +147,22 @@ const UseCasesPage = () => {
         </div>
       </section>
 
-      {/* Use Cases List */}
+      {/* Use Cases List - Images Only */}
       <section className="pb-24">
         <div className="container px-4 md:px-6 mx-auto">
-          <div className="space-y-32">
+          <div className="space-y-8 md:space-y-12">
             {useCases.map((useCase, index) => (
               <div
                 key={index}
-                className={`flex flex-col lg:flex-row gap-12 lg:gap-24 items-center ${
-                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                }`}
+                className="relative group overflow-hidden rounded-[2rem] md:rounded-[2.5rem] shadow-lg hover:shadow-2xl transition-all duration-500 bg-background"
               >
-                {/* Image Side */}
-                <div className="flex-1 w-full group perspective-1000">
-                  <div className="relative transform transition-all duration-500 group-hover:scale-[1.02] group-hover:rotate-1">
-                    <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-[2rem] blur-3xl opacity-50 transition-opacity duration-500" />
-                    <img
-                      src={useCase.image}
-                      alt={useCase.title}
-                      className="relative rounded-[2rem] shadow-2xl w-full aspect-[4/3] object-cover border border-border/50 bg-muted"
-                    />
-                  </div>
-                </div>
-
-                {/* Text Side */}
-                <div className="flex-1 space-y-8">
-                  <div className="space-y-4">
-                    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
-                      <useCase.icon className="w-8 h-8 text-primary" />
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-bold">
-                      {useCase.title}
-                    </h2>
-                    <p className="text-lg text-muted-foreground leading-relaxed">
-                      {useCase.description}
-                    </p>
-                  </div>
-
-                  <div className="inline-flex items-center px-4 py-2 bg-accent/10 rounded-full border border-accent/20">
-                    <TrendingUp className="w-4 h-4 text-accent mr-2" />
-                    <span className="text-accent font-semibold">
-                      {useCase.stats}
-                    </span>
-                  </div>
-
-                  <ul className="space-y-4">
-                    {useCase.benefits.map((benefit, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground/80 font-medium">
-                          {benefit}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* Full Width Centered Image */}
+                <div className="relative w-full flex items-center justify-center">
+                  <img
+                    src={useCase.image}
+                    alt={useCase.title}
+                    className="w-full h-auto max-w-full block transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
                 </div>
               </div>
             ))}

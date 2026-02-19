@@ -101,6 +101,9 @@ const features = [
   // },
 ];
 
+
+// Bulk processing card
+
 const FeaturesPage = () => {
   return (
     <div className="min-h-screen">

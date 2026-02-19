@@ -22,11 +22,11 @@ const features = [
     title: "Brand Customization",
     description: "Fully white-labeled solutions that match your dealership's brand identity perfectly.",
   },
-  {
-    icon: Globe,
-    title: "Multi-Platform Integration",
-    description: "Seamlessly integrate with your existing website, social media, and automotive marketplaces.",
-  },
+  // {
+  //   icon: Globe,
+  //   title: "Multi-Platform Integration",
+  //   description: "Seamlessly integrate with your existing website, social media, and automotive marketplaces.",
+  // },
 ];
 
 const Features = () => {

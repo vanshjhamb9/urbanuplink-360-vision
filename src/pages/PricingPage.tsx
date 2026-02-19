@@ -31,7 +31,7 @@ const plans = [
     price: {
       monthly: "24,999",
       annually: "2,49,999",
-      earlyBird: "12,499",
+      earlyBird: "12,450",
     },
     description:
       "Perfect for individual sellers and small dealerships getting started",
@@ -40,10 +40,10 @@ const plans = [
       "Mobile capture app access",
       "AI background enhancement",
       // "Cloud storage (100GB)",
-      "Basic 360° viewer",
+      // "Basic 360° viewer",
       "Email support",
       "Standard processing speed",
-      "Watermarked exports",
+      // "Watermarked exports",
     ],
     cta: "Start Free Trial",
     popular: false,
@@ -65,8 +65,10 @@ const plans = [
       "Advanced analytics",
       "API access",
       "Priority support",
-      "No watermarks",
+      // "No watermarks",
       "CRM integration",
+      "Dashboard access ",
+
     ],
     cta: "Start Free Trial",
     popular: true,
@@ -89,14 +91,21 @@ const plans = [
       "Unlimited storage",
       "SLA guarantee",
       "24/7 phone support",
+      "API integration",
       "Custom contracts",
       "Volume discounts",
+      "Dashboard access ",
     ],
     cta: "Contact Sales",
     link: "https://calendly.com/admin-urbanuplink/30min",
     popular: false,
   },
 ];
+// 1. Bulk bg removal package , 8/image(early bird ) , Standard -- 12/image 
+
+// 2. Bg removal  branding and replacement -- 12/image(early bird ) , Standard -- 15/image 
+
+
 
 const faqs = [
   {
