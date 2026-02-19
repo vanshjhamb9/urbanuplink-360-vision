@@ -177,13 +177,10 @@ const ThreeSixtyShowcase = () => {
     const angleChange = (deltaX / containerRef.current.offsetWidth) * 360 * sensitivity;
     const newAngle = (rotationAngle + angleChange) % 360;
     const normalizedAngle = newAngle < 0 ? newAngle + 360 : newAngle;
+    setRotationAngle(normalizedAngle);
     
-    // Calculate image index instantly based on angle
     const exactIndex = (normalizedAngle / 360) * totalAngles;
     const newIndex = Math.floor(exactIndex) % totalAngles;
-    
-    // Update both angle and image index immediately
-    setRotationAngle(normalizedAngle);
     setCurrentImageIndex(newIndex);
     setDragStartX(e.touches[0].clientX);
     setVelocity(angleChange);

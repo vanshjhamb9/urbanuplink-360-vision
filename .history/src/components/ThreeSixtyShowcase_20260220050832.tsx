@@ -139,13 +139,11 @@ const ThreeSixtyShowcase = () => {
     const angleChange = (deltaX / containerRef.current.offsetWidth) * 360 * sensitivity;
     const newAngle = (rotationAngle + angleChange) % 360;
     const normalizedAngle = newAngle < 0 ? newAngle + 360 : newAngle;
+    setRotationAngle(normalizedAngle);
     
-    // Calculate image index instantly based on angle
+    // Smooth image index calculation with interpolation
     const exactIndex = (normalizedAngle / 360) * totalAngles;
     const newIndex = Math.floor(exactIndex) % totalAngles;
-    
-    // Update both angle and image index immediately
-    setRotationAngle(normalizedAngle);
     setCurrentImageIndex(newIndex);
     setDragStartX(e.clientX);
     
@@ -177,24 +175,20 @@ const ThreeSixtyShowcase = () => {
     const angleChange = (deltaX / containerRef.current.offsetWidth) * 360 * sensitivity;
     const newAngle = (rotationAngle + angleChange) % 360;
     const normalizedAngle = newAngle < 0 ? newAngle + 360 : newAngle;
+    setRotationAngle(normalizedAngle);
     
-    // Calculate image index instantly based on angle
     const exactIndex = (normalizedAngle / 360) * totalAngles;
     const newIndex = Math.floor(exactIndex) % totalAngles;
-    
-    // Update both angle and image index immediately
-    setRotationAngle(normalizedAngle);
     setCurrentImageIndex(newIndex);
     setDragStartX(e.touches[0].clientX);
     setVelocity(angleChange);
   };
 
-  // Manual navigation with smooth transitions
+  // Manual navigation
   const handlePrevious = () => {
     setIsPlaying(false);
     setRotationAngle((prev) => {
-      const angleStep = 360 / totalAngles;
-      const newAngle = (prev - angleStep * 3 + 360) % 360;
+      const newAngle = (prev - 30 + 360) % 360;
       const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
       setCurrentImageIndex(newIndex);
       return newAngle;
@@ -204,8 +198,7 @@ const ThreeSixtyShowcase = () => {
   const handleNext = () => {
     setIsPlaying(false);
     setRotationAngle((prev) => {
-      const angleStep = 360 / totalAngles;
-      const newAngle = (prev + angleStep * 3) % 360;
+      const newAngle = (prev + 30) % 360;
       const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
       setCurrentImageIndex(newIndex);
       return newAngle;
@@ -244,18 +237,14 @@ const ThreeSixtyShowcase = () => {
                 onMouseLeave={handleMouseUp}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
-                onTouchEnd={() => {
-                  setIsDragging(false);
-                  if (Math.abs(velocity) > 0.5) {
-                    const momentumAngle = (rotationAngle + velocity * 2) % 360;
-                    setRotationAngle(momentumAngle < 0 ? momentumAngle + 360 : momentumAngle);
-                  }
-                  setVelocity(0);
-                }}
+                onTouchEnd={handleMouseUp}
               >
-                {/* 360 Images - Instant switch for real rotation effect */}
+                {/* 360 Images with smooth transitions */}
                 <div className="relative w-full aspect-[4/3] flex items-center justify-center mt-[4rem]">
                   {car360Images.map((img, index) => {
+                    const exactIndex = (rotationAngle / 360) * totalAngles;
+                    const distance = Math.abs(index - exactIndex);
+                    const opacity = distance < 1 ? 1 - distance * 0.3 : 0;
                     const isActive = index === currentImageIndex;
                     
                     return (
@@ -263,9 +252,12 @@ const ThreeSixtyShowcase = () => {
                         key={index}
                         src={img}
                         alt={`Angle ${index * 11}`}
-                        className={`absolute w-full h-full object-contain drop-shadow-2xl ${
-                          isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                        className={`absolute w-full h-full object-contain will-change-opacity drop-shadow-2xl transition-opacity duration-75 ${
+                          isActive ? "opacity-100 z-10" : "opacity-0 z-0"
                         }`}
+                        style={{
+                          opacity: isActive ? Math.max(opacity, 0.7) : 0,
+                        }}
                       />
                     );
                   })}
@@ -358,13 +350,13 @@ const ThreeSixtyShowcase = () => {
                     Featured Listing
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-bold text-slate-900 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">₹18.5L</div>
+                    <div className="text-3xl font-bold text-slate-900 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">₹24.8L</div>
                     <div className="text-xs text-slate-500 font-medium">On-road Mumbai</div>
                   </div>
                </div>
 
-               <h3 className="text-3xl font-bold text-slate-900 mb-1 tracking-tight">2023 Hyundai Creta</h3>
-               <p className="text-slate-500 mb-8 font-medium">SX (O) 1.5 Petrol • CVT</p>
+               <h3 className="text-3xl font-bold text-slate-900 mb-1 tracking-tight">2023 Toyota Innova Crysta</h3>
+               <p className="text-slate-500 mb-8 font-medium">ZX 2.4 Diesel • Automatic</p>
 
                <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
@@ -382,7 +374,7 @@ const ThreeSixtyShowcase = () => {
                      </div>
                      <div>
                         <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Mileage</div>
-                        <div className="font-bold text-slate-800">12,500 km</div>
+                        <div className="font-bold text-slate-800">18,500 km</div>
                      </div>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
@@ -391,7 +383,7 @@ const ThreeSixtyShowcase = () => {
                      </div>
                      <div>
                         <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Fuel</div>
-                        <div className="font-bold text-slate-800">Petrol</div>
+                        <div className="font-bold text-slate-800">Diesel</div>
                      </div>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">

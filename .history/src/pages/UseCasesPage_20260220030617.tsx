@@ -12,12 +12,12 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import indianDealership from "@/assets/dealership.jpg";
-import indianHandover from "@/assets/automotive.dealership.webp";
-import indianAuction from "@/assets/used.car.platform.webp";
-import indianFleet from "@/assets/Fleet.management.webp";
-import indianDetailing from "@/assets/Premium.detailing.webp";
-import indianInspection from "@/assets/indian-auction.png";
+import indianDealership from "@/assets/indian-dealership.png";
+import indianHandover from "@/assets/automotive dealership.jpg";
+import indianAuction from "@/assets/used car platform.jpg";
+import indianFleet from "@/assets/Fleet Management.png";
+import indianDetailing from "@/assets/Premium Detailing.png";
+import indianInspection from "@/assets/indian-inspection.png";
 import indianStudio from "@/assets/car-photo-studio.jpg";
 import aiPoweredBg from "@/assets/AI-poweredbg.webp";
 import insuranceInspectionWebp from "@/assets/Insurance&inspection.webp";
@@ -150,18 +150,20 @@ const UseCasesPage = () => {
       {/* Use Cases List - Images Only */}
       <section className="pb-24">
         <div className="container px-4 md:px-6 mx-auto">
-          <div className="space-y-8 md:space-y-10 lg:space-y-12">
+          <div className="space-y-8 md:space-y-12">
             {useCases.map((useCase, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center"
+                className="relative group overflow-hidden rounded-[2rem] md:rounded-[2.5rem] shadow-lg hover:shadow-2xl transition-all duration-500 bg-background"
               >
-                {/* Clean Image Display */}
-                <img
-                  src={useCase.image}
-                  alt={useCase.title}
-                  className="max-w-6xl w-full h-[400px] md:h-[500px] lg:h-[600px] object-contain rounded-lg"
-                />
+                {/* Full Width Centered Image */}
+                <div className="relative w-full flex items-center justify-center">
+                  <img
+                    src={useCase.image}
+                    alt={useCase.title}
+                    className="w-full h-auto max-w-full block transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                </div>
               </div>
             ))}
           </div>

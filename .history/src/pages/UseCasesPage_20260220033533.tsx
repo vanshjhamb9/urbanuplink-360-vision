@@ -150,18 +150,20 @@ const UseCasesPage = () => {
       {/* Use Cases List - Images Only */}
       <section className="pb-24">
         <div className="container px-4 md:px-6 mx-auto">
-          <div className="space-y-8 md:space-y-10 lg:space-y-12">
+          <div className="space-y-8 md:space-y-12">
             {useCases.map((useCase, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center"
+                className="relative group overflow-hidden rounded-[2rem] md:rounded-[2.5rem] shadow-lg hover:shadow-2xl transition-all duration-500 bg-background"
               >
-                {/* Clean Image Display */}
-                <img
-                  src={useCase.image}
-                  alt={useCase.title}
-                  className="max-w-6xl w-full h-[400px] md:h-[500px] lg:h-[600px] object-contain rounded-lg"
-                />
+                {/* Full Width Centered Image */}
+                <div className="relative w-full flex items-center justify-center">
+                  <img
+                    src={useCase.image}
+                    alt={useCase.title}
+                    className="w-full h-auto max-w-full block transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                </div>
               </div>
             ))}
           </div>

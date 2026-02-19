@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Clock, Target, Zap } from "lucide-react";
-import tataHarrierOriginal from "@/assets/hyundai-creta-2026-01.jpg";
-import carNoBg from "@/assets/hyundai-creta-2026-01-removebg-preview.png";
+import tataHarrierOriginal from "@/assets/2023-Tata-Harrier-facelift-dark-edition-front-.jpg";
+import carNoBg from "@/assets/bg-removed.png";
 
 // Using Tata Harrier - original with background and transparent PNG version
 const carImageOriginal = tataHarrierOriginal;

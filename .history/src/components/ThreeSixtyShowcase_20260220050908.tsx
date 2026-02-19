@@ -139,13 +139,11 @@ const ThreeSixtyShowcase = () => {
     const angleChange = (deltaX / containerRef.current.offsetWidth) * 360 * sensitivity;
     const newAngle = (rotationAngle + angleChange) % 360;
     const normalizedAngle = newAngle < 0 ? newAngle + 360 : newAngle;
+    setRotationAngle(normalizedAngle);
     
-    // Calculate image index instantly based on angle
+    // Smooth image index calculation with interpolation
     const exactIndex = (normalizedAngle / 360) * totalAngles;
     const newIndex = Math.floor(exactIndex) % totalAngles;
-    
-    // Update both angle and image index immediately
-    setRotationAngle(normalizedAngle);
     setCurrentImageIndex(newIndex);
     setDragStartX(e.clientX);
     
@@ -177,13 +175,10 @@ const ThreeSixtyShowcase = () => {
     const angleChange = (deltaX / containerRef.current.offsetWidth) * 360 * sensitivity;
     const newAngle = (rotationAngle + angleChange) % 360;
     const normalizedAngle = newAngle < 0 ? newAngle + 360 : newAngle;
+    setRotationAngle(normalizedAngle);
     
-    // Calculate image index instantly based on angle
     const exactIndex = (normalizedAngle / 360) * totalAngles;
     const newIndex = Math.floor(exactIndex) % totalAngles;
-    
-    // Update both angle and image index immediately
-    setRotationAngle(normalizedAngle);
     setCurrentImageIndex(newIndex);
     setDragStartX(e.touches[0].clientX);
     setVelocity(angleChange);
@@ -253,9 +248,12 @@ const ThreeSixtyShowcase = () => {
                   setVelocity(0);
                 }}
               >
-                {/* 360 Images - Instant switch for real rotation effect */}
+                {/* 360 Images with smooth transitions */}
                 <div className="relative w-full aspect-[4/3] flex items-center justify-center mt-[4rem]">
                   {car360Images.map((img, index) => {
+                    const exactIndex = (rotationAngle / 360) * totalAngles;
+                    const distance = Math.abs(index - exactIndex);
+                    const opacity = distance < 1 ? 1 - distance * 0.3 : 0;
                     const isActive = index === currentImageIndex;
                     
                     return (
@@ -263,9 +261,12 @@ const ThreeSixtyShowcase = () => {
                         key={index}
                         src={img}
                         alt={`Angle ${index * 11}`}
-                        className={`absolute w-full h-full object-contain drop-shadow-2xl ${
-                          isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                        className={`absolute w-full h-full object-contain will-change-opacity drop-shadow-2xl transition-opacity duration-100 ease-out ${
+                          isActive ? "opacity-100 z-10" : "opacity-0 z-0"
                         }`}
+                        style={{
+                          opacity: isActive ? Math.max(opacity, 0.7) : 0,
+                        }}
                       />
                     );
                   })}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Check, Camera, Eraser, Image } from "lucide-react";
 import tataHarrierOriginal from "@/assets/maruti-grand-vitara.png";
-import carNoBg from "@/assets/maruti-grand-vitara-removebg-preview.png";
+import carNoBg from "@/assets/grand-vitara-removebg-preview.png";
 
 // Using Tata Harrier - original with background and transparent PNG version
 const carImageOriginal = tataHarrierOriginal;

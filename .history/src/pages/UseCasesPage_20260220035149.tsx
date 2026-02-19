@@ -160,7 +160,7 @@ const UseCasesPage = () => {
                 <img
                   src={useCase.image}
                   alt={useCase.title}
-                  className="max-w-6xl w-full h-[400px] md:h-[500px] lg:h-[600px] object-contain rounded-lg"
+                  className="max-w-4xl w-full h-[250px] md:h-[300px] lg:h-[350px] object-contain rounded-lg"
                 />
               </div>
             ))}

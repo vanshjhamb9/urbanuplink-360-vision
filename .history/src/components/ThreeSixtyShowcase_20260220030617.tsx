@@ -2,40 +2,17 @@ import { useState, useEffect, useRef } from "react";
 import { Camera, Eraser, Image, Shield, Sparkles, Play, Pause, RotateCcw, Maximize2, Box, Calendar, Gauge, Fuel, MapPin, Heart, Share2, CheckCircle2 } from "lucide-react";
 
 // 360° car images - All angles with background removed
-import car360_1 from "@/assets/bgCreta/creta1.avif";
-import car360_2 from "@/assets/bgCreta/creta2.avif";
-import car360_3 from "@/assets/bgCreta/creta3.avif";
-import car360_4 from "@/assets/bgCreta/creta4.avif";
-import car360_5 from "@/assets/bgCreta/creta5.avif";
-import car360_6 from "@/assets/bgCreta/creta6.avif";
-import car360_7 from "@/assets/bgCreta/creta7.avif";
-import car360_8 from "@/assets/bgCreta/creta8.avif";
-import car360_9 from "@/assets/bgCreta/creta9.avif";
-import car360_10 from "@/assets/bgCreta/creta10.avif";
-import car360_11 from "@/assets/bgCreta/creta11.avif";
-import car360_12 from "@/assets/bgCreta/creta12.avif";
-import car360_13 from "@/assets/bgCreta/creta13.avif";
-import car360_14 from "@/assets/bgCreta/creta14.avif";
-import car360_15 from "@/assets/bgCreta/creta15.avif";
-import car360_16 from "@/assets/bgCreta/creta16.avif";
-import car360_17 from "@/assets/bgCreta/creta17.avif";
-import car360_18 from "@/assets/bgCreta/creta18.avif";
-import car360_19 from "@/assets/bgCreta/creta19.avif";
-import car360_20 from "@/assets/bgCreta/creta20.avif";
-import car360_21 from "@/assets/bgCreta/creta21.avif";
-import car360_22 from "@/assets/bgCreta/creta22.avif";
-import car360_23 from "@/assets/bgCreta/creta23.avif";
-import car360_24 from "@/assets/bgCreta/creta24.avif";
-import car360_25 from "@/assets/bgCreta/creta25.avif";
-import car360_26 from "@/assets/bgCreta/creta26.avif";
-import car360_27 from "@/assets/bgCreta/creta27.avif";
-import car360_28 from "@/assets/bgCreta/creta28.avif";
-import car360_29 from "@/assets/bgCreta/creta29.avif";
-import car360_30 from "@/assets/bgCreta/creta30.avif";
-import car360_31 from "@/assets/bgCreta/creta31.avif";
-import car360_32 from "@/assets/bgCreta/creta32.avif";
-import car360_33 from "@/assets/bgCreta/creta33.avif";
-
+import car360_1 from "@/assets/processed_000.png";
+import car360_2 from "@/assets/processed_001.png";
+import car360_3 from "@/assets/processed_002.png";
+import car360_4 from "@/assets/processed_003.png";
+import car360_5 from "@/assets/processed_004.png";
+import car360_6 from "@/assets/processed_005.png";
+import car360_7 from "@/assets/processed_006.png";
+import car360_8 from "@/assets/processed_007.png";
+import car360_9 from "@/assets/processed_008.png";
+import car360_10 from "@/assets/processed_010.png";
+import car360_11 from "@/assets/processed_011.png";
 import carBg360 from "@/assets/Bgimage360.webp";
 import logoImage from "@/assets/2 (2).png";
 
@@ -51,28 +28,6 @@ const car360Images = [
   car360_9,  // 240°
   car360_10, // 270°
   car360_11, // 300°
-  car360_12, // 330°
-  car360_13, // 360°
-  car360_14, // 390°
-  car360_15, // 420°
-  car360_16, // 450°
-  car360_17, // 480°
-  car360_18, // 510°
-  car360_19, // 540°
-  car360_20, // 570°
-  car360_21, // 600°
-  car360_22, // 630°
-  car360_23, // 660°
-  car360_24, // 690°
-  car360_25, // 720°
-  car360_26, // 750°
-  car360_27, // 780°
-  car360_28, // 810°
-  car360_29, // 840°
-  car360_30, // 870°
-  car360_31, // 900°
-  car360_32, // 930°
-  car360_33, // 960°
 ];
 
 const totalAngles = car360Images.length;
@@ -92,109 +47,64 @@ const ThreeSixtyShowcase = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
-  const [velocity, setVelocity] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationFrameRef = useRef<number>();
-  const lastTimeRef = useRef<number>(Date.now());
 
-  // Smooth auto-rotate 360° view
+  // Auto-rotate 360° view
   useEffect(() => {
     if (!isPlaying) return;
-    
-    const animate = () => {
-      const now = Date.now();
-      const deltaTime = now - lastTimeRef.current;
-      lastTimeRef.current = now;
-      
+    const rotationInterval = setInterval(() => {
       setRotationAngle((prev) => {
-        const newAngle = (prev + 0.3) % 360;
+        const newAngle = (prev + 0.5) % 360;
         const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
         setCurrentImageIndex(newIndex);
         return newAngle;
       });
-      
-      animationFrameRef.current = requestAnimationFrame(animate);
-    };
-    
-    animationFrameRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
+    }, 30);
+    return () => clearInterval(rotationInterval);
   }, [isPlaying]);
 
-  // Handle drag to rotate with smooth interpolation
+  // Handle drag to rotate
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     setDragStartX(e.clientX);
     setIsPlaying(false);
-    setVelocity(0);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging || !containerRef.current) return;
     const deltaX = e.clientX - dragStartX;
-    const sensitivity = 1.5;
+    const sensitivity = 2;
     const angleChange = (deltaX / containerRef.current.offsetWidth) * 360 * sensitivity;
     const newAngle = (rotationAngle + angleChange) % 360;
-    const normalizedAngle = newAngle < 0 ? newAngle + 360 : newAngle;
-    
-    // Calculate image index instantly based on angle
-    const exactIndex = (normalizedAngle / 360) * totalAngles;
-    const newIndex = Math.floor(exactIndex) % totalAngles;
-    
-    // Update both angle and image index immediately
-    setRotationAngle(normalizedAngle);
+    setRotationAngle(newAngle < 0 ? newAngle + 360 : newAngle);
+    const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
     setCurrentImageIndex(newIndex);
     setDragStartX(e.clientX);
-    
-    // Calculate velocity for momentum
-    setVelocity(angleChange);
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    // Add momentum effect
-    if (Math.abs(velocity) > 0.5) {
-      const momentumAngle = (rotationAngle + velocity * 2) % 360;
-      setRotationAngle(momentumAngle < 0 ? momentumAngle + 360 : momentumAngle);
-    }
-    setVelocity(0);
-  };
-
+  const handleMouseUp = () => setIsDragging(false);
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsDragging(true);
     setDragStartX(e.touches[0].clientX);
     setIsPlaying(false);
-    setVelocity(0);
   };
-
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging || !containerRef.current) return;
     const deltaX = e.touches[0].clientX - dragStartX;
-    const sensitivity = 1.5;
+    const sensitivity = 2;
     const angleChange = (deltaX / containerRef.current.offsetWidth) * 360 * sensitivity;
     const newAngle = (rotationAngle + angleChange) % 360;
-    const normalizedAngle = newAngle < 0 ? newAngle + 360 : newAngle;
-    
-    // Calculate image index instantly based on angle
-    const exactIndex = (normalizedAngle / 360) * totalAngles;
-    const newIndex = Math.floor(exactIndex) % totalAngles;
-    
-    // Update both angle and image index immediately
-    setRotationAngle(normalizedAngle);
+    setRotationAngle(newAngle < 0 ? newAngle + 360 : newAngle);
+    const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
     setCurrentImageIndex(newIndex);
     setDragStartX(e.touches[0].clientX);
-    setVelocity(angleChange);
   };
 
-  // Manual navigation with smooth transitions
+  // Manual navigation
   const handlePrevious = () => {
     setIsPlaying(false);
     setRotationAngle((prev) => {
-      const angleStep = 360 / totalAngles;
-      const newAngle = (prev - angleStep * 3 + 360) % 360;
+      const newAngle = (prev - 30 + 360) % 360;
       const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
       setCurrentImageIndex(newIndex);
       return newAngle;
@@ -204,8 +114,7 @@ const ThreeSixtyShowcase = () => {
   const handleNext = () => {
     setIsPlaying(false);
     setRotationAngle((prev) => {
-      const angleStep = 360 / totalAngles;
-      const newAngle = (prev + angleStep * 3) % 360;
+      const newAngle = (prev + 30) % 360;
       const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
       setCurrentImageIndex(newIndex);
       return newAngle;
@@ -244,31 +153,19 @@ const ThreeSixtyShowcase = () => {
                 onMouseLeave={handleMouseUp}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
-                onTouchEnd={() => {
-                  setIsDragging(false);
-                  if (Math.abs(velocity) > 0.5) {
-                    const momentumAngle = (rotationAngle + velocity * 2) % 360;
-                    setRotationAngle(momentumAngle < 0 ? momentumAngle + 360 : momentumAngle);
-                  }
-                  setVelocity(0);
-                }}
+                onTouchEnd={handleMouseUp}
               >
-                {/* 360 Images - Instant switch for real rotation effect */}
+                {/* 360 Images */}
                 <div className="relative w-full aspect-[4/3] flex items-center justify-center mt-[4rem]">
-                  {car360Images.map((img, index) => {
-                    const isActive = index === currentImageIndex;
-                    
-                    return (
-                      <img
-                        key={index}
-                        src={img}
-                        alt={`Angle ${index * 11}`}
-                        className={`absolute w-full h-full object-contain drop-shadow-2xl ${
-                          isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                  {car360Images.map((img, index) => (
+                    <img
+                      key={index}
+                      src={img}
+                      alt={`Angle ${index * 30}`}
+                      className={`absolute w-full h-full object-contain transition-opacity duration-300 will-change-opacity drop-shadow-2xl ${index === currentImageIndex ? "opacity-100 z-10" : "opacity-0 z-0"
                         }`}
-                      />
-                    );
-                  })}
+                    />
+                  ))}
                   
                   {/* Hotspots Overlay */}
                   {hotspots.map((spot) => (
@@ -358,13 +255,13 @@ const ThreeSixtyShowcase = () => {
                     Featured Listing
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-bold text-slate-900 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">₹18.5L</div>
+                    <div className="text-3xl font-bold text-slate-900 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">₹24.8L</div>
                     <div className="text-xs text-slate-500 font-medium">On-road Mumbai</div>
                   </div>
                </div>
 
-               <h3 className="text-3xl font-bold text-slate-900 mb-1 tracking-tight">2023 Hyundai Creta</h3>
-               <p className="text-slate-500 mb-8 font-medium">SX (O) 1.5 Petrol • CVT</p>
+               <h3 className="text-3xl font-bold text-slate-900 mb-1 tracking-tight">2023 Toyota Innova Crysta</h3>
+               <p className="text-slate-500 mb-8 font-medium">ZX 2.4 Diesel • Automatic</p>
 
                <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
@@ -382,7 +279,7 @@ const ThreeSixtyShowcase = () => {
                      </div>
                      <div>
                         <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Mileage</div>
-                        <div className="font-bold text-slate-800">12,500 km</div>
+                        <div className="font-bold text-slate-800">18,500 km</div>
                      </div>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
@@ -391,7 +288,7 @@ const ThreeSixtyShowcase = () => {
                      </div>
                      <div>
                         <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Fuel</div>
-                        <div className="font-bold text-slate-800">Petrol</div>
+                        <div className="font-bold text-slate-800">Diesel</div>
                      </div>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">

@@ -92,109 +92,64 @@ const ThreeSixtyShowcase = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
-  const [velocity, setVelocity] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationFrameRef = useRef<number>();
-  const lastTimeRef = useRef<number>(Date.now());
 
-  // Smooth auto-rotate 360° view
+  // Auto-rotate 360° view
   useEffect(() => {
     if (!isPlaying) return;
-    
-    const animate = () => {
-      const now = Date.now();
-      const deltaTime = now - lastTimeRef.current;
-      lastTimeRef.current = now;
-      
+    const rotationInterval = setInterval(() => {
       setRotationAngle((prev) => {
-        const newAngle = (prev + 0.3) % 360;
+        const newAngle = (prev + 0.5) % 360;
         const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
         setCurrentImageIndex(newIndex);
         return newAngle;
       });
-      
-      animationFrameRef.current = requestAnimationFrame(animate);
-    };
-    
-    animationFrameRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
+    }, 30);
+    return () => clearInterval(rotationInterval);
   }, [isPlaying]);
 
-  // Handle drag to rotate with smooth interpolation
+  // Handle drag to rotate
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     setDragStartX(e.clientX);
     setIsPlaying(false);
-    setVelocity(0);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging || !containerRef.current) return;
     const deltaX = e.clientX - dragStartX;
-    const sensitivity = 1.5;
+    const sensitivity = 2;
     const angleChange = (deltaX / containerRef.current.offsetWidth) * 360 * sensitivity;
     const newAngle = (rotationAngle + angleChange) % 360;
-    const normalizedAngle = newAngle < 0 ? newAngle + 360 : newAngle;
-    
-    // Calculate image index instantly based on angle
-    const exactIndex = (normalizedAngle / 360) * totalAngles;
-    const newIndex = Math.floor(exactIndex) % totalAngles;
-    
-    // Update both angle and image index immediately
-    setRotationAngle(normalizedAngle);
+    setRotationAngle(newAngle < 0 ? newAngle + 360 : newAngle);
+    const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
     setCurrentImageIndex(newIndex);
     setDragStartX(e.clientX);
-    
-    // Calculate velocity for momentum
-    setVelocity(angleChange);
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    // Add momentum effect
-    if (Math.abs(velocity) > 0.5) {
-      const momentumAngle = (rotationAngle + velocity * 2) % 360;
-      setRotationAngle(momentumAngle < 0 ? momentumAngle + 360 : momentumAngle);
-    }
-    setVelocity(0);
-  };
-
+  const handleMouseUp = () => setIsDragging(false);
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsDragging(true);
     setDragStartX(e.touches[0].clientX);
     setIsPlaying(false);
-    setVelocity(0);
   };
-
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging || !containerRef.current) return;
     const deltaX = e.touches[0].clientX - dragStartX;
-    const sensitivity = 1.5;
+    const sensitivity = 2;
     const angleChange = (deltaX / containerRef.current.offsetWidth) * 360 * sensitivity;
     const newAngle = (rotationAngle + angleChange) % 360;
-    const normalizedAngle = newAngle < 0 ? newAngle + 360 : newAngle;
-    
-    // Calculate image index instantly based on angle
-    const exactIndex = (normalizedAngle / 360) * totalAngles;
-    const newIndex = Math.floor(exactIndex) % totalAngles;
-    
-    // Update both angle and image index immediately
-    setRotationAngle(normalizedAngle);
+    setRotationAngle(newAngle < 0 ? newAngle + 360 : newAngle);
+    const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
     setCurrentImageIndex(newIndex);
     setDragStartX(e.touches[0].clientX);
-    setVelocity(angleChange);
   };
 
-  // Manual navigation with smooth transitions
+  // Manual navigation
   const handlePrevious = () => {
     setIsPlaying(false);
     setRotationAngle((prev) => {
-      const angleStep = 360 / totalAngles;
-      const newAngle = (prev - angleStep * 3 + 360) % 360;
+      const newAngle = (prev - 30 + 360) % 360;
       const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
       setCurrentImageIndex(newIndex);
       return newAngle;
@@ -204,8 +159,7 @@ const ThreeSixtyShowcase = () => {
   const handleNext = () => {
     setIsPlaying(false);
     setRotationAngle((prev) => {
-      const angleStep = 360 / totalAngles;
-      const newAngle = (prev + angleStep * 3) % 360;
+      const newAngle = (prev + 30) % 360;
       const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
       setCurrentImageIndex(newIndex);
       return newAngle;
@@ -244,31 +198,19 @@ const ThreeSixtyShowcase = () => {
                 onMouseLeave={handleMouseUp}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
-                onTouchEnd={() => {
-                  setIsDragging(false);
-                  if (Math.abs(velocity) > 0.5) {
-                    const momentumAngle = (rotationAngle + velocity * 2) % 360;
-                    setRotationAngle(momentumAngle < 0 ? momentumAngle + 360 : momentumAngle);
-                  }
-                  setVelocity(0);
-                }}
+                onTouchEnd={handleMouseUp}
               >
-                {/* 360 Images - Instant switch for real rotation effect */}
+                {/* 360 Images */}
                 <div className="relative w-full aspect-[4/3] flex items-center justify-center mt-[4rem]">
-                  {car360Images.map((img, index) => {
-                    const isActive = index === currentImageIndex;
-                    
-                    return (
-                      <img
-                        key={index}
-                        src={img}
-                        alt={`Angle ${index * 11}`}
-                        className={`absolute w-full h-full object-contain drop-shadow-2xl ${
-                          isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                  {car360Images.map((img, index) => (
+                    <img
+                      key={index}
+                      src={img}
+                      alt={`Angle ${index * 30}`}
+                      className={`absolute w-full h-full object-contain transition-opacity duration-300 will-change-opacity drop-shadow-2xl ${index === currentImageIndex ? "opacity-100 z-10" : "opacity-0 z-0"
                         }`}
-                      />
-                    );
-                  })}
+                    />
+                  ))}
                   
                   {/* Hotspots Overlay */}
                   {hotspots.map((spot) => (
@@ -358,13 +300,13 @@ const ThreeSixtyShowcase = () => {
                     Featured Listing
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-bold text-slate-900 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">₹18.5L</div>
+                    <div className="text-3xl font-bold text-slate-900 bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">₹24.8L</div>
                     <div className="text-xs text-slate-500 font-medium">On-road Mumbai</div>
                   </div>
                </div>
 
-               <h3 className="text-3xl font-bold text-slate-900 mb-1 tracking-tight">2023 Hyundai Creta</h3>
-               <p className="text-slate-500 mb-8 font-medium">SX (O) 1.5 Petrol • CVT</p>
+               <h3 className="text-3xl font-bold text-slate-900 mb-1 tracking-tight">2023 Toyota Innova Crysta</h3>
+               <p className="text-slate-500 mb-8 font-medium">ZX 2.4 Diesel • Automatic</p>
 
                <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
@@ -382,7 +324,7 @@ const ThreeSixtyShowcase = () => {
                      </div>
                      <div>
                         <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Mileage</div>
-                        <div className="font-bold text-slate-800">12,500 km</div>
+                        <div className="font-bold text-slate-800">18,500 km</div>
                      </div>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
@@ -391,7 +333,7 @@ const ThreeSixtyShowcase = () => {
                      </div>
                      <div>
                         <div className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Fuel</div>
-                        <div className="font-bold text-slate-800">Petrol</div>
+                        <div className="font-bold text-slate-800">Diesel</div>
                      </div>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">
