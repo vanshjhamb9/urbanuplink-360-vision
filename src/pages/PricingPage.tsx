@@ -105,6 +105,27 @@ const plans = [
 
 // 2. Bg removal  branding and replacement -- 12/image(early bird ) , Standard -- 15/image 
 
+const imageServicePlans = [
+  {
+    name: "Bulk BG Removal Package",
+    description:
+      "Designed for dealerships and marketplaces handling large photo volumes. We remove distracting backgrounds quickly and consistently so every listing looks clean, professional, and marketplace-ready while reducing your edit turnaround time.",
+    earlyBird: "8",
+    standard: "12",
+    unit: "image",
+    cta: "Get Started",
+  },
+  {
+    name: "BG Removal + Branding + Replacement",
+    description:
+      "Complete post-processing for premium listing visuals. Along with precise background removal and replacement, we apply your brand look for a uniform catalog experience that improves buyer trust and helps your inventory stand out.",
+    earlyBird: "12",
+    standard: "15",
+    unit: "image",
+    cta: "Get Started",
+  },
+];
+
 
 
 const faqs = [
@@ -275,6 +296,58 @@ const PricingPage = () => {
                 </CardFooter>
               </Card>
             ))}
+          </div>
+
+          {/* Image Services Cards */}
+          <div className="mt-14">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl md:text-3xl font-bold">
+                Image Processing Services
+              </h3>
+              <p className="text-muted-foreground mt-2">
+                Flexible per-image pricing for background-focused workflows.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {imageServicePlans.map((service, index) => (
+                <Card
+                  key={index}
+                  className="border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 bg-card"
+                >
+                  <CardHeader>
+                    <CardTitle className="text-xl">{service.name}</CardTitle>
+                    <CardDescription>{service.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="inline-block bg-slate-900 text-white text-xs font-bold px-2 py-1 rounded shadow-sm">
+                        Early bird offer
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl font-bold text-accent">₹</span>
+                        <span className="text-4xl font-bold text-accent">
+                          {service.earlyBird}
+                        </span>
+                        <span className="text-muted-foreground">
+                          /{service.unit}
+                        </span>
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        Standard:{" "}
+                        <span className="line-through decoration-red-500/50">
+                          ₹{service.standard}/{service.unit}
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <Button className="w-full" variant="outline" asChild>
+                      <a href="/contact">{service.cta}</a>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
           </div>
 
           {/* Enterprise Contact Section */}
