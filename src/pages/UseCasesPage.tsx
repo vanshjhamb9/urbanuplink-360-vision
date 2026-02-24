@@ -12,15 +12,15 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import indianDealership from "@/assets/dealership.jpg";
-import indianHandover from "@/assets/automotive.dealership.webp";
-import indianAuction from "@/assets/used.car.platform.webp";
-import indianFleet from "@/assets/Fleet.management.webp";
+import indianDealership from "@/assets/business-usecases.webp";
+import indianHandover from "@/assets/automotive.dealership1.webp";
+import indianAuction from "@/assets/used.car.platform1.webp";
+import indianFleet from "@/assets/Fleet.management1.webp";
 import indianDetailing from "@/assets/Premium.detailing.webp";
 import indianInspection from "@/assets/indian-auction.png";
 import indianStudio from "@/assets/car-photo-studio.jpg";
-import aiPoweredBg from "@/assets/AI-poweredbg.webp";
-import insuranceInspectionWebp from "@/assets/Insurance&inspection.webp";
+import aiPoweredBg from "@/assets/AI-poweredbg1.webp";
+import insuranceInspectionWebp from "@/assets/Insurance&inspection1.webp";
 
 const useCases = [
   {
@@ -154,14 +154,16 @@ const UseCasesPage = () => {
             {useCases.map((useCase, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center"
+                className="w-full flex items-center justify-center"
               >
-                {/* Clean Image Display */}
-                <img
-                  src={useCase.image}
-                  alt={useCase.title}
-                  className="max-w-6xl w-full h-[400px] md:h-[500px] lg:h-[600px] object-contain rounded-lg"
-                />
+                {/* Image Display with Cover Effect - Matched to Content Width */}
+                <div className="relative w-full max-w-5xl overflow-hidden rounded-lg md:rounded-xl lg:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group">
+                  <img
+                    src={useCase.image}
+                    alt={useCase.title}
+                    className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -171,31 +173,15 @@ const UseCasesPage = () => {
       {/* Featured Section */}
       <section className="py-24 bg-muted/30">
         <div className="container px-4 md:px-6 mx-auto">
-          <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl isolate">
-            <img
-              src={indianDealership}
-              alt="Modern dealership"
-              className="absolute inset-0 w-full h-full object-cover -z-10 brightness-[0.4]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-accent/80 mix-blend-multiply -z-10" />
-
-            <div className="p-12 md:p-24 text-center max-w-4xl mx-auto">
-              <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Do not wish to restrict to Indian audience alone 
-              </h3>
-              <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-                The industry standard for automotive 360° imaging.
-                transformative results, guaranteed.
-              </p>
-              <Button
-                size="xl"
-                className="bg-white text-primary hover:bg-white/90 border-0 shadow-lg font-bold text-lg px-10"
-                asChild
-              >
-                <a href="/contact">Get Started Today</a>
-              </Button>
+          <a href="/contact" className="block cursor-pointer group">
+            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-3xl hover:scale-[1.02]">
+              <img
+                src={indianDealership}
+                alt="Modern dealership"
+                className="w-full h-auto object-cover"
+              />
             </div>
-          </div>
+          </a>
         </div>
       </section>
 

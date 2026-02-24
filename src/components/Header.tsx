@@ -36,7 +36,7 @@ const Header = () => {
                     filter: "brightness(1.1) contrast(1.2)",
                   }}
                 />
-                <span className={`font-display -ml-[2rem] font-bold text-xl md:text-2xl tracking-tight transition-colors duration-300 ${isScrolled ? "text-slate-800" : "text-white drop-shadow-md"}`}>
+                <span className={`font-display -ml-[2rem] font-bold text-xl md:text-2xl tracking-tight transition-colors duration-300 ${isScrolled ? "text-slate-800" : "text-slate-800 drop-shadow-md"}`}>
                   Urban Uplink
                 </span>
               </a>
