@@ -35,9 +35,9 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-background pt-20 md:pt-28 pb-8 md:pb-12">
+    <section className="relative w-full overflow-hidden bg-background pt-20 md:pt-20 pb-8 md:pb-12">
       {/* DESKTOP: Full Screen Image Carousel - Starts below header */}
-      <div className="hidden lg:block relative w-full h-[calc(100vh-7rem-3rem)]">
+      <div className="hidden lg:block relative w-full h-[calc(100vh-4rem-2rem)]">
         {heroImages.map((img, index) => (
           <div
             key={index}

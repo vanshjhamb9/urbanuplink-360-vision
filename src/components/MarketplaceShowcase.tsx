@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Play, ChevronLeft, ChevronRight, MapPin, Calendar, Fuel, Gauge, Eye, Heart, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import tataHarrier from "@/assets/2023-Tata-Harrier-facelift-dark-edition-front-.jpg";
-import sierraExterior from "@/assets/sierra-exterior.jpg";
-import sierraInterior from "@/assets/sierra-interior.jpg";
-import bgRemoved from "@/assets/bg-removed.png";
+import tataHarrier from "@/assets/slavia3.jpg";
+import sierraExterior from "@/assets/slavia2.avif";
+import sierraInterior from "@/assets/slavia4.avif";
+import bgRemoved from "@/assets/slavia5.avif";
 
 const carImages = [
   { src: tataHarrier, angle: "Front View", label: "Front" },
@@ -17,42 +17,42 @@ const carImages = [
 const carSpecs = [
   { icon: Calendar, label: "Year", value: "2024" },
   { icon: Gauge, label: "Mileage", value: "8,500 km" },
-  { icon: Fuel, label: "Fuel", value: "Diesel" },
+  { icon: Fuel, label: "Fuel", value: "Petrol" },
   { icon: MapPin, label: "Location", value: "Mumbai, MH" },
 ];
 
 const hotspotsByAngle = [
-  // Front View
+  // Front View - Skoda Slavia
   [
-    { x: 18, y: 45, label: "Sequential DRLs", description: "Signature connected LED DRLs" },
-    { x: 50, y: 52, label: "Parametric Grille", description: "Dark chrome accent grille with radar" },
-    { x: 82, y: 45, label: "LED Projectors", description: "Vertically stacked headlamps" },
-    { x: 50, y: 80, label: "ADAS Radar", description: "Level 2 ADAS Sensor Module" },
-    { x: 15, y: 75, label: "LED Fog Lamps", description: "Cornering function enabled" },
+    { x: 50, y: 40, label: "Skoda Emblem", description: "Monte Carlo badge on hood" },
+    { x: 25, y: 50, label: "Side Indicator", description: "Front fender indicator light" },
+    { x: 20, y: 75, label: "Fog Lamp Housing", description: "LED fog lamp with cornering function" },
+    { x: 15, y: 45, label: "Side Mirror", description: "Electrically adjustable ORVM" },
+    { x: 30, y: 70, label: "17\" Alloy Wheels", description: "Diamond-cut alloy wheels" },
   ],
-  // Side View
+  // Side View - Skoda Slavia
   [
-    { x: 28, y: 65, label: "19\" Aero Alloys", description: "Diamond cut dark finish alloy wheels" },
-    { x: 50, y: 22, label: "Panoramic Sunroof", description: "Voice assisted panoramic sunroof" },
-    { x: 72, y: 65, label: "Rear Disc Brakes", description: "Standard all-wheel disc brakes" },
-    { x: 55, y: 45, label: "Chrome Handles", description: "Request sensors on both sides" },
-    { x: 50, y: 85, label: "Side Cladding", description: "Muscular wheel arch cladding" },
+    { x: 30, y: 68, label: "17\" Alloy Wheels", description: "Diamond-cut alloy wheels" },
+    { x: 50, y: 25, label: "Panoramic Sunroof", description: "Large panoramic sunroof" },
+    { x: 70, y: 68, label: "Rear Disc Brakes", description: "All-wheel disc brakes" },
+    { x: 52, y: 48, label: "Chrome Door Handles", description: "Body-colored handles with chrome accents" },
+    { x: 50, y: 88, label: "Side Skirts", description: "Sporty side body cladding" },
   ],
-  // Rear View
+  // Rear View - Skoda Slavia
   [
-    { x: 50, y: 40, label: "Connected Tail Lamp", description: "End-to-end LED tail lamp bar" },
-    { x: 50, y: 15, label: "Shark Fin Antenna", description: "Aerodynamic connectivity module" },
-    { x: 50, y: 75, label: "Power Tailgate", description: "Gesture controlled powered tailgate" },
-    { x: 50, y: 30, label: "Rear Wiper", description: "Intermittent rear wiper with washer" },
-    { x: 25, y: 65, label: "Reflectors", description: "Safety reflectors with surround chrome" },
+    { x: 50, y: 38, label: "LED Tail Lamps", description: "Crystal LED tail lamp design" },
+    { x: 50, y: 18, label: "Shark Fin Antenna", description: "Aerodynamic roof antenna" },
+    { x: 50, y: 72, label: "Rear Bumper", description: "Sporty rear diffuser design" },
+    { x: 50, y: 32, label: "Rear Wiper", description: "Intermittent rear wiper" },
+    { x: 28, y: 62, label: "Reflectors", description: "Safety reflectors" },
   ],
-  // Interior
+  // Interior - Skoda Slavia
   [
-    { x: 50, y: 40, label: "12.3\" Infotainment", description: "Cinematic touchscreen with JBL audio" },
-    { x: 70, y: 55, label: "Digital Cluster", description: "10.25\" configurable instrument cluster" },
-    { x: 20, y: 65, label: "Ventilated Seats", description: "Premium Benecke-Kaliko leather upholstery" },
-    { x: 50, y: 65, label: "Wireless Charger", description: "45W fast wireless charging pad" },
-    { x: 50, y: 20, label: "Mood Lighting", description: "Ambient mood lighting on dashboard" },
+    { x: 50, y: 38, label: "10\" Infotainment", description: "Touchscreen with smartphone connectivity" },
+    { x: 68, y: 52, label: "Digital Cluster", description: "10.25\" virtual cockpit display" },
+    { x: 22, y: 62, label: "Premium Seats", description: "Comfortable leather upholstery" },
+    { x: 50, y: 65, label: "Wireless Charger", description: "Fast wireless charging pad" },
+    { x: 50, y: 22, label: "Ambient Lighting", description: "10-color ambient lighting" },
   ]
 ];
 
@@ -196,8 +196,8 @@ const MarketplaceShowcase = () => {
                       <span className="inline-block px-2.5 py-0.5 md:px-3 md:py-1 bg-primary/10 text-primary text-[10px] md:text-xs font-semibold rounded-full mb-2">
                         Featured Listing
                       </span>
-                      <h3 className="text-xl md:text-2xl font-bold">2024 Tata Harrier</h3>
-                      <p className="text-sm md:text-base text-muted-foreground">Dark Edition • Automatic</p>
+                      <h3 className="text-xl md:text-2xl font-bold">2024 Skoda Slavia</h3>
+                      <p className="text-sm md:text-base text-muted-foreground">Monte Carlo • Automatic</p>
                     </div>
                     <div className="text-right">
                       <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">

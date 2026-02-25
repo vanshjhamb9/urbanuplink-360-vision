@@ -93,20 +93,20 @@ const useCases = [
     ],
     image: insuranceInspectionWebp,
   },
-  {
-    icon: Camera,
-    title: "Car Photography Studios",
-    description:
-      "Expand your service offerings with cutting-edge 360° imaging technology.",
-    stats: "5x service value",
-    benefits: [
-      "New revenue stream",
-      "Premium service offering",
-      "Faster shoot-to-delivery",
-      "Client retention increase",
-    ],
-    image: indianStudio,
-  },
+  // {
+  //   icon: Camera,
+  //   title: "Car Photography Studios",
+  //   description:
+  //     "Expand your service offerings with cutting-edge 360° imaging technology.",
+  //   stats: "5x service value",
+  //   benefits: [
+  //     "New revenue stream",
+  //     "Premium service offering",
+  //     "Faster shoot-to-delivery",
+  //     "Client retention increase",
+  //   ],
+  //   image: indianStudio,
+  // },
   {
     icon: Sparkles,
     title: "AI-Powered Background Studio",
