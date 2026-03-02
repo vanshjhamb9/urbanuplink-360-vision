@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { MessageCircle, Globe, Instagram, Facebook, Smartphone, TrendingUp, Users, Eye } from "lucide-react";
-import heroImage from "@/assets/hero-car.jpg";
+// Import different images for each use case
+import whatsappImage from "@/assets/image (3).webp";
+import websiteImage from "@/assets/image (4).webp";
+import instagramImage from "@/assets/image (5).webp";
+import facebookImage from "@/assets/image (2).webp";
 
 const useCases = [
   {
@@ -10,6 +14,8 @@ const useCases = [
     description: "Share stunning car videos on WhatsApp Status for maximum reach",
     color: "from-green-500 to-green-600",
     mockup: "phone",
+    image: whatsappImage,
+    imageMobile: whatsappImage, // Can use different mobile-optimized image
     stats: { reach: "3x", engagement: "85%" },
   },
   {
@@ -19,6 +25,8 @@ const useCases = [
     description: "Embed interactive 360° viewers directly on your website",
     color: "from-blue-500 to-blue-600",
     mockup: "desktop",
+    image: websiteImage,
+    imageMobile: websiteImage,
     stats: { reach: "5x", engagement: "92%" },
   },
   {
@@ -28,6 +36,8 @@ const useCases = [
     description: "Create scroll-stopping reels and stories for Instagram",
     color: "from-pink-500 to-purple-600",
     mockup: "phone",
+    image: instagramImage,
+    imageMobile: instagramImage,
     stats: { reach: "4x", engagement: "78%" },
   },
   {
@@ -37,6 +47,8 @@ const useCases = [
     description: "Stand out on Facebook Marketplace with professional imagery",
     color: "from-blue-600 to-blue-700",
     mockup: "desktop",
+    image: facebookImage,
+    imageMobile: facebookImage,
     stats: { reach: "2.5x", engagement: "68%" },
   },
 ];
@@ -112,19 +124,27 @@ const UseCaseScenarios = () => {
 
           <div className="relative w-full order-1 lg:order-2">
             {currentCase.mockup === "phone" ? (
-              <div className="relative mx-auto w-72">
-                <div className="bg-foreground rounded-[3rem] p-3 shadow-2xl">
+              <div className="relative mx-auto w-full max-w-[280px] md:max-w-[320px] lg:max-w-[360px]">
+                <div className="bg-foreground rounded-[3rem] p-2 md:p-3 shadow-2xl">
                   <div className="bg-background rounded-[2.5rem] overflow-hidden">
-                    <div className="h-8 bg-muted flex items-center justify-center">
-                      <div className="w-20 h-5 bg-foreground rounded-full" />
+                    <div className="h-6 md:h-8 bg-muted flex items-center justify-center">
+                      <div className="w-16 md:w-20 h-4 md:h-5 bg-foreground rounded-full" />
                     </div>
-                    <div className="aspect-[9/16] relative">
-                      <img
-                        src={heroImage}
-                        alt="Mobile preview"
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
+                    <div className="aspect-[9/16] relative bg-gradient-to-br from-slate-100 to-slate-200">
+                      <picture>
+                        <source
+                          media="(max-width: 640px)"
+                          srcSet={currentCase.imageMobile || currentCase.image}
+                        />
+                        <img
+                          src={currentCase.image}
+                          alt={`${currentCase.title} mobile preview`}
+                          className="w-full h-full object-contain object-center"
+                          loading="lazy"
+                          sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 360px"
+                        />
+                      </picture>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
 
                       <div className="absolute top-4 left-4 right-4 flex items-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary to-accent" />
@@ -158,17 +178,17 @@ const UseCaseScenarios = () => {
                 </div>
               </div>
             ) : (
-              <div className="relative mx-auto max-w-lg">
-                <div className="bg-foreground rounded-xl p-2 shadow-2xl">
-                  <div className="bg-muted rounded-t-lg h-8 flex items-center px-4 gap-2">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-500" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                      <div className="w-3 h-3 rounded-full bg-green-500" />
+              <div className="relative mx-auto w-full max-w-md md:max-w-lg lg:max-w-xl">
+                <div className="bg-foreground rounded-xl p-1.5 md:p-2 shadow-2xl">
+                  <div className="bg-muted rounded-t-lg h-6 md:h-8 flex items-center px-3 md:px-4 gap-2">
+                    <div className="flex gap-1 md:gap-1.5">
+                      <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-red-500" />
+                      <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-yellow-500" />
+                      <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-green-500" />
                     </div>
-                    <div className="flex-1 mx-4">
-                      <div className="bg-background rounded-full h-5 flex items-center px-3">
-                        <span className="text-xs text-muted-foreground truncate">
+                    <div className="flex-1 mx-2 md:mx-4">
+                      <div className="bg-background rounded-full h-4 md:h-5 flex items-center px-2 md:px-3">
+                        <span className="text-[10px] md:text-xs text-muted-foreground truncate">
                           www.yourdealership.com/inventory/360-view
                         </span>
                       </div>
@@ -176,11 +196,19 @@ const UseCaseScenarios = () => {
                   </div>
                   <div className="bg-background rounded-b-lg overflow-hidden">
                     <div className="aspect-video relative">
-                      <img
-                        src={heroImage}
-                        alt="Desktop preview"
-                        className="w-full h-full object-cover"
-                      />
+                      <picture>
+                        <source
+                          media="(max-width: 768px)"
+                          srcSet={currentCase.imageMobile || currentCase.image}
+                        />
+                        <img
+                          src={currentCase.image}
+                          alt={`${currentCase.title} desktop preview`}
+                          className="w-full h-full object-cover object-center"
+                          loading="lazy"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 512px, 640px"
+                        />
+                      </picture>
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="w-20 h-20 rounded-full bg-black/50 backdrop-blur flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
                           <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center">

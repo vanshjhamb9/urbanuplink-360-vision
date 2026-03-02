@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { Clock, Target, Zap } from "lucide-react";
 import tataHarrierOriginal from "@/assets/hyundai-creta-2026-01.jpg";
 import carNoBg from "@/assets/hyundai-creta-2026-01-removebg-preview.png";
+import backdropImage from "@/assets/backdrop.webp";
+import logoImage from "@/assets/2 (2).png";
 
 // Using Tata Harrier - original with background and transparent PNG version
 const carImageOriginal = tataHarrierOriginal;
@@ -84,12 +86,12 @@ const   BackgroundRemovalShowcase = () => {
             onMouseDown={() => setIsDragging(true)}
             onTouchStart={() => setIsDragging(true)}
           >
-            {/* BEFORE - Original with dealership background (NOW BOTTOM LAYER) */}
+            {/* LEFT SIDE - Car WITH background (BOTTOM LAYER) */}
             <div className="absolute inset-0">
               <div className="absolute inset-0 flex items-center justify-center">
                 <img
                   src={carImageOriginal}
-                  alt="Original car with background"
+                  alt="Car with background"
                   className="w-full h-full object-contain"
                   style={{
                     maxWidth: '100%',
@@ -97,40 +99,41 @@ const   BackgroundRemovalShowcase = () => {
                   }}
                 />
               </div>
-              {/* Subtle overlay to emphasize "messy" background */}
+              {/* Subtle overlay */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/5" />
             </div>
 
-            {/* AFTER - Clean studio background with isolated car (NOW TOP LAYER with CLIP) */}
+            {/* RIGHT SIDE - Car WITHOUT background (TOP LAYER with CLIP) */}
             <div
               className="absolute inset-0"
-              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+              style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
             >
-              {/* Checkerboard pattern to show transparency concept */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage: `
-                    linear-gradient(45deg, #e8e8e8 25%, transparent 25%),
-                    linear-gradient(-45deg, #e8e8e8 25%, transparent 25%),
-                    linear-gradient(45deg, transparent 75%, #e8e8e8 75%),
-                    linear-gradient(-45deg, transparent 75%, #e8e8e8 75%)
-                  `,
-                  backgroundSize: '24px 24px',
-                  backgroundPosition: '0 0, 0 12px, 12px -12px, -12px 0px',
-                  backgroundColor: '#f5f5f5'
-                }}
-              />
-              {/* Clean studio gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-50/90 via-gray-100/80 to-slate-200/90" />
+              {/* Showroom Background */}
+              <div className="absolute inset-0">
+                <img
+                  src={backdropImage}
+                  alt="Showroom background"
+                  className="w-full h-full object-cover"
+                />
+                {/* Subtle overlay for better car visibility */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20" />
+              </div>
 
-              {/* Car with background removed - Using transparent PNG for perfect edge cutting */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                {/* Using transparent PNG for perfect background removal - same size and position as original */}
+              {/* Centered Logo behind car */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+                <img
+                  src={logoImage}
+                  alt="Urban Uplink Logo"
+                  className="w-48 md:w-64 lg:w-80 h-auto object-contain opacity-30"
+                />
+              </div>
+
+              {/* Car with background removed */}
+              <div className="absolute inset-0 flex items-center justify-center z-10">
                 <div className="relative w-full h-full flex items-center justify-center">
                   <img
                     src={carImageWithNoBg}
-                    alt="Car with background removed"
+                    alt="Car without background"
                     className="w-full h-full object-contain"
                     style={{
                       maxWidth: '100%',
@@ -138,14 +141,12 @@ const   BackgroundRemovalShowcase = () => {
                       filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
                     }}
                   />
-                  {/* AI Plate Masking */}
-                 
                 </div>
               </div>
 
               {/* Subtle floor shadow */}
               <div
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-16"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-16 z-5"
                 style={{
                   background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, transparent 70%)',
                 }}
@@ -170,11 +171,11 @@ const   BackgroundRemovalShowcase = () => {
             </div>
 
             {/* Labels */}
-             <div className="absolute top-4 right-4 px-4 py-2 bg-gradient-to-r from-primary to-accent rounded-full text-white text-sm font-semibold flex items-center gap-2">
+             <div className="absolute top-4 left-4 px-4 py-2 bg-gradient-to-r from-primary to-accent rounded-full text-white text-sm font-semibold flex items-center gap-2 z-30">
               <div className="w-2 h-2 rounded-full bg-white" />
               Before
             </div>
-            <div className="absolute top-4 left-4 px-4 py-2 bg-black/70 backdrop-blur-sm rounded-full text-white text-sm font-semibold flex items-center gap-2">
+            <div className="absolute top-4 right-4 px-4 py-2 bg-black/70 backdrop-blur-sm rounded-full text-white text-sm font-semibold flex items-center gap-2 z-30">
               <div className="w-2 h-2 rounded-full bg-red-400" />
               After
             </div>

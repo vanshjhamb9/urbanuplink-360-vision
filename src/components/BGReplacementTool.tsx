@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { Check, Camera, Eraser, Image } from "lucide-react";
 import tataHarrierOriginal from "@/assets/maruti-grand-vitara.png";
 import carNoBg from "@/assets/maruti-grand-vitara-removebg-preview.png";
+import backdropImage from "@/assets/backdrop.webp";
+import bgImageCar from "@/assets/bgimage_car.webp";
+import bgImage360 from "@/assets/Bgimage360.webp";
+import logoImage from "@/assets/2 (2).png";
 
 // Using Tata Harrier - original with background and transparent PNG version
 const carImageOriginal = tataHarrierOriginal;
@@ -29,10 +33,34 @@ const stages = [
 ];
 
 const backgrounds = [
-  { id: 1, name: "Studio White", gradient: "from-gray-50 via-white to-gray-100", textDark: true },
-  { id: 2, name: "Showroom", gradient: "from-slate-300 via-slate-200 to-slate-100", textDark: true },
-  { id: 3, name: "Outdoor", gradient: "from-sky-200 via-blue-100 to-emerald-100", textDark: true },
-  { id: 4, name: "Night City", gradient: "from-slate-900 via-purple-900 to-indigo-900", textDark: false },
+  { 
+    id: 1, 
+    name: "Studio White", 
+    image: backdropImage,
+    overlay: "from-white/20 via-transparent to-white/20",
+    textDark: true 
+  },
+  { 
+    id: 2, 
+    name: "Showroom", 
+    image: bgImageCar,
+    overlay: "from-slate-200/20 via-transparent to-slate-200/20",
+    textDark: true 
+  },
+  { 
+    id: 3, 
+    name: "360 View", 
+    image: bgImage360,
+    overlay: "from-sky-200/20 via-transparent to-emerald-100/20",
+    textDark: true 
+  },
+  { 
+    id: 4, 
+    name: "Night City", 
+    image: backdropImage,
+    overlay: "from-slate-900/50 via-purple-900/30 to-indigo-900/50",
+    textDark: false 
+  },
 ];
 
 const BGReplacementTool = () => {
@@ -187,19 +215,38 @@ const BGReplacementTool = () => {
                 </div>
               </div>
 
-              {/* Stage 3: Background Replaced with selected gradient */}
+              {/* Stage 3: Background Replaced with showroom backdrop */}
               <div
                 className={`absolute inset-0 transition-all duration-700 ${currentStage === 3 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                   }`}
               >
-                {/* Selected background gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${backgrounds[selectedBg].gradient}`} />
+                {/* Showroom backdrop image */}
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src={backgrounds[selectedBg].image}
+                    alt="Showroom background"
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Overlay effect based on selected background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${backgrounds[selectedBg].overlay}`} />
+                  {/* Subtle lighting effect */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/20" />
+                </div>
 
-                {/* Subtle lighting effect */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/20" />
+                {/* Large Logo behind car - extends beyond car boundaries */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[5]">
+                  <img
+                    src={logoImage}
+                    alt="Urban Uplink Logo"
+                    className="w-[600px] md:w-[800px] lg:w-[1000px] h-auto object-contain opacity-35"
+                    style={{
+                      filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.1))",
+                    }}
+                  />
+                </div>
 
                 {/* Car with background removed on new background - Using transparent PNG for perfect edge cutting */}
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center justify-center z-10">
                   {/* Using transparent PNG for perfect background removal - same size and position as original */}
                   <img
                     src={carImageWithNoBg}
@@ -213,16 +260,28 @@ const BGReplacementTool = () => {
                   />
                 </div>
 
+                {/* Logo in top area above car */}
+                <div className="absolute top-8 left-1/2 -translate-x-1/2 pointer-events-none z-[15]">
+                  <img
+                    src={logoImage}
+                    alt="Urban Uplink Logo"
+                    className="w-32 md:w-40 lg:w-48 h-auto object-contain opacity-40"
+                    style={{
+                      filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.15))",
+                    }}
+                  />
+                </div>
+
                 {/* Floor shadow/reflection */}
                 <div
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-20"
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-20 z-[8]"
                   style={{
                     background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, transparent 70%)',
                   }}
                 />
 
                 {/* Replaced indicator badge */}
-                <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 ${backgrounds[selectedBg].textDark ? 'bg-black/70 text-white' : 'bg-white/90 text-black'
+                <div className={`absolute top-4 right-4 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 z-20 ${backgrounds[selectedBg].textDark ? 'bg-black/70 text-white' : 'bg-white/90 text-black'
                   }`}>
                   <Image className="w-3 h-3" />
                   {backgrounds[selectedBg].name.toUpperCase()}
@@ -277,14 +336,30 @@ const BGReplacementTool = () => {
                         setCurrentStage(3);
                         setIsAutoPlaying(false);
                       }}
-                      className={`group relative w-16 h-16 lg:w-full lg:aspect-square rounded-xl bg-gradient-to-br ${bg.gradient
-                        } transition-all overflow-hidden ${selectedBg === index && currentStage === 3
+                      className={`group relative w-16 h-16 lg:w-full lg:aspect-square rounded-xl transition-all overflow-hidden ${selectedBg === index && currentStage === 3
                           ? "ring-4 ring-primary ring-offset-2 scale-105"
                           : "hover:scale-105 hover:ring-2 hover:ring-primary/50"
                         }`}
                       title={bg.name}
                     >
-                      <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 text-white text-[10px] font-medium p-1 text-center">
+                      {/* Showroom backdrop preview */}
+                      <div className="absolute inset-0 z-0">
+                        <img
+                          src={bg.image}
+                          alt={`${bg.name} background`}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className={`absolute inset-0 bg-gradient-to-br ${bg.overlay}`} />
+                      </div>
+                      {/* Logo preview in center */}
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[5]">
+                        <img
+                          src={logoImage}
+                          alt="Logo"
+                          className="w-8 h-8 lg:w-12 lg:h-12 object-contain opacity-40"
+                        />
+                      </div>
+                      <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 text-white text-[10px] font-medium p-1 text-center z-10">
                         {bg.name}
                       </span>
                     </button>

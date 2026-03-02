@@ -22,38 +22,34 @@ const carSpecs = [
 ];
 
 const hotspotsByAngle = [
-  // Front View - Skoda Slavia
+  // Front View - Skoda Slavia (Front-left three-quarter view)
   [
-    { x: 50, y: 40, label: "Skoda Emblem", description: "Monte Carlo badge on hood" },
-    { x: 25, y: 50, label: "Side Indicator", description: "Front fender indicator light" },
-    { x: 20, y: 75, label: "Fog Lamp Housing", description: "LED fog lamp with cornering function" },
-    { x: 15, y: 45, label: "Side Mirror", description: "Electrically adjustable ORVM" },
-    { x: 30, y: 70, label: "17\" Alloy Wheels", description: "Diamond-cut alloy wheels" },
+    { x: 26, y: 30, label: "Side Mirror", description: "Electrically adjustable ORVM" },
+    { x: 54, y: 48, label: "Skoda Emblem", description: "Monte Carlo badge" },
+    { x: 32, y: 68, label: "Fog Lamp Housing", description: "LED fog lamp with cornering function" },
+    { x: 28, y: 52, label: "Side Indicator", description: "Front fender indicator light" },
+    { x: 46, y: 72, label: "17\" Alloy Wheels", description: "Diamond-cut alloy wheels" },
   ],
-  // Side View - Skoda Slavia
+  // Side View - Skoda Slavia (Side profile)
   [
-    { x: 30, y: 68, label: "17\" Alloy Wheels", description: "Diamond-cut alloy wheels" },
-    { x: 50, y: 25, label: "Panoramic Sunroof", description: "Large panoramic sunroof" },
-    { x: 70, y: 68, label: "Rear Disc Brakes", description: "All-wheel disc brakes" },
-    { x: 52, y: 48, label: "Chrome Door Handles", description: "Body-colored handles with chrome accents" },
-    { x: 50, y: 88, label: "Side Skirts", description: "Sporty side body cladding" },
-  ],
-  // Rear View - Skoda Slavia
+    { x: 32, y: 70, label: "17\" Alloy Wheels", description: "Diamond-cut alloy wheels" },
+    { x: 68, y: 70, label: "Rear Alloy Wheels", description: "Matching rear alloy wheels" },
+    { x: 54, y: 48, label: "LED tail lights", description: "Crystal LED tail lamp design" },
+     { x: 50, y: 70, label: "Rear Bumper", description: "Sporty rear diffuser design" },
+      ],
+  // Rear View - Skoda Slavia (Rear-left three-quarter view)
   [
-    { x: 50, y: 38, label: "LED Tail Lamps", description: "Crystal LED tail lamp design" },
-    { x: 50, y: 18, label: "Shark Fin Antenna", description: "Aerodynamic roof antenna" },
-    { x: 50, y: 72, label: "Rear Bumper", description: "Sporty rear diffuser design" },
-    { x: 50, y: 32, label: "Rear Wiper", description: "Intermittent rear wiper" },
-    { x: 28, y: 62, label: "Reflectors", description: "Safety reflectors" },
+    { x: 35, y: 30, label: "Shark Fin Antenna", description: "Aerodynamic roof antenna" },
+     { x: 42, y: 50, label: "Slavia Monte Carlo Badge", description: "Model badge on side view" },
+   { x: 28, y: 48, label: "Chrome Door Handles", description: "Body-colored handles with chrome accents" },
+    { x: 50, y: 72, label: "Alloy Wheels", description: "Matching alloy wheels" },
   ],
   // Interior - Skoda Slavia
-  [
-    { x: 50, y: 38, label: "10\" Infotainment", description: "Touchscreen with smartphone connectivity" },
-    { x: 68, y: 52, label: "Digital Cluster", description: "10.25\" virtual cockpit display" },
-    { x: 22, y: 62, label: "Premium Seats", description: "Comfortable leather upholstery" },
-    { x: 50, y: 65, label: "Wireless Charger", description: "Fast wireless charging pad" },
-    { x: 50, y: 22, label: "Ambient Lighting", description: "10-color ambient lighting" },
-  ]
+  [{ x: 30, y: 30, label: "Shark Fin Antenna", description: "Aerodynamic roof antenna" },
+     { x: 38, y: 50, label: "Slavia Monte Carlo Badge", description: "Model badge on side view" },
+   { x: 24, y: 48, label: "Chrome Door Handles", description: "Body-colored handles with chrome accents" },
+    { x: 44, y: 72, label: "Alloy Wheels", description: "Matching alloy wheels" },
+]
 ];
 
 const MarketplaceShowcase = () => {
