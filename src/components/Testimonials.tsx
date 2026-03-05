@@ -62,12 +62,13 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <Card
               key={index}
-              className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-accent/50 bg-card/80 backdrop-blur relative overflow-hidden max-w-sm mx-auto"
+              className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-accent/50 bg-card/80 backdrop-blur relative max-w-sm mx-auto"
+              style={{ overflow: 'visible' }}
             >
               {/* Quote decoration */}
               <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
 
-              <CardContent className="p-0 relative">
+              <CardContent className="p-0 relative" style={{ overflow: 'visible' }}>
                 {/* Car Image with Backdrop and Logo */}
                 <div className="relative h-64 md:h-72 overflow-hidden">
                   {/* Showroom Background */}
@@ -108,7 +109,7 @@ const Testimonials = () => {
                   </div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-6 pb-7" style={{ overflow: 'visible', paddingBottom: '1.75rem' }}>
                   <Quote className="w-8 h-8 text-accent/30 mb-3" />
 
                   {/* Rating */}
@@ -119,20 +120,28 @@ const Testimonials = () => {
                   </div>
 
                   {/* Quote */}
-                  <p className="text-foreground/90 mb-4 leading-relaxed italic text-sm">
+                  <p className="text-foreground/90 mb-4 italic text-sm" style={{ 
+                    lineHeight: '1.75', 
+                    paddingBottom: '0.5rem',
+                    overflow: 'visible'
+                  }}>
                     "{testimonial.quote}"
                   </p>
 
                   {/* Author */}
-                  <div className="flex items-center gap-3 pt-4 border-t border-border/50">
+                  <div className="flex items-center gap-3 pt-4 border-t border-border/50" style={{ paddingBottom: '0.5rem' }}>
                     <img
                       src={testimonial.image}
                       alt={testimonial.name}
-                      className="w-10 h-10 rounded-full object-cover ring-2 ring-accent/30"
+                      className="w-10 h-10 rounded-full object-cover ring-2 ring-accent/30 flex-shrink-0"
                     />
-                    <div>
-                      <div className="font-bold text-foreground text-sm">{testimonial.name}</div>
-                      <div className="text-xs text-muted-foreground">
+                    <div className="min-w-0 flex-1" style={{ overflow: 'visible' }}>
+                      <div className="font-bold text-foreground text-sm mb-0.5">{testimonial.name}</div>
+                      <div className="text-xs text-muted-foreground" style={{ 
+                        lineHeight: '1.6', 
+                        paddingBottom: '0.25rem',
+                        overflow: 'visible'
+                      }}>
                         {testimonial.role}, {testimonial.company}
                       </div>
                     </div>

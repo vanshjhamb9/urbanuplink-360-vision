@@ -17,7 +17,7 @@ const LearnMorePage = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
             Revolutionizing Car Photography
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10">
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto ">
             Discover how Urban Uplink combines AI technology with smartphone convenience to create professional 360° car spins.
           </p>
           <img 

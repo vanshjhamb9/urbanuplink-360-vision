@@ -234,7 +234,7 @@ const BGReplacementTool = () => {
                 </div>
 
                 {/* Large Logo behind car - extends beyond car boundaries */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[5]">
+                {/* <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[5]">
                   <img
                     src={logoImage}
                     alt="Urban Uplink Logo"
@@ -243,7 +243,7 @@ const BGReplacementTool = () => {
                       filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.1))",
                     }}
                   />
-                </div>
+                </div> */}
 
                 {/* Car with background removed on new background - Using transparent PNG for perfect edge cutting */}
                 <div className="absolute inset-0 flex items-center justify-center z-10">

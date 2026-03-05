@@ -33,8 +33,7 @@ const hotspotsByAngle = [
   // Side View - Skoda Slavia (Side profile)
   [
     { x: 32, y: 70, label: "17\" Alloy Wheels", description: "Diamond-cut alloy wheels" },
-    { x: 68, y: 70, label: "Rear Alloy Wheels", description: "Matching rear alloy wheels" },
-    { x: 54, y: 48, label: "LED tail lights", description: "Crystal LED tail lamp design" },
+   { x: 54, y: 48, label: "LED tail lights", description: "Crystal LED tail lamp design" },
      { x: 50, y: 70, label: "Rear Bumper", description: "Sporty rear diffuser design" },
       ],
   // Rear View - Skoda Slavia (Rear-left three-quarter view)
