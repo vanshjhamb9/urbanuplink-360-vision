@@ -14,11 +14,11 @@ const LearnMorePage = () => {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
         <div className="container mx-auto px-4 md:px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl p-[3rem] font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
             Revolutionizing Car Photography
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto ">
-            Discover how Urban Uplink combines AI technology with smartphone convenience to create professional 360° car spins.
+            Discover how Urban Uplin combines AI technology with smartphone convenience to create professional 360° car spins.
           </p>
           <img 
             src={heroCar} 
