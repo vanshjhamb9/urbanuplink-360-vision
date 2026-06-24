@@ -1,5 +1,4 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { PageLayout } from "@/components/layout/PageLayout";
 import FloatingDemo from "@/components/FloatingDemo";
 import {
   Camera,
@@ -106,27 +105,18 @@ const features = [
 
 const FeaturesPage = () => {
   return (
-    <div className="min-h-screen">
-      <Header />
-
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 bg-gradient-to-br from-primary via-accent to-primary-glow text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-foreground rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary-foreground rounded-full blur-3xl" />
-        </div>
-
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-block mb-4 px-4 py-2 bg-primary-foreground/10 rounded-full border border-primary-foreground/20">
-              <span className="text-primary-foreground font-semibold text-sm">
-                Product Features
-              </span>
-            </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+    <PageLayout>
+      <section className="relative overflow-hidden py-16 md:py-24">
+        <div className="pointer-events-none absolute inset-0 section-glow" />
+        <div className="container relative mx-auto px-4 md:px-6">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-lime">
+              Product Features
+            </p>
+            <h1 className="font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">
               Everything You Need for Professional 360° Imaging
             </h1>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8">
+            <p className="mt-6 text-lg text-muted-brand md:text-xl">
               Powerful features designed for automotive professionals. No
               technical expertise required.
             </p>
@@ -134,36 +124,33 @@ const FeaturesPage = () => {
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-24 bg-background">
+      <section className="pb-24">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid gap-6 md:grid-cols-2">
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-accent/50"
+                className="group border-white/10 bg-gradient-card transition-all duration-500 hover:-translate-y-1 hover:border-brand-lime/30 hover:shadow-glow"
               >
                 <CardContent className="p-8">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <feature.icon className="w-7 h-7 text-primary-foreground" />
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl border border-brand-lime/20 bg-brand-lime/10 transition-transform duration-500 group-hover:scale-110">
+                    <feature.icon className="h-7 w-7 text-brand-lime" />
                   </div>
 
-                  <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                  <h3 className="mb-3 font-heading text-2xl font-extrabold text-white group-hover:text-brand-lime transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                  <p className="mb-6 leading-relaxed text-muted-brand">
                     {feature.description}
                   </p>
 
                   <ul className="space-y-3">
                     {feature.details.map((detail, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <div className="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <div className="w-2 h-2 rounded-full bg-accent" />
+                        <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-lime/10">
+                          <div className="h-2 w-2 rounded-full bg-brand-lime" />
                         </div>
-                        <span className="text-foreground/80 text-sm">
-                          {detail}
-                        </span>
+                        <span className="text-sm text-white/80">{detail}</span>
                       </li>
                     ))}
                   </ul>
@@ -175,8 +162,7 @@ const FeaturesPage = () => {
       </section>
 
       <FloatingDemo />
-      <Footer />
-    </div>
+    </PageLayout>
   );
 };
 

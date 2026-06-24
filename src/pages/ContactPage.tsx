@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { PageLayout } from "@/components/layout/PageLayout";
 import FloatingDemo from "@/components/FloatingDemo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -83,22 +82,17 @@ const ContactPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Header />
-
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5 pointer-events-none" />
-        <div className="container px-4 md:px-6 relative z-10 mx-auto text-center">
-          <div className="inline-flex items-center justify-center p-1.5 mb-6 rounded-full bg-accent/10 border border-accent/20">
-            <span className="px-3 py-1 text-sm font-semibold text-accent">
-              Get in Touch
-            </span>
-          </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+    <PageLayout>
+      <section className="relative overflow-hidden py-16 md:py-20">
+        <div className="pointer-events-none absolute inset-0 section-glow" />
+        <div className="container relative z-10 mx-auto px-4 text-center md:px-6">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-lime">
+            Get in Touch
+          </p>
+          <h1 className="font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">
             Let's Transform Your Business
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-brand">
             Have questions about our technology or pricing? We're here to help
             you get started.
           </p>
@@ -123,20 +117,20 @@ const ContactPage = () => {
                 {contactInfo.map((item, index) => (
                   <Card
                     key={index}
-                    className="border-0 shadow-sm bg-muted/30 hover:bg-muted/50 transition-colors"
+                    className="border-white/10 bg-gradient-card transition-colors hover:border-brand-lime/30"
                   >
-                    <CardContent className="p-6 flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <item.icon className="w-6 h-6 text-primary" />
+                    <CardContent className="flex items-start gap-4 p-6">
+                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-brand-lime/20 bg-brand-lime/10">
+                        <item.icon className="h-6 w-6 text-brand-lime" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-lg mb-1">
+                        <h4 className="mb-1 text-lg font-semibold text-white">
                           {item.title}
                         </h4>
-                        <p className="text-foreground font-medium mb-1">
+                        <p className="mb-1 font-medium text-white/90">
                           {item.details}
                         </p>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-sm text-muted-brand">
                           {item.description}
                         </p>
                       </div>
@@ -173,10 +167,11 @@ const ContactPage = () => {
 
             {/* Contact Form Side */}
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-[2rem] blur-3xl opacity-50" />
-              <Card className="relative border-border/50 shadow-2xl bg-card">
+              <Card className="relative border-white/10 bg-gradient-card shadow-glow">
                 <CardContent className="p-8 md:p-10">
-                  <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
+                  <h3 className="mb-6 font-heading text-2xl font-extrabold text-white">
+                    Send us a Message
+                  </h3>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -238,7 +233,7 @@ const ContactPage = () => {
 
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90"
+                      className="w-full bg-brand-lime text-brand-black hover:bg-brand-lime/90"
                       size="lg"
                       disabled={isSubmitting}
                     >
@@ -260,8 +255,7 @@ const ContactPage = () => {
       </section>
 
       <FloatingDemo />
-      <Footer />
-    </div>
+    </PageLayout>
   );
 };
 

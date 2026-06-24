@@ -1,191 +1,164 @@
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
-import Image2 from "../assets/2 (2).png";
+import { motion, AnimatePresence } from "framer-motion";
+import { Logo } from "@/components/brand/Logo";
+import { GlowButton } from "@/components/ui-custom/GlowButton";
+import { navLinks } from "@/lib/brand";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   return (
     <>
       <header
-        className={`fixed top-0 z-50 w-full transition-all duration-500 ${
-          isScrolled
-            ? "bg-gray-100/95 backdrop-blur-xl shadow-xl border-b border-primary/20"
-            : "bg-transparent"
-        }`}
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+          isScrolled ? "glass-nav shadow-lg" : "bg-transparent",
+        )}
       >
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex h-20 md:h-28 items-center justify-between">
-            {/* Logo - Centered on Mobile */}
-            <div className="flex-1 md:flex-none flex items-center md:items-start gap-4">
-              <a href="/" className="relative group cursor-pointer block flex items-center gap-3">
-                <img
-                  className="w-14 h-14 md:w-32 md:h-32 -mt-[1rem] object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-lg"
-                  src={Image2}
-                  alt="Urban Uplink Logo"
-                  style={{
-                    filter: "brightness(1.1) contrast(1.2)",
-                  }}
-                />
-                <span className={`font-display -ml-[2rem] font-bold text-xl md:text-2xl tracking-tight transition-colors duration-300 ${isScrolled ? "text-slate-800" : "text-slate-800 drop-shadow-md"}`}>
-                  Urban Uplink
-                </span>
-              </a>
-            </div>
+          <div className="relative flex h-20 items-center justify-between lg:h-24">
+            <Link to="/" className="relative z-10 shrink-0" aria-label="Urban Uplink home">
+              <Logo size="sm" className="md:hidden" />
+              <Logo size="md" className="hidden md:flex" />
+            </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-1">
-              <a
-                href="/"
-                className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}
-              >
-                <span className="relative z-10">Home</span>
-                <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
-              <a
-                href="/features"
-                className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}
-              >
-                <span className="relative z-10">Features</span>
-                <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
-              <a
-                href="/use-cases"
-                className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}
-              >
-                <span className="relative z-10">Use Cases</span>
-                <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
-              <a
-                href="/pricing"
-                className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}
-              >
-                <span className="relative z-10">Pricing</span>
-                <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
-              <a
-                href="/learn-more"
-                className={`px-5 py-2.5 rounded-lg transition-all duration-300 font-semibold text-sm relative group ${isScrolled ? "text-foreground hover:text-primary" : "text-foreground/90 hover:text-primary"}`}
-              >
-                <span className="relative z-10">Learn More</span>
-                <span className="absolute inset-0 bg-primary/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </a>
-              <a
-                href="/contact"
-                className={`ml-4 px-6 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 bg-gradient-to-r from-primary to-accent text-white hover:shadow-lg hover:scale-105 ${isScrolled ? "shadow-md" : "shadow-lg"}`}
-              >
-                Get Started
-              </a>
+            <nav
+              className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:flex"
+              aria-label="Main navigation"
+            >
+              <ul className="flex items-center gap-1">
+                {navLinks.map((link) => {
+                  const active = location.pathname === link.href;
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        to={link.href}
+                        className={cn(
+                          "relative px-4 py-2 text-sm font-medium text-white/80 transition-colors hover:text-white",
+                          active && "text-white",
+                        )}
+                      >
+                        {link.label}
+                        {active && (
+                          <motion.span
+                            layoutId="nav-underline"
+                            className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-brand-lime"
+                          />
+                        )}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
             </nav>
 
-            {/* Mobile Actions */}
-            <div className="flex md:hidden items-center gap-4">
-              {/* Call to Action Button usually good to have visible on mobile too */}
-              <a
-                href="/contact"
-                className="px-4 py-2 rounded-full font-bold text-xs bg-gradient-to-r from-primary to-accent text-white shadow-md"
-              >
-                Get Started
-              </a>
+            <div className="relative z-10 hidden items-center lg:flex">
+              <GlowButton href="/contact">Get Started</GlowButton>
+            </div>
 
-              {/* Mobile Menu Button */}
+            <div className="flex items-center gap-2 max-[380px]:gap-1 lg:hidden">
+              <GlowButton href="/contact" className="hidden px-4 py-2 text-xs min-[381px]:inline-flex">
+                Get Started
+              </GlowButton>
               <button
-                className={`p-2 rounded-lg transition-colors ${
-                  isScrolled
-                    ? "text-foreground hover:bg-primary/10"
-                    : "text-foreground hover:bg-primary/10"
-                }`}
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                type="button"
+                className="rounded-lg p-2 text-white hover:bg-white/10"
+                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-nav"
+                onClick={() => setMobileOpen((v) => !v)}
               >
-                <Menu className="w-6 h-6" />
+                {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Side Drawer Mobile Menu */}
-      {isMobileMenuOpen && (
-        <>
-          <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 animate-in fade-in duration-300 md:hidden"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-          <nav className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm bg-background/95 backdrop-blur-xl z-50 shadow-2xl p-6 border-l border-primary/20 animate-in slide-in-from-right duration-300 md:hidden flex flex-col">
-            <div className="flex items-center justify-between mb-8">
-              <span className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Menu
-              </span>
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-full hover:bg-muted"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
+              onClick={() => setMobileOpen(false)}
+            />
+            <motion.nav
+              id="mobile-nav"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 28, stiffness: 280 }}
+              className="fixed inset-y-0 right-0 z-50 flex w-[min(88vw,360px)] flex-col border-l border-white/10 bg-brand-black/95 p-6 backdrop-blur-xl lg:hidden"
+              aria-label="Mobile navigation"
+            >
+              <div className="mb-8 flex items-center justify-between">
+                <Logo size="sm" showTagline={false} />
+                <button
+                  type="button"
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-full p-2 hover:bg-white/10"
+                  aria-label="Close menu"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
 
-            <div className="flex flex-col gap-2">
-              <a
-                href="/"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
-              >
-                Home
-              </a>
-              <a
-                href="/features"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
-              >
-                Features
-              </a>
-              <a
-                href="/use-cases"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
-              >
-                Use Cases
-              </a>
-              <a
-                href="/pricing"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
-              >
-                Pricing
-              </a>
-              <a
-                href="/learn-more"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-base font-medium rounded-xl hover:bg-primary/5 hover:text-primary transition-colors flex items-center gap-3"
-              >
-                Learn More
-              </a>
-            </div>
+              <ul className="flex flex-col gap-1">
+                {navLinks.map((link) => {
+                  const active = location.pathname === link.href;
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        to={link.href}
+                        className={cn(
+                          "block rounded-xl px-4 py-3 text-base font-medium transition-colors",
+                          active
+                            ? "bg-brand-lime/10 text-brand-lime"
+                            : "text-white/80 hover:bg-white/5 hover:text-white",
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
 
-            <div className="mt-auto pt-6 border-t border-border">
-              <a
-                href="/contact"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block w-full text-center px-6 py-3 rounded-xl font-bold bg-gradient-to-r from-primary to-accent text-white shadow-lg"
-              >
-                Get Started
-              </a>
-              <p className="text-center text-xs text-muted-foreground mt-4">
-                © 2025 UrbanUplink
-              </p>
-            </div>
-          </nav>
-        </>
-      )}
+              <div className="mt-auto border-t border-white/10 pt-6">
+                <GlowButton href="/contact" className="w-full">
+                  Get Started
+                </GlowButton>
+              </div>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 };

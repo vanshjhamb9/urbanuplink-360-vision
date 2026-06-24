@@ -1,63 +1,59 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Phone, Mail, Download } from "lucide-react";
+import { motion } from "framer-motion";
+import { GlowButton } from "@/components/ui-custom/GlowButton";
+import { ResponsiveImage } from "@/components/ui-custom/ResponsiveImage";
+import { assets } from "@/lib/assets";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const CTA = () => {
+  const { ref, visible } = useScrollReveal<HTMLElement>();
+
   return (
-    <section className="py-24 bg-gradient-to-br from-primary via-secondary to-accent text-primary-foreground relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-foreground rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary-foreground rounded-full blur-3xl" />
+    <section
+      ref={ref}
+      className="relative min-h-[60svh] overflow-hidden bg-brand-black py-16 md:min-h-0 md:py-28"
+      aria-labelledby="cta-heading"
+    >
+      <div className="absolute inset-0">
+        <ResponsiveImage
+          desktopSrc={assets.cta.desktop}
+          mobileSrc={assets.cta.mobile}
+          alt=""
+          loading="lazy"
+          objectPosition="object-center md:object-right"
+          imgClassName="opacity-40"
+        />
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Ready to Transform Your Automotive Sales?
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/92 to-brand-black/75 md:via-brand-black/90 md:to-brand-black/70" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-brand-black/40 md:hidden" />
+
+      <div className="container relative mx-auto flex min-h-[50svh] items-center px-4 md:min-h-0 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={visible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="mx-auto w-full max-w-2xl text-center"
+        >
+          <h2
+            id="cta-heading"
+            className="font-heading text-2xl font-extrabold tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl"
+          >
+            Ready to Transform Your{" "}
+            <span className="text-brand-lime">Vehicle Listings?</span>
           </h2>
-          <p className="text-xl md:text-2xl mb-8 text-primary-foreground/90">
-            Join the 360° revolution. Get started with UrbanUplink today and see results within weeks.
+          <p className="mt-4 text-sm text-muted-brand sm:mt-5 sm:text-base md:text-lg">
+            Join leading dealerships and marketplaces using Urban Uplink to create
+            stunning 360° experiences that convert.
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button
-              variant="secondary"
-              size="xl"
-              className="group bg-background text-foreground hover:bg-background/90"
-              asChild
-            >
-              <a href="/uplai.apk" download>
-                <Download className="mr-2 w-5 h-5" />
-                Get Started Now
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Button>
-            <Button
-              variant="outline"
-              size="xl"
-              className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
-              asChild
-            >
-              <a href="https://calendly.com/admin-urbanuplink/30min" target="_blank" rel="noopener noreferrer">
-                Schedule a Demo
-              </a>
-            </Button>
+          <div className="mt-6 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
+            <GlowButton href="/contact" variant="filled" className="w-full sm:w-auto">
+              Get Started
+            </GlowButton>
+            <GlowButton href="/pricing" className="w-full sm:w-auto">
+              View Pricing
+            </GlowButton>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <div className="flex items-center justify-center gap-3 p-4 bg-primary-foreground/10 rounded-lg backdrop-blur">
-              <Phone className="w-5 h-5" />
-              <span className="font-semibold">+91 80 1234 5678</span>
-            </div>
-            <div className="flex items-center justify-center gap-3 p-4 bg-primary-foreground/10 rounded-lg backdrop-blur">
-              <Mail className="w-5 h-5" />
-              <span className="font-semibold">sales@urbanuplink.com</span>
-            </div>
-          </div>
-
-          <p className="mt-8 text-sm text-primary-foreground/70">
-            No credit card required • Free trial available • Cancel anytime
-          </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
