@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import CTA from "@/components/CTA";
 import Features from "@/components/Features";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, Smartphone, Zap, Cloud } from "lucide-react";
+import { CheckCircle2, Smartphone, Zap, Cloud } from "lucide-react";
 import heroCar from "@/assets/hero-car.jpg";
 
 const LearnMorePage = () => {
@@ -15,11 +15,24 @@ const LearnMorePage = () => {
       <section className="relative pt-32 pb-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
         <div className="container mx-auto px-4 md:px-6 text-center">
           <h1 className="text-4xl md:text-6xl p-[3rem] font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-            Revolutionizing Car Photography
+            Built for the Future of Automotive Retail.
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto ">
-            Discover how Urban Uplin combines AI technology with smartphone convenience to create professional 360° car spins.
+            See how AI-powered imaging helps dealerships, marketplaces,
+            detailers and fleet operators create better customer experiences
+            while reducing operational effort.
           </p>
+          <div className="mx-auto mb-8 mt-8 flex max-w-3xl flex-col justify-center gap-3 sm:flex-row">
+            <Button variant="gradient" asChild>
+              <a href="/use-cases">Explore Case Studies</a>
+            </Button>
+            <Button variant="outline" asChild>
+              <a href="/contact">Watch Product Demo</a>
+            </Button>
+            <Button variant="outline" asChild>
+              <a href="/learn-more">Download Brochure</a>
+            </Button>
+          </div>
           <img 
             src={heroCar} 
             alt="Urban Uplink Technology" 
@@ -33,11 +46,14 @@ const LearnMorePage = () => {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold">The Power of AI in Your Pocket</h2>
+              <h2 className="text-3xl md:text-4xl font-bold">
+                The Visual Infrastructure Platform for Automotive Retail.
+              </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Urban Uplink isn't just an app; it's a complete studio in your smartphone. 
-                Our proprietary AI algorithms handle the complex tasks of image stitching, 
-                stabilization, and background processing instantly.
+                Urban Uplink gives automotive teams one workflow to digitize,
+                present, inspect and market vehicles. Photography is just the
+                starting point for a platform built around better vehicle
+                experiences.
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">

@@ -3,37 +3,48 @@ import { Camera, Shield, Share2, Sparkles, RotateCw, Wand2 } from "lucide-react"
 import { SectionHeading } from "@/components/ui-custom/SectionHeading";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import { assets } from "@/lib/assets";
 
 const steps = [
   {
-    number: "①",
+    number: "01",
     title: "Capture",
-    description: "Quick mobile capture anywhere.",
+    description:
+      "Capture vehicles using any modern smartphone with guided photography.",
     icon: Camera,
+    image: assets.useCases.marketplace.process[0],
   },
   {
-    number: "②",
+    number: "02",
     title: "AI Background Replacement",
-    description: "Remove distractions. Add studio or branded environments.",
+    description:
+      "Automatically replace distracting backgrounds with professional studio environments.",
     icon: Wand2,
+    image: assets.useCases.marketplace.process[1],
   },
   {
-    number: "③",
+    number: "03",
     title: "Enhance & Style",
-    description: "AI enhances lighting, reflections & clarity.",
+    description:
+      "Optimize lighting, reflections, alignment and image quality automatically.",
     icon: Sparkles,
+    image: assets.useCases.marketplace.process[2],
   },
   {
-    number: "④",
+    number: "04",
     title: "360° Interactive Experience",
-    description: "Let buyers explore every angle.",
+    description:
+      "Create interactive vehicle experiences that keep buyers engaged longer.",
     icon: RotateCw,
+    image: assets.useCases.marketplace.process[3],
   },
   {
-    number: "⑤",
+    number: "05",
     title: "Publish Everywhere",
-    description: "One click to marketplaces, website & social channels.",
+    description:
+      "Publish to your website, marketplaces and social channels with one workflow.",
     icon: Share2,
+    image: assets.useCases.marketplace.process[4],
   },
 ];
 
@@ -43,7 +54,7 @@ const ProcessSection = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-brand-black py-16 md:py-28"
+      className="relative z-20 overflow-hidden bg-brand-black py-16 md:py-28"
       aria-labelledby="process-heading"
     >
       <div className="pointer-events-none absolute inset-0 section-glow" />
@@ -57,11 +68,11 @@ const ProcessSection = () => {
             eyebrow="Our 5-Step Process"
             title={
               <>
-                Images That Sell.{" "}
-                <span className="text-brand-lime">Results That Scale.</span>
+                From Smartphone to{" "}
+                <span className="text-brand-lime">Marketplace in Minutes.</span>
               </>
             }
-            description="From quick capture to everywhere you sell—our AI-powered platform delivers showroom-quality images that drive more clicks and more sales."
+            description="Capture once. Publish everywhere. Sell faster."
           />
         </motion.div>
 
@@ -74,12 +85,25 @@ const ProcessSection = () => {
               transition={{ duration: 0.6, delay: index * 0.08 }}
               className="group relative overflow-hidden rounded-xl border border-white/10 bg-gradient-card p-4 transition-all duration-500 hover:-translate-y-1 hover:border-brand-lime/40 hover:shadow-glow sm:rounded-2xl sm:p-5"
             >
-              <div className="mb-3 flex h-24 items-center justify-center rounded-lg bg-white/5 sm:mb-4 sm:h-32 sm:rounded-xl">
-                <step.icon className="h-8 w-8 text-brand-lime transition-transform duration-500 group-hover:scale-110 sm:h-10 sm:w-10" />
+              <div className="relative mb-3 h-24 overflow-hidden rounded-lg bg-white/5 sm:mb-4 sm:h-32 sm:rounded-xl">
+                <img
+                  src={step.image}
+                  alt={`${step.title} process preview`}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-black/45 via-transparent to-transparent" />
+                <div className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-brand-lime/30 bg-brand-black/70 text-brand-lime backdrop-blur">
+                  <step.icon className="h-4 w-4" />
+                </div>
               </div>
-              <p className="font-heading text-base font-extrabold leading-snug text-white sm:text-lg">
-                {step.number} {step.title}
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-lime/80">
+                Step {step.number}
               </p>
+              <h3 className="mt-1 font-heading text-base font-extrabold leading-snug text-white sm:text-lg">
+                {step.title}
+              </h3>
               <p className="mt-1.5 text-xs leading-relaxed text-muted-brand sm:mt-2 sm:text-sm">
                 {step.description}
               </p>
@@ -109,7 +133,8 @@ const ProcessSection = () => {
           </GlowButton>
           <p className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs text-muted-brand sm:mt-6 sm:text-sm">
             <Shield className="h-4 w-4 shrink-0 text-brand-lime" />
-            Secure. Fast. Scalable. Built for dealerships.
+            Built for dealerships. Trusted by automotive professionals. Ready to
+            scale.
           </p>
         </motion.div>
       </div>

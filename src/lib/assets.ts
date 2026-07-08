@@ -33,8 +33,15 @@ export const assets = {
   },
   useCases: {
     marketplace: {
-      desktop: `${base}/use-cases/marketplace/card-desktop.webp`,
-      mobile: `${base}/use-cases/marketplace/mobile/1. Main Feature Image (Card Style) marketplace mobile 930x 570.webp`,
+      desktop: `${base}/banners/marketplace/Marketplace Use Case Hero Banner mobile 1080 x 1350 (4 isto 5).webp`,
+      mobile: `${base}/banners/marketplace/Marketplace Use Case Hero Banner mobile 1080 x 1350 (4 isto 5).webp`,
+      process: [
+        `${base}/use-cases/marketplace/1. Main Feature Image (Card Style) marketplace mobile 930x 570.webp`,
+        `${base}/use-cases/marketplace/2. Main Feature Image (Card Style) marketplace mobile 930x 570.webp`,
+        `${base}/use-cases/marketplace/3. Main Feature Image (Card Style) marketplace mobile 930x 570.webp`,
+        `${base}/use-cases/marketplace/4. Main Feature Image (Card Style) marketplace mobile 930x 570.webp`,
+        `${base}/use-cases/marketplace/5. Main Feature Image (Card Style) marketplace mobile 930x 570.webp`,
+      ],
     },
     insurance: {
       desktop: `${base}/use-cases/insurance/1. Main Feature Image (Card Style) insurance desktop 1318 x 808.webp`,

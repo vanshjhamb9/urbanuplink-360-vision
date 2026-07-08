@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Camera, Eraser, Image, Shield, Sparkles, Play, Pause, RotateCcw, Maximize2, Box, Calendar, Gauge, Fuel, MapPin, Heart, Share2, CheckCircle2 } from "lucide-react";
 
-// 360° car images - All angles with background removed
+// 360° car images - all angles with background removed
 import car360_1 from "@/assets/bgCreta/creta1.avif";
 import car360_2 from "@/assets/bgCreta/creta2.avif";
 import car360_3 from "@/assets/bgCreta/creta3.avif";
@@ -77,7 +77,7 @@ const car360Images = [
 
 const totalAngles = car360Images.length;
 
-// Hotspots configuration - visible at specific angles (Creta)
+// Hotspots configuration - visible at specific angles
 // Note: 33 images total, index 6 = 180° (rear), index 7-9 = rear-left, index 10-12 = left side
 const hotspots = [
   { id: 1, angleIndices: [8, 12], x: 50, y: 52, label: "Front Grille", description: "Parametric grille design" },
@@ -365,8 +365,8 @@ const ThreeSixtyShowcase = () => {
                   </div>
                </div>
 
-               <h3 className="text-3xl font-bold text-slate-900 mb-1 tracking-tight">2023 Hyundai Creta</h3>
-               <p className="text-slate-500 mb-8 font-medium">SX (O) 1.5 Petrol • CVT</p>
+               <h3 className="text-3xl font-bold text-slate-900 mb-1 tracking-tight">Certified Mid-Size SUV</h3>
+               <p className="text-slate-500 mb-8 font-medium">Automatic • Verified Listing</p>
 
                <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex items-center gap-3">

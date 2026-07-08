@@ -7,7 +7,7 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 const useCases = [
   {
     title: "Marketplace",
-    subtitle: "Drive One Red Thar",
+    subtitle: "Premium Listing Experience",
     desktop: assets.useCases.marketplace.desktop,
     mobile: assets.useCases.marketplace.mobile,
     gradient: "from-brand-lime/20 to-transparent",
@@ -21,14 +21,14 @@ const useCases = [
   },
   {
     title: "Fleet Management",
-    subtitle: "Toyota Fleet",
+    subtitle: "Operational Visibility",
     desktop: assets.useCases.fleet.desktop,
     mobile: assets.useCases.fleet.mobile,
     gradient: "from-brand-lime/15 to-transparent",
   },
   {
     title: "Car Detailing",
-    subtitle: "Mercedes Studio",
+    subtitle: "Studio-Grade Presentation",
     desktop: assets.useCases.detailing.desktop,
     mobile: assets.useCases.detailing.mobile,
     gradient: "from-brand-blue/15 to-transparent",
@@ -41,7 +41,7 @@ const UseCaseCards = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-brand-black py-16 md:py-28"
+      className="relative z-20 overflow-hidden bg-brand-black py-16 md:py-28"
       aria-labelledby="use-cases-heading"
     >
       <div className="pointer-events-none absolute inset-0 section-glow" />
@@ -80,7 +80,7 @@ const UseCaseCards = () => {
                 <ResponsiveImage
                   desktopSrc={item.desktop}
                   mobileSrc={item.mobile}
-                  alt={`${item.title.trim()} - ${item.subtitle}`}
+                  alt={`${item.title.trim()} solution preview`}
                   objectPosition="object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/15 to-transparent" />

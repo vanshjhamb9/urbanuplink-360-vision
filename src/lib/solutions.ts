@@ -1,33 +1,35 @@
-import { Camera, Shield, FileText, Clock, Handshake } from "lucide-react";
+import { Camera, Shield, FileText, Clock, Handshake, Box, Palette } from "lucide-react";
 import { assets } from "@/lib/assets";
 import type { UseCaseBannerProps } from "@/components/UseCaseBanner";
 
 export const solutions: UseCaseBannerProps[] = [
   {
     id: "marketplace",
-    headlineWhite: "Transform Inventory",
-    headlineAccent: "Into Showroom-Grade Listings",
-    description: "AI-powered visuals that sell more, faster.",
+    headlineWhite: "Every Listing Should Look Like It",
+    headlineAccent: "Belongs in a Premium Showroom.",
+    description:
+      "Turn everyday smartphone photos into professional inventory that generates more clicks, longer engagement and higher buyer confidence.",
     features: [
-      { icon: Camera, label: "Studio AI" },
-      { icon: Shield, label: "360° Views" },
-      { icon: FileText, label: "Consistent Brand" },
+      { icon: Camera, label: "AI Studio" },
+      { icon: Box, label: "Interactive 360°" },
+      { icon: Palette, label: "Brand Consistency" },
+      { icon: FileText, label: "Marketplace Ready" },
     ],
     imageDesktop: assets.banners.marketplace.desktop,
     imageMobile: assets.banners.marketplace.mobile,
-    imageAlt: "Red Mahindra Thar in studio showroom for marketplace listings",
+    imageAlt: "Vehicle presented in a premium studio showroom for marketplace listings",
   },
   {
     id: "insurance",
-    headlineWhite: "Smarter Claims.",
-    headlineAccent: "Stronger Assurance.",
+    headlineWhite: "Faster Inspections.",
+    headlineAccent: "Faster Claims.",
     description:
-      "End-to-end insurance & inspection made simple, transparent, and fast.",
+      "Digitally document every vehicle with AI-assisted imaging that improves transparency and speeds up insurance workflows. Capture accurate evidence, reduce disputes and streamline claim approvals.",
     features: [
-      { icon: FileText, label: "Accurate Documentation" },
-      { icon: Shield, label: "Fraud Control" },
-      { icon: Handshake, label: "Partner Network" },
-      { icon: Clock, label: "Faster Claims" },
+      { icon: Camera, label: "Inspection Ready" },
+      { icon: FileText, label: "Damage Documentation" },
+      { icon: Shield, label: "Fraud Prevention" },
+      { icon: Clock, label: "Claim Reports" },
     ],
     imageDesktop: assets.banners.insurance.desktop,
     imageMobile: assets.banners.insurance.mobile,
@@ -35,32 +37,33 @@ export const solutions: UseCaseBannerProps[] = [
   },
   {
     id: "fleet",
-    headlineWhite: "Smarter Fleet.",
-    headlineAccent: "Stronger Control.",
+    headlineWhite: "Manage Every Vehicle",
+    headlineAccent: "With Confidence.",
     description:
-      "Capture. Track. Verify. Maintain. Complete control over your rental fleet.",
+      "Capture, inspect and document every fleet vehicle with a consistent digital workflow. Reduce disputes, improve accountability and maintain accurate vehicle records throughout the fleet lifecycle.",
     features: [
-      { icon: Camera, label: "Vehicle Inspections" },
-      { icon: Shield, label: "Damage Verification" },
-      { icon: FileText, label: "Digital Records" },
+      { icon: Camera, label: "Digital Inspections" },
+      { icon: Shield, label: "Damage Tracking" },
+      { icon: Clock, label: "Maintenance Records" },
+      { icon: FileText, label: "Audit Ready" },
     ],
     imageDesktop: assets.banners.fleet.desktop,
     imageMobile: assets.banners.fleet.mobile,
-    imageAlt: "Toyota fleet vehicles lined up at airport rental facility",
+    imageAlt: "Fleet vehicles lined up for digital inspection and operational records",
   },
   {
     id: "detailing",
-    headlineWhite: "Studio Quality.",
-    headlineAccent: "Every Detail Matters.",
+    headlineWhite: "Make Every Detail",
+    headlineAccent: "Worth Paying For.",
     description:
-      "Showcase your detailing work with premium studio backgrounds and interactive 360° views.",
+      "Showcase detailing, ceramic coating and paint protection with premium studio presentations that justify premium pricing. When customers can clearly see the difference, they're more likely to choose higher-value detailing packages.",
     features: [
-      { icon: Camera, label: "Mercedes Studio" },
-      { icon: Shield, label: "Premium Presentation" },
+      { icon: Camera, label: "Premium Studio" },
       { icon: FileText, label: "Before & After" },
+      { icon: Handshake, label: "Interactive Comparison" },
     ],
     imageDesktop: assets.banners.detailing.desktop,
     imageMobile: assets.banners.detailing.mobile,
-    imageAlt: "Mercedes in premium detailing studio environment",
+    imageAlt: "Vehicle in a premium detailing studio environment",
   },
 ];

@@ -22,30 +22,30 @@ const carSpecs = [
 ];
 
 const hotspotsByAngle = [
-  // Front View - Skoda Slavia (Front-left three-quarter view)
+  // Front-left three-quarter view
   [
     { x: 26, y: 30, label: "Side Mirror", description: "Electrically adjustable ORVM" },
-    { x: 54, y: 48, label: "Skoda Emblem", description: "Monte Carlo badge" },
+    { x: 54, y: 48, label: "Front Emblem", description: "Clean brand presentation" },
     { x: 32, y: 68, label: "Fog Lamp Housing", description: "LED fog lamp with cornering function" },
     { x: 28, y: 52, label: "Side Indicator", description: "Front fender indicator light" },
     { x: 46, y: 72, label: "17\" Alloy Wheels", description: "Diamond-cut alloy wheels" },
   ],
-  // Side View - Skoda Slavia (Side profile)
+  // Side profile
   [
     { x: 32, y: 70, label: "17\" Alloy Wheels", description: "Diamond-cut alloy wheels" },
    { x: 54, y: 48, label: "LED tail lights", description: "Crystal LED tail lamp design" },
      { x: 50, y: 70, label: "Rear Bumper", description: "Sporty rear diffuser design" },
       ],
-  // Rear View - Skoda Slavia (Rear-left three-quarter view)
+  // Rear-left three-quarter view
   [
     { x: 35, y: 30, label: "Shark Fin Antenna", description: "Aerodynamic roof antenna" },
-     { x: 42, y: 50, label: "Slavia Monte Carlo Badge", description: "Model badge on side view" },
+     { x: 42, y: 50, label: "Model Badge", description: "Model badge on side view" },
    { x: 28, y: 48, label: "Chrome Door Handles", description: "Body-colored handles with chrome accents" },
     { x: 50, y: 72, label: "Alloy Wheels", description: "Matching alloy wheels" },
   ],
-  // Interior - Skoda Slavia
+  // Interior
   [{ x: 30, y: 30, label: "Shark Fin Antenna", description: "Aerodynamic roof antenna" },
-     { x: 38, y: 50, label: "Slavia Monte Carlo Badge", description: "Model badge on side view" },
+     { x: 38, y: 50, label: "Model Badge", description: "Model badge on side view" },
    { x: 24, y: 48, label: "Chrome Door Handles", description: "Body-colored handles with chrome accents" },
     { x: 44, y: 72, label: "Alloy Wheels", description: "Matching alloy wheels" },
 ]
@@ -191,8 +191,8 @@ const MarketplaceShowcase = () => {
                       <span className="inline-block px-2.5 py-0.5 md:px-3 md:py-1 bg-primary/10 text-primary text-[10px] md:text-xs font-semibold rounded-full mb-2">
                         Featured Listing
                       </span>
-                      <h3 className="text-xl md:text-2xl font-bold">2024 Skoda Slavia</h3>
-                      <p className="text-sm md:text-base text-muted-foreground">Monte Carlo • Automatic</p>
+                      <h3 className="text-xl md:text-2xl font-bold">Certified Premium Sedan</h3>
+                      <p className="text-sm md:text-base text-muted-foreground">Automatic • Verified Listing</p>
                     </div>
                     <div className="text-right">
                       <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">

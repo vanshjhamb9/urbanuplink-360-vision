@@ -30,7 +30,7 @@ export function UseCaseBanner({
     <section
       ref={ref}
       id={id}
-      className="relative min-h-[88svh] overflow-hidden bg-brand-black md:min-h-[72vh] lg:min-h-[85vh]"
+      className="relative z-20 min-h-[88svh] overflow-hidden bg-brand-black md:min-h-[72vh] lg:min-h-[85vh]"
       aria-labelledby={`${id}-heading`}
     >
       <div className="absolute inset-0">

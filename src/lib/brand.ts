@@ -14,10 +14,9 @@ export const brand = {
 } as const;
 
 export const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/team" },
-  { label: "Services", href: "/features" },
-  { label: "Solutions", href: "/use-cases" },
+  { label: "Solutions", href: "/" },
+  { label: "Industries", href: "/use-cases" },
+  { label: "Pricing", href: "/pricing" },
   { label: "Resources", href: "/learn-more" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "About", href: "/team" },
 ] as const;

@@ -5,25 +5,28 @@ const features = [
   {
     icon: Camera,
     title: "Real 360° Photography",
-    description: "Authentic 360-degree views without expensive 3D modeling. Capture reality, showcase excellence.",
+    description:
+      "Interactive vehicle experiences without expensive cameras or 3D modelling.",
     gradient: "from-blue-500 to-cyan-500",
   },
   {
     icon: Zap,
     title: "Lightning Fast Processing",
-    description: "From capture to publish in minutes. Our AI-powered platform delivers industry-leading turnaround times.",
+    description: "Go from capture to live listing in minutes.",
     gradient: "from-yellow-500 to-orange-500",
   },
   {
     icon: TrendingUp,
     title: "Proven Sales Growth",
-    description: "Dealerships using UrbanUplink see up to 40% increase in online engagement and conversion rates.",
+    description:
+      "Increase listing engagement, buyer confidence and enquiry quality.",
     gradient: "from-green-500 to-emerald-500",
   },
   {
     icon: Palette,
     title: "Brand Customization",
-    description: "Fully white-labeled solutions that match your dealership's brand identity perfectly.",
+    description:
+      "Create a consistent premium experience across every customer touchpoint.",
     gradient: "from-purple-500 to-pink-500",
   },
 ];
@@ -46,13 +49,14 @@ const Features = () => {
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 tracking-tight">
-            Complete 360° Solution for{" "}
+            Everything You Need to{" "}
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient">
-              Automotive Excellence
+              Market Vehicles Better.
             </span>
           </h2>
           <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Everything you need to showcase your inventory in stunning detail
+            One platform for capturing, enhancing, showcasing and publishing
+            professional automotive inventory.
           </p>
         </div>
 

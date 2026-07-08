@@ -17,7 +17,7 @@ const BackgroundRemovalShowcase = () => {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-brand-black py-16 md:py-28"
+      className="relative z-20 overflow-hidden bg-brand-black py-16 md:py-28"
       aria-labelledby="bg-removal-heading"
     >
       <div className="pointer-events-none absolute inset-0 section-glow opacity-60" />
@@ -28,14 +28,14 @@ const BackgroundRemovalShowcase = () => {
           transition={{ duration: 0.7 }}
         >
           <SectionHeading
-            eyebrow="AI-Powered Magic"
+            eyebrow="Professional Results. Instantly."
             title={
               <>
-                Instant{" "}
-                <span className="text-brand-lime">Background Removal</span>
+                First Impressions{" "}
+                <span className="text-brand-lime">Sell Cars.</span>
               </>
             }
-            description="See the transformation in real-time. Drag the slider to compare before and after — from outdoor capture to studio-grade presentation."
+            description="Professional vehicle images build trust before customers ever visit your showroom. Move the slider to see how AI transforms ordinary smartphone photos into premium showroom-ready inventory."
           />
         </motion.div>
 
@@ -49,7 +49,7 @@ const BackgroundRemovalShowcase = () => {
             <BeforeAfterSlider
               beforeSrc={assets.beforeAfter.beforeDesktop}
               afterSrc={assets.beforeAfter.afterDesktop}
-              beforeLabel="Before"
+              beforeLabel="Captured on Phone"
               afterLabel="After"
               orientation="horizontal"
               aspectClass="aspect-video"
@@ -59,7 +59,7 @@ const BackgroundRemovalShowcase = () => {
             <BeforeAfterSlider
               beforeSrc={assets.beforeAfter.beforeMobile}
               afterSrc={assets.beforeAfter.afterMobile}
-              beforeLabel="Before"
+              beforeLabel="Captured on Phone"
               afterLabel="After"
               orientation="horizontal"
               aspectClass="aspect-[4/3]"

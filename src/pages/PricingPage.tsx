@@ -35,6 +35,7 @@ const plans = [
     },
     description:
       "Perfect for individual sellers and small dealerships getting started",
+    vehicleLimit: 50,
     features: [
       "Up to 50 vehicles/month",
       "Mobile capture app access",
@@ -57,6 +58,7 @@ const plans = [
       earlyBird: "50,000",
     },
     description: "Best for growing dealerships and automotive businesses",
+    vehicleLimit: 200,
     features: [
       "Up to 200 vehicles/month",
       "Everything in Starter, plus:",
@@ -82,6 +84,7 @@ const plans = [
       earlyBird: null,
     },
     description: "For large dealership groups and automotive platforms",
+    vehicleLimit: null,
     features: [
       "Unlimited vehicles",
       "Everything in Pro, plus:",
@@ -155,6 +158,13 @@ const faqs = [
   },
 ];
 
+const parsePrice = (price: string) => Number(price.replace(/,/g, ""));
+
+const formatPrice = (price: number) =>
+  new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 }).format(
+    Math.round(price),
+  );
+
 const PricingPage = () => {
   const [isAnnual, setIsAnnual] = useState(false);
 
@@ -207,7 +217,24 @@ const PricingPage = () => {
       <section className="pb-24">
         <div className="container px-4 md:px-6 mx-auto">
           <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto items-start">
-            {plans.map((plan, index) => (
+            {plans.map((plan, index) => {
+              const hasFixedPricing = plan.price.monthly !== "Custom" && plan.vehicleLimit;
+              const planTotal =
+                hasFixedPricing &&
+                (isAnnual ? plan.price.annually : plan.price.earlyBird || plan.price.monthly);
+              const vehicleAllowance = hasFixedPricing
+                ? plan.vehicleLimit * (isAnnual ? 12 : 1)
+                : null;
+              const perCarPrice =
+                planTotal && vehicleAllowance
+                  ? formatPrice(parsePrice(planTotal) / vehicleAllowance)
+                  : null;
+              const standardPerCar =
+                !isAnnual && hasFixedPricing
+                  ? formatPrice(parsePrice(plan.price.monthly) / plan.vehicleLimit)
+                  : null;
+
+              return (
               <Card
                 key={index}
                 className={`relative overflow-hidden transition-all duration-300 flex flex-col h-full ${
@@ -243,24 +270,27 @@ const PricingPage = () => {
                       <div className="space-y-2">
                         {!isAnnual && plan.price.earlyBird && (
                            <div className="inline-block bg-slate-900 text-white text-xs font-bold px-2 py-1 rounded mb-1 shadow-sm">
-                             Early bird offer {plan.price.earlyBird}
+                             Early bird offer ₹{plan.price.earlyBird}/month
                            </div>
                         )}
                         <div className="flex items-baseline gap-1">
                           <span className="text-xl font-bold">₹</span>
                           <span className={`text-4xl font-bold ${!isAnnual && plan.price.earlyBird ? 'text-accent' : ''}`}>
-                            {isAnnual 
-                              ? plan.price.annually 
-                              : (plan.price.earlyBird || plan.price.monthly)
-                            }
+                            {perCarPrice}
                           </span>
                           <span className="text-muted-foreground text-sm font-normal">
-                            /{isAnnual ? "year" : "month"}
+                            /car
                           </span>
                         </div>
-                        {!isAnnual && plan.price.earlyBird && (
-                          <div className="text-sm text-muted-foreground line-through decoration-red-500/50">
-                            ₹{plan.price.monthly}
+                        <div className="text-sm text-muted-foreground">
+                          Package total: ₹{planTotal}/{isAnnual ? "year" : "month"}
+                        </div>
+                        {!isAnnual && standardPerCar && plan.price.earlyBird && (
+                          <div className="text-sm text-muted-foreground">
+                            Standard:{" "}
+                            <span className="line-through decoration-red-500/50">
+                              ₹{standardPerCar}/car
+                            </span>
                           </div>
                         )}
                       </div>
@@ -295,7 +325,8 @@ const PricingPage = () => {
                   </Button>
                 </CardFooter>
               </Card>
-            ))}
+              );
+            })}
           </div>
 
           {/* Image Services Cards */}

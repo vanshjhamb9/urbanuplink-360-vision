@@ -5,10 +5,7 @@ import {
   Zap,
   Palette,
   Cloud,
-  Shield,
   Globe,
-  Smartphone,
-  Sparkles,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -17,9 +14,9 @@ import { Card, CardContent } from "@/components/ui/card";
 const features = [
   {
     icon: Camera,
-    title: "Mobile Capture Technology",
+    title: "Mobile Capture",
     description:
-      "Turn any smartphone into a professional 360° imaging device. No expensive equipment or special cameras needed.",
+      "Capture consistent vehicle images with guided workflows designed for dealerships.",
     details: [
       "Works with any modern smartphone",
       "Automated capture guidance",
@@ -28,10 +25,10 @@ const features = [
     ],
   },
   {
-    icon: Sparkles,
-    title: "AI Background Enhancement",
+    icon: Cloud,
+    title: "Studio Background Enhancement",
     description:
-      "Our AI automatically removes distracting backgrounds and replaces them with professional studio environments.",
+      "Create clean, professional inventory images that strengthen your brand identity.",
     details: [
       "One-click background removal",
       "Library of professional backgrounds",
@@ -42,7 +39,7 @@ const features = [
     icon: Zap,
     title: "Lightning Fast Processing",
     description:
-      "From upload to publish-ready 360° view in under 10 minutes. Industry-leading processing speeds powered by AI.",
+      "Move vehicles online in minutes, not days.",
     details: [
       "Real-time processing status",
       "Batch processing support",
@@ -52,9 +49,9 @@ const features = [
   },
   {
     icon: Globe,
-    title: "Instant 360° Viewer",
+    title: "360 Viewer",
     description:
-      "Embeddable, interactive viewer that works on any website or platform. Mobile-optimized for perfect viewing.",
+      "Give buyers the confidence to inspect every angle before visiting your showroom.",
     details: [
       "Responsive design",
       "Touch & swipe support",
@@ -78,7 +75,7 @@ const features = [
     icon: Palette,
     title: "Brand Customization",
     description:
-      "White-label solution that matches your brand perfectly. Customize colors, logos, and viewer interface.",
+      "Deliver a consistent branded experience across every listing.",
     details: [
       "Custom branding",
       "Logo placement",
@@ -114,11 +111,11 @@ const FeaturesPage = () => {
               Product Features
             </p>
             <h1 className="font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">
-              Everything You Need for Professional 360° Imaging
+              A Complete Vehicle Imaging Platform.
             </h1>
             <p className="mt-6 text-lg text-muted-brand md:text-xl">
-              Powerful features designed for automotive professionals. No
-              technical expertise required.
+              Everything needed to capture, enhance, manage and publish
+              professional vehicle inventory without expensive equipment.
             </p>
           </div>
         </div>

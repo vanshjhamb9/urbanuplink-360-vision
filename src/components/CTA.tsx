@@ -10,7 +10,7 @@ const CTA = () => {
   return (
     <section
       ref={ref}
-      className="relative min-h-[60svh] overflow-hidden bg-brand-black py-16 md:min-h-0 md:py-28"
+      className="relative z-20 min-h-[60svh] overflow-hidden bg-brand-black py-16 md:min-h-0 md:py-28"
       aria-labelledby="cta-heading"
     >
       <div className="absolute inset-0">
@@ -38,16 +38,16 @@ const CTA = () => {
             id="cta-heading"
             className="font-heading text-2xl font-extrabold tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl"
           >
-            Ready to Transform Your{" "}
-            <span className="text-brand-lime">Vehicle Listings?</span>
+            Ready to Make Every Listing{" "}
+            <span className="text-brand-lime">Look Professional?</span>
           </h2>
           <p className="mt-4 text-sm text-muted-brand sm:mt-5 sm:text-base md:text-lg">
-            Join leading dealerships and marketplaces using Urban Uplink to create
-            stunning 360° experiences that convert.
+            Give your team a faster way to capture, enhance and publish vehicle
+            inventory that builds buyer confidence.
           </p>
           <div className="mt-6 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
             <GlowButton href="/contact" variant="filled" className="w-full sm:w-auto">
-              Get Started
+              Book a Demo
             </GlowButton>
             <GlowButton href="/pricing" className="w-full sm:w-auto">
               View Pricing

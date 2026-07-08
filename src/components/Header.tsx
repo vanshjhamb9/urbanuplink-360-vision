@@ -76,12 +76,12 @@ const Header = () => {
             </nav>
 
             <div className="relative z-10 hidden items-center lg:flex">
-              <GlowButton href="/contact">Get Started</GlowButton>
+              <GlowButton href="/contact">Book Demo</GlowButton>
             </div>
 
             <div className="flex items-center gap-2 max-[380px]:gap-1 lg:hidden">
               <GlowButton href="/contact" className="hidden px-4 py-2 text-xs min-[381px]:inline-flex">
-                Get Started
+                Book Demo
               </GlowButton>
               <button
                 type="button"
@@ -152,7 +152,7 @@ const Header = () => {
 
               <div className="mt-auto border-t border-white/10 pt-6">
                 <GlowButton href="/contact" className="w-full">
-                  Get Started
+                  Book Demo
                 </GlowButton>
               </div>
             </motion.nav>

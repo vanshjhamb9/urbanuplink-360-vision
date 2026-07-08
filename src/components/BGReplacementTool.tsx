@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Check, Camera, Eraser, Image } from "lucide-react";
-import tataHarrierOriginal from "@/assets/maruti-grand-vitara.png";
+import originalVehicleImage from "@/assets/maruti-grand-vitara.png";
 import carNoBg from "@/assets/maruti-grand-vitara-removebg-preview.png";
 import backdropImage from "@/assets/backdrop.webp";
 import bgImageCar from "@/assets/bgimage_car.webp";
 import bgImage360 from "@/assets/Bgimage360.webp";
 import logoImage from "@/assets/2 (2).png";
 
-// Using Tata Harrier - original with background and transparent PNG version
-const carImageOriginal = tataHarrierOriginal;
+// Original capture and matching transparent PNG version
+const carImageOriginal = originalVehicleImage;
 const carImageWithNoBg = carNoBg; // Background-removed PNG
 
 const stages = [

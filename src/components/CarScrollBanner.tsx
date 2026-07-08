@@ -9,13 +9,13 @@ import carBgImage4 from "@/assets/bg-removed/Output/processed_004.png";
 import carBgImage5 from "@/assets/bg-removed/Output/processed_005.png";
 import carBgImage6 from "@/assets/bg-removed/Output/processed_007.png";
 
-// Indian car showcase gallery with images, content, and tags
+// Automotive showcase gallery with images, content, and tags
 const carShowcase = [
   {
     image: jeepImage,
     background: "from-slate-50 to-blue-50",
-    angle: "Jeep Front Profile",
-    name: "Jeep Grand Cherokee",
+    angle: "Front Profile",
+    name: "Premium SUV",
     price: "₹80.5L",
     year: "2024",
     dark: false,
@@ -23,8 +23,8 @@ const carShowcase = [
   {
     image: harrierImage,
     background: "from-blue-50 to-indigo-50",
-    angle: "BYD Front Quarter",
-    name: "BYD Atto 3",
+    angle: "Front Quarter",
+    name: "Electric Crossover",
     price: "₹33.9L",
     year: "2024",
     dark: false,
@@ -32,8 +32,8 @@ const carShowcase = [
   {
     image: carBgImage6,
     background: "from-slate-100 to-white",
-    angle: "Jeep Low Angle",
-    name: "Jeep Grand Cherokee",
+    angle: "Low Angle",
+    name: "Flagship SUV",
     price: "₹78.9L",
     year: "2024",
     dark: false,
@@ -41,8 +41,8 @@ const carShowcase = [
   {
     image: carBgImage1,
     background: "from-indigo-50 to-blue-100",
-    angle: "BMW Quarter View",
-    name: "BMW X7",
+    angle: "Quarter View",
+    name: "Luxury SUV",
     price: "₹1.27Cr",
     year: "2024",
     dark: false,
@@ -50,8 +50,8 @@ const carShowcase = [
   {
     image: carBgImage2,
     background: "from-white to-slate-50",
-    angle: "Citroen Front View",
-    name: "Citroen C3",
+    angle: "Front View",
+    name: "Compact Hatchback",
     price: "₹6.4L",
     year: "2024",
     dark: false,
@@ -59,8 +59,8 @@ const carShowcase = [
   {
     image: carBgImage3,
     background: "from-white to-slate-50",
-    angle: "Citroen Side View",
-    name: "Citroen C3",
+    angle: "Side View",
+    name: "Urban Hatchback",
     price: "₹6.8L",
     year: "2024",
     dark: false,
@@ -68,8 +68,8 @@ const carShowcase = [
   {
     image: carBgImage4,
     background: "from-white to-slate-50",
-    angle: "Creta Front View",
-    name: "Hyundai Creta",
+    angle: "Front View",
+    name: "Mid-Size SUV",
     price: "₹11.0L",
     year: "2024",
     dark: false,
@@ -77,8 +77,8 @@ const carShowcase = [
   {
     image: carBgImage5,
     background: "from-white to-slate-50",
-    angle: "Ioniq Front View",
-    name: "Hyundai Ioniq 5",
+    angle: "Front View",
+    name: "Electric SUV",
     price: "₹44.9L",
     year: "2024",
     dark: false,
@@ -95,7 +95,7 @@ const CarScrollBanner = () => {
         <div className="text-center max-w-3xl mx-auto">
           <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full border border-primary/20">
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-semibold text-sm">
-              Indian Automotive Excellence
+              Automotive Visual Excellence
             </span>
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
@@ -105,7 +105,7 @@ const CarScrollBanner = () => {
             </span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Explore the finest machines from India's leading automotive giants.
+            Explore polished inventory visuals built for modern automotive teams.
           </p>
         </div>
       </div>
