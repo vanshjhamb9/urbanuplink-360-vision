@@ -82,8 +82,9 @@ const UseCaseCards = () => {
                   mobileSrc={item.mobile}
                   alt={`${item.title.trim()} solution preview`}
                   objectPosition="object-center"
+                  imgClassName="brightness-110 contrast-110 saturate-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/15 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-brand-black/88 via-brand-black/20 to-transparent" />
               </div>
               <div className="relative p-4 sm:p-6">
                 <p className="text-[10px] font-semibold uppercase tracking-wider text-brand-lime sm:text-xs">

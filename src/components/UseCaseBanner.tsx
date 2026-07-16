@@ -39,17 +39,17 @@ export function UseCaseBanner({
           mobileSrc={imageMobile}
           alt={imageAlt}
           loading="lazy"
-          imgClassName="object-[center_20%] md:object-center"
+          imgClassName="object-[center_20%] brightness-110 contrast-110 saturate-110 md:object-center"
         />
       </div>
 
-      {/* Overlays — stronger on mobile for portrait banners */}
+      {/* Keep text readable on the left while leaving right-side visuals clear. */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/92 to-brand-black/30 md:via-brand-black/78 md:to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/84 to-transparent md:via-brand-black/62 md:to-transparent"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-black/95 via-brand-black/40 to-brand-black/50 md:from-brand-black/85 md:via-transparent md:to-brand-black/35"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-black/88 via-brand-black/20 to-transparent md:from-brand-black/58 md:via-transparent md:to-transparent"
         aria-hidden="true"
       />
 

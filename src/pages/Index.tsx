@@ -3,7 +3,7 @@ import Hero from "@/components/Hero";
 import BackgroundRemovalShowcase from "@/components/BackgroundRemovalShowcase";
 import { UseCaseBanner } from "@/components/UseCaseBanner";
 import { solutions } from "@/lib/solutions";
-import UseCaseCards from "@/components/UseCaseCards";
+import ThreeSixtyShowcase from "@/components/ThreeSixtyShowcase";
 import ProcessSection from "@/components/ProcessSection";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
@@ -21,7 +21,7 @@ const Index = () => {
       <main id="main-content">
         <Hero />
         <BackgroundRemovalShowcase />
-        <UseCaseCards />
+        <ThreeSixtyShowcase />
         {solutions.map((solution) => (
           <UseCaseBanner key={solution.id} {...solution} />
         ))}

@@ -1,4 +1,6 @@
 import { cn } from "@/lib/utils";
+import logoIcon from "@/assets/logo-icon-cropped.png";
+import logoWordmark from "@/assets/logo-wordmark-cropped.png";
 
 interface LogoProps {
   className?: string;
@@ -7,49 +9,36 @@ interface LogoProps {
 }
 
 const sizes = {
-  sm: { icon: "h-8 w-8", text: "text-base", tagline: "text-[10px]" },
-  md: { icon: "h-10 w-10", text: "text-lg", tagline: "text-[11px]" },
-  lg: { icon: "h-12 w-12", text: "text-xl", tagline: "text-xs" },
+  sm: {
+    icon: "h-8 w-8",
+    wordmark: "h-8 w-[9rem]",
+  },
+  md: {
+    icon: "h-9 w-9",
+    wordmark: "h-9 w-[10.25rem]",
+  },
+  lg: {
+    icon: "h-10 w-10",
+    wordmark: "h-10 w-[11.25rem]",
+  },
 };
 
 export function Logo({ className, showTagline = true, size = "md" }: LogoProps) {
   const s = sizes[size];
 
   return (
-    <div className={cn("flex items-center gap-3", className)}>
-      <svg
-        viewBox="0 0 48 48"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className={cn(s.icon, "shrink-0")}
+    <div className={cn("flex items-center gap-2.5", className)}>
+      <img
+        src={logoIcon}
+        alt=""
+        className={cn(s.icon, "shrink-0 object-contain")}
         aria-hidden="true"
-      >
-        <circle cx="24" cy="24" r="24" fill="#C9F135" />
-        <path
-          d="M24 12C18 12 14 16 14 22C14 28 18 32 24 32C30 32 34 28 34 22"
-          stroke="#3B9AE1"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <path
-          d="M24 32V36M20 36H28"
-          stroke="#0A0A0A"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-        <circle cx="24" cy="22" r="3" fill="#0A0A0A" />
-      </svg>
-      <div className="flex flex-col leading-none">
-        <span className={cn("font-heading font-extrabold tracking-tight", s.text)}>
-          <span className="text-brand-blue">urban</span>{" "}
-          <span className="text-brand-lime">uplink</span>
-        </span>
-        {showTagline && (
-          <span className={cn("mt-1 text-brand-blue/80 font-medium", s.tagline)}>
-            Smarter tools, greater impact
-          </span>
-        )}
-      </div>
+      />
+      <img
+        src={logoWordmark}
+        alt={showTagline ? "Urban Uplink - Smarter tools, greater impact" : "Urban Uplink"}
+        className={cn(s.wordmark, "shrink-0 object-contain object-left")}
+      />
     </div>
   );
 }

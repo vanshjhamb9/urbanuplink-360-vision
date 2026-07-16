@@ -141,9 +141,9 @@ const Hero = () => {
           className="pointer-events-none absolute inset-0 z-[1]"
           aria-hidden="true"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/88 to-brand-black/10 md:via-brand-black/58 md:to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/78 via-brand-black/20 to-brand-black/28 md:from-brand-black/70 md:via-transparent md:to-brand-black/18" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_45%,rgba(10,10,10,0.82)_0%,transparent_58%)]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/78 to-transparent md:via-brand-black/42 md:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/72 via-transparent to-transparent md:from-brand-black/58" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_45%,rgba(10,10,10,0.72)_0%,transparent_52%)]" />
           <div className="absolute inset-0 noise-overlay opacity-15 md:opacity-20" />
         </div>
 

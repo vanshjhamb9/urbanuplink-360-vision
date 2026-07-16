@@ -4,7 +4,6 @@ import CTA from "@/components/CTA";
 import Features from "@/components/Features";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, Smartphone, Zap, Cloud } from "lucide-react";
-import heroCar from "@/assets/hero-car.jpg";
 
 const LearnMorePage = () => {
   return (
@@ -34,8 +33,8 @@ const LearnMorePage = () => {
             </Button>
           </div>
           <img 
-            src={heroCar} 
-            alt="Urban Uplink Technology" 
+            src="/assets/before-after/seltos.avif" 
+            alt="KIA Seltos vehicle preview for Urban Uplink Technology" 
             className="rounded-2xl shadow-2xl mx-auto max-w-4xl w-full object-cover h-[400px]"
           />
         </div>

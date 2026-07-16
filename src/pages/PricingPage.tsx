@@ -110,6 +110,23 @@ const plans = [
 
 const imageServicePlans = [
   {
+    name: "360 Spin Experience",
+    description:
+      "Starter package for interactive vehicle spins. We create and host a smooth 360° car spin experience that can be embedded into marketplace listings, dealer pages, and buyer journeys.",
+    earlyBird: "249",
+    standard: "299",
+    unit: "car spin",
+    cta: "Start 360 Spin",
+    features: [
+      "Upload workflow",
+      "Hosted 360° spin viewer",
+      "Embeddable listing experience",
+      "Basic analytics",
+      "Email support",
+    ],
+    featured: true,
+  },
+  {
     name: "Bulk BG Removal Package",
     description:
       "Designed for dealerships and marketplaces handling large photo volumes. We remove distracting backgrounds quickly and consistently so every listing looks clean, professional, and marketplace-ready while reducing your edit turnaround time.",
@@ -117,6 +134,7 @@ const imageServicePlans = [
     standard: "12",
     unit: "image",
     cta: "Get Started",
+    features: ["Bulk upload", "Background removal", "Marketplace-ready exports"],
   },
   {
     name: "BG Removal + Branding + Replacement",
@@ -126,6 +144,7 @@ const imageServicePlans = [
     standard: "15",
     unit: "image",
     cta: "Get Started",
+    features: ["Brand styling", "Background replacement", "Consistent catalog visuals"],
   },
 ];
 
@@ -333,19 +352,29 @@ const PricingPage = () => {
           <div className="mt-14">
             <div className="text-center mb-8">
               <h3 className="text-2xl md:text-3xl font-bold">
-                Image Processing Services
+                Add-on Services & 360 Spin Pricing
               </h3>
               <p className="text-muted-foreground mt-2">
-                Flexible per-image pricing for background-focused workflows.
+                Flexible per-car and per-image pricing for specific workflows.
               </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {imageServicePlans.map((service, index) => (
                 <Card
                   key={index}
-                  className="border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 bg-card"
+                  className={`relative overflow-hidden border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 bg-card ${
+                    service.featured ? "border-accent/70 shadow-glow" : ""
+                  }`}
                 >
+                  {service.featured && (
+                    <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-primary to-accent" />
+                  )}
                   <CardHeader>
+                    {service.featured && (
+                      <div className="mb-3 w-fit rounded-full border border-accent/20 bg-accent/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-accent">
+                        Starter Package
+                      </div>
+                    )}
                     <CardTitle className="text-xl">{service.name}</CardTitle>
                     <CardDescription>{service.description}</CardDescription>
                   </CardHeader>
@@ -369,6 +398,14 @@ const PricingPage = () => {
                           ₹{service.standard}/{service.unit}
                         </span>
                       </div>
+                      <ul className="space-y-2 pt-2">
+                        {service.features.map((feature) => (
+                          <li key={feature} className="flex items-start gap-2 text-sm text-muted-foreground">
+                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </CardContent>
                   <CardFooter>

@@ -20,12 +20,12 @@ const CTA = () => {
           alt=""
           loading="lazy"
           objectPosition="object-center md:object-right"
-          imgClassName="opacity-40"
+          imgClassName="brightness-110 contrast-110 saturate-110"
         />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/92 to-brand-black/75 md:via-brand-black/90 md:to-brand-black/70" />
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-brand-black/40 md:hidden" />
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/80 to-brand-black/20 md:via-brand-black/62 md:to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-black/65 via-transparent to-transparent md:hidden" />
 
       <div className="container relative mx-auto flex min-h-[50svh] items-center px-4 md:min-h-0 md:px-6">
         <motion.div
