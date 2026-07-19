@@ -22,6 +22,12 @@ const smoothProgress = (value: number) => {
   return eased * eased * (3 - 2 * eased);
 };
 
+// Scroll budget while hero is pinned (viewport heights beyond the first screen).
+// Transition runs first; hold keeps the final studio view stuck for a few more scrolls.
+const HERO_TRANSITION_VH = 120;
+const HERO_HOLD_VH = 100;
+const HERO_SECTION_VH = 100 + HERO_TRANSITION_VH + HERO_HOLD_VH;
+
 type HeroPinState = "before" | "active" | "after";
 
 const getHeroScrollState = (section: HTMLElement | null) => {
@@ -29,13 +35,21 @@ const getHeroScrollState = (section: HTMLElement | null) => {
     return { progress: 0, pinState: "before" as HeroPinState };
   }
 
-  const scrollableDistance = Math.max(section.offsetHeight - window.innerHeight, 1);
-  const rawProgress = (window.scrollY - section.offsetTop) / scrollableDistance;
+  const viewport = window.innerHeight || 1;
+  const scrollableDistance = Math.max(section.offsetHeight - viewport, 1);
+  const scrolled = window.scrollY - section.offsetTop;
+  const rawProgress = scrolled / scrollableDistance;
   const pinState: HeroPinState =
     rawProgress < 0 ? "before" : rawProgress >= 1 ? "after" : "active";
 
+  // Complete the outdoor → studio reveal in the first portion, then hold at 1.
+  const transitionDistance = Math.max(
+    (HERO_TRANSITION_VH / (HERO_TRANSITION_VH + HERO_HOLD_VH)) * scrollableDistance,
+    1,
+  );
+
   return {
-    progress: clamp(rawProgress),
+    progress: clamp(scrolled / transitionDistance),
     pinState,
   };
 };
@@ -131,7 +145,7 @@ const Hero = () => {
     <section
       ref={sectionRef}
       className="relative z-10 bg-brand-black"
-      style={{ height: reducedMotion ? "100svh" : "220svh" }}
+      style={{ height: reducedMotion ? "100svh" : `${HERO_SECTION_VH}svh` }}
       aria-labelledby="hero-heading"
     >
       <div className={heroFrameClass}>

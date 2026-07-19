@@ -95,12 +95,12 @@ const totalAngles = car360Images.length;
 // Hotspots configuration - visible at specific angles
 // Note: 33 images total, index 6 = 180° (rear), index 7-9 = rear-left, index 10-12 = left side
 const hotspots = [
-  { id: 1, angleIndices: [8, 12], x: 50, y: 52, label: "Front Grille", description: "Parametric grille design" },
-  { id: 2, angleIndices: [8 , 12], x: 28, y: 48, label: "LED Headlights", description: "Projector LED headlamps" },
-  { id: 3, angleIndices: [1, 2, 3, 4, 10, 11, 12], x: 42, y: 62, label: "Alloy Wheels", description: "17\" diamond-cut alloys" },
-  { id: 4, angleIndices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], x: 50, y: 25, label: "Panoramic Sunroof", description: "Large panoramic sunroof" },
-  { id: 5, angleIndices: [26 ,27, 28 ,29], x: 72, y: 42, label: "LED Tail Lamps", description: "Connected LED tail lamps" },
-  { id: 6, angleIndices: [2, 3, 4, 5, 9,20], x: 55, y: 42, label: "Chrome Door Handles", description: "Body-colored with chrome accents" },
+  { id: 1, angleIndices: [2,3,4 , 8], x: 50, y: 57, label: "Front Grille", description: "Parametric grille design" },
+  { id: 2, angleIndices: [8 ], x: 36, y: 52, label: "LED Headlights", description: "Projector LED headlamps" },
+  { id: 3, angleIndices: [10, 11,12], x: 50, y: 62, label: "Alloy Wheels", description: "17\" diamond-cut alloys" },
+  { id: 4, angleIndices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], x: 50, y: 35, label: "Panoramic Sunroof", description: "Large panoramic sunroof" },
+  { id: 5, angleIndices: [26 ,27, 28 ,29], x: 74, y: 48, label: "LED Tail Lamps", description: "Connected LED tail lamps" },
+  { id: 6, angleIndices: [2, 3, 4, 5, 9 ], x: 60, y: 52, label: "Chrome Door Handles", description: "Body-colored with chrome accents" },
 ];
 
 const ThreeSixtyShowcase = () => {

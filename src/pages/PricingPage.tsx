@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingDemo from "@/components/FloatingDemo";
@@ -18,7 +19,7 @@ import { Label } from "@/components/ui/label";
 
 // Services:
 // 1.	BG Removal + Replacement (99/12 Images)
-// 2.	360 Spin (299/Car or 12 images)
+// 2.	360 Spin (500/Car or 12 images)
 // 3.	BG Replacement + 360 + Hotspots + Number plate masking (Original Price-598 Combo Price-499)
 // 4.	Manual Quality Check (INR 200/Car Minimum 200 Cars/Month volume)
 // 5.	White labeling of app (TBD)
@@ -110,11 +111,12 @@ const plans = [
 
 const imageServicePlans = [
   {
+    id: "360-spin",
     name: "360 Spin Experience",
     description:
       "Starter package for interactive vehicle spins. We create and host a smooth 360° car spin experience that can be embedded into marketplace listings, dealer pages, and buyer journeys.",
     earlyBird: "249",
-    standard: "299",
+    standard: "500",
     unit: "car spin",
     cta: "Start 360 Spin",
     features: [
@@ -127,6 +129,7 @@ const imageServicePlans = [
     featured: true,
   },
   {
+    id: "bulk-bg-removal",
     name: "Bulk BG Removal Package",
     description:
       "Designed for dealerships and marketplaces handling large photo volumes. We remove distracting backgrounds quickly and consistently so every listing looks clean, professional, and marketplace-ready while reducing your edit turnaround time.",
@@ -137,6 +140,7 @@ const imageServicePlans = [
     features: ["Bulk upload", "Background removal", "Marketplace-ready exports"],
   },
   {
+    id: "bg-removal-branding",
     name: "BG Removal + Branding + Replacement",
     description:
       "Complete post-processing for premium listing visuals. Along with precise background removal and replacement, we apply your brand look for a uniform catalog experience that improves buyer trust and helps your inventory stand out.",
@@ -186,6 +190,18 @@ const formatPrice = (price: number) =>
 
 const PricingPage = () => {
   const [isAnnual, setIsAnnual] = useState(false);
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return;
+    const id = hash.replace("#", "");
+    const el = document.getElementById(id);
+    if (el) {
+      requestAnimationFrame(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }, [hash]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -349,7 +365,7 @@ const PricingPage = () => {
           </div>
 
           {/* Image Services Cards */}
-          <div className="mt-14">
+          <div id="services" className="mt-14 scroll-mt-28">
             <div className="text-center mb-8">
               <h3 className="text-2xl md:text-3xl font-bold">
                 Add-on Services & 360 Spin Pricing
@@ -359,10 +375,11 @@ const PricingPage = () => {
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {imageServicePlans.map((service, index) => (
+              {imageServicePlans.map((service) => (
                 <Card
-                  key={index}
-                  className={`relative overflow-hidden border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 bg-card ${
+                  key={service.id}
+                  id={service.id}
+                  className={`relative scroll-mt-28 overflow-hidden border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 bg-card ${
                     service.featured ? "border-accent/70 shadow-glow" : ""
                   }`}
                 >
