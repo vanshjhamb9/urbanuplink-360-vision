@@ -254,15 +254,18 @@ const comparisonFeatures: {
   { feature: "Cars Included", starter: "50 / Month", pro: "200 / Month", enterprise: "Unlimited" },
   { feature: "AI Enhancement", starter: true, pro: true, enterprise: true },
   { feature: "AI Background Replacement", starter: true, pro: true, enterprise: true },
+  { feature: "License Plate Masking", starter: true, pro: true, enterprise: true },
   { feature: "360 Viewer", starter: true, pro: true, enterprise: true },
   { feature: "Walkaround Video", starter: true, pro: true, enterprise: true },
   { feature: "Offline App", starter: true, pro: true, enterprise: true },
+  { feature: "Processing", starter: "Standard", pro: "Priority", enterprise: "Priority" },
   { feature: "Custom Branding", starter: false, pro: true, enterprise: true },
   { feature: "Logo Background", starter: false, pro: true, enterprise: true },
   { feature: "Analytics", starter: "Basic", pro: "Advanced", enterprise: "Advanced +" },
   { feature: "Priority Support", starter: false, pro: true, enterprise: true },
   { feature: "API", starter: false, pro: false, enterprise: true },
   { feature: "CRM", starter: false, pro: false, enterprise: true },
+  { feature: "White Label Solution", starter: false, pro: false, enterprise: true },
   { feature: "Dedicated Manager", starter: false, pro: false, enterprise: true },
 ];
 
