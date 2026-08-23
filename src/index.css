@@ -124,6 +124,31 @@
       transparent 70%
     );
   }
+
+  .section-shell {
+    @apply py-20 md:py-24 lg:py-28;
+  }
+
+  .section-compact {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  /** Consistent gap between section heading and body content */
+  .section-body {
+    @apply mt-8 md:mt-10 lg:mt-12;
+  }
+
+  .page-container {
+    @apply container mx-auto w-full max-w-5xl;
+  }
+
+  .page-container-narrow {
+    @apply max-w-4xl;
+  }
+
+  .page-container-wide {
+    @apply container mx-auto w-full max-w-6xl;
+  }
 }
 
 @layer utilities {

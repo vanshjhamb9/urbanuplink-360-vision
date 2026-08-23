@@ -10,7 +10,7 @@ const FloatingDemo = () => {
         variant="filled"
         className="shadow-glow"
       >
-        Request a Demo
+        Book a Demo
       </GlowButton>
     </div>
   );

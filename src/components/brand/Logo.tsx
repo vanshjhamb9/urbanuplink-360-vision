@@ -10,24 +10,27 @@ interface LogoProps {
 
 const sizes = {
   sm: {
-    icon: "h-8 w-8",
-    wordmark: "h-8 w-[9rem]",
+    icon: "h-9 w-9",
+    wordmark: "h-7 w-[8.5rem]",
+    gap: "gap-2",
   },
   md: {
-    icon: "h-9 w-9",
-    wordmark: "h-9 w-[10.25rem]",
+    icon: "h-11 w-11",
+    wordmark: "h-8 w-[9.75rem]",
+    gap: "gap-2.5",
   },
   lg: {
-    icon: "h-10 w-10",
-    wordmark: "h-10 w-[11.25rem]",
+    icon: "h-12 w-12",
+    wordmark: "h-9 w-[11rem]",
+    gap: "gap-3",
   },
 };
 
-export function Logo({ className, showTagline = true, size = "md" }: LogoProps) {
+export function Logo({ className, showTagline = false, size = "md" }: LogoProps) {
   const s = sizes[size];
 
   return (
-    <div className={cn("flex items-center gap-2.5", className)}>
+    <div className={cn("flex items-center", s.gap, className)}>
       <img
         src={logoIcon}
         alt=""
@@ -36,8 +39,11 @@ export function Logo({ className, showTagline = true, size = "md" }: LogoProps) 
       />
       <img
         src={logoWordmark}
-        alt={showTagline ? "Urban Uplink - Smarter tools, greater impact" : "Urban Uplink"}
-        className={cn(s.wordmark, "shrink-0 object-contain object-left")}
+        alt="Urban Uplink"
+        className={cn(
+          s.wordmark,
+          "shrink-0 object-contain object-left brightness-110 contrast-110",
+        )}
       />
     </div>
   );

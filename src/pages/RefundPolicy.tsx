@@ -1,22 +1,8 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { LegalDocumentLayout } from "@/components/layout/LegalDocumentLayout";
 
 const RefundPolicy = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main className="container mx-auto px-4 md:px-6 pt-32 pb-12 lg:pt-48 max-w-4xl">
-        <h1
-          className="text-4xl font-bold mb-4"
-          data-testid="heading-refund-policy"
-        >
-          Refund Policy
-        </h1>
-        <p className="text-sm text-muted-foreground mb-8">
-          Last updated: October 2025
-        </p>
-
-        <div className="prose prose-slate max-w-none space-y-6">
+    <LegalDocumentLayout title="Refund Policy" updated="October 2025">
           <section>
             <p>
               At Urban Uplink Pvt. Ltd. ("Urban Uplink," "we," "our," or "us"),
@@ -129,10 +115,7 @@ const RefundPolicy = () => {
               changes are posted constitutes acceptance of the latest version.
             </p>
           </section>
-        </div>
-      </main>
-      <Footer />
-    </div>
+    </LegalDocumentLayout>
   );
 };
 

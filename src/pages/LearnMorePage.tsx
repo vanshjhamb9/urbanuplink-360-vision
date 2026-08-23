@@ -1,154 +1,169 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { motion } from "framer-motion";
+import { CheckCircle2, Cloud, Smartphone, Zap } from "lucide-react";
 import CTA from "@/components/CTA";
-import Features from "@/components/Features";
-import { Button } from "@/components/ui/button";
-import { CheckCircle2, Smartphone, Zap, Cloud } from "lucide-react";
+import FloatingDemo from "@/components/FloatingDemo";
+import { GlowButton } from "@/components/ui-custom/GlowButton";
+import { SectionHeading } from "@/components/ui-custom/SectionHeading";
+import { PageLayout } from "@/components/layout/PageLayout";
+
+const pillars = [
+  {
+    icon: Smartphone,
+    title: "Smartphone first",
+    description:
+      "No expensive DSLR cameras or turntables needed. Use the phone you already own with guided capture.",
+  },
+  {
+    icon: Zap,
+    title: "Fast processing",
+    description:
+      "Move from capture to polished visuals quickly with cloud-optimized processing.",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud sync",
+    description:
+      "Sync spins and listing assets to your dashboard and publish across channels.",
+  },
+];
+
+const benefits = [
+  "Reduce photography costs by up to 90%",
+  "Increase vehicle detail page engagement",
+  "Faster time-to-market for inventory",
+  "Consistent, professional look across all listings",
+  "Easy integration with existing websites",
+];
+
+const faqs = [
+  {
+    q: "Do I need a tripod?",
+    a: "A tripod helps, but guided capture and stabilization make handheld photos effective for most lots.",
+  },
+  {
+    q: "How long does processing take?",
+    a: "Most assets are ready within minutes after upload, depending on connection speed and batch size.",
+  },
+  {
+    q: "Can I change the background?",
+    a: "Yes — choose virtual studio environments or upload custom branded backdrops.",
+  },
+  {
+    q: "Is there an API available?",
+    a: "Yes. Integrate captures and viewers directly into your inventory and dealer systems.",
+  },
+];
 
 const LearnMorePage = () => {
   return (
-    <div className="min-h-screen font-sans">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-          <h1 className="text-4xl md:text-6xl p-[3rem] font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-            Built for the Future of Automotive Retail.
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto ">
-            See how AI-powered imaging helps dealerships, marketplaces,
-            detailers and fleet operators create better customer experiences
-            while reducing operational effort.
-          </p>
-          <div className="mx-auto mb-8 mt-8 flex max-w-3xl flex-col justify-center gap-3 sm:flex-row">
-            <Button variant="gradient" asChild>
-              <a href="/use-cases">Explore Case Studies</a>
-            </Button>
-            <Button variant="outline" asChild>
-              <a href="/contact">Watch Product Demo</a>
-            </Button>
-            <Button variant="outline" asChild>
-              <a href="/learn-more">Download Brochure</a>
-            </Button>
+    <PageLayout>
+      <section className="relative overflow-hidden border-b border-white/10 section-compact">
+        <div className="pointer-events-none absolute inset-0 section-glow" />
+        <div className="page-container relative text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65 }}
+          >
+            <SectionHeading
+              eyebrow="Platform Overview"
+              title={
+                <>
+                  Built for the future of{" "}
+                  <span className="text-brand-lime">automotive retail.</span>
+                </>
+              }
+              description="See how Urban Uplink helps dealerships, marketplaces, detailers, and fleet operators create better customer experiences while reducing operational effort."
+            />
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <GlowButton href="/use-cases" variant="filled">
+                Explore Industries
+              </GlowButton>
+              <GlowButton href="/contact">Book a Demo</GlowButton>
+              <GlowButton href="/pricing">View Pricing</GlowButton>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="section-shell border-b border-white/8">
+        <div className="page-container grid items-start gap-10 lg:grid-cols-2 lg:gap-12">
+          <div>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-lime">
+              About the platform
+            </p>
+            <h2 className="font-heading text-2xl font-extrabold text-white md:text-3xl">
+              The visual infrastructure platform for automotive retail.
+            </h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted-brand md:text-base">
+              Urban Uplink gives automotive teams one workflow to digitize, present,
+              inspect, and market vehicles. Photography is the starting point for a
+              platform built around better vehicle experiences.
+            </p>
+            <ul className="section-body space-y-5">
+              {pillars.map(({ icon: Icon, title, description }) => (
+                <li key={title} className="flex gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand-lime/25 bg-brand-lime/10">
+                    <Icon className="h-5 w-5 text-brand-lime" />
+                  </span>
+                  <div>
+                    <h3 className="font-heading text-base font-extrabold text-white">
+                      {title}
+                    </h3>
+                    <p className="mt-1 text-sm leading-relaxed text-white/65">
+                      {description}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
-          <img 
-            src="/assets/before-after/seltos.avif" 
-            alt="KIA Seltos vehicle preview for Urban Uplink Technology" 
-            className="rounded-2xl shadow-2xl mx-auto max-w-4xl w-full object-cover h-[400px]"
+
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8">
+            <h3 className="font-heading text-xl font-extrabold text-white">
+              Why choose Urban Uplink?
+            </h3>
+            <ul className="section-body space-y-3">
+              {benefits.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-sm text-white/80">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-lime" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 border-t border-white/10 pt-6">
+              <GlowButton href="/pricing" variant="filled" className="w-full sm:w-auto">
+                View Pricing Plans
+              </GlowButton>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell border-b border-white/8">
+        <div className="page-container">
+          <SectionHeading
+            eyebrow="FAQ"
+            title="Common questions"
+            description="Everything you need to know about getting started."
           />
-        </div>
-      </section>
-
-      {/* About Technology */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold">
-                The Visual Infrastructure Platform for Automotive Retail.
-              </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Urban Uplink gives automotive teams one workflow to digitize,
-                present, inspect and market vehicles. Photography is just the
-                starting point for a platform built around better vehicle
-                experiences.
-              </p>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <Smartphone className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-lg">Smartphone First</h3>
-                    <p className="text-muted-foreground">No expensive DSLR cameras or turntables needed. Just use the phone you already own.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Zap className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-lg">Instant Processing</h3>
-                    <p className="text-muted-foreground">Get results in seconds, not hours. Our cloud processing is optimized for speed.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Cloud className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-lg">Cloud Sync</h3>
-                    <p className="text-muted-foreground">Automatically sync your spins to your dashboard and integrate with your website.</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div className="bg-muted/30 p-8 rounded-2xl border border-border/50">
-              <h3 className="text-2xl font-bold mb-6">Why Choose Urban Uplink?</h3>
-              <div className="space-y-4">
-                {[
-                  "Reduce photography costs by up to 90%",
-                  "Increase vehicle detail page engagement",
-                  "Faster time-to-market for inventory",
-                  "Consistent, professional look across all listings",
-                  "Easy API integration with existing websites"
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span className="text-foreground/90">{item}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 pt-8 border-t border-border/50">
-                <Button variant="gradient" className="w-full">
-                    <a href="/pricing" className="w-full h-full flex items-center justify-center">
-                    View Pricing Plans
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Detailed Features Reuse */}
-      <Features />
-
-      {/* Extended FAQ / Details */}
-      <section className="py-20 bg-muted/20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-muted-foreground">Everything you need to know about getting started.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="bg-background p-6 rounded-xl shadow-sm border border-border/50">
-              <h3 className="text-xl font-bold mb-3">Do I need a tripod?</h3>
-              <p className="text-muted-foreground">
-                While a tripod can help ensure perfect stability, our AI stabilization technology makes handheld capture surprisingly easy and effective.
-              </p>
-            </div>
-            <div className="bg-background p-6 rounded-xl shadow-sm border border-border/50">
-              <h3 className="text-xl font-bold mb-3">How long does it take to process?</h3>
-              <p className="text-muted-foreground">
-                Most 360° spins are processed and ready to view within 1-2 minutes after upload, depending on your connection speed.
-              </p>
-            </div>
-            <div className="bg-background p-6 rounded-xl shadow-sm border border-border/50">
-              <h3 className="text-xl font-bold mb-3">Can I change the background?</h3>
-              <p className="text-muted-foreground">
-                Yes! We offer a variety of virtual studio backgrounds, or you can upload your own custom branded background.
-              </p>
-            </div>
-            <div className="bg-background p-6 rounded-xl shadow-sm border border-border/50">
-              <h3 className="text-xl font-bold mb-3">Is there an API available?</h3>
-              <p className="text-muted-foreground">
-                Absolutely. We provide robust API documentation to help you integrate the viewer directly into your existing inventory management system.
-              </p>
-            </div>
+          <div className="section-body grid gap-4 md:grid-cols-2">
+            {faqs.map(({ q, a }) => (
+              <article
+                key={q}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 md:p-6"
+              >
+                <h3 className="font-heading text-base font-extrabold text-white">{q}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/65">{a}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
       <CTA />
-      <Footer />
-    </div>
+      <FloatingDemo />
+    </PageLayout>
   );
 };
 

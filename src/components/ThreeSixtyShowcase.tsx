@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { motion } from "framer-motion";
 import {
   Calendar,
@@ -12,9 +12,15 @@ import {
   Play,
   RotateCcw,
   Share2,
-  Sparkles,
 } from "lucide-react";
 import { SectionHeading } from "@/components/ui-custom/SectionHeading";
+import { threeSixtyCopy } from "@/lib/homepageContent";
+import { assets } from "@/lib/assets";
+import { GlowButton } from "@/components/ui-custom/GlowButton";
+import interiorDashboard from "@/assets/sierra-interior.jpg";
+import interiorSeats from "@/assets/slavia4.avif";
+import interiorEngine from "@/assets/360-tech.jpg";
+import cretaRear from "@/assets/bgCreta/creta26.avif";
 
 // 360° car images - all angles with background removed
 import car360_1 from "@/assets/bgCreta/creta1.avif";
@@ -50,9 +56,6 @@ import car360_30 from "@/assets/bgCreta/creta30.avif";
 import car360_31 from "@/assets/bgCreta/creta31.avif";
 import car360_32 from "@/assets/bgCreta/creta32.avif";
 import car360_33 from "@/assets/bgCreta/creta33.avif";
-
-import carBg360 from "@/assets/Bgimage360.webp";
-import logoImage from "@/assets/2 (2).png";
 
 const car360Images = [
   car360_1,  // 0°
@@ -91,16 +94,162 @@ const car360Images = [
 ];
 
 const totalAngles = car360Images.length;
+const showroomBackground = assets.showroom.spinBackground;
 
-// Hotspots configuration - visible at specific angles
-// Note: 33 images total, index 6 = 180° (rear), index 7-9 = rear-left, index 10-12 = left side
-const hotspots = [
-  { id: 1, angleIndices: [2,3,4 , 8], x: 50, y: 57, label: "Front Grille", description: "Parametric grille design" },
-  { id: 2, angleIndices: [8 ], x: 36, y: 52, label: "LED Headlights", description: "Projector LED headlamps" },
-  { id: 3, angleIndices: [10, 11,12], x: 50, y: 62, label: "Alloy Wheels", description: "17\" diamond-cut alloys" },
-  { id: 4, angleIndices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], x: 50, y: 35, label: "Panoramic Sunroof", description: "Large panoramic sunroof" },
-  { id: 5, angleIndices: [26 ,27, 28 ,29], x: 74, y: 48, label: "LED Tail Lamps", description: "Connected LED tail lamps" },
-  { id: 6, angleIndices: [2, 3, 4, 5, 9 ], x: 60, y: 52, label: "Chrome Door Handles", description: "Body-colored with chrome accents" },
+/** Backdrop crop anchor — keeps the studio floor line aligned with the vehicle stage */
+const SPIN_BACKDROP_POSITION = "center 44%";
+
+type HotspotPoint = { x: number; y: number };
+
+type HotspotTrack = {
+  id: number;
+  label: string;
+  description: string;
+  /** Frame ranges where this feature is visible */
+  ranges: [number, number][];
+  /** Anchor positions — intermediate frames are interpolated */
+  keys: Record<number, HotspotPoint>;
+};
+
+const pos = (x: number, y: number): HotspotPoint => ({ x, y });
+
+const hotspotTracks: HotspotTrack[] = [
+  {
+    id: 1,
+    label: "Front Grille",
+    description: "Parametric grille design with chrome accents",
+    ranges: [
+      [0, 5],
+      [28, 32],
+    ],
+    keys: {
+      0: pos(50, 49),
+      1: pos(51, 49),
+      2: pos(53, 48),
+      3: pos(55, 48),
+      4: pos(58, 47),
+      5: pos(61, 46),
+      28: pos(39, 46),
+      29: pos(42, 47),
+      30: pos(45, 48),
+      31: pos(48, 49),
+      32: pos(50, 49),
+    },
+  },
+  {
+    id: 2,
+    label: "LED Headlights",
+    description: "Projector LED headlamps with DRL signature",
+    ranges: [
+      [0, 5],
+      [27, 32],
+    ],
+    keys: {
+      0: pos(35, 41),
+      1: pos(34, 40),
+      2: pos(33, 39),
+      3: pos(32, 39),
+      4: pos(39, 38),
+      5: pos(41, 37),
+      27: pos(58, 37),
+      28: pos(60, 38),
+      29: pos(61, 39),
+      30: pos(63, 40),
+      32: pos(65, 41),
+    },
+  },
+  {
+    id: 3,
+    label: "Alloy Wheels",
+    description: '17" diamond-cut alloy wheels',
+    ranges: [
+      [9, 10],
+      [24, 25],
+    ],
+    keys: {
+      9: pos(22, 71),
+      10: pos(23, 72),
+      24: pos(77, 71),
+      25: pos(76, 72),
+    },
+  },
+  {
+    id: 5,
+    label: "LED Tail Lamps",
+    description: "Connected LED tail lamp design",
+    ranges: [[14, 19]],
+    keys: {
+      14: pos(37, 43),
+      15: pos(42, 41),
+      16: pos(50, 39),
+      17: pos(58, 41),
+      18: pos(63, 43),
+      19: pos(66, 44),
+    },
+  },
+];
+
+function getHotspotPosition(track: HotspotTrack, frame: number): HotspotPoint | null {
+  const isVisible = track.ranges.some(([start, end]) => frame >= start && frame <= end);
+  if (!isVisible) return null;
+
+  if (track.keys[frame]) return track.keys[frame];
+
+  const keyFrames = Object.keys(track.keys)
+    .map(Number)
+    .sort((a, b) => a - b);
+
+  if (frame <= keyFrames[0]) return track.keys[keyFrames[0]];
+  if (frame >= keyFrames[keyFrames.length - 1]) return track.keys[keyFrames[keyFrames.length - 1]];
+
+  for (let i = 0; i < keyFrames.length - 1; i++) {
+    const lower = keyFrames[i];
+    const upper = keyFrames[i + 1];
+    if (frame >= lower && frame <= upper) {
+      const t = (frame - lower) / (upper - lower);
+      const from = track.keys[lower];
+      const to = track.keys[upper];
+      return {
+        x: from.x + (to.x - from.x) * t,
+        y: from.y + (to.y - from.y) * t,
+      };
+    }
+  }
+
+  return null;
+}
+
+type FeatureTab = "exterior" | "interior";
+
+const interiorFeatures = [
+  {
+    id: 101,
+    label: "Dashboard",
+    description: "Digital instrument cluster and touchscreen infotainment layout.",
+    image: interiorDashboard,
+    imageAlt: "Vehicle dashboard with digital cluster and infotainment screen",
+  },
+  {
+    id: 102,
+    label: "Seats",
+    description: "Premium upholstery with ergonomic seating for long drives.",
+    image: interiorSeats,
+    imageAlt: "Premium cabin seats and interior upholstery",
+  },
+  {
+    id: 103,
+    label: "Boot Space",
+    description: "Generous cargo area with flat loading floor.",
+    image: cretaRear,
+    imageAlt: "Rear view showing boot and tail section of the vehicle",
+  },
+  {
+    id: 104,
+    label: "Engine Bay",
+    description: "Efficient powertrain with accessible service points.",
+    image: interiorEngine,
+    imageAlt: "Engine bay and powertrain components",
+  },
 ];
 
 const ThreeSixtyShowcase = () => {
@@ -110,7 +259,9 @@ const ThreeSixtyShowcase = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
   const [velocity, setVelocity] = useState(0);
-  const [activeHotspot, setActiveHotspot] = useState<number>(hotspots[3].id);
+  const [activeHotspot, setActiveHotspot] = useState<number>(hotspotTracks[0].id);
+  const [activeInteriorId, setActiveInteriorId] = useState<number>(interiorFeatures[0].id);
+  const [featureTab, setFeatureTab] = useState<FeatureTab>("exterior");
   const [framesReady, setFramesReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number>();
@@ -120,30 +271,27 @@ const ThreeSixtyShowcase = () => {
     let cancelled = false;
 
     const preloadFrames = async () => {
+      // Eagerly preload first frame for LCP; batch the rest
+      const first = new Promise<void>((resolve) => {
+        const image = new Image();
+        image.onload = () => resolve();
+        image.onerror = () => resolve();
+        image.src = car360Images[0];
+      });
+      await first;
+      if (!cancelled) setFramesReady(true);
+
       await Promise.all(
-        car360Images.map(
+        car360Images.slice(1).map(
           (src) =>
             new Promise<void>((resolve) => {
               const image = new Image();
-              image.onload = async () => {
-                if ("decode" in image) {
-                  try {
-                    await image.decode();
-                  } catch {
-                    // Continue even if a browser cannot decode this frame eagerly.
-                  }
-                }
-                resolve();
-              };
+              image.onload = () => resolve();
               image.onerror = () => resolve();
               image.src = src;
             }),
         ),
       );
-
-      if (!cancelled) {
-        setFramesReady(true);
-      }
     };
 
     preloadFrames();
@@ -244,72 +392,91 @@ const ThreeSixtyShowcase = () => {
     setVelocity(angleChange);
   };
 
-  // Manual navigation with smooth transitions
-  const handlePrevious = () => {
+  const stepFrame = (direction: -1 | 1) => {
     setIsPlaying(false);
-    setRotationAngle((prev) => {
-      const angleStep = 360 / totalAngles;
-      const newAngle = (prev - angleStep * 3 + 360) % 360;
-      const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
-      setCurrentImageIndex(newIndex);
-      return newAngle;
+    setCurrentImageIndex((prev) => {
+      const newIndex = (prev + direction + totalAngles) % totalAngles;
+      setRotationAngle((newIndex / totalAngles) * 360);
+      return newIndex;
     });
   };
 
-  const handleNext = () => {
-    setIsPlaying(false);
-    setRotationAngle((prev) => {
-      const angleStep = 360 / totalAngles;
-      const newAngle = (prev + angleStep * 3) % 360;
-      const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
-      setCurrentImageIndex(newIndex);
-      return newAngle;
-    });
-  };
+  const handlePrevious = () => stepFrame(-1);
+  const handleNext = () => stepFrame(1);
 
-  const visibleHotspots = hotspots.filter((spot) =>
-    spot.angleIndices.includes(currentImageIndex),
+  const visibleHotspots = useMemo(
+    () =>
+      hotspotTracks
+        .map((track) => {
+          const position = getHotspotPosition(track, currentImageIndex);
+          return position ? { ...track, position } : null;
+        })
+        .filter((track): track is HotspotTrack & { position: HotspotPoint } => track !== null),
+    [currentImageIndex],
   );
+
+  useEffect(() => {
+    setActiveHotspot((prev) => {
+      const visible = hotspotTracks
+        .map((track) => {
+          const position = getHotspotPosition(track, currentImageIndex);
+          return position ? track.id : null;
+        })
+        .filter((id): id is number => id !== null);
+
+      if (visible.includes(prev)) return prev;
+      return visible[0] ?? prev;
+    });
+  }, [currentImageIndex]);
+
   const selectedHotspot =
-    hotspots.find((spot) => spot.id === activeHotspot) ||
-    visibleHotspots[0] ||
-    hotspots[0];
+    hotspotTracks.find((spot) => spot.id === activeHotspot) || visibleHotspots[0] || hotspotTracks[0];
+  const selectedInterior =
+    interiorFeatures.find((f) => f.id === activeInteriorId) ?? interiorFeatures[0];
 
   return (
-    <section className="relative z-20 overflow-hidden bg-brand-black py-16 md:py-28">
-      <div className="pointer-events-none absolute inset-0 section-glow opacity-80" />
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-brand-blue/10 blur-[120px]" />
-      <div className="container relative mx-auto px-4 md:px-6">
+    <section
+      id="360-experience"
+      className="relative z-20 overflow-hidden bg-brand-black section-shell"
+    >
+      <div className="pointer-events-none absolute inset-0 section-glow opacity-60" />
+      <div className="page-container">
         <SectionHeading
-          eyebrow="Interactive 360 Experience"
+          eyebrow={threeSixtyCopy.eyebrow}
           title={
             <>
-              Spin, inspect and explore{" "}
-              <span className="text-brand-lime">every detail.</span>
+              {threeSixtyCopy.title}{" "}
+              <span className="text-brand-lime">{threeSixtyCopy.titleAccent}</span>
             </>
           }
-          description="A premium Creta-style vehicle experience with smooth 360 rotation, clickable hotspots and buyer-ready listing context."
+          description={threeSixtyCopy.description}
+          className="max-w-2xl md:mx-auto md:text-center"
         />
+        <p className="mx-auto mt-4 max-w-xl text-center text-sm font-semibold text-brand-lime/90 md:text-base">
+          {threeSixtyCopy.tagline}
+        </p>
+        <p className="mx-auto mt-1 max-w-xl text-center text-xs text-white/45">
+          {threeSixtyCopy.footnote}
+        </p>
 
-        <div className="mx-auto mt-10 max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.035] shadow-card backdrop-blur-xl md:mt-14">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.18fr_0.82fr]">
+        <div className="section-body mx-auto overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] shadow-card backdrop-blur-xl lg:rounded-[1.25rem]">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
             {/* Left: 360 Viewer */}
-            <div className="relative flex min-h-[430px] items-center justify-center overflow-hidden border-b border-white/10 bg-[linear-gradient(145deg,#0e1214,#050606)] p-0 lg:min-h-[640px] lg:border-b-0 lg:border-r">
-              {/* Showroom Background */}
+            <div className="relative flex min-h-[min(58svh,520px)] items-center justify-center overflow-hidden border-b border-white/10 lg:min-h-[min(68svh,620px)] lg:border-b-0 lg:border-r">
+              {/* Client showroom background — 16:9 crop aligned to vehicle floor */}
               <div className="absolute inset-0 z-0">
-                <img src={carBg360} className="h-full w-full object-cover opacity-75 brightness-75 contrast-125" alt="" />
-                <div className="absolute inset-0 bg-gradient-to-b from-brand-black/20 via-brand-black/5 to-brand-black/65" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(201,241,53,0.12),transparent_36%)]" />
-                <div className="absolute inset-x-8 bottom-16 h-24 rounded-full bg-brand-lime/10 blur-3xl" />
+                <img
+                  src={showroomBackground}
+                  className="h-full w-full object-cover brightness-110 contrast-100"
+                  style={{ objectPosition: SPIN_BACKDROP_POSITION }}
+                  alt=""
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-brand-black/20" />
               </div>
 
-              {/* Centered Logo on the background wall - Positioned higher to be visible */}
-              <div className="pointer-events-none absolute inset-x-0 top-16 z-0 flex items-center justify-center opacity-60">
-                <img src={logoImage} className="h-auto w-28 object-contain md:w-44" alt="Urban Uplink" />
-              </div>
               <div
                 ref={containerRef}
-                className="perspective-1000 relative flex h-full w-full cursor-grab touch-none items-center justify-center active:cursor-grabbing"
+                className="perspective-1000 relative h-full w-full cursor-grab touch-none active:cursor-grabbing"
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
@@ -325,8 +492,11 @@ const ThreeSixtyShowcase = () => {
                   setVelocity(0);
                 }}
               >
-                {/* 360 Images - Instant switch for real rotation effect */}
-                <div className="relative mt-20 flex aspect-[4/3] w-full items-center justify-center px-3 sm:mt-24 sm:px-8 lg:mt-28">
+                {/* Vehicle stage — larger scale so hotspots align to body panels */}
+                <div
+                  className="absolute bottom-[10%] left-1/2 z-10 w-[min(88%,820px)] -translate-x-1/2 translate-y-[1%] lg:bottom-[14%] lg:translate-y-[2%]"
+                  style={{ aspectRatio: "1120 / 425" }}
+                >
                   {!framesReady && (
                     <div className="absolute inset-0 z-30 flex items-center justify-center">
                       <div className="rounded-full border border-brand-lime/20 bg-brand-black/75 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-brand-lime backdrop-blur-xl">
@@ -336,62 +506,66 @@ const ThreeSixtyShowcase = () => {
                   )}
                   {car360Images.map((img, index) => {
                     const isActive = index === currentImageIndex;
-                    
+
                     return (
                       <img
                         key={index}
                         src={img}
                         alt={`Angle ${index * 11}`}
-                        className={`absolute h-full w-full translate-y-8 object-contain drop-shadow-[0_45px_80px_rgba(0,0,0,0.72)] sm:translate-y-10 lg:translate-y-12 ${
-                          isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                        className={`absolute inset-0 h-full w-full origin-[center_100%] scale-[1.1] object-contain object-bottom brightness-125 contrast-110 drop-shadow-[0_22px_44px_rgba(0,0,0,0.34)] [object-position:50%_103%] ${
+                          isActive ? "z-10 opacity-100" : "pointer-events-none z-0 opacity-0"
                         }`}
-                        loading="eager"
+                        loading={index === 0 ? "eager" : "lazy"}
                         decoding="async"
                       />
                     );
                   })}
-                  
+
                   {/* Hotspots Overlay */}
                   {visibleHotspots.map((spot) => (
-                      <button
-                        key={spot.id}
-                        type="button"
-                        className="group absolute z-20 cursor-pointer"
-                        style={{
-                          left: `${spot.x}%`,
-                          top: `${spot.y}%`,
-                        }}
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          setActiveHotspot(spot.id);
-                          setIsPlaying(false);
-                        }}
-                        aria-label={`Open ${spot.label} hotspot`}
-                      >
-                         <div className="relative">
-                           <div className="absolute inset-0 h-7 w-7 rounded-full bg-brand-lime/35 animate-ping" />
-                           <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-brand-lime text-brand-black shadow-[0_0_24px_rgba(201,241,53,0.55)] transition-transform group-hover:scale-125">
-                              <div className="h-2 w-2 rounded-full bg-brand-black" />
-                           </div>
-                           {/* Tooltip */}
-                           <div className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-xl border border-white/10 bg-brand-black/90 px-3 py-2 text-left text-xs font-bold text-white opacity-0 shadow-card backdrop-blur transition-opacity group-hover:opacity-100">
-                             <span className="text-brand-lime">{spot.label}</span>
-                             <span className="mt-0.5 block font-medium text-white/55">{spot.description}</span>
-                           </div>
-                         </div>
-                      </button>
+                    <button
+                      key={spot.id}
+                      type="button"
+                      className={`group absolute z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-opacity ${
+                        activeHotspot === spot.id ? "opacity-100" : "opacity-90"
+                      }`}
+                      style={{
+                        left: `${spot.position.x}%`,
+                        top: `${spot.position.y}%`,
+                      }}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setActiveHotspot(spot.id);
+                        setIsPlaying(false);
+                      }}
+                      aria-label={`Open ${spot.label} hotspot`}
+                      aria-current={activeHotspot === spot.id}
+                    >
+                      <div className="relative">
+                           <div className={`flex h-6 w-6 items-center justify-center rounded-full border-2 bg-white/90 text-brand-black shadow-md transition-transform group-hover:scale-110 ${
+                             activeHotspot === spot.id
+                               ? "border-brand-lime scale-110"
+                               : "border-white/90"
+                           }`}>
+                          <div className="h-1.5 w-1.5 rounded-full bg-brand-black/70" />
+                        </div>
+                        <div className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-xl border border-white/10 bg-brand-black/90 px-3 py-2 text-left text-xs font-bold text-white opacity-0 shadow-card backdrop-blur transition-opacity group-hover:opacity-100">
+                          <span className="text-white">{spot.label}</span>
+                          <span className="mt-0.5 block font-medium text-white/55">{spot.description}</span>
+                        </div>
+                      </div>
+                    </button>
                   ))}
                 </div>
-
 
                 {/* Controls Overlay */}
                 <div className="pointer-events-none absolute bottom-6 left-5 right-5 z-30 flex items-center justify-between">
                   {/* Rotation Indicator */}
                   <div className="pointer-events-auto flex items-center gap-3 rounded-full border border-white/10 bg-brand-black/70 px-4 py-2 text-white shadow-card backdrop-blur-xl">
-                     <RotateCcw className="h-4 w-4 text-brand-lime" />
+                     <RotateCcw className="h-4 w-4 text-white/70" />
                      <div className="h-1.5 w-28 overflow-hidden rounded-full bg-white/10">
                         <div 
-                          className="h-full rounded-full bg-gradient-to-r from-brand-lime to-brand-blue transition-all duration-100"
+                          className="h-full rounded-full bg-white/80 transition-all duration-100"
                           style={{ width: `${(rotationAngle / 360) * 100}%` }}
                         />
                      </div>
@@ -403,7 +577,7 @@ const ThreeSixtyShowcase = () => {
                    {/* Play/Pause */}
                    <button
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-brand-lime/30 bg-brand-lime text-brand-black shadow-[0_0_28px_rgba(201,241,53,0.35)] transition-transform hover:scale-105"
+                    className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/90 text-brand-black transition-transform hover:scale-105"
                     aria-label={isPlaying ? "Pause 360 rotation" : "Play 360 rotation"}
                   >
                     {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="ml-1 h-5 w-5" />}
@@ -445,23 +619,48 @@ const ThreeSixtyShowcase = () => {
               </div>
             </div>
 
-            <div className="flex h-full flex-col bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.02))] p-6 text-white sm:p-8 lg:p-10">
-               <div className="mb-6 flex items-start justify-between gap-4">
-                  <div className="rounded-full border border-brand-lime/20 bg-brand-lime/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-brand-lime">
+            <div className="flex h-full max-h-[min(88svh,760px)] flex-col overflow-y-auto bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.02))] p-5 text-white sm:p-6 lg:p-8">
+               <div className="mb-4 flex items-start justify-between gap-4">
+                  <div className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/60">
                     Featured Listing
                   </div>
                   <div className="text-right">
-                    <div className="bg-gradient-to-r from-white to-brand-lime bg-clip-text text-3xl font-extrabold text-transparent">₹18.5L</div>
+                    <div className="text-3xl font-extrabold text-brand-lime">₹18.5L</div>
                     <div className="text-xs font-medium text-white/55">On-road Mumbai</div>
                   </div>
                </div>
 
-               <h3 className="mb-1 font-heading text-3xl font-extrabold tracking-tight text-white">Certified Mid-Size SUV</h3>
-               <p className="mb-8 font-medium text-white/58">Automatic • Verified Listing • 360° Enabled</p>
+               <h3 className="mb-1 font-heading text-2xl font-extrabold tracking-tight text-white sm:text-3xl">Certified Mid-Size SUV</h3>
+               <p className="mb-4 text-sm font-medium text-white/58">Automatic • Verified Listing • 360° Enabled</p>
 
-               <div className="mb-6 grid grid-cols-2 gap-3 sm:gap-4">
+               <div className="mb-4 flex gap-2 rounded-xl border border-white/10 bg-brand-black/40 p-1">
+                 <button
+                   type="button"
+                   onClick={() => setFeatureTab("exterior")}
+                   className={`flex-1 rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wide transition-colors ${
+                     featureTab === "exterior"
+                       ? "bg-brand-lime text-brand-black"
+                       : "text-white/60 hover:text-white"
+                   }`}
+                 >
+                   Exterior
+                 </button>
+                 <button
+                   type="button"
+                   onClick={() => setFeatureTab("interior")}
+                   className={`flex-1 rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wide transition-colors ${
+                     featureTab === "interior"
+                       ? "bg-brand-lime text-brand-black"
+                       : "text-white/60 hover:text-white"
+                   }`}
+                 >
+                   Interior
+                 </button>
+               </div>
+
+               <div className="mb-4 grid grid-cols-2 gap-2 sm:gap-3">
                   <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-brand-black/45 p-4">
-                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-lime/20 bg-brand-lime/10 text-brand-lime">
+                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80">
                         <Calendar className="h-5 w-5" />
                      </div>
                      <div>
@@ -470,7 +669,7 @@ const ThreeSixtyShowcase = () => {
                      </div>
                   </div>
                   <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-brand-black/45 p-4">
-                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-lime/20 bg-brand-lime/10 text-brand-lime">
+                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80">
                         <Gauge className="h-5 w-5" />
                      </div>
                      <div>
@@ -479,7 +678,7 @@ const ThreeSixtyShowcase = () => {
                      </div>
                   </div>
                   <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-brand-black/45 p-4">
-                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-lime/20 bg-brand-lime/10 text-brand-lime">
+                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80">
                         <Fuel className="h-5 w-5" />
                      </div>
                      <div>
@@ -488,7 +687,7 @@ const ThreeSixtyShowcase = () => {
                      </div>
                   </div>
                   <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-brand-black/45 p-4">
-                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-lime/20 bg-brand-lime/10 text-brand-lime">
+                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80">
                         <MapPin className="h-5 w-5" />
                      </div>
                      <div>
@@ -498,26 +697,83 @@ const ThreeSixtyShowcase = () => {
                   </div>
                </div>
 
-               <motion.div
-                  key={selectedHotspot.id}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="relative mb-4 overflow-hidden rounded-2xl border border-brand-lime/20 bg-brand-lime/10 p-5"
-                >
-                  <div className="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-brand-lime/15 blur-2xl" />
-                  <div className="relative z-10">
-                    <div className="mb-2 flex items-center gap-2">
+               {featureTab === "exterior" ? (
+                 <motion.div
+                   key={selectedHotspot.id}
+                   initial={{ opacity: 0, y: 12 }}
+                   animate={{ opacity: 1, y: 0 }}
+                   transition={{ duration: 0.25 }}
+                   className="relative mb-4 overflow-hidden rounded-2xl border border-brand-lime/20 bg-brand-lime/10 p-4"
+                 >
+                   <div className="relative z-10">
+                     <div className="mb-2 flex items-center gap-2">
                        <MousePointer2 className="h-4 w-4 text-brand-lime" />
                        <span className="text-sm font-bold text-brand-lime">{selectedHotspot.label}</span>
-                    </div>
-                    <p className="text-sm leading-relaxed text-white/72">
-                       {selectedHotspot.description}. Click hotspots on the vehicle to open area-specific details.
-                    </p>
-                  </div>
-               </motion.div>
+                     </div>
+                     <p className="text-sm leading-relaxed text-white/72">
+                       {selectedHotspot.description}. Click hotspots on the vehicle to explore exterior details.
+                     </p>
+                   </div>
+                 </motion.div>
+               ) : (
+                 <div className="mb-4 space-y-3">
+                   <div className="grid grid-cols-2 gap-2">
+                     {interiorFeatures.map((feature) => (
+                       <button
+                         key={feature.id}
+                         type="button"
+                         onClick={() => setActiveInteriorId(feature.id)}
+                         className={`overflow-hidden rounded-xl border text-left transition-colors ${
+                           activeInteriorId === feature.id
+                             ? "border-brand-lime/40 bg-brand-lime/10"
+                             : "border-white/10 bg-brand-black/40 hover:border-white/20"
+                         }`}
+                       >
+                         <div className="relative aspect-[4/3] overflow-hidden border-b border-white/10 bg-brand-black/50">
+                           <img
+                             src={feature.image}
+                             alt={feature.imageAlt}
+                             className="h-full w-full object-cover brightness-110 contrast-105"
+                             loading="lazy"
+                             decoding="async"
+                           />
+                         </div>
+                         <span
+                           className={`block px-3 py-2 text-xs font-bold ${
+                             activeInteriorId === feature.id ? "text-brand-lime" : "text-white/75"
+                           }`}
+                         >
+                           {feature.label}
+                         </span>
+                       </button>
+                     ))}
+                   </div>
+                   <motion.div
+                     key={selectedInterior.id}
+                     initial={{ opacity: 0, y: 8 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     className="overflow-hidden rounded-2xl border border-brand-blue/20 bg-brand-blue/10"
+                   >
+                     <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10">
+                       <img
+                         src={selectedInterior.image}
+                         alt={selectedInterior.imageAlt}
+                         className="h-full w-full object-cover brightness-110 contrast-105"
+                         loading="lazy"
+                         decoding="async"
+                       />
+                     </div>
+                     <div className="p-4">
+                       <p className="text-sm font-bold text-white">{selectedInterior.label}</p>
+                       <p className="mt-1 text-xs leading-relaxed text-white/65">
+                         {selectedInterior.description}
+                       </p>
+                     </div>
+                   </motion.div>
+                 </div>
+               )}
 
-               <div className="relative mb-8 overflow-hidden rounded-2xl border border-brand-blue/20 bg-brand-blue/10 p-5">
+               <div className="relative mb-4 overflow-hidden rounded-2xl border border-brand-blue/20 bg-brand-blue/10 p-4">
                   <div className="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-brand-blue/20 blur-2xl" />
                   <div className="relative z-10">
                     <div className="mb-2 flex items-center gap-2">
@@ -530,10 +786,10 @@ const ThreeSixtyShowcase = () => {
                   </div>
                </div>
 
-               <div className="mt-auto space-y-3">
-                  <button className="w-full rounded-xl bg-brand-lime py-4 font-bold text-brand-black shadow-[0_0_32px_rgba(201,241,53,0.22)] transition-all hover:scale-[1.01] hover:bg-white active:scale-[0.99]">
-                     Book Interactive Demo
-                  </button>
+               <div className="mt-auto space-y-3 pt-2">
+                  <GlowButton href="/contact" variant="filled" className="w-full justify-center">
+                     Book a Demo
+                  </GlowButton>
                   <div className="flex gap-3">
                      <button className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 py-3 font-bold text-white/72 transition-colors hover:border-brand-lime/40 hover:bg-brand-lime/10 hover:text-brand-lime">
                         <Heart className="h-4 w-4" /> Save

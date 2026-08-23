@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { PageLayout } from "@/components/layout/PageLayout";
 import FloatingDemo from "@/components/FloatingDemo";
 import {
   Check,
@@ -139,6 +138,7 @@ const plans: Plan[] = [
       "Unlimited Vehicles",
       "Dedicated Success Manager",
       "Custom AI Models",
+      "API Access",
       "API Integration",
       "CRM Integration",
       "White Label Solution",
@@ -256,6 +256,7 @@ const comparisonFeatures: {
   { feature: "AI Background Replacement", starter: true, pro: true, enterprise: true },
   { feature: "License Plate Masking", starter: true, pro: true, enterprise: true },
   { feature: "360 Viewer", starter: true, pro: true, enterprise: true },
+  { feature: "360 Spin Package", starter: "₹249 / car", pro: "Add-on", enterprise: "Custom" },
   { feature: "Walkaround Video", starter: true, pro: true, enterprise: true },
   { feature: "Offline App", starter: true, pro: true, enterprise: true },
   { feature: "Processing", starter: "Standard", pro: "Priority", enterprise: "Priority" },
@@ -263,7 +264,8 @@ const comparisonFeatures: {
   { feature: "Logo Background", starter: false, pro: true, enterprise: true },
   { feature: "Analytics", starter: "Basic", pro: "Advanced", enterprise: "Advanced +" },
   { feature: "Priority Support", starter: false, pro: true, enterprise: true },
-  { feature: "API", starter: false, pro: false, enterprise: true },
+  { feature: "API Access", starter: false, pro: false, enterprise: true },
+  { feature: "API Integration", starter: false, pro: false, enterprise: true },
   { feature: "CRM", starter: false, pro: false, enterprise: true },
   { feature: "White Label Solution", starter: false, pro: false, enterprise: true },
   { feature: "Dedicated Manager", starter: false, pro: false, enterprise: true },
@@ -274,6 +276,11 @@ const faqs = [
     question: "Can I change plans later?",
     answer:
       "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately.",
+  },
+  {
+    question: "What is the difference between API Access and API Integration?",
+    answer:
+      "API Access means your plan includes access to Urban Uplink APIs and services so your systems can use platform capabilities. API Integration is custom implementation work to connect Urban Uplink into your existing website, web app, mobile app, backend, or infrastructure — including development, testing, deployment, and configuration as needed.",
   },
   {
     question: "Is there a free trial?",
@@ -331,24 +338,22 @@ const PricingPage = () => {
   }, [hash]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Header />
-
+    <PageLayout>
       {/* Hero */}
-      <section className="relative overflow-hidden pt-32 pb-16 lg:pt-44 lg:pb-20">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
-        <div className="pointer-events-none absolute left-1/2 top-24 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+      <section className="relative overflow-hidden border-b border-white/10 section-compact">
+        <div className="pointer-events-none absolute inset-0 section-glow" />
+        <div className="pointer-events-none absolute left-1/2 top-12 h-48 w-[36rem] -translate-x-1/2 rounded-full bg-brand-lime/5 blur-3xl" />
 
-        <div className="container relative z-10 mx-auto px-4 text-center md:px-6">
-          <div className="mb-6 inline-flex items-center justify-center rounded-full border border-accent/20 bg-accent/10 p-1.5">
-            <span className="px-3 py-1 text-sm font-semibold text-accent">
+        <div className="page-container relative z-10 text-center">
+          <div className="mb-5 inline-flex items-center justify-center rounded-full border border-brand-lime/25 bg-brand-lime/10 px-4 py-1.5">
+            <span className="text-sm font-semibold text-brand-lime">
               Simple, Transparent Pricing
             </span>
           </div>
-          <h1 className="mb-6 text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-            Choose the Right Plan for Your Growth
+          <h1 className="font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl lg:text-5xl">
+            Choose the right plan for your growth
           </h1>
-          <p className="mx-auto mb-10 max-w-2xl text-xl text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-brand md:text-base">
             Enterprise-grade automotive imaging for dealerships, marketplaces,
             and platforms. Clear pricing. No hidden fees.
           </p>
@@ -386,9 +391,9 @@ const PricingPage = () => {
       </section>
 
       {/* Main Plans */}
-      <section className="pb-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="mx-auto grid max-w-7xl items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      <section className="section-shell">
+        <div className="page-container-wide page-container">
+          <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {plans.map((plan) => {
               const isCustom = plan.pricing === "custom";
               const price = isCustom ? null : plan.pricing[billing];
@@ -523,7 +528,7 @@ const PricingPage = () => {
           </div>
 
           {/* Feature Comparison Table */}
-          <div className="mx-auto mt-24 max-w-7xl">
+          <div className="page-container-wide page-container mt-16 md:mt-20">
             <div className="mb-10 text-center">
               <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
                 Compare Plans
@@ -600,7 +605,7 @@ const PricingPage = () => {
               </p>
             </div>
 
-            <div className="mx-auto grid max-w-7xl items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            <div className="page-container-wide page-container grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
               {imageServicePlans.map((service) => {
                 const price = service.pricing[billing];
 
@@ -727,22 +732,23 @@ const PricingPage = () => {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="bg-muted/30 py-24">
-        <div className="container mx-auto px-4 md:px-6">
+      <section className="section-shell border-t border-white/8">
+        <div className="page-container">
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
+            <h2 className="mb-10 text-center font-heading text-2xl font-extrabold text-white md:text-3xl">
               Frequently Asked Questions
             </h2>
-            <div className="grid gap-6">
+            <div className="grid gap-4">
               {faqs.map((faq) => (
                 <Card
                   key={faq.question}
-                  className="border-0 bg-background/60 shadow-sm backdrop-blur transition-colors hover:bg-background"
+                  className="border-white/10 bg-white/[0.03] transition-colors hover:border-brand-lime/20"
                 >
-                  <CardContent className="p-6">
-                    <h4 className="mb-2 text-lg font-semibold">{faq.question}</h4>
-                    <p className="leading-relaxed text-muted-foreground">
+                  <CardContent className="p-5 md:p-6">
+                    <h4 className="mb-2 font-heading text-base font-extrabold text-white">
+                      {faq.question}
+                    </h4>
+                    <p className="text-sm leading-relaxed text-muted-brand">
                       {faq.answer}
                     </p>
                   </CardContent>
@@ -754,8 +760,7 @@ const PricingPage = () => {
       </section>
 
       <FloatingDemo />
-      <Footer />
-    </div>
+    </PageLayout>
   );
 };
 

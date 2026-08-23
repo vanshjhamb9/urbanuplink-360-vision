@@ -113,7 +113,7 @@ export function BeforeAfterSlider({
     <div
       ref={containerRef}
       className={cn(
-        "relative overflow-hidden select-none",
+        "relative select-none overflow-visible",
         isHero
           ? "h-full w-full"
           : cn("rounded-2xl border border-white/10 shadow-card", aspectClass),
@@ -143,7 +143,7 @@ export function BeforeAfterSlider({
       <div
         className={cn(
           "pointer-events-none absolute z-20 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-brand-black",
-          isHero ? "right-6 top-6 md:right-10 md:top-10" : "left-4 top-4",
+          isHero ? "right-6 top-6 md:right-10 md:top-10" : "left-3 top-3 sm:left-4 sm:top-4",
         )}
       >
         {beforeLabel}

@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
+import { SectionHeading } from "@/components/ui-custom/SectionHeading";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
 
 import { useToast } from "@/components/ui/use-toast";
 
@@ -83,31 +84,32 @@ const ContactPage = () => {
 
   return (
     <PageLayout>
-      <section className="relative overflow-hidden py-16 md:py-20">
+      <section className="relative overflow-hidden border-b border-white/10 section-compact">
         <div className="pointer-events-none absolute inset-0 section-glow" />
-        <div className="container relative z-10 mx-auto px-4 text-center md:px-6">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-lime">
-            Get in Touch
-          </p>
-          <h1 className="font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">
-            Let's Transform Your Business
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-brand">
-            Have questions about our technology or pricing? We're here to help
-            you get started.
-          </p>
+        <div className="page-container relative z-10 text-center">
+          <SectionHeading
+            eyebrow="Get in Touch"
+            title={
+              <>
+                Let&apos;s transform{" "}
+                <span className="text-brand-lime">your business</span>
+              </>
+            }
+            description="Have questions about our technology or pricing? We're here to help you get started."
+          />
         </div>
       </section>
 
-      {/* Content Section */}
-      <section className="pb-24">
-        <div className="container px-4 md:px-6 mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start max-w-6xl mx-auto">
+      <section className="section-shell">
+        <div className="page-container-wide page-container">
+          <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-12">
             {/* Contact Info Side */}
             <div className="space-y-8">
               <div className="space-y-6">
-                <h2 className="text-3xl font-bold">Contact Information</h2>
-                <p className="text-muted-foreground text-lg">
+                <h2 className="font-heading text-2xl font-extrabold text-white">
+                  Contact Information
+                </h2>
+                <p className="text-sm leading-relaxed text-muted-brand md:text-base">
                   Ready to upgrade your visual documentation? Reach out to us
                   through any of these channels.
                 </p>
@@ -139,28 +141,15 @@ const ContactPage = () => {
                 ))}
               </div>
 
-              {/* Trust Badge */}
-              <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl p-6 border border-primary/10">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="flex -space-x-3">
-                    {[1, 2, 3].map((i) => (
-                      <div
-                        key={i}
-                        className="w-10 h-10 rounded-full border-2 border-background bg-muted flex items-center justify-center text-xs font-bold"
-                      >
-                        User
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    <div className="font-bold">Trusted by 500+</div>
-                    <div className="text-sm text-muted-foreground">
-                      Dealerships & businesses
-                    </div>
-                  </div>
-                </div>
-                <p className="text-sm font-medium">
-                  "UrbanUplink revolutionized how we showcase our inventory."
+              <div className="rounded-2xl border border-brand-lime/15 bg-brand-lime/[0.05] p-6">
+                <p className="font-heading text-base font-extrabold text-white">
+                  Trusted by dealerships &amp; operators
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-white/65">
+                  &ldquo;Urban Uplink revolutionized how we showcase our inventory.&rdquo;
+                </p>
+                <p className="mt-3 text-xs text-white/45">
+                  — Dealer partner, marketplace listing team
                 </p>
               </div>
             </div>

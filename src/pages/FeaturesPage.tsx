@@ -1,16 +1,9 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import FloatingDemo from "@/components/FloatingDemo";
-import {
-  Camera,
-  Zap,
-  Palette,
-  Cloud,
-  Globe,
-} from "lucide-react";
+import { SectionHeading } from "@/components/ui-custom/SectionHeading";
+import { Camera, Zap, Palette, Cloud, Globe } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
-
-// Testing the environent 
 const features = [
   {
     icon: Camera,
@@ -37,9 +30,9 @@ const features = [
   },
   {
     icon: Zap,
-    title: "Lightning Fast Processing",
+    title: "Instant Processing",
     description:
-      "Move vehicles online in minutes, not days.",
+      "Move vehicles online quickly with cloud-optimized processing.",
     details: [
       "Real-time processing status",
       "Batch processing support",
@@ -59,18 +52,6 @@ const features = [
       "Fullscreen mode",
     ],
   },
-  // {
-  //   icon: Shield,
-  //   title: "Enterprise Security",
-  //   description:
-  //     "Bank-level encryption and secure cloud infrastructure. Your data is protected 24/7 with automatic backups.",
-  //   details: [
-  //     "256-bit encryption",
-  //     "SOC 2 compliant",
-  //     "Automatic backups",
-  //     "Role-based access control",
-  //   ],
-  // },
   {
     icon: Palette,
     title: "Brand Customization",
@@ -83,70 +64,51 @@ const features = [
       "Custom domains",
     ],
   },
-  // {
-  //   icon: Smartphone,
-  //   title: "Multi-Platform Integration",
-  //   description:
-  //     "Seamlessly integrate with your existing website, CRM, and automotive marketplace platforms.",
-  //   details: [
-  //     "WordPress plugin",
-  //     "API access",
-  //     "Marketplace integrations",
-  //     "CRM connectors",
-  //   ],
-  // },
 ];
-
-
-// Bulk processing card
 
 const FeaturesPage = () => {
   return (
     <PageLayout>
-      <section className="relative overflow-hidden py-16 md:py-24">
+      <section className="relative overflow-hidden border-b border-white/10 section-compact">
         <div className="pointer-events-none absolute inset-0 section-glow" />
-        <div className="container relative mx-auto px-4 md:px-6">
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-brand-lime">
-              Product Features
-            </p>
-            <h1 className="font-heading text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">
-              A Complete Vehicle Imaging Platform.
-            </h1>
-            <p className="mt-6 text-lg text-muted-brand md:text-xl">
-              Everything needed to capture, enhance, manage and publish
-              professional vehicle inventory without expensive equipment.
-            </p>
-          </div>
+        <div className="page-container">
+          <SectionHeading
+            eyebrow="Product Features"
+            title={
+              <>
+                A complete vehicle imaging{" "}
+                <span className="text-brand-lime">platform.</span>
+              </>
+            }
+            description="Everything needed to capture, enhance, manage, and publish professional vehicle inventory without expensive equipment."
+          />
         </div>
       </section>
 
-      <section className="pb-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid gap-6 md:grid-cols-2">
-            {features.map((feature, index) => (
+      <section className="section-shell">
+        <div className="page-container">
+          <div className="grid gap-5 md:grid-cols-2 md:gap-6">
+            {features.map((feature) => (
               <Card
-                key={index}
-                className="group border-white/10 bg-gradient-card transition-all duration-500 hover:-translate-y-1 hover:border-brand-lime/30 hover:shadow-glow"
+                key={feature.title}
+                className="group border-white/10 bg-white/[0.03] transition-all duration-500 hover:-translate-y-1 hover:border-brand-lime/30 hover:shadow-glow"
               >
-                <CardContent className="p-8">
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl border border-brand-lime/20 bg-brand-lime/10 transition-transform duration-500 group-hover:scale-110">
-                    <feature.icon className="h-7 w-7 text-brand-lime" />
+                <CardContent className="p-6 md:p-7">
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-brand-lime/20 bg-brand-lime/10 transition-transform duration-500 group-hover:scale-105">
+                    <feature.icon className="h-6 w-6 text-brand-lime" />
                   </div>
 
-                  <h3 className="mb-3 font-heading text-2xl font-extrabold text-white group-hover:text-brand-lime transition-colors">
+                  <h3 className="mb-2 font-heading text-xl font-extrabold text-white transition-colors group-hover:text-brand-lime">
                     {feature.title}
                   </h3>
-                  <p className="mb-6 leading-relaxed text-muted-brand">
+                  <p className="mb-5 text-sm leading-relaxed text-muted-brand">
                     {feature.description}
                   </p>
 
-                  <ul className="space-y-3">
-                    {feature.details.map((detail, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <div className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand-lime/10">
-                          <div className="h-2 w-2 rounded-full bg-brand-lime" />
-                        </div>
+                  <ul className="space-y-2.5">
+                    {feature.details.map((detail) => (
+                      <li key={detail} className="flex items-start gap-3">
+                        <div className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-lime" />
                         <span className="text-sm text-white/80">{detail}</span>
                       </li>
                     ))}

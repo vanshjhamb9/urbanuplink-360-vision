@@ -13,19 +13,19 @@ export default {
     container: {
       center: true,
       padding: {
-        DEFAULT: "1rem",
-        sm: "1.25rem",
-        md: "1.5rem",
-        lg: "2rem",
-        xl: "2rem",
-        "2xl": "2rem",
+        DEFAULT: "1.25rem",
+        sm: "1.5rem",
+        md: "2rem",
+        lg: "2.5rem",
+        xl: "3rem",
+        "2xl": "3.5rem",
       },
       screens: {
         sm: "640px",
         md: "768px",
         lg: "1024px",
-        xl: "1280px",
-        "2xl": "1440px",
+        xl: "1180px",
+        "2xl": "1280px",
       },
     },
     extend: {
@@ -114,6 +114,14 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-8px)" },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+        "marquee-reverse": {
+          from: { transform: "translateX(-50%)" },
+          to: { transform: "translateX(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -122,6 +130,8 @@ export default {
         "scale-in": "scale-in 0.6s ease-out forwards",
         shimmer: "shimmer 3s linear infinite",
         float: "float 6s ease-in-out infinite",
+        marquee: "marquee 36s linear infinite",
+        "marquee-reverse": "marquee-reverse 36s linear infinite",
       },
     },
   },

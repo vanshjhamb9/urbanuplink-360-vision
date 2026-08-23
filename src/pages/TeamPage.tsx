@@ -1,8 +1,8 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Linkedin, Mail, Rocket, Handshake, Lightbulb } from "lucide-react";
 import FloatingDemo from "@/components/FloatingDemo";
-import { Linkedin, Mail } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { GlowButton } from "@/components/ui-custom/GlowButton";
+import { SectionHeading } from "@/components/ui-custom/SectionHeading";
+import { PageLayout } from "@/components/layout/PageLayout";
 
 const team = [
   {
@@ -11,8 +11,7 @@ const team = [
     experience: "6 years",
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces",
-    bio: "Marketing strategist with expertise in automotive tech and digital transformation. Former Head of Marketing at AutoTech Solutions.",
-    linkedin: "#",
+    bio: "Marketing strategist with expertise in automotive tech and digital transformation.",
   },
   {
     name: "Jayshree Kumar",
@@ -20,8 +19,7 @@ const team = [
     experience: "5 years",
     image:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=faces",
-    bio: "Growth expert specializing in performance marketing and brand strategy. Scaled multiple automotive SaaS platforms.",
-    linkedin: "#",
+    bio: "Growth expert specializing in performance marketing and brand strategy.",
   },
   {
     name: "Michael Chen",
@@ -29,8 +27,7 @@ const team = [
     experience: "8 years",
     image:
       "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=faces",
-    bio: "AI and computer vision specialist. Previously led engineering teams at major tech companies building imaging solutions.",
-    linkedin: "#",
+    bio: "AI and computer vision specialist building imaging solutions at scale.",
   },
   {
     name: "Sarah Williams",
@@ -38,8 +35,7 @@ const team = [
     experience: "7 years",
     image:
       "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=400&fit=crop&crop=faces",
-    bio: "Product visionary with deep understanding of automotive industry needs. Former Product Lead at enterprise software companies.",
-    linkedin: "#",
+    bio: "Product leader focused on automotive industry workflows and dealer outcomes.",
   },
   {
     name: "David Kumar",
@@ -47,8 +43,7 @@ const team = [
     experience: "6 years",
     image:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=faces",
-    bio: "Customer success champion dedicated to ensuring clients achieve maximum value. Automotive industry veteran.",
-    linkedin: "#",
+    bio: "Customer success champion helping clients maximize platform value.",
   },
   {
     name: "Emily Rodriguez",
@@ -56,184 +51,142 @@ const team = [
     experience: "5 years",
     image:
       "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=faces",
-    bio: "Award-winning designer creating intuitive experiences. Passionate about making complex technology accessible.",
-    linkedin: "#",
+    bio: "Designer creating intuitive experiences for complex automotive technology.",
+  },
+];
+
+const values = [
+  {
+    icon: Rocket,
+    title: "Innovation first",
+    description:
+      "We push boundaries to deliver imaging tools that transform how vehicles are presented online.",
+  },
+  {
+    icon: Handshake,
+    title: "Customer success",
+    description:
+      "Your outcomes drive our roadmap — from capture quality to listing performance.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Simplicity",
+    description:
+      "Powerful technology should feel effortless for dealers, operators, and marketing teams.",
   },
 ];
 
 const TeamPage = () => {
   return (
-    <div className="min-h-screen">
-      <Header />
-
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 bg-gradient-to-br from-primary/10 via-accent/5 to-background overflow-hidden">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
-        </div>
-
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-block mb-4 px-4 py-2 bg-accent/10 rounded-full border border-accent/20">
-              <span className="text-accent font-semibold text-sm">
-                Our Team
-              </span>
-            </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-              Meet the Minds Behind{" "}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                UrbanUplink
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-              A passionate team of innovators, designers, and automotive
-              technology experts dedicated to transforming the industry
-            </p>
-          </div>
+    <PageLayout>
+      <section className="relative overflow-hidden border-b border-white/10 section-compact">
+        <div className="pointer-events-none absolute inset-0 section-glow" />
+        <div className="page-container">
+          <SectionHeading
+            eyebrow="Our Team"
+            title={
+              <>
+                Meet the minds behind{" "}
+                <span className="text-brand-lime">Urban Uplink.</span>
+              </>
+            }
+            description="Innovators, designers, and automotive technology experts dedicated to elevating every vehicle listing."
+          />
         </div>
       </section>
 
-      {/* Team Grid */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {team.map((member, index) => (
-              <Card
-                key={index}
-                className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 hover:border-accent/50 overflow-hidden"
+      <section className="section-shell border-b border-white/8">
+        <div className="page-container-wide page-container">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            {team.map((member) => (
+              <article
+                key={member.name}
+                className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-brand-lime/30"
               >
-                <CardContent className="p-0">
-                  {/* Image */}
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                    {/* Social Links */}
-                    <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                      <a
-                        href={member.linkedin}
-                        className="w-10 h-10 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center hover:bg-primary transition-colors"
-                      >
-                        <Linkedin className="w-5 h-5 text-primary-foreground" />
-                      </a>
-                      <a
-                        href={`mailto:${member.name.toLowerCase().replace(" ", ".")}@urbanuplink.com`}
-                        className="w-10 h-10 rounded-full bg-primary/90 backdrop-blur flex items-center justify-center hover:bg-primary transition-colors"
-                      >
-                        <Mail className="w-5 h-5 text-primary-foreground" />
-                      </a>
-                    </div>
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+                    <a
+                      href="mailto:hello@urbanuplink.com"
+                      className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-brand-black/80 text-white backdrop-blur hover:border-brand-lime/40"
+                      aria-label={`Email ${member.name}`}
+                    >
+                      <Mail className="h-4 w-4" />
+                    </a>
+                    <span
+                      className="flex h-9 w-9 cursor-default items-center justify-center rounded-full border border-white/20 bg-brand-black/80 text-white/40 backdrop-blur"
+                      aria-hidden="true"
+                    >
+                      <Linkedin className="h-4 w-4" />
+                    </span>
                   </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    <div className="mb-4">
-                      <h3 className="text-2xl font-bold mb-1 group-hover:text-primary transition-colors">
-                        {member.name}
-                      </h3>
-                      <p className="text-accent font-semibold text-sm mb-1">
-                        {member.role}
-                      </p>
-                      <p className="text-muted-foreground text-xs">
-                        {member.experience} experience
-                      </p>
-                    </div>
-
-                    <p className="text-foreground/80 text-sm leading-relaxed">
-                      {member.bio}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+                </div>
+                <div className="p-5">
+                  <h3 className="font-heading text-lg font-extrabold text-white">
+                    {member.name}
+                  </h3>
+                  <p className="mt-1 text-sm font-semibold text-brand-lime">{member.role}</p>
+                  <p className="text-xs text-white/45">{member.experience} experience</p>
+                  <p className="mt-3 text-sm leading-relaxed text-white/65">{member.bio}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-24 bg-gradient-to-br from-muted/30 via-background to-muted/30">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Our Values</h2>
-            <p className="text-lg text-muted-foreground">
-              The principles that guide everything we do
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="border-2 hover:border-accent/50 transition-all text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4">
-                  <span className="text-3xl">🚀</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3">Innovation First</h3>
-                <p className="text-muted-foreground text-sm">
-                  We constantly push boundaries to deliver cutting-edge
-                  solutions that transform the automotive industry.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-accent/50 transition-all text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4">
-                  <span className="text-3xl">🤝</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3">Customer Success</h3>
-                <p className="text-muted-foreground text-sm">
-                  Your success is our success. We're committed to helping you
-                  achieve your business goals.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-accent/50 transition-all text-center">
-              <CardContent className="p-8">
-                <div className="w-16 h-16 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mb-4">
-                  <span className="text-3xl">💡</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3">Simplicity</h3>
-                <p className="text-muted-foreground text-sm">
-                  We believe powerful technology should be easy to use. No
-                  complexity, just results.
-                </p>
-              </CardContent>
-            </Card>
+      <section className="section-shell border-b border-white/8">
+        <div className="page-container">
+          <SectionHeading
+            title="Our values"
+            description="The principles that guide everything we build."
+          />
+          <div className="section-body grid gap-4 md:grid-cols-3 md:gap-6">
+            {values.map(({ icon: Icon, title, description }) => (
+              <article
+                key={title}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center"
+              >
+                <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl border border-brand-lime/25 bg-brand-lime/10">
+                  <Icon className="h-5 w-5 text-brand-lime" />
+                </span>
+                <h3 className="mt-4 font-heading text-base font-extrabold text-white">
+                  {title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/65">{description}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Join Team CTA */}
-      <section className="py-24 bg-gradient-to-r from-primary via-accent to-primary-glow text-primary-foreground">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Join Our Team
+      <section className="section-compact">
+        <div className="page-container">
+          <div className="rounded-2xl border border-brand-lime/20 bg-brand-lime/[0.06] p-6 text-center md:p-10">
+            <h2 className="font-heading text-2xl font-extrabold text-white md:text-3xl">
+              Join our team
             </h2>
-            <p className="text-xl text-primary-foreground/90 mb-8">
-              We're always looking for talented individuals who share our
-              passion for innovation and automotive technology.
+            <p className="mx-auto mt-3 max-w-xl text-sm text-muted-brand md:text-base">
+              We&apos;re always looking for talented people who share our passion for
+              automotive innovation.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="mailto:careers@urbanuplink.com"
-                className="inline-flex items-center justify-center px-8 py-4 bg-background text-foreground rounded-lg font-semibold hover:bg-background/90 transition-all duration-300 hover:scale-105"
-              >
+            <div className="mt-6 flex justify-center">
+              <GlowButton href="mailto:careers@urbanuplink.com" variant="filled">
                 View Open Positions
-              </a>
+              </GlowButton>
             </div>
           </div>
         </div>
       </section>
 
       <FloatingDemo />
-      <Footer />
-    </div>
+    </PageLayout>
   );
 };
 

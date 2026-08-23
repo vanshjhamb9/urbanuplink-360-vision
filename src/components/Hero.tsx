@@ -1,18 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Box, Camera, Sparkles, Timer } from "lucide-react";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
 import { assets } from "@/lib/assets";
+import { heroCopy } from "@/lib/homepageContent";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
-const features = [
-  { icon: Camera, label: "No DSLR or Turntable Required" },
-  { icon: Sparkles, label: "AI Studio Backgrounds" },
-  { icon: Box, label: "Interactive 360° Experience" },
-  { icon: Timer, label: "Ready in Minutes" },
-];
-
 const heroImageClass =
-  "h-full w-full object-cover object-center md:object-[75%_center]";
+  "h-full w-full object-cover brightness-105 contrast-105 object-[center_42%] md:object-[78%_center] lg:object-[82%_center] xl:object-[76%_center]";
 
 const clamp = (value: number, min = 0, max = 1) =>
   Math.min(max, Math.max(min, value));
@@ -22,10 +15,8 @@ const smoothProgress = (value: number) => {
   return eased * eased * (3 - 2 * eased);
 };
 
-// Scroll budget while hero is pinned (viewport heights beyond the first screen).
-// Transition runs first; hold keeps the final studio view stuck for a few more scrolls.
-const HERO_TRANSITION_VH = 120;
-const HERO_HOLD_VH = 100;
+const HERO_TRANSITION_VH = 80;
+const HERO_HOLD_VH = 0;
 const HERO_SECTION_VH = 100 + HERO_TRANSITION_VH + HERO_HOLD_VH;
 
 type HeroPinState = "before" | "active" | "after";
@@ -42,9 +33,9 @@ const getHeroScrollState = (section: HTMLElement | null) => {
   const pinState: HeroPinState =
     rawProgress < 0 ? "before" : rawProgress >= 1 ? "after" : "active";
 
-  // Complete the outdoor → studio reveal in the first portion, then hold at 1.
   const transitionDistance = Math.max(
-    (HERO_TRANSITION_VH / (HERO_TRANSITION_VH + HERO_HOLD_VH)) * scrollableDistance,
+    (HERO_TRANSITION_VH / (HERO_TRANSITION_VH + HERO_HOLD_VH || 1)) *
+      scrollableDistance,
     1,
   );
 
@@ -57,11 +48,6 @@ const getHeroScrollState = (section: HTMLElement | null) => {
 const AnimatedHeroBackground = ({ progress }: { progress: number }) => {
   const reducedMotion = useReducedMotion();
   const revealProgress = reducedMotion ? 1 : smoothProgress(progress);
-  const sweepProgress = smoothProgress(progress);
-  const sweepOpacity =
-    revealProgress > 0 && revealProgress < 1
-      ? 0.7 * (1 - Math.abs(revealProgress - 0.5) / 0.5)
-      : 0;
 
   return (
     <div className="absolute inset-0" aria-hidden="true">
@@ -76,7 +62,7 @@ const AnimatedHeroBackground = ({ progress }: { progress: number }) => {
       </picture>
 
       <div
-        className="absolute inset-0 overflow-hidden transition-opacity duration-500 will-change-opacity"
+        className="absolute inset-0 overflow-hidden transition-opacity duration-300 will-change-opacity"
         style={{
           opacity: reducedMotion ? 1 : revealProgress,
         }}
@@ -91,16 +77,6 @@ const AnimatedHeroBackground = ({ progress }: { progress: number }) => {
           />
         </picture>
       </div>
-
-      {!reducedMotion && (
-        <div
-          className="absolute inset-y-0 left-0 z-[1] w-20 bg-gradient-to-r from-transparent via-brand-lime/25 to-transparent blur-sm will-change-transform"
-          style={{
-            opacity: sweepOpacity,
-            transform: `translate3d(${-15 + sweepProgress * 120}vw, 0, 0)`,
-          }}
-        />
-      )}
     </div>
   );
 };
@@ -155,60 +131,49 @@ const Hero = () => {
           className="pointer-events-none absolute inset-0 z-[1]"
           aria-hidden="true"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/78 to-transparent md:via-brand-black/42 md:to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/72 via-transparent to-transparent md:from-brand-black/58" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_15%_45%,rgba(10,10,10,0.72)_0%,transparent_52%)]" />
-          <div className="absolute inset-0 noise-overlay opacity-15 md:opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-black/85 via-brand-black/50 to-transparent md:via-brand-black/40 md:to-transparent lg:via-brand-black/35" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/30 via-transparent to-brand-black/20 md:hidden" />
         </div>
 
-        <div className="pointer-events-none absolute -left-24 top-1/3 z-[1] hidden h-80 w-80 rounded-full bg-brand-lime/8 blur-[100px] md:block" />
-
-        <div className="container relative z-10 mx-auto flex h-screen items-end px-4 pb-12 pt-24 sm:items-center sm:pb-16 sm:pt-28 md:px-6 lg:pt-32">
-          <div className="relative w-full max-w-xl lg:max-w-2xl">
-            <div className="accent-line mb-4 md:mb-6" />
-
+        <div className="page-container-wide relative z-10 flex min-h-[100svh] items-end pb-10 pt-[4.5rem] sm:items-center sm:pb-14 sm:pt-20 lg:pb-16 lg:pt-[4.75rem]">
+          <div className="w-full max-w-xl lg:max-w-[34rem]">
             <h1
               id="hero-heading"
-              className="font-heading text-[1.875rem] font-extrabold leading-[1.05] tracking-tight text-brand-lime sm:text-4xl md:text-5xl lg:text-[3.75rem]"
+              className="text-balance font-heading text-[1.65rem] font-extrabold leading-[1.1] tracking-tight text-white sm:text-3xl md:text-[2.35rem] lg:text-4xl"
             >
-              Turn Every Vehicle Into Your Best Salesperson.
+              {heroCopy.headline}{" "}
+              <span className="text-brand-lime">{heroCopy.headlineAccent}</span>
             </h1>
 
-            <p className="mt-4 max-w-[95%] text-sm leading-relaxed text-white/90 sm:mt-5 sm:max-w-md sm:text-base md:mt-6 md:max-w-lg md:text-lg">
-              Capture professional vehicle experiences using only your smartphone.
-              AI transforms every vehicle into showroom-quality inventory that
-              attracts more buyers and sells faster.
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/78 sm:mt-5 sm:text-base lg:max-w-lg lg:text-lg">
+              {heroCopy.description}
             </p>
 
-            <ul className="mt-6 flex flex-col gap-2 sm:mt-7 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3 sm:gap-y-2 md:mt-8 md:gap-x-4">
-              {features.map(({ icon: Icon, label }, index) => (
-                <li key={label} className="flex items-center gap-2 text-sm text-brand-lime">
-                  {index > 0 && (
-                    <span className="hidden text-brand-lime/35 sm:inline" aria-hidden="true">
-                      •
-                    </span>
-                  )}
-                  <Icon className="h-4 w-4 shrink-0" strokeWidth={2} />
-                  <span className="font-medium">{label}</span>
-                </li>
-              ))}
-            </ul>
+            <p className="mt-3 text-xs font-semibold tracking-wide text-brand-lime/90 sm:text-sm">
+              {heroCopy.tagline}
+            </p>
 
-            <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-              <GlowButton href="/contact" variant="filled" className="w-full sm:w-auto">
-                Book a Demo
+            <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2.5 sm:mt-7 lg:gap-x-5">
+              {heroCopy.features.map(({ icon: Icon, label }) => (
+                <div key={label} className="flex items-center gap-2 text-xs text-white/88 sm:text-sm">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-brand-black/45 sm:h-9 sm:w-9">
+                    <Icon className="h-3.5 w-3.5 shrink-0 text-white sm:h-4 sm:w-4" strokeWidth={2} />
+                  </span>
+                  <span className="font-medium">{label}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-col items-stretch gap-3 sm:mt-7 sm:flex-row sm:items-center">
+              <GlowButton href={heroCopy.primaryHref} variant="filled" className="w-full sm:w-auto">
+                {heroCopy.primaryCta}
               </GlowButton>
-              <GlowButton href="/learn-more" className="w-full sm:w-auto">
-                See it in Action
+              <GlowButton href={heroCopy.secondaryHref} className="w-full sm:w-auto">
+                {heroCopy.secondaryCta}
               </GlowButton>
             </div>
           </div>
         </div>
-
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-24 bg-gradient-to-t from-brand-black to-transparent sm:h-32"
-          aria-hidden="true"
-        />
       </div>
     </section>
   );

@@ -8,16 +8,8 @@ import { navLinks } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     setMobileOpen(false);
@@ -32,24 +24,19 @@ const Header = () => {
 
   return (
     <>
-      <header
-        className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-          isScrolled ? "glass-nav shadow-lg" : "bg-transparent",
-        )}
-      >
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="relative flex h-20 items-center justify-between lg:h-24">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-brand-black/95 shadow-lg backdrop-blur-md">
+        <div className="page-container-wide">
+          <div className="relative flex h-16 items-center justify-between lg:h-[4.25rem]">
             <Link to="/" className="relative z-10 shrink-0" aria-label="Urban Uplink home">
-              <Logo size="sm" className="md:hidden" />
-              <Logo size="md" className="hidden md:flex" />
+              <Logo size="sm" className="sm:hidden" />
+              <Logo size="md" className="hidden sm:flex" />
             </Link>
 
             <nav
               className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:flex"
               aria-label="Main navigation"
             >
-              <ul className="flex items-center gap-1">
+              <ul className="flex items-center gap-0.5 xl:gap-1">
                 {navLinks.map((link) => {
                   const active = location.pathname === link.href;
                   return (
@@ -57,7 +44,7 @@ const Header = () => {
                       <Link
                         to={link.href}
                         className={cn(
-                          "relative px-4 py-2 text-sm font-medium text-white/80 transition-colors hover:text-white",
+                          "relative px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:text-white xl:px-4",
                           active && "text-white",
                         )}
                       >
@@ -65,7 +52,7 @@ const Header = () => {
                         {active && (
                           <motion.span
                             layoutId="nav-underline"
-                            className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-brand-lime"
+                            className="absolute inset-x-2 -bottom-0.5 h-0.5 rounded-full bg-brand-lime xl:inset-x-3"
                           />
                         )}
                       </Link>
@@ -76,11 +63,17 @@ const Header = () => {
             </nav>
 
             <div className="relative z-10 hidden items-center lg:flex">
-              <GlowButton href="/contact">Book Demo</GlowButton>
+              <GlowButton href="/contact" variant="filled" className="px-5 py-2.5 text-sm">
+                Book Demo
+              </GlowButton>
             </div>
 
             <div className="flex items-center gap-2 max-[380px]:gap-1 lg:hidden">
-              <GlowButton href="/contact" className="hidden px-4 py-2 text-xs min-[381px]:inline-flex">
+              <GlowButton
+                href="/contact"
+                variant="filled"
+                className="hidden px-4 py-2 text-xs min-[381px]:inline-flex"
+              >
                 Book Demo
               </GlowButton>
               <button
@@ -114,11 +107,11 @@ const Header = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 280 }}
-              className="fixed inset-y-0 right-0 z-50 flex w-[min(88vw,360px)] flex-col border-l border-white/10 bg-brand-black/95 p-6 backdrop-blur-xl lg:hidden"
+              className="fixed inset-y-0 right-0 z-50 flex w-[min(88vw,360px)] flex-col border-l border-white/10 bg-brand-black p-6 lg:hidden"
               aria-label="Mobile navigation"
             >
               <div className="mb-8 flex items-center justify-between">
-                <Logo size="sm" showTagline={false} />
+                <Logo size="md" />
                 <button
                   type="button"
                   onClick={() => setMobileOpen(false)}
@@ -151,7 +144,7 @@ const Header = () => {
               </ul>
 
               <div className="mt-auto border-t border-white/10 pt-6">
-                <GlowButton href="/contact" className="w-full">
+                <GlowButton href="/contact" variant="filled" className="w-full">
                   Book Demo
                 </GlowButton>
               </div>
