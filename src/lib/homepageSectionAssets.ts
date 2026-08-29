@@ -2,7 +2,6 @@ import { assets } from "@/lib/assets";
 import whatsappCreative from "@/assets/image (3).webp";
 import websiteCreative from "@/assets/image (4).webp";
 import instagramCreative from "@/assets/image (5).webp";
-import spinChannelCreative from "@/assets/used.car.platform1.webp";
 
 const lot = "/assets/comparison/lot";
 
@@ -20,18 +19,20 @@ function assertUniqueSlots(slots: Record<string, string>) {
 }
 
 const d = assets.useCases.detailing.process.desktop;
+const dm = assets.useCases.detailing.process.mobile;
 const f = assets.useCases.fleet.process.desktop;
 const fm = assets.useCases.fleet.process.mobile;
 const mp = assets.useCases.marketplace.process;
-const im = assets.useCases.insurance.process.mobile;
+const id = assets.useCases.insurance.process.desktop;
 
 /** Strict one-image-per-slot registry for the homepage */
 export const homepageSectionAssets = {
   hero: {
     outdoorDesktop: assets.hero.outdoorDesktop,
     outdoorMobile: assets.hero.outdoorMobile,
-    studioDesktop: assets.hero.studioDesktop,
-    studioMobile: assets.hero.studioMobile,
+    /** Detailing process card — frees studio-desktop for social source master */
+    studioDesktop: d[1],
+    studioMobile: dm[1],
   },
   backgroundRemoval: {
     beforeDesktop: assets.beforeAfter.beforeDesktop,
@@ -47,7 +48,7 @@ export const homepageSectionAssets = {
       `${lot}/lot-4.jpg`,
       `${lot}/lot-5.jpg`,
     ],
-    afterGrid: [d[0], d[1], d[2], d[3], f[1]],
+    afterGrid: [f[0], f[2], id[0], id[1], mp[2]],
   },
   productWorkflow: {
     capture: {
@@ -59,12 +60,12 @@ export const homepageSectionAssets = {
       mobile: assets.beforeAfter.seltosPreview,
     },
     present: {
-      desktop: assets.showroom.showroom1,
-      mobile: assets.showroom.showroom1,
+      desktop: d[2],
+      mobile: dm[2],
     },
     showcase: {
-      desktop: assets.showroom.showroom2,
-      mobile: assets.showroom.showroom2,
+      desktop: d[3],
+      mobile: dm[3],
     },
     publish: {
       desktop: f[3],
@@ -73,18 +74,18 @@ export const homepageSectionAssets = {
   },
   platformShowcase: {
     sourceCapture: {
-      image: assets.banners.detailing.desktop,
-      alt: "Single studio capture — source for every channel output",
-      objectPosition: "center 35%",
+      image: assets.hero.studioDesktop,
+      alt: "Studio master file — one clean capture for every channel",
+      objectPosition: "center center",
       objectFit: "cover" as const,
     },
     channels: {
       marketplace: assets.marketplace.listingDesktop,
       instagram: instagramCreative,
-      story: im[1],
+      story: assets.banners.detailing.mobile,
       whatsapp: whatsappCreative,
       website: websiteCreative,
-      spin: spinChannelCreative,
+      spin: assets.marketplace.cardDesktop,
     },
   },
   cta: {
@@ -115,8 +116,10 @@ const homepageImageSlots: Record<string, string> = {
   "workflow.capture.desktop": homepageSectionAssets.productWorkflow.capture.desktop,
   "workflow.capture.mobile": homepageSectionAssets.productWorkflow.capture.mobile,
   "workflow.clean": homepageSectionAssets.productWorkflow.clean.desktop,
-  "workflow.present": homepageSectionAssets.productWorkflow.present.desktop,
-  "workflow.showcase": homepageSectionAssets.productWorkflow.showcase.desktop,
+  "workflow.present.desktop": homepageSectionAssets.productWorkflow.present.desktop,
+  "workflow.present.mobile": homepageSectionAssets.productWorkflow.present.mobile,
+  "workflow.showcase.desktop": homepageSectionAssets.productWorkflow.showcase.desktop,
+  "workflow.showcase.mobile": homepageSectionAssets.productWorkflow.showcase.mobile,
   "workflow.publish.desktop": homepageSectionAssets.productWorkflow.publish.desktop,
   "workflow.publish.mobile": homepageSectionAssets.productWorkflow.publish.mobile,
   "social.source": homepageSectionAssets.platformShowcase.sourceCapture.image,

@@ -1,181 +1,213 @@
 import { motion } from "framer-motion";
-import { RotateCcw } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
 import { SectionHeading } from "@/components/ui-custom/SectionHeading";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import {
   channelTiles,
+  marketplaceTile,
   platformShowcaseCopy,
   sourceVehicle,
+  websiteTile,
   type ChannelTile,
 } from "@/lib/platformShowcaseContent";
 
-const accentRing: Record<NonNullable<ChannelTile["accent"]>, string> = {
-  instagram: "ring-pink-500/30 group-hover:ring-pink-400/50",
-  whatsapp: "ring-emerald-500/30 group-hover:ring-emerald-400/50",
-  marketplace: "ring-brand-lime/25 group-hover:ring-brand-lime/45",
-  spin: "ring-cyan-500/25 group-hover:ring-cyan-400/45",
-  website: "ring-blue-500/25 group-hover:ring-blue-400/45",
-};
+const CARD_SHELL =
+  "overflow-hidden rounded-2xl border border-white/10 bg-[#080a0c]";
 
-function ChannelChrome({ tile }: { tile: ChannelTile }) {
-  if (tile.format === "story" && tile.accent === "whatsapp") {
-    return (
-      <>
-        <div className="absolute inset-x-0 top-0 z-20 h-1 bg-emerald-500" />
-        <div className="absolute inset-x-0 top-0 z-20 flex justify-center pt-3">
-          <span className="h-1 w-10 rounded-full bg-white/25" />
-        </div>
-        <div className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-brand-black/85 to-transparent px-3 pb-3 pt-10">
-          <p className="text-[10px] font-bold text-emerald-400">WhatsApp Status</p>
-          <p className="text-[9px] text-white/50">Tap to view listing</p>
-        </div>
-      </>
-    );
-  }
+/** Shared preview height — every channel card uses the same shell */
+const MEDIA_H = "h-[228px]";
+const CHANNEL_STAGE = `flex h-[240px] items-center justify-center overflow-hidden px-2`;
 
-  if (tile.format === "story") {
-    return (
-      <>
-        <div className="absolute inset-2 z-10 rounded-[1.25rem] border border-white/10 pointer-events-none" />
-        <div className="absolute inset-x-0 top-0 z-20 flex justify-center pt-2">
-          <span className="h-1 w-10 rounded-full bg-white/25" />
-        </div>
-        <div className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-brand-black/80 to-transparent px-3 pb-3 pt-8">
-          <p className="text-[10px] font-bold text-white">urbanuplink.com</p>
-          <p className="text-[9px] text-white/50">Swipe up to explore</p>
-        </div>
-      </>
-    );
-  }
-
-  if (tile.format === "square") {
-    return (
-      <>
-        <div className="absolute inset-0 z-10 rounded-sm ring-1 ring-inset ring-pink-500/20 pointer-events-none" />
-        <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-2 border-b border-white/10 bg-brand-black/60 px-3 py-2 backdrop-blur-sm">
-          <span className="h-6 w-6 rounded-full bg-gradient-to-br from-pink-500 to-orange-400" />
-          <span className="text-[10px] font-semibold text-white">urbanuplink</span>
-        </div>
-      </>
-    );
-  }
-
-  if (tile.format === "wide") {
-    return (
-      <>
-        <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-1.5 border-b border-white/10 bg-brand-black/70 px-3 py-1.5">
-          <span className="h-2 w-2 rounded-full bg-red-400/80" />
-          <span className="h-2 w-2 rounded-full bg-amber-400/80" />
-          <span className="h-2 w-2 rounded-full bg-emerald-400/80" />
-          <span className="ml-2 flex-1 truncate rounded bg-white/5 px-2 py-0.5 text-[8px] text-white/40">
-            dealer.urbanuplink.com
-          </span>
-        </div>
-        <div className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-brand-black/90 via-brand-black/50 to-transparent px-4 pb-4 pt-12 sm:px-6 sm:pb-5">
-          <p className="font-heading text-sm font-extrabold text-white sm:text-base">
-            Certified SUV · 360° Enabled
-          </p>
-          <p className="mt-0.5 text-[10px] text-brand-lime sm:text-xs">Explore every angle online</p>
-        </div>
-      </>
-    );
-  }
-
-  if (tile.format === "spin") {
-    return (
-      <div className="absolute inset-x-0 bottom-3 z-20 flex justify-center">
-        <span className="inline-flex animate-pulse items-center gap-1.5 rounded-full border border-brand-lime/40 bg-brand-black/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-lime backdrop-blur-sm">
-          <RotateCcw className="h-3 w-3" />
-          Drag to rotate
-        </span>
-      </div>
-    );
-  }
-
-  if (tile.format === "listing") {
-    return (
-      <div className="absolute left-3 top-3 z-20 rounded-full bg-brand-lime px-2.5 py-1 text-[10px] font-bold text-brand-black shadow-lg">
-        ₹18.5L
-      </div>
-    );
-  }
-
-  return null;
+function PlatformBadge({
+  icon,
+  gradient,
+}: {
+  icon: string;
+  gradient: string;
+}) {
+  return (
+    <span
+      className={`inline-flex h-6 min-w-[1.75rem] shrink-0 items-center justify-center rounded-md bg-gradient-to-br ${gradient} px-1.5 text-[9px] font-extrabold text-white`}
+    >
+      {icon}
+    </span>
+  );
 }
 
-function ChannelImage({
-  tile,
-  className,
+function PlatformHeader({
+  icon,
+  gradient,
+  label,
+  subtitle,
 }: {
-  tile: Pick<ChannelTile, "image" | "imageAlt" | "format" | "objectPosition" | "objectFit" | "accent">;
-  className?: string;
+  icon: string;
+  gradient: string;
+  label: string;
+  subtitle: string;
 }) {
-  const isListing = tile.format === "listing";
-  const fit = tile.objectFit ?? (isListing ? "cover" : "contain");
-
   return (
-    <div className={`relative overflow-hidden bg-[#0c0e10] ${className ?? ""}`}>
-      <img
-        src={tile.image}
-        alt={tile.imageAlt}
-        className={`absolute inset-0 h-full w-full brightness-110 contrast-105 transition-transform duration-500 group-hover:scale-[1.03] ${
-          fit === "contain" ? "object-contain p-1.5 sm:p-2" : "object-cover"
-        } ${isListing ? "object-top" : ""}`}
-        style={{ objectPosition: tile.objectPosition ?? "center center" }}
-        loading="lazy"
-      />
-      {tile.accent === "instagram" && tile.format === "square" && (
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-pink-500/10 via-transparent to-orange-500/10" />
-      )}
-      {tile.accent === "marketplace" && (
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-black/50 via-transparent to-transparent" />
-      )}
-      <ChannelChrome tile={tile as ChannelTile} />
+    <div className="mb-3 flex items-center gap-2">
+      <PlatformBadge icon={icon} gradient={gradient} />
+      <div className="min-w-0">
+        <p className="truncate text-xs font-bold text-white">{label}</p>
+        <p className="truncate text-[10px] text-white/45">{subtitle}</p>
+      </div>
     </div>
   );
 }
 
-function ChannelTileCard({
+function FrameImage({
+  src,
+  alt,
+  objectPosition,
+}: {
+  src: string;
+  alt: string;
+  objectPosition: string;
+}) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className="absolute inset-0 h-full w-full object-cover"
+      style={{ objectPosition }}
+      loading="lazy"
+      draggable={false}
+    />
+  );
+}
+
+function FeedFrame({ tile }: { tile: ChannelTile }) {
+  return (
+    <div
+      className={`${MEDIA_H} flex w-auto max-w-full flex-col overflow-hidden rounded-xl border border-white/10 bg-[#0a0c0e] aspect-square`}
+    >
+      <div className="flex shrink-0 items-center gap-1.5 border-b border-white/8 px-2 py-1">
+        <span className="h-3 w-3 shrink-0 rounded-full bg-gradient-to-br from-pink-500 to-orange-400" />
+        <span className="text-[7px] font-semibold text-white/65">urbanuplink</span>
+      </div>
+      <div className="relative min-h-0 flex-1 overflow-hidden">
+        <FrameImage
+          src={tile.image}
+          alt={tile.imageAlt}
+          objectPosition={tile.objectPosition}
+        />
+      </div>
+    </div>
+  );
+}
+
+function PhoneFrame({ tile }: { tile: ChannelTile }) {
+  return (
+    <div
+      className={`${MEDIA_H} w-auto max-w-full overflow-hidden rounded-[1.2rem] border-2 border-white/12 bg-[#0a0c0e] aspect-[9/16]`}
+    >
+      <div className="relative h-full w-full overflow-hidden">
+        <FrameImage
+          src={tile.image}
+          alt={tile.imageAlt}
+          objectPosition={tile.objectPosition}
+        />
+      </div>
+    </div>
+  );
+}
+
+function BrowserFrame({ tile }: { tile: ChannelTile }) {
+  return (
+    <div className="w-full overflow-hidden rounded-xl border border-white/10 bg-[#0a0c0e]">
+      <div className="flex items-center gap-1 border-b border-white/8 bg-[#111] px-2.5 py-1.5">
+        <span className="h-1.5 w-1.5 rounded-full bg-red-400/80" />
+        <span className="h-1.5 w-1.5 rounded-full bg-amber-400/80" />
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400/80" />
+        <span className="ml-1 truncate text-[8px] text-white/35">dealer.urbanuplink.com</span>
+      </div>
+      <div className={`relative w-full overflow-hidden ${tile.aspectClass}`}>
+        <FrameImage
+          src={tile.image}
+          alt={tile.imageAlt}
+          objectPosition={tile.objectPosition}
+        />
+      </div>
+    </div>
+  );
+}
+
+function ChannelMedia({ tile }: { tile: ChannelTile }) {
+  switch (tile.frame) {
+    case "feed":
+      return <FeedFrame tile={tile} />;
+    case "phone":
+      return <PhoneFrame tile={tile} />;
+    case "browser":
+      return <BrowserFrame tile={tile} />;
+    default:
+      return null;
+  }
+}
+
+function MediaWell({
+  src,
+  alt,
+  aspectClass,
+  objectFit,
+  objectPosition,
+}: {
+  src: string;
+  alt: string;
+  aspectClass: string;
+  objectFit: "cover" | "contain";
+  objectPosition: string;
+}) {
+  return (
+    <div
+      className={`relative w-full overflow-hidden ${aspectClass} ${
+        objectFit === "contain" ? "bg-[#060809]" : ""
+      }`}
+    >
+      <img
+        src={src}
+        alt={alt}
+        className={`absolute inset-0 h-full w-full ${
+          objectFit === "contain" ? "object-contain" : "object-cover"
+        }`}
+        style={{ objectPosition }}
+        loading="lazy"
+        draggable={false}
+      />
+    </div>
+  );
+}
+
+function ChannelCard({
   tile,
   index,
   visible,
+  orderClass,
 }: {
   tile: ChannelTile;
   index: number;
   visible: boolean;
+  orderClass?: string;
 }) {
-  const isStory = tile.format === "story";
-  const isWide = tile.format === "wide";
-  const ringClass = tile.accent ? accentRing[tile.accent] : "ring-white/10";
+  const isWebsite = tile.id === "website";
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={visible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: 0.08 + index * 0.06 }}
-      className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-[#0a0c0e] shadow-card ring-1 ring-inset transition-all duration-300 hover:scale-[1.02] hover:border-brand-lime/30 hover:shadow-glow ${ringClass} ${tile.className}`}
+      transition={{ duration: 0.4, delay: 0.12 + index * 0.05 }}
+      className={`min-w-0 overflow-hidden ${isWebsite ? "col-span-12" : "col-span-6 lg:col-span-3"} ${orderClass ?? ""}`}
     >
-      <div className="flex h-full min-h-[140px] flex-col">
-        <div className={`relative flex-1 overflow-hidden ${isStory ? "mx-auto w-full max-w-[200px]" : ""}`}>
-          <ChannelImage
-            tile={tile}
-            className={`h-full w-full ${
-              isStory
-                ? "aspect-[9/16] min-h-[220px]"
-                : isWide
-                  ? "aspect-[21/9] min-h-[120px]"
-                  : "min-h-[160px] aspect-square sm:aspect-[4/3]"
-            }`}
-          />
-        </div>
-
-        <div className="border-t border-white/10 bg-brand-black/90 px-3 py-2.5 sm:px-4 sm:py-3">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-lime">
-            {tile.label}
-          </p>
-          <p className="mt-0.5 text-xs text-white/50">{tile.subtitle}</p>
-        </div>
+      <PlatformHeader
+        icon={tile.platformIcon}
+        gradient={tile.platformColor}
+        label={tile.label}
+        subtitle={tile.subtitle}
+      />
+      <div className={`${CARD_SHELL} ${isWebsite ? "p-0" : CHANNEL_STAGE}`}>
+        <ChannelMedia tile={tile} />
       </div>
     </motion.article>
   );
@@ -190,7 +222,8 @@ const PlatformShowcaseSection = () => {
       className="relative z-20 overflow-hidden bg-brand-black section-shell"
       aria-labelledby="platform-showcase-heading"
     >
-      <div className="pointer-events-none absolute inset-0 section-glow opacity-30" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(201,241,53,0.06),transparent)]" />
+
       <div className="page-container">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -209,54 +242,105 @@ const PlatformShowcaseSection = () => {
           />
         </motion.div>
 
-        <div className="section-body grid auto-rows-[minmax(108px,auto)] grid-flow-dense grid-cols-12 gap-2.5 sm:gap-3 md:gap-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={visible ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.12 }}
-            className="group col-span-12 overflow-hidden rounded-2xl border border-brand-lime/30 bg-[#0a0c0e] shadow-glow ring-1 ring-inset ring-brand-lime/20 transition-all duration-300 hover:scale-[1.01] hover:border-brand-lime/50 lg:col-span-5 lg:row-span-4"
-          >
-            <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-              <div>
-                <span className="mb-1 inline-block rounded-full bg-brand-lime/15 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-brand-lime">
-                  Raw capture
+        <div className="section-body space-y-5 lg:space-y-6">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-5">
+            <motion.div
+              initial={{ opacity: 0, x: -12 }}
+              animate={visible ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 0.08 }}
+              className="min-w-0 overflow-hidden lg:col-span-5"
+            >
+              <div className="mb-3 flex items-center gap-2">
+                <span className="inline-flex h-6 items-center rounded-md bg-brand-lime/15 px-2 text-[9px] font-bold uppercase tracking-widest text-brand-lime">
+                  Source
                 </span>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-lime">
-                  One source capture
-                </p>
-                <p className="mt-0.5 text-xs text-white/50">Same vehicle · Same quality · Every output</p>
+                <p className="text-xs font-bold text-white">One capture</p>
               </div>
-            </div>
-            <ChannelImage
-              tile={{
-                image: sourceVehicle.image,
-                imageAlt: sourceVehicle.alt,
-                format: "square",
-                objectPosition: sourceVehicle.objectPosition,
-                objectFit: sourceVehicle.objectFit,
-              }}
-              className="aspect-[16/10] min-h-[200px] sm:min-h-[240px] lg:min-h-[280px]"
-            />
-          </motion.div>
+              <div className={`${CARD_SHELL} border-brand-lime/20`}>
+                <MediaWell
+                  src={sourceVehicle.image}
+                  alt={sourceVehicle.alt}
+                  aspectClass="aspect-[16/10]"
+                  objectFit={sourceVehicle.objectFit}
+                  objectPosition={sourceVehicle.objectPosition}
+                />
+                <div className="flex items-center justify-between border-t border-white/8 px-4 py-2.5">
+                  <p className="text-[11px] text-white/50">Studio master file</p>
+                  <span className="flex items-center gap-1 text-[10px] font-semibold text-brand-lime">
+                    6 outputs <ArrowRight className="h-3 w-3" />
+                  </span>
+                </div>
+              </div>
+            </motion.div>
 
-          {channelTiles.map((tile, index) => (
-            <ChannelTileCard key={tile.id} tile={tile} index={index} visible={visible} />
-          ))}
+            <motion.div
+              initial={{ opacity: 0, x: 12 }}
+              animate={visible ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 0.12 }}
+              className="min-w-0 overflow-hidden lg:col-span-7"
+            >
+              <PlatformHeader
+                icon="MP"
+                gradient="from-brand-lime to-emerald-500"
+                label={marketplaceTile.label}
+                subtitle={marketplaceTile.subtitle}
+              />
+              <div className={CARD_SHELL}>
+                <MediaWell
+                  src={marketplaceTile.image}
+                  alt={marketplaceTile.imageAlt}
+                  aspectClass={marketplaceTile.aspectClass}
+                  objectFit={marketplaceTile.objectFit}
+                  objectPosition={marketplaceTile.objectPosition}
+                />
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="grid grid-cols-12 gap-4 lg:gap-5">
+            {channelTiles.map((tile, index) => {
+              const mobileOrder =
+                tile.id === "instagram"
+                  ? "order-1"
+                  : tile.id === "story"
+                    ? "order-2"
+                    : tile.id === "whatsapp"
+                      ? "order-3"
+                      : "order-5";
+
+              return (
+                <ChannelCard
+                  key={tile.id}
+                  tile={tile}
+                  index={index}
+                  visible={visible}
+                  orderClass={`${mobileOrder} lg:order-none`}
+                />
+              );
+            })}
+
+            <ChannelCard
+              tile={websiteTile}
+              index={channelTiles.length}
+              visible={visible}
+              orderClass="order-4 lg:order-none"
+            />
+          </div>
         </div>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={visible ? { opacity: 1 } : {}}
-          transition={{ delay: 0.45 }}
-          className="section-body text-center font-heading text-base font-extrabold text-white/75 md:text-lg"
+          transition={{ delay: 0.4 }}
+          className="section-body mt-8 text-center font-heading text-base font-extrabold text-white/75 md:text-lg"
         >
           {platformShowcaseCopy.tagline}
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.45 }}
           className="mt-8 flex justify-center"
         >
           <GlowButton href={platformShowcaseCopy.ctaHref} variant="filled">

@@ -1,6 +1,5 @@
 import { Ban, MapPin, Wrench, Eye, Trophy } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { assets } from "@/lib/assets";
 import { lotListingPhotos, studioListingPhotos } from "@/lib/studioVehicle";
 
 export type ComparisonPhoto = {
@@ -40,11 +39,11 @@ export const beforeGrid: ComparisonPhoto[] = [
 
 /** Urban Uplink processed studio vehicle photos */
 export const afterGrid: ComparisonPhoto[] = [
-  { src: studioListingPhotos[0], alt: "Kia Seltos on a clean studio backdrop", objectPosition: "center 42%" },
-  { src: studioListingPhotos[1], alt: "Vehicle in a premium detailing studio", objectPosition: "center 40%" },
-  { src: studioListingPhotos[2], alt: "Finished studio presentation of a vehicle", objectPosition: "center 38%" },
-  { src: studioListingPhotos[3], alt: "Fleet vehicle with professional presentation", objectPosition: "center 45%" },
-  { src: studioListingPhotos[4], alt: "Consistent studio-grade fleet imagery", objectPosition: "center 42%" },
+  { src: studioListingPhotos[0], alt: "Fleet vehicle with professional studio presentation", objectPosition: "center 42%" },
+  { src: studioListingPhotos[1], alt: "Consistent fleet imagery on a premium backdrop", objectPosition: "center 40%" },
+  { src: studioListingPhotos[2], alt: "Insurance-ready vehicle documentation in studio", objectPosition: "center 38%" },
+  { src: studioListingPhotos[3], alt: "Polished vehicle photo for digital listings", objectPosition: "center 45%" },
+  { src: studioListingPhotos[4], alt: "Marketplace-ready studio vehicle presentation", objectPosition: "center 42%" },
 ];
 
 export type BadgeItem = {

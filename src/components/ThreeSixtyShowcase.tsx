@@ -7,7 +7,6 @@ import {
   Gauge,
   Heart,
   MapPin,
-  MousePointer2,
   Pause,
   Play,
   RotateCcw,
@@ -28,10 +27,6 @@ import {
   HotspotCalibrator,
   useCalibratorEnabled,
 } from "@/components/three-sixty/HotspotCalibrator";
-import interiorDashboard from "@/assets/sierra-interior.jpg";
-import interiorSeats from "@/assets/slavia4.avif";
-import interiorEngine from "@/assets/360-tech.jpg";
-import cretaRear from "@/assets/bgCreta/creta26.avif";
 
 // 360° car images - all angles with background removed
 import car360_1 from "@/assets/bgCreta/creta1.avif";
@@ -112,38 +107,12 @@ const SPIN_BACKDROP_POSITION = "center 44%";
 /** Fixed stage aspect — hotspot % coords map to this box 1:1 with car images */
 const VEHICLE_STAGE_ASPECT = "1120 / 425";
 
-type FeatureTab = "exterior" | "interior";
-
-const interiorFeatures = [
-  {
-    id: 101,
-    label: "Dashboard",
-    description: "Digital instrument cluster and touchscreen infotainment layout.",
-    image: interiorDashboard,
-    imageAlt: "Vehicle dashboard with digital cluster and infotainment screen",
-  },
-  {
-    id: 102,
-    label: "Seats",
-    description: "Premium upholstery with ergonomic seating for long drives.",
-    image: interiorSeats,
-    imageAlt: "Premium cabin seats and interior upholstery",
-  },
-  {
-    id: 103,
-    label: "Boot Space",
-    description: "Generous cargo area with flat loading floor.",
-    image: cretaRear,
-    imageAlt: "Rear view showing boot and tail section of the vehicle",
-  },
-  {
-    id: 104,
-    label: "Engine Bay",
-    description: "Efficient powertrain with accessible service points.",
-    image: interiorEngine,
-    imageAlt: "Engine bay and powertrain components",
-  },
-];
+const listingSpecs = [
+  { icon: Calendar, label: "Year", value: "2023" },
+  { icon: Gauge, label: "Mileage", value: "12,500 km" },
+  { icon: Fuel, label: "Fuel", value: "Petrol" },
+  { icon: MapPin, label: "Location", value: "Mumbai, MH" },
+] as const;
 
 const ThreeSixtyShowcase = () => {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -153,8 +122,6 @@ const ThreeSixtyShowcase = () => {
   const [dragStartX, setDragStartX] = useState(0);
   const [velocity, setVelocity] = useState(0);
   const [activeHotspot, setActiveHotspot] = useState<number>(hotspotFeatures[0].numericId);
-  const [activeInteriorId, setActiveInteriorId] = useState<number>(interiorFeatures[0].id);
-  const [featureTab, setFeatureTab] = useState<FeatureTab>("exterior");
   const [framesReady, setFramesReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const vehicleStageRef = useRef<HTMLDivElement>(null);
@@ -328,8 +295,6 @@ const ThreeSixtyShowcase = () => {
     hotspotFeatures.find((spot) => spot.numericId === activeHotspot) ||
     visibleHotspots[0] ||
     hotspotFeatures[0];
-  const selectedInterior =
-    interiorFeatures.find((f) => f.id === activeInteriorId) ?? interiorFeatures[0];
 
   return (
     <section
@@ -359,7 +324,7 @@ const ThreeSixtyShowcase = () => {
         <div className="section-body mx-auto overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] shadow-card backdrop-blur-xl lg:rounded-[1.25rem]">
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
             {/* Left: 360 Viewer */}
-            <div className="relative flex min-h-[min(58svh,520px)] items-center justify-center overflow-hidden border-b border-white/10 lg:min-h-[min(68svh,620px)] lg:border-b-0 lg:border-r">
+            <div className="relative min-h-[min(58svh,520px)] overflow-hidden border-b border-white/10 lg:min-h-[min(68svh,620px)] lg:border-b-0 lg:border-r">
               {/* Client showroom background — 16:9 crop aligned to vehicle floor */}
               <div className="absolute inset-0 z-0">
                 <img
@@ -373,7 +338,7 @@ const ThreeSixtyShowcase = () => {
 
               <div
                 ref={containerRef}
-                className="perspective-1000 relative h-full w-full cursor-grab touch-none active:cursor-grabbing"
+                className="perspective-1000 absolute inset-0 z-10 cursor-grab touch-none active:cursor-grabbing"
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
@@ -385,14 +350,15 @@ const ThreeSixtyShowcase = () => {
                   applyMomentum();
                 }}
               >
-                {/* Vehicle stage — fixed aspect; car + hotspots share the same coordinate space */}
-                <div
-                  ref={vehicleStageRef}
-                  className={`absolute bottom-[10%] left-1/2 z-10 w-[min(88%,820px)] -translate-x-1/2 translate-y-[1%] lg:bottom-[14%] lg:translate-y-[2%] ${
-                    calibratorEnabled ? "border border-yellow-400/30" : ""
-                  }`}
-                  style={{ aspectRatio: VEHICLE_STAGE_ASPECT }}
-                >
+                {/* Vehicle stage — width-first; 1120×425 matches hotspot % coords 1:1 */}
+                <div className="absolute inset-x-4 top-8 bottom-28 z-10 flex items-end justify-center lg:bottom-32">
+                  <div
+                    ref={vehicleStageRef}
+                    className={`relative w-full max-w-[960px] ${
+                      calibratorEnabled ? "border border-yellow-400/30" : ""
+                    }`}
+                    style={{ aspectRatio: VEHICLE_STAGE_ASPECT }}
+                  >
                   {!framesReady && (
                     <div className="absolute inset-0 z-30 flex items-center justify-center">
                       <div className="rounded-full border border-brand-lime/20 bg-brand-black/75 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-brand-lime backdrop-blur-xl">
@@ -408,7 +374,7 @@ const ThreeSixtyShowcase = () => {
                         key={index}
                         src={img}
                         alt={`Angle ${Math.round(frameToAngle(index))}°`}
-                        className={`absolute inset-0 h-full w-full object-contain object-bottom brightness-125 contrast-110 drop-shadow-[0_22px_44px_rgba(0,0,0,0.34)] ${
+                        className={`absolute inset-0 h-full w-full brightness-125 contrast-110 drop-shadow-[0_22px_44px_rgba(0,0,0,0.34)] ${
                           isActive ? "z-10 opacity-100" : "pointer-events-none z-0 opacity-0"
                         }`}
                         loading={index === 0 ? "eager" : "lazy"}
@@ -479,6 +445,7 @@ const ThreeSixtyShowcase = () => {
                       stageRef={vehicleStageRef}
                     />
                   )}
+                  </div>
                 </div>
 
                 {/* Controls Overlay */}
@@ -542,186 +509,89 @@ const ThreeSixtyShowcase = () => {
               </div>
             </div>
 
-            <div className="flex h-full max-h-[min(88svh,760px)] flex-col overflow-y-auto bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.02))] p-5 text-white sm:p-6 lg:p-8">
-               <div className="mb-4 flex items-start justify-between gap-4">
-                  <div className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/60">
-                    Featured Listing
-                  </div>
+            <div className="flex flex-col justify-between border-t border-white/10 bg-[#0a0c0e] p-6 sm:p-8 lg:border-t-0 lg:border-l">
+              <div className="space-y-6">
+                <div className="flex items-start justify-between gap-4">
+                  <span className="rounded-full border border-brand-lime/25 bg-brand-lime/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-brand-lime">
+                    Featured
+                  </span>
                   <div className="text-right">
-                    <div className="text-3xl font-extrabold text-brand-lime">₹18.5L</div>
-                    <div className="text-xs font-medium text-white/55">On-road Mumbai</div>
-                  </div>
-               </div>
-
-               <h3 className="mb-1 font-heading text-2xl font-extrabold tracking-tight text-white sm:text-3xl">Certified Mid-Size SUV</h3>
-               <p className="mb-4 text-sm font-medium text-white/58">Automatic • Verified Listing • 360° Enabled</p>
-
-               <div className="mb-4 flex gap-2 rounded-xl border border-white/10 bg-brand-black/40 p-1">
-                 <button
-                   type="button"
-                   onClick={() => setFeatureTab("exterior")}
-                   className={`flex-1 rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wide transition-colors ${
-                     featureTab === "exterior"
-                       ? "bg-brand-lime text-brand-black"
-                       : "text-white/60 hover:text-white"
-                   }`}
-                 >
-                   Exterior
-                 </button>
-                 <button
-                   type="button"
-                   onClick={() => setFeatureTab("interior")}
-                   className={`flex-1 rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wide transition-colors ${
-                     featureTab === "interior"
-                       ? "bg-brand-lime text-brand-black"
-                       : "text-white/60 hover:text-white"
-                   }`}
-                 >
-                   Interior
-                 </button>
-               </div>
-
-               <div className="mb-4 grid grid-cols-2 gap-2 sm:gap-3">
-                  <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-brand-black/45 p-4">
-                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80">
-                        <Calendar className="h-5 w-5" />
-                     </div>
-                     <div>
-                        <div className="text-[10px] font-bold uppercase tracking-wider text-white/38">Year</div>
-                        <div className="font-bold text-white">2023</div>
-                     </div>
-                  </div>
-                  <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-brand-black/45 p-4">
-                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80">
-                        <Gauge className="h-5 w-5" />
-                     </div>
-                     <div>
-                        <div className="text-[10px] font-bold uppercase tracking-wider text-white/38">Mileage</div>
-                        <div className="font-bold text-white">12,500 km</div>
-                     </div>
-                  </div>
-                  <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-brand-black/45 p-4">
-                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80">
-                        <Fuel className="h-5 w-5" />
-                     </div>
-                     <div>
-                        <div className="text-[10px] font-bold uppercase tracking-wider text-white/38">Fuel</div>
-                        <div className="font-bold text-white">Petrol</div>
-                     </div>
-                  </div>
-                  <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-brand-black/45 p-4">
-                     <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80">
-                        <MapPin className="h-5 w-5" />
-                     </div>
-                     <div>
-                        <div className="text-[10px] font-bold uppercase tracking-wider text-white/38">Location</div>
-                        <div className="font-bold text-white">Mumbai, MH</div>
-                     </div>
-                  </div>
-               </div>
-
-               {featureTab === "exterior" ? (
-                 <motion.div
-                   key={selectedHotspot.numericId}
-                   initial={{ opacity: 0, y: 12 }}
-                   animate={{ opacity: 1, y: 0 }}
-                   transition={{ duration: 0.25 }}
-                   className="relative mb-4 overflow-hidden rounded-2xl border border-brand-lime/20 bg-brand-lime/10 p-4"
-                 >
-                   <div className="relative z-10">
-                     <div className="mb-2 flex items-center gap-2">
-                       <MousePointer2 className="h-4 w-4 text-brand-lime" />
-                       <span className="text-sm font-bold text-brand-lime">{selectedHotspot.label}</span>
-                     </div>
-                     <p className="text-sm leading-relaxed text-white/72">
-                       {selectedHotspot.description}. Click hotspots on the vehicle to explore exterior details.
-                     </p>
-                   </div>
-                 </motion.div>
-               ) : (
-                 <div className="mb-4 space-y-3">
-                   <div className="grid grid-cols-2 gap-2">
-                     {interiorFeatures.map((feature) => (
-                       <button
-                         key={feature.id}
-                         type="button"
-                         onClick={() => setActiveInteriorId(feature.id)}
-                         className={`overflow-hidden rounded-xl border text-left transition-colors ${
-                           activeInteriorId === feature.id
-                             ? "border-brand-lime/40 bg-brand-lime/10"
-                             : "border-white/10 bg-brand-black/40 hover:border-white/20"
-                         }`}
-                       >
-                         <div className="relative aspect-[4/3] overflow-hidden border-b border-white/10 bg-brand-black/50">
-                           <img
-                             src={feature.image}
-                             alt={feature.imageAlt}
-                             className="h-full w-full object-cover brightness-110 contrast-105"
-                             loading="lazy"
-                             decoding="async"
-                           />
-                         </div>
-                         <span
-                           className={`block px-3 py-2 text-xs font-bold ${
-                             activeInteriorId === feature.id ? "text-brand-lime" : "text-white/75"
-                           }`}
-                         >
-                           {feature.label}
-                         </span>
-                       </button>
-                     ))}
-                   </div>
-                   <motion.div
-                     key={selectedInterior.id}
-                     initial={{ opacity: 0, y: 8 }}
-                     animate={{ opacity: 1, y: 0 }}
-                     className="overflow-hidden rounded-2xl border border-brand-blue/20 bg-brand-blue/10"
-                   >
-                     <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10">
-                       <img
-                         src={selectedInterior.image}
-                         alt={selectedInterior.imageAlt}
-                         className="h-full w-full object-cover brightness-110 contrast-105"
-                         loading="lazy"
-                         decoding="async"
-                       />
-                     </div>
-                     <div className="p-4">
-                       <p className="text-sm font-bold text-white">{selectedInterior.label}</p>
-                       <p className="mt-1 text-xs leading-relaxed text-white/65">
-                         {selectedInterior.description}
-                       </p>
-                     </div>
-                   </motion.div>
-                 </div>
-               )}
-
-               <div className="relative mb-4 overflow-hidden rounded-2xl border border-brand-blue/20 bg-brand-blue/10 p-4">
-                  <div className="absolute -right-12 -top-12 h-28 w-28 rounded-full bg-brand-blue/20 blur-2xl" />
-                  <div className="relative z-10">
-                    <div className="mb-2 flex items-center gap-2">
-                       <CheckCircle2 className="h-4 w-4 text-brand-lime" />
-                       <span className="text-sm font-bold text-white">360° Inspection Report</span>
-                    </div>
-                    <p className="text-xs font-medium leading-relaxed text-white/62">
-                       This vehicle has passed our 140-point quality check. Inspect every detail with the interactive view adjacent.
+                    <p className="font-heading text-2xl font-extrabold text-brand-lime sm:text-3xl">
+                      ₹18.5L
                     </p>
+                    <p className="text-xs text-white/45">On-road · Mumbai</p>
                   </div>
-               </div>
+                </div>
 
-               <div className="mt-auto space-y-3 pt-2">
-                  <GlowButton href="/contact" variant="filled" className="w-full justify-center">
-                     Book a Demo
-                  </GlowButton>
-                  <div className="flex gap-3">
-                     <button className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 py-3 font-bold text-white/72 transition-colors hover:border-brand-lime/40 hover:bg-brand-lime/10 hover:text-brand-lime">
-                        <Heart className="h-4 w-4" /> Save
-                     </button>
-                     <button className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-white/10 py-3 font-bold text-white/72 transition-colors hover:border-brand-blue/40 hover:bg-brand-blue/10 hover:text-brand-blue">
-                        <Share2 className="h-4 w-4" /> Share
-                     </button>
-                  </div>
-               </div>
+                <div>
+                  <h3 className="font-heading text-xl font-extrabold tracking-tight text-white sm:text-2xl">
+                    Certified Mid-Size SUV
+                  </h3>
+                  <p className="mt-1.5 text-sm text-white/50">
+                    Automatic · Verified · 360° enabled
+                  </p>
+                </div>
+
+                <dl className="grid grid-cols-2 gap-x-4 gap-y-3 border-y border-white/8 py-4">
+                  {listingSpecs.map(({ icon: Icon, label, value }) => (
+                    <div key={label} className="flex items-center gap-2.5">
+                      <Icon className="h-4 w-4 shrink-0 text-brand-lime/80" strokeWidth={1.75} />
+                      <div className="min-w-0">
+                        <dt className="text-[10px] font-medium uppercase tracking-wide text-white/35">
+                          {label}
+                        </dt>
+                        <dd className="truncate text-sm font-semibold text-white">{value}</dd>
+                      </div>
+                    </div>
+                  ))}
+                </dl>
+
+                <motion.div
+                  key={selectedHotspot.numericId}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="rounded-xl border border-white/10 bg-white/[0.03] p-4"
+                >
+                  <p className="text-sm font-bold text-white">{selectedHotspot.label}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-white/60">
+                    {selectedHotspot.description}
+                  </p>
+                  <p className="mt-3 text-xs text-white/40">
+                    Tap a hotspot on the vehicle to explore details.
+                  </p>
+                </motion.div>
+
+                <div className="flex items-start gap-3 rounded-xl border border-brand-lime/15 bg-brand-lime/[0.06] px-4 py-3">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-lime" />
+                  <p className="text-xs leading-relaxed text-white/55">
+                    Passed our 140-point inspection. Every angle verified in the
+                    interactive view.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 space-y-3">
+                <GlowButton href="/contact" variant="filled" className="w-full justify-center">
+                  Book a Demo
+                </GlowButton>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    className="flex items-center justify-center gap-2 rounded-xl border border-white/10 py-2.5 text-sm font-semibold text-white/70 transition-colors hover:border-white/20 hover:text-white"
+                  >
+                    <Heart className="h-4 w-4" />
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    className="flex items-center justify-center gap-2 rounded-xl border border-white/10 py-2.5 text-sm font-semibold text-white/70 transition-colors hover:border-white/20 hover:text-white"
+                  >
+                    <Share2 className="h-4 w-4" />
+                    Share
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

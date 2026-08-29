@@ -1,97 +1,110 @@
 import { homepageSectionAssets } from "@/lib/homepageSectionAssets";
 
-export type ChannelFormat = "square" | "story" | "landscape" | "wide" | "listing" | "spin";
+export type ChannelFormat = "square" | "story" | "wide" | "spin";
+export type ChannelFrame = "feed" | "phone" | "browser";
 
 export interface ChannelTile {
   id: string;
   label: string;
   subtitle: string;
   format: ChannelFormat;
+  frame: ChannelFrame;
   image: string;
   imageAlt: string;
-  className: string;
-  objectPosition?: string;
-  objectFit?: "cover" | "contain";
-  accent?: "instagram" | "whatsapp" | "marketplace" | "spin" | "website";
+  aspectClass: string;
+  objectPosition: string;
+  objectFit: "cover" | "contain";
+  platformIcon: string;
+  platformColor: string;
 }
 
 const ch = homepageSectionAssets.platformShowcase.channels;
 
 export const sourceVehicle = homepageSectionAssets.platformShowcase.sourceCapture;
 
+export const marketplaceTile = {
+  label: "Marketplace Listing",
+  subtitle: "Dealer & classified grids",
+  image: ch.marketplace,
+  imageAlt: "Multi-dealer listing grid mockup",
+  aspectClass: "aspect-[16/11]",
+  objectPosition: "center top",
+  objectFit: "contain" as const,
+};
+
+/** Four channel outputs — equal columns, shared preview height */
 export const channelTiles: ChannelTile[] = [
   {
-    id: "marketplace",
-    label: "Marketplace Listing",
-    subtitle: "Dealer & classified grids",
-    format: "listing",
-    image: ch.marketplace,
-    imageAlt: "Premium marketplace listing grid mockup",
-    className: "col-span-12 row-span-2 lg:col-span-7 lg:row-span-2",
-    objectPosition: "center top",
-    objectFit: "cover",
-    accent: "marketplace",
-  },
-  {
     id: "instagram",
-    label: "Instagram Post",
-    subtitle: "Feed & carousel ads",
+    label: "Instagram",
+    subtitle: "Feed & carousel",
     format: "square",
+    frame: "feed",
     image: ch.instagram,
-    imageAlt: "Instagram feed creative with studio vehicle",
-    className: "col-span-6 row-span-2 sm:col-span-6 lg:col-span-4",
+    imageAlt: "Square Instagram feed creative",
+    aspectClass: "aspect-square",
     objectPosition: "center center",
-    objectFit: "contain",
-    accent: "instagram",
+    objectFit: "cover",
+    platformIcon: "IG",
+    platformColor: "from-pink-500 to-orange-500",
   },
   {
     id: "story",
-    label: "Instagram Story",
-    subtitle: "Vertical stories & reels",
+    label: "Stories",
+    subtitle: "Vertical reels",
     format: "story",
+    frame: "phone",
     image: ch.story,
-    imageAlt: "Vertical Instagram story with vehicle hero",
-    className: "col-span-6 row-span-2 sm:col-span-6 lg:col-span-3 lg:row-span-2",
+    imageAlt: "Portrait story creative",
+    aspectClass: "aspect-[9/16]",
     objectPosition: "center center",
     objectFit: "cover",
-    accent: "instagram",
+    platformIcon: "▶",
+    platformColor: "from-purple-500 to-pink-500",
   },
   {
     id: "whatsapp",
-    label: "WhatsApp Creative",
+    label: "WhatsApp",
     subtitle: "Status & forwards",
     format: "story",
+    frame: "phone",
     image: ch.whatsapp,
-    imageAlt: "WhatsApp status creative with vehicle listing",
-    className: "col-span-6 row-span-2 sm:col-span-4 lg:col-span-3",
+    imageAlt: "WhatsApp status creative",
+    aspectClass: "aspect-[9/16]",
     objectPosition: "center center",
-    objectFit: "contain",
-    accent: "whatsapp",
-  },
-  {
-    id: "website",
-    label: "Website Banner",
-    subtitle: "Landing pages & dealer sites",
-    format: "wide",
-    image: ch.website,
-    imageAlt: "Website hero banner with studio vehicle",
-    className: "col-span-12 row-span-2 sm:col-span-8 lg:col-span-6 lg:row-span-2",
-    objectPosition: "center center",
-    objectFit: "contain",
-    accent: "website",
+    objectFit: "cover",
+    platformIcon: "WA",
+    platformColor: "from-emerald-500 to-green-600",
   },
   {
     id: "360",
-    label: "360° Experience",
-    subtitle: "Interactive exploration",
+    label: "360° View",
+    subtitle: "Interactive spin",
     format: "spin",
+    frame: "phone",
     image: ch.spin,
-    imageAlt: "Interactive 360° studio vehicle presentation",
-    className: "col-span-12 row-span-2 sm:col-span-4 lg:col-span-3 lg:row-span-2",
-    objectPosition: "center 38%",
+    imageAlt: "Listing card with 360° explorer",
+    aspectClass: "aspect-[9/16]",
+    objectPosition: "center top",
     objectFit: "cover",
-    accent: "spin",
+    platformIcon: "360",
+    platformColor: "from-brand-lime to-emerald-400",
   },
 ];
+
+export const websiteTile: ChannelTile = {
+  id: "website",
+  label: "Website",
+  subtitle: "Dealer landing pages",
+  format: "wide",
+  frame: "browser",
+  image: ch.website,
+  imageAlt: "Wide website hero banner",
+  aspectClass: "aspect-[21/9] sm:aspect-[2.4/1]",
+  objectPosition: "center center",
+  objectFit: "cover",
+  platformIcon: "WWW",
+  platformColor: "from-sky-500 to-blue-600",
+};
 
 export { socialCopy as platformShowcaseCopy } from "@/lib/homepageContent";

@@ -106,12 +106,15 @@ async function analyzeFrame(frameIndex) {
 
   if (frameIndex <= 3 && leftWheel) {
     wheels = pct(leftWheel.x, leftWheel.y);
-  } else if (frameIndex >= 29 && leftWheel) {
+  } else if (frameIndex >= 24 && frameIndex <= 32 && leftWheel) {
     wheels = pct(leftWheel.x, leftWheel.y);
+  } else if (frameIndex >= 29 && rightWheel) {
+    wheels = pct(rightWheel.x, rightWheel.y);
   }
 
   const tailVisible =
-    (frameIndex >= 14 && frameIndex <= 15) || (frameIndex >= 19 && frameIndex <= 22);
+    (frameIndex >= 14 && frameIndex <= 16) ||
+    (frameIndex >= 19 && frameIndex <= 28);
 
   if (tailVisible) {
     tailLamps = pct(tailX, tailY);
@@ -177,7 +180,7 @@ console.log("Wrote src/lib/threeSixtyHotspots.data.json\n");
 
 const frameToAngle = (frame) => (frame / TOTAL_FRAMES) * 360;
 
-for (const angle of [55, 76, 98, 142, 218]) {
+for (const angle of [55, 76, 98, 142, 218, 284]) {
   const frame = Math.min(TOTAL_FRAMES - 1, Math.floor((angle / 360) * TOTAL_FRAMES));
   const parts = [];
   if (grilleFrames[frame]) parts.push(`G@${grilleFrames[frame].x},${grilleFrames[frame].y}`);
