@@ -16,7 +16,7 @@ export function PageLayout({ children, className = "" }: PageLayoutProps) {
         Skip to content
       </a>
       <Header />
-      <main id="main-content" className="pt-20 lg:pt-24">
+      <main id="main-content" className="pt-16 lg:pt-[4.25rem]">
         {children}
       </main>
       <Footer />

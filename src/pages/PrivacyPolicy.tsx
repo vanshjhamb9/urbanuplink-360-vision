@@ -4,7 +4,7 @@ const PrivacyPolicy = () => {
   return (
     <LegalDocumentLayout title="Privacy Policy" updated="October 2025">
           <section>
-            <h2 className="text-2xl font-semibold mb-3">Overview</h2>
+            <h2 className="mb-3">Overview</h2>
             <p>
               Welcome to Urban Uplink Pvt. Ltd. ("Urban Uplink," "we," "our," or
               "us"). Your privacy is important to us, and we are committed to
@@ -16,7 +16,7 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">Who We Are</h2>
+            <h2 className="mb-3">Who We Are</h2>
             <p>
               Urban Uplink Pvt. Ltd. provides innovative tools that help
               creators and businesses build and manage photo galleries,
@@ -36,7 +36,7 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               Information We Collect
             </h2>
             <p>
@@ -58,7 +58,7 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               How We Collect Information
             </h2>
             <p>We collect information in three ways:</p>
@@ -80,7 +80,7 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               How We Use Your Information
             </h2>
             <p>
@@ -102,7 +102,7 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               How We Share Information
             </h2>
             <p>
@@ -127,7 +127,7 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">Data Security</h2>
+            <h2 className="mb-3">Data Security</h2>
             <p>
               We follow industry-standard practices to protect your data from
               unauthorized access, alteration, or loss. This includes
@@ -138,7 +138,7 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">Data Retention</h2>
+            <h2 className="mb-3">Data Retention</h2>
             <p>
               We retain your data while your account is active or as needed for
               services. Some data may be kept temporarily for legal or
@@ -157,7 +157,7 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               International Transfers
             </h2>
             <p>
@@ -169,7 +169,7 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">Your Privacy Rights</h2>
+            <h2 className="mb-3">Your Privacy Rights</h2>
             <p>
               You control your data. You can access, correct, delete, or
               restrict use directly via your account. For help, contact{" "}
@@ -197,7 +197,7 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">Contact & Grievance</h2>
+            <h2 className="mb-3">Contact & Grievance</h2>
             <p>
               If you have questions or concerns, please contact our Grievance
               Officer:

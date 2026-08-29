@@ -340,7 +340,7 @@ const PricingPage = () => {
   return (
     <PageLayout>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/10 section-compact">
+      <section className="relative overflow-hidden page-hero-band">
         <div className="pointer-events-none absolute inset-0 section-glow" />
         <div className="pointer-events-none absolute left-1/2 top-12 h-48 w-[36rem] -translate-x-1/2 rounded-full bg-brand-lime/5 blur-3xl" />
 
@@ -350,7 +350,7 @@ const PricingPage = () => {
               Simple, Transparent Pricing
             </span>
           </div>
-          <h1 className="font-heading text-3xl font-extrabold tracking-tight text-white md:text-4xl lg:text-5xl">
+          <h1 className="font-heading text-2xl font-extrabold tracking-tight text-white sm:text-3xl md:text-[2.35rem] lg:text-4xl">
             Choose the right plan for your growth
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-brand md:text-base">
@@ -392,7 +392,7 @@ const PricingPage = () => {
 
       {/* Main Plans */}
       <section className="section-shell">
-        <div className="page-container-wide page-container">
+        <div className="page-container-wide">
           <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {plans.map((plan) => {
               const isCustom = plan.pricing === "custom";
@@ -403,7 +403,7 @@ const PricingPage = () => {
                   key={plan.name}
                   className={`group relative flex h-full flex-col overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
                     plan.popular
-                      ? "z-10 border-accent bg-gradient-to-b from-background to-accent/5 shadow-2xl shadow-accent/10 lg:scale-[1.02]"
+                      ? "z-10 border-accent bg-gradient-to-b from-background to-accent/5 shadow-2xl shadow-accent/10 ring-1 ring-accent/30"
                       : "border-border bg-card hover:border-accent/50 hover:shadow-xl hover:shadow-accent/5"
                   }`}
                 >
@@ -528,7 +528,7 @@ const PricingPage = () => {
           </div>
 
           {/* Feature Comparison Table */}
-          <div className="page-container-wide page-container mt-16 md:mt-20">
+          <div className="page-container-wide mt-16 md:mt-20">
             <div className="mb-10 text-center">
               <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
                 Compare Plans
@@ -605,7 +605,7 @@ const PricingPage = () => {
               </p>
             </div>
 
-            <div className="page-container-wide page-container grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            <div className="page-container-wide grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
               {imageServicePlans.map((service) => {
                 const price = service.pricing[billing];
 

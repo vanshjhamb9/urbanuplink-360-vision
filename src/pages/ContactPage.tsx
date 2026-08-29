@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { PageLayout } from "@/components/layout/PageLayout";
-import FloatingDemo from "@/components/FloatingDemo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -84,11 +83,12 @@ const ContactPage = () => {
 
   return (
     <PageLayout>
-      <section className="relative overflow-hidden border-b border-white/10 section-compact">
+      <section className="relative overflow-hidden page-hero-band">
         <div className="pointer-events-none absolute inset-0 section-glow" />
         <div className="page-container relative z-10 text-center">
           <SectionHeading
             eyebrow="Get in Touch"
+            size="page"
             title={
               <>
                 Let&apos;s transform{" "}
@@ -101,7 +101,7 @@ const ContactPage = () => {
       </section>
 
       <section className="section-shell">
-        <div className="page-container-wide page-container">
+        <div className="page-container-wide">
           <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-12">
             {/* Contact Info Side */}
             <div className="space-y-8">
@@ -242,8 +242,6 @@ const ContactPage = () => {
           </div>
         </div>
       </section>
-
-      <FloatingDemo />
     </PageLayout>
   );
 };

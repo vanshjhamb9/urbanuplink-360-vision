@@ -79,11 +79,12 @@ const values = [
 const TeamPage = () => {
   return (
     <PageLayout>
-      <section className="relative overflow-hidden border-b border-white/10 section-compact">
+      <section className="relative overflow-hidden page-hero-band">
         <div className="pointer-events-none absolute inset-0 section-glow" />
         <div className="page-container">
           <SectionHeading
             eyebrow="Our Team"
+            size="page"
             title={
               <>
                 Meet the minds behind{" "}
@@ -96,7 +97,7 @@ const TeamPage = () => {
       </section>
 
       <section className="section-shell border-b border-white/8">
-        <div className="page-container-wide page-container">
+        <div className="page-container-wide">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {team.map((member) => (
               <article

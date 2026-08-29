@@ -1,5 +1,6 @@
 import { Ban, MapPin, Wrench, Eye, Trophy } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { assets } from "@/lib/assets";
 import { lotListingPhotos, studioListingPhotos } from "@/lib/studioVehicle";
 
 export type ComparisonPhoto = {
@@ -37,13 +38,13 @@ export const beforeGrid: ComparisonPhoto[] = [
   { src: lotListingPhotos.bottomRight, alt: "Phone capture with harsh outdoor lighting", objectPosition: "center 45%" },
 ];
 
-/** Client studio listing cards — pre-composited, consistent floor alignment */
+/** Urban Uplink processed studio vehicle photos */
 export const afterGrid: ComparisonPhoto[] = [
-  { src: studioListingPhotos[0], alt: "Premium studio front listing", objectPosition: "center 42%" },
-  { src: studioListingPhotos[1], alt: "Premium studio quarter view listing", objectPosition: "center 40%" },
-  { src: studioListingPhotos[2], alt: "Premium studio side profile listing", objectPosition: "center 38%" },
-  { src: studioListingPhotos[3], alt: "Premium studio rear listing", objectPosition: "center 40%" },
-  { src: studioListingPhotos[4], alt: "Premium studio three-quarter listing", objectPosition: "center 42%" },
+  { src: studioListingPhotos[0], alt: "Kia Seltos on a clean studio backdrop", objectPosition: "center 42%" },
+  { src: studioListingPhotos[1], alt: "Vehicle in a premium detailing studio", objectPosition: "center 40%" },
+  { src: studioListingPhotos[2], alt: "Finished studio presentation of a vehicle", objectPosition: "center 38%" },
+  { src: studioListingPhotos[3], alt: "Fleet vehicle with professional presentation", objectPosition: "center 45%" },
+  { src: studioListingPhotos[4], alt: "Consistent studio-grade fleet imagery", objectPosition: "center 42%" },
 ];
 
 export type BadgeItem = {

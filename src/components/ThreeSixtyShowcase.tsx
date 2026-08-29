@@ -17,6 +17,17 @@ import { SectionHeading } from "@/components/ui-custom/SectionHeading";
 import { threeSixtyCopy } from "@/lib/homepageContent";
 import { assets } from "@/lib/assets";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
+import {
+  angleToFrame,
+  frameToAngle,
+  getHotspotsForFrame,
+  hotspotFeatures,
+  TOTAL_FRAMES,
+} from "@/lib/threeSixtyHotspots";
+import {
+  HotspotCalibrator,
+  useCalibratorEnabled,
+} from "@/components/three-sixty/HotspotCalibrator";
 import interiorDashboard from "@/assets/sierra-interior.jpg";
 import interiorSeats from "@/assets/slavia4.avif";
 import interiorEngine from "@/assets/360-tech.jpg";
@@ -93,131 +104,13 @@ const car360Images = [
   car360_33, // 960°
 ];
 
-const totalAngles = car360Images.length;
 const showroomBackground = assets.showroom.spinBackground;
 
 /** Backdrop crop anchor — keeps the studio floor line aligned with the vehicle stage */
 const SPIN_BACKDROP_POSITION = "center 44%";
 
-type HotspotPoint = { x: number; y: number };
-
-type HotspotTrack = {
-  id: number;
-  label: string;
-  description: string;
-  /** Frame ranges where this feature is visible */
-  ranges: [number, number][];
-  /** Anchor positions — intermediate frames are interpolated */
-  keys: Record<number, HotspotPoint>;
-};
-
-const pos = (x: number, y: number): HotspotPoint => ({ x, y });
-
-const hotspotTracks: HotspotTrack[] = [
-  {
-    id: 1,
-    label: "Front Grille",
-    description: "Parametric grille design with chrome accents",
-    ranges: [
-      [0, 5],
-      [28, 32],
-    ],
-    keys: {
-      0: pos(50, 49),
-      1: pos(51, 49),
-      2: pos(53, 48),
-      3: pos(55, 48),
-      4: pos(58, 47),
-      5: pos(61, 46),
-      28: pos(39, 46),
-      29: pos(42, 47),
-      30: pos(45, 48),
-      31: pos(48, 49),
-      32: pos(50, 49),
-    },
-  },
-  {
-    id: 2,
-    label: "LED Headlights",
-    description: "Projector LED headlamps with DRL signature",
-    ranges: [
-      [0, 5],
-      [27, 32],
-    ],
-    keys: {
-      0: pos(35, 41),
-      1: pos(34, 40),
-      2: pos(33, 39),
-      3: pos(32, 39),
-      4: pos(39, 38),
-      5: pos(41, 37),
-      27: pos(58, 37),
-      28: pos(60, 38),
-      29: pos(61, 39),
-      30: pos(63, 40),
-      32: pos(65, 41),
-    },
-  },
-  {
-    id: 3,
-    label: "Alloy Wheels",
-    description: '17" diamond-cut alloy wheels',
-    ranges: [
-      [9, 10],
-      [24, 25],
-    ],
-    keys: {
-      9: pos(22, 71),
-      10: pos(23, 72),
-      24: pos(77, 71),
-      25: pos(76, 72),
-    },
-  },
-  {
-    id: 5,
-    label: "LED Tail Lamps",
-    description: "Connected LED tail lamp design",
-    ranges: [[14, 19]],
-    keys: {
-      14: pos(37, 43),
-      15: pos(42, 41),
-      16: pos(50, 39),
-      17: pos(58, 41),
-      18: pos(63, 43),
-      19: pos(66, 44),
-    },
-  },
-];
-
-function getHotspotPosition(track: HotspotTrack, frame: number): HotspotPoint | null {
-  const isVisible = track.ranges.some(([start, end]) => frame >= start && frame <= end);
-  if (!isVisible) return null;
-
-  if (track.keys[frame]) return track.keys[frame];
-
-  const keyFrames = Object.keys(track.keys)
-    .map(Number)
-    .sort((a, b) => a - b);
-
-  if (frame <= keyFrames[0]) return track.keys[keyFrames[0]];
-  if (frame >= keyFrames[keyFrames.length - 1]) return track.keys[keyFrames[keyFrames.length - 1]];
-
-  for (let i = 0; i < keyFrames.length - 1; i++) {
-    const lower = keyFrames[i];
-    const upper = keyFrames[i + 1];
-    if (frame >= lower && frame <= upper) {
-      const t = (frame - lower) / (upper - lower);
-      const from = track.keys[lower];
-      const to = track.keys[upper];
-      return {
-        x: from.x + (to.x - from.x) * t,
-        y: from.y + (to.y - from.y) * t,
-      };
-    }
-  }
-
-  return null;
-}
+/** Fixed stage aspect — hotspot % coords map to this box 1:1 with car images */
+const VEHICLE_STAGE_ASPECT = "1120 / 425";
 
 type FeatureTab = "exterior" | "interior";
 
@@ -259,13 +152,15 @@ const ThreeSixtyShowcase = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
   const [velocity, setVelocity] = useState(0);
-  const [activeHotspot, setActiveHotspot] = useState<number>(hotspotTracks[0].id);
+  const [activeHotspot, setActiveHotspot] = useState<number>(hotspotFeatures[0].numericId);
   const [activeInteriorId, setActiveInteriorId] = useState<number>(interiorFeatures[0].id);
   const [featureTab, setFeatureTab] = useState<FeatureTab>("exterior");
   const [framesReady, setFramesReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const vehicleStageRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number>();
   const lastTimeRef = useRef<number>(Date.now());
+  const calibratorEnabled = useCalibratorEnabled();
 
   useEffect(() => {
     let cancelled = false;
@@ -311,7 +206,7 @@ const ThreeSixtyShowcase = () => {
       
       setRotationAngle((prev) => {
         const newAngle = (prev + 0.3) % 360;
-        const newIndex = Math.floor((newAngle / 360) * totalAngles) % totalAngles;
+        const newIndex = angleToFrame(newAngle);
         setCurrentImageIndex(newIndex);
         return newAngle;
       });
@@ -344,8 +239,8 @@ const ThreeSixtyShowcase = () => {
     const normalizedAngle = newAngle < 0 ? newAngle + 360 : newAngle;
     
     // Calculate image index instantly based on angle
-    const exactIndex = (normalizedAngle / 360) * totalAngles;
-    const newIndex = Math.floor(exactIndex) % totalAngles;
+    const exactIndex = (normalizedAngle / 360) * TOTAL_FRAMES;
+    const newIndex = Math.min(TOTAL_FRAMES - 1, Math.floor(exactIndex));
     
     // Update both angle and image index immediately
     setRotationAngle(normalizedAngle);
@@ -356,14 +251,26 @@ const ThreeSixtyShowcase = () => {
     setVelocity(angleChange);
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    // Add momentum effect
+  const snapToFrame = (index: number) => {
+    const clamped = ((index % TOTAL_FRAMES) + TOTAL_FRAMES) % TOTAL_FRAMES;
+    setCurrentImageIndex(clamped);
+    setRotationAngle(frameToAngle(clamped));
+  };
+
+  const applyMomentum = () => {
     if (Math.abs(velocity) > 0.5) {
       const momentumAngle = (rotationAngle + velocity * 2) % 360;
-      setRotationAngle(momentumAngle < 0 ? momentumAngle + 360 : momentumAngle);
+      const normalized = momentumAngle < 0 ? momentumAngle + 360 : momentumAngle;
+      snapToFrame(angleToFrame(normalized));
+    } else {
+      snapToFrame(angleToFrame(rotationAngle));
     }
     setVelocity(0);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    applyMomentum();
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -382,8 +289,8 @@ const ThreeSixtyShowcase = () => {
     const normalizedAngle = newAngle < 0 ? newAngle + 360 : newAngle;
     
     // Calculate image index instantly based on angle
-    const exactIndex = (normalizedAngle / 360) * totalAngles;
-    const newIndex = Math.floor(exactIndex) % totalAngles;
+    const exactIndex = (normalizedAngle / 360) * TOTAL_FRAMES;
+    const newIndex = Math.min(TOTAL_FRAMES - 1, Math.floor(exactIndex));
     
     // Update both angle and image index immediately
     setRotationAngle(normalizedAngle);
@@ -395,8 +302,8 @@ const ThreeSixtyShowcase = () => {
   const stepFrame = (direction: -1 | 1) => {
     setIsPlaying(false);
     setCurrentImageIndex((prev) => {
-      const newIndex = (prev + direction + totalAngles) % totalAngles;
-      setRotationAngle((newIndex / totalAngles) * 360);
+      const newIndex = (prev + direction + TOTAL_FRAMES) % TOTAL_FRAMES;
+      setRotationAngle(frameToAngle(newIndex));
       return newIndex;
     });
   };
@@ -405,32 +312,22 @@ const ThreeSixtyShowcase = () => {
   const handleNext = () => stepFrame(1);
 
   const visibleHotspots = useMemo(
-    () =>
-      hotspotTracks
-        .map((track) => {
-          const position = getHotspotPosition(track, currentImageIndex);
-          return position ? { ...track, position } : null;
-        })
-        .filter((track): track is HotspotTrack & { position: HotspotPoint } => track !== null),
+    () => getHotspotsForFrame(currentImageIndex),
     [currentImageIndex],
   );
 
   useEffect(() => {
     setActiveHotspot((prev) => {
-      const visible = hotspotTracks
-        .map((track) => {
-          const position = getHotspotPosition(track, currentImageIndex);
-          return position ? track.id : null;
-        })
-        .filter((id): id is number => id !== null);
-
+      const visible = visibleHotspots.map((track) => track.numericId);
       if (visible.includes(prev)) return prev;
       return visible[0] ?? prev;
     });
-  }, [currentImageIndex]);
+  }, [currentImageIndex, visibleHotspots]);
 
   const selectedHotspot =
-    hotspotTracks.find((spot) => spot.id === activeHotspot) || visibleHotspots[0] || hotspotTracks[0];
+    hotspotFeatures.find((spot) => spot.numericId === activeHotspot) ||
+    visibleHotspots[0] ||
+    hotspotFeatures[0];
   const selectedInterior =
     interiorFeatures.find((f) => f.id === activeInteriorId) ?? interiorFeatures[0];
 
@@ -485,17 +382,16 @@ const ThreeSixtyShowcase = () => {
                 onTouchMove={handleTouchMove}
                 onTouchEnd={() => {
                   setIsDragging(false);
-                  if (Math.abs(velocity) > 0.5) {
-                    const momentumAngle = (rotationAngle + velocity * 2) % 360;
-                    setRotationAngle(momentumAngle < 0 ? momentumAngle + 360 : momentumAngle);
-                  }
-                  setVelocity(0);
+                  applyMomentum();
                 }}
               >
-                {/* Vehicle stage — larger scale so hotspots align to body panels */}
+                {/* Vehicle stage — fixed aspect; car + hotspots share the same coordinate space */}
                 <div
-                  className="absolute bottom-[10%] left-1/2 z-10 w-[min(88%,820px)] -translate-x-1/2 translate-y-[1%] lg:bottom-[14%] lg:translate-y-[2%]"
-                  style={{ aspectRatio: "1120 / 425" }}
+                  ref={vehicleStageRef}
+                  className={`absolute bottom-[10%] left-1/2 z-10 w-[min(88%,820px)] -translate-x-1/2 translate-y-[1%] lg:bottom-[14%] lg:translate-y-[2%] ${
+                    calibratorEnabled ? "border border-yellow-400/30" : ""
+                  }`}
+                  style={{ aspectRatio: VEHICLE_STAGE_ASPECT }}
                 >
                   {!framesReady && (
                     <div className="absolute inset-0 z-30 flex items-center justify-center">
@@ -511,8 +407,8 @@ const ThreeSixtyShowcase = () => {
                       <img
                         key={index}
                         src={img}
-                        alt={`Angle ${index * 11}`}
-                        className={`absolute inset-0 h-full w-full origin-[center_100%] scale-[1.1] object-contain object-bottom brightness-125 contrast-110 drop-shadow-[0_22px_44px_rgba(0,0,0,0.34)] [object-position:50%_103%] ${
+                        alt={`Angle ${Math.round(frameToAngle(index))}°`}
+                        className={`absolute inset-0 h-full w-full object-contain object-bottom brightness-125 contrast-110 drop-shadow-[0_22px_44px_rgba(0,0,0,0.34)] ${
                           isActive ? "z-10 opacity-100" : "pointer-events-none z-0 opacity-0"
                         }`}
                         loading={index === 0 ? "eager" : "lazy"}
@@ -522,40 +418,67 @@ const ThreeSixtyShowcase = () => {
                   })}
 
                   {/* Hotspots Overlay */}
-                  {visibleHotspots.map((spot) => (
-                    <button
-                      key={spot.id}
-                      type="button"
-                      className={`group absolute z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-opacity ${
-                        activeHotspot === spot.id ? "opacity-100" : "opacity-90"
-                      }`}
-                      style={{
-                        left: `${spot.position.x}%`,
-                        top: `${spot.position.y}%`,
-                      }}
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        setActiveHotspot(spot.id);
+                  {!calibratorEnabled &&
+                    visibleHotspots.map((spot) => {
+                      const tooltipRight = spot.position.x > 55;
+
+                      return (
+                        <button
+                          key={spot.id}
+                          type="button"
+                          className={`group absolute z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-[left,top,opacity] duration-150 ${
+                            activeHotspot === spot.numericId ? "opacity-100" : "opacity-90"
+                          }`}
+                          style={{
+                            left: `${spot.position.x}%`,
+                            top: `${spot.position.y}%`,
+                          }}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            setActiveHotspot(spot.numericId);
+                            setIsPlaying(false);
+                          }}
+                          aria-label={`Open ${spot.label} hotspot`}
+                          aria-current={activeHotspot === spot.numericId}
+                        >
+                          <div className="relative">
+                            <div
+                              className={`flex h-8 w-8 items-center justify-center rounded-full border-2 bg-white/90 text-brand-black shadow-md transition-transform group-hover:scale-110 sm:h-6 sm:w-6 ${
+                                activeHotspot === spot.numericId
+                                  ? "scale-110 border-brand-lime"
+                                  : "border-white/90"
+                              }`}
+                            >
+                              <div className="h-1.5 w-1.5 rounded-full bg-brand-black/70" />
+                            </div>
+                            <div
+                              className={`pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded-xl border border-white/10 bg-brand-black/90 px-3 py-2 text-left text-xs font-bold text-white opacity-0 shadow-card backdrop-blur transition-opacity group-hover:opacity-100 ${
+                                tooltipRight
+                                  ? "right-full mr-3"
+                                  : "left-full ml-3"
+                              }`}
+                            >
+                              <span className="text-white">{spot.label}</span>
+                              <span className="mt-0.5 block font-medium text-white/55">
+                                {spot.description}
+                              </span>
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    })}
+
+                  {calibratorEnabled && (
+                    <HotspotCalibrator
+                      currentFrame={currentImageIndex}
+                      onFrameChange={(frame) => {
                         setIsPlaying(false);
+                        setCurrentImageIndex(frame);
+                        setRotationAngle(frameToAngle(frame));
                       }}
-                      aria-label={`Open ${spot.label} hotspot`}
-                      aria-current={activeHotspot === spot.id}
-                    >
-                      <div className="relative">
-                           <div className={`flex h-6 w-6 items-center justify-center rounded-full border-2 bg-white/90 text-brand-black shadow-md transition-transform group-hover:scale-110 ${
-                             activeHotspot === spot.id
-                               ? "border-brand-lime scale-110"
-                               : "border-white/90"
-                           }`}>
-                          <div className="h-1.5 w-1.5 rounded-full bg-brand-black/70" />
-                        </div>
-                        <div className="pointer-events-none absolute left-full top-1/2 ml-3 -translate-y-1/2 whitespace-nowrap rounded-xl border border-white/10 bg-brand-black/90 px-3 py-2 text-left text-xs font-bold text-white opacity-0 shadow-card backdrop-blur transition-opacity group-hover:opacity-100">
-                          <span className="text-white">{spot.label}</span>
-                          <span className="mt-0.5 block font-medium text-white/55">{spot.description}</span>
-                        </div>
-                      </div>
-                    </button>
-                  ))}
+                      stageRef={vehicleStageRef}
+                    />
+                  )}
                 </div>
 
                 {/* Controls Overlay */}
@@ -570,7 +493,7 @@ const ThreeSixtyShowcase = () => {
                         />
                      </div>
                      <span className="hidden text-xs font-semibold text-white/60 sm:inline">
-                       {Math.round(rotationAngle)}°
+                       {Math.round(frameToAngle(currentImageIndex))}°
                      </span>
                   </div>
 
@@ -610,7 +533,7 @@ const ThreeSixtyShowcase = () => {
                     onClick={() => {
                       setIsPlaying(false);
                       setCurrentImageIndex(idx);
-                      setRotationAngle(idx * 30);
+                      setRotationAngle(frameToAngle(idx));
                     }}
                   >
                     <img src={car360Images[idx]} className="h-full w-full object-cover" alt="360 angle thumbnail" />
@@ -699,7 +622,7 @@ const ThreeSixtyShowcase = () => {
 
                {featureTab === "exterior" ? (
                  <motion.div
-                   key={selectedHotspot.id}
+                   key={selectedHotspot.numericId}
                    initial={{ opacity: 0, y: 12 }}
                    animate={{ opacity: 1, y: 0 }}
                    transition={{ duration: 0.25 }}

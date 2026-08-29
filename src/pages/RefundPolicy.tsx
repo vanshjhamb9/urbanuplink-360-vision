@@ -14,7 +14,7 @@ const RefundPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">1. No Refund Policy</h2>
+            <h2 className="mb-3">1. No Refund Policy</h2>
             <p>
               All purchases and payments made to Urban Uplink Pvt. Ltd. are
               final and non-refundable. Once a transaction is completed —
@@ -37,7 +37,7 @@ const RefundPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               2. Exceptional Circumstances
             </h2>
             <p>
@@ -64,7 +64,7 @@ const RefundPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               3. Subscription Cancellations
             </h2>
             <p>
@@ -77,7 +77,7 @@ const RefundPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               4. Third-Party Payments
             </h2>
             <p>
@@ -90,7 +90,7 @@ const RefundPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">5. Contact Us</h2>
+            <h2 className="mb-3">5. Contact Us</h2>
             <p>
               If you have questions regarding this Refund Policy or believe a
               billing error has occurred, please contact us at:

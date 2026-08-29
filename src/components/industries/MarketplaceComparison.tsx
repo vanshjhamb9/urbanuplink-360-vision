@@ -60,8 +60,9 @@ export function MarketplaceComparison({ content }: MarketplaceComparisonProps) {
                     alt={step.cardTitle}
                     className="h-full w-full object-cover brightness-105 contrast-105 transition-transform duration-500 hover:scale-[1.02]"
                     style={{ objectPosition: step.objectPosition ?? "center center" }}
-                    loading="lazy"
-                    decoding="async"
+                    loading="eager"
+                    fetchPriority={index === 0 ? "high" : "low"}
+                    decoding="sync"
                   />
                 </picture>
               </div>
@@ -82,7 +83,7 @@ export function MarketplaceComparison({ content }: MarketplaceComparisonProps) {
 
             {index < content.steps.length - 1 && (
               <span
-                className="absolute -right-3 top-[4.5rem] hidden font-heading text-2xl font-extrabold text-brand-lime lg:inline xl:-right-4"
+                className="absolute -right-3 top-[4.5rem] hidden font-heading text-2xl font-extrabold text-brand-lime xl:inline xl:-right-4"
                 aria-hidden="true"
               >
                 ›

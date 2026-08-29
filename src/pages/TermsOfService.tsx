@@ -4,7 +4,7 @@ const TermsOfService = () => {
   return (
     <LegalDocumentLayout title="Terms of Service" updated="October 2025">
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               Welcome to Urban Uplink Pvt. Ltd.
             </h2>
             <p>
@@ -19,7 +19,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">1. Our Services</h2>
+            <h2 className="mb-3">1. Our Services</h2>
             <p>
               Urban Uplink Pvt. Ltd. provides online tools that enable users to
               create, host, and manage photo galleries, websites, and digital
@@ -30,7 +30,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               2. Account Creation and Responsibilities
             </h2>
             <p>
@@ -52,7 +52,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">3. Acceptable Use</h2>
+            <h2 className="mb-3">3. Acceptable Use</h2>
             <p>
               You agree to use our Services only for lawful purposes and in
               accordance with these Terms. You may not:
@@ -82,7 +82,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               4. Payments and Billing
             </h2>
             <p>
@@ -96,7 +96,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               5. Third-Party Services and Integrations
             </h2>
             <p>
@@ -110,7 +110,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               6. Intellectual Property
             </h2>
             <p>
@@ -124,7 +124,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">7. Termination</h2>
+            <h2 className="mb-3">7. Termination</h2>
             <p>
               We reserve the right to suspend or terminate your account at our
               discretion if you violate these Terms or engage in activities that
@@ -136,7 +136,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               8. Privacy and Data Protection
             </h2>
             <p>
@@ -149,7 +149,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               9. Disclaimer of Warranties
             </h2>
             <p>
@@ -163,7 +163,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               10. Limitation of Liability
             </h2>
             <p>
@@ -177,7 +177,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">11. Indemnification</h2>
+            <h2 className="mb-3">11. Indemnification</h2>
             <p>
               You agree to defend, indemnify, and hold harmless Urban Uplink
               Pvt. Ltd., its affiliates, employees, and partners from and
@@ -187,7 +187,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               12. Updates to These Terms
             </h2>
             <p>
@@ -200,7 +200,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">
+            <h2 className="mb-3">
               13. Governing Law and Dispute Resolution
             </h2>
             <p>
@@ -212,7 +212,7 @@ const TermsOfService = () => {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-3">14. Contact Us</h2>
+            <h2 className="mb-3">14. Contact Us</h2>
             <p>
               For any questions or concerns about these Terms, please contact us
               at:

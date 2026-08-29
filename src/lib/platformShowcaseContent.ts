@@ -1,9 +1,4 @@
-import { assets } from "@/lib/assets";
-import { studioListingPhotos } from "@/lib/studioVehicle";
-import whatsappCreative from "@/assets/image (3).webp";
-import websiteCreative from "@/assets/image (4).webp";
-import instagramCreative from "@/assets/image (5).webp";
-import marketplaceCard from "@/assets/used.car.platform1.webp";
+import { homepageSectionAssets } from "@/lib/homepageSectionAssets";
 
 export type ChannelFormat = "square" | "story" | "landscape" | "wide" | "listing" | "spin";
 
@@ -16,17 +11,13 @@ export interface ChannelTile {
   imageAlt: string;
   className: string;
   objectPosition?: string;
-  /** contain preserves full marketing creative; cover for mockups */
   objectFit?: "cover" | "contain";
+  accent?: "instagram" | "whatsapp" | "marketplace" | "spin" | "website";
 }
 
-/** Hero source — one studio capture (distinct from all channel outputs) */
-export const sourceVehicle = {
-  image: studioListingPhotos[0],
-  alt: "Premium studio vehicle — one capture, every channel",
-  objectPosition: "center 42%",
-  objectFit: "cover" as const,
-};
+const ch = homepageSectionAssets.platformShowcase.channels;
+
+export const sourceVehicle = homepageSectionAssets.platformShowcase.sourceCapture;
 
 export const channelTiles: ChannelTile[] = [
   {
@@ -34,74 +25,73 @@ export const channelTiles: ChannelTile[] = [
     label: "Marketplace Listing",
     subtitle: "Dealer & classified grids",
     format: "listing",
-    image: assets.marketplace.listingDesktop,
+    image: ch.marketplace,
     imageAlt: "Premium marketplace listing grid mockup",
     className: "col-span-12 row-span-2 lg:col-span-7 lg:row-span-2",
     objectPosition: "center top",
     objectFit: "cover",
+    accent: "marketplace",
   },
   {
     id: "instagram",
     label: "Instagram Post",
     subtitle: "Feed & carousel ads",
     format: "square",
-    image: instagramCreative,
+    image: ch.instagram,
     imageAlt: "Instagram feed creative with studio vehicle",
     className: "col-span-6 row-span-2 sm:col-span-6 lg:col-span-4",
     objectPosition: "center center",
     objectFit: "contain",
+    accent: "instagram",
   },
   {
     id: "story",
     label: "Instagram Story",
     subtitle: "Vertical stories & reels",
     format: "story",
-    image: assets.banners.marketplace.mobile,
+    image: ch.story,
     imageAlt: "Vertical Instagram story with vehicle hero",
     className: "col-span-6 row-span-2 sm:col-span-6 lg:col-span-3 lg:row-span-2",
     objectPosition: "center center",
     objectFit: "cover",
+    accent: "instagram",
   },
   {
     id: "whatsapp",
     label: "WhatsApp Creative",
     subtitle: "Status & forwards",
     format: "story",
-    image: whatsappCreative,
+    image: ch.whatsapp,
     imageAlt: "WhatsApp status creative with vehicle listing",
     className: "col-span-6 row-span-2 sm:col-span-4 lg:col-span-3",
     objectPosition: "center center",
     objectFit: "contain",
+    accent: "whatsapp",
   },
   {
     id: "website",
     label: "Website Banner",
     subtitle: "Landing pages & dealer sites",
     format: "wide",
-    image: websiteCreative,
+    image: ch.website,
     imageAlt: "Website hero banner with studio vehicle",
     className: "col-span-12 row-span-2 sm:col-span-8 lg:col-span-6 lg:row-span-2",
     objectPosition: "center center",
     objectFit: "contain",
+    accent: "website",
   },
   {
     id: "360",
     label: "360° Experience",
     subtitle: "Interactive exploration",
     format: "spin",
-    image: studioListingPhotos[2],
+    image: ch.spin,
     imageAlt: "Interactive 360° studio vehicle presentation",
     className: "col-span-12 row-span-2 sm:col-span-4 lg:col-span-3 lg:row-span-2",
     objectPosition: "center 38%",
     objectFit: "cover",
+    accent: "spin",
   },
 ];
-
-/** Alternate assets kept for future A/B swaps — all unique per channel above */
-export const platformAssetPool = {
-  marketplaceCard,
-  processCards: studioListingPhotos,
-  heroStudio: assets.hero.studioDesktop,
-};
 
 export { socialCopy as platformShowcaseCopy } from "@/lib/homepageContent";

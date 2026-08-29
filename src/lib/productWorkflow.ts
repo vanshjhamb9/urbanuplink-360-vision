@@ -1,5 +1,5 @@
 import { Camera, Sparkles, Box, RotateCcw, Globe } from "lucide-react";
-import { assets } from "@/lib/assets";
+import { homepageSectionAssets } from "@/lib/homepageSectionAssets";
 import type { LucideIcon } from "lucide-react";
 
 export interface ProductWorkflowStep {
@@ -19,9 +19,8 @@ export const productWorkflowCopy = {
   footer: "One capture. Every channel.",
 };
 
-const wf = assets.productWorkflow;
+const wf = homepageSectionAssets.productWorkflow;
 
-/** Five-step dealer journey — static card images only (before/after slider lives in its own section). */
 export const productWorkflowSteps: ProductWorkflowStep[] = [
   {
     title: "Capture",

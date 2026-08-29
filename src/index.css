@@ -133,6 +133,11 @@
     @apply py-16 md:py-20 lg:py-24;
   }
 
+  /** Inner-page hero band — no extra top padding (main already clears the header) */
+  .page-hero-band {
+    @apply border-b border-white/10 pb-12 md:pb-16 lg:pb-20;
+  }
+
   /** Consistent gap between section heading and body content */
   .section-body {
     @apply mt-8 md:mt-10 lg:mt-12;

@@ -66,7 +66,7 @@ export function IndustryProcessRail({
             </div>
             {index < steps.length - 1 && (
               <span
-                className="absolute -right-3 top-[28%] hidden font-heading text-3xl font-extrabold text-brand-lime/70 lg:inline"
+                className="absolute -right-3 top-[28%] hidden font-heading text-3xl font-extrabold text-brand-lime/70 xl:inline"
                 aria-hidden="true"
               >
                 ›

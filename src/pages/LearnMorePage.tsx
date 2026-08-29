@@ -57,7 +57,7 @@ const faqs = [
 const LearnMorePage = () => {
   return (
     <PageLayout>
-      <section className="relative overflow-hidden border-b border-white/10 section-compact">
+      <section className="relative overflow-hidden page-hero-band">
         <div className="pointer-events-none absolute inset-0 section-glow" />
         <div className="page-container relative text-center">
           <motion.div
@@ -67,6 +67,7 @@ const LearnMorePage = () => {
           >
             <SectionHeading
               eyebrow="Platform Overview"
+              size="page"
               title={
                 <>
                   Built for the future of{" "}
@@ -80,7 +81,6 @@ const LearnMorePage = () => {
                 Explore Industries
               </GlowButton>
               <GlowButton href="/contact">Book a Demo</GlowButton>
-              <GlowButton href="/pricing">View Pricing</GlowButton>
             </div>
           </motion.div>
         </div>
@@ -89,17 +89,13 @@ const LearnMorePage = () => {
       <section className="section-shell border-b border-white/8">
         <div className="page-container grid items-start gap-10 lg:grid-cols-2 lg:gap-12">
           <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-lime">
-              About the platform
-            </p>
-            <h2 className="font-heading text-2xl font-extrabold text-white md:text-3xl">
-              The visual infrastructure platform for automotive retail.
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted-brand md:text-base">
-              Urban Uplink gives automotive teams one workflow to digitize, present,
-              inspect, and market vehicles. Photography is the starting point for a
-              platform built around better vehicle experiences.
-            </p>
+            <SectionHeading
+              align="left"
+              eyebrow="About the platform"
+              title="The visual infrastructure platform for automotive retail."
+              description="Urban Uplink gives automotive teams one workflow to digitize, present, inspect, and market vehicles. Photography is the starting point for a platform built around better vehicle experiences."
+              className="max-w-none"
+            />
             <ul className="section-body space-y-5">
               {pillars.map(({ icon: Icon, title, description }) => (
                 <li key={title} className="flex gap-3">

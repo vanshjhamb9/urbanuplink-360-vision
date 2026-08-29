@@ -31,7 +31,7 @@ const ProductWorkflowSection = () => {
           />
         </motion.div>
 
-        <div className="section-body grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-4">
+        <div className="section-body grid grid-cols-1 gap-5 overflow-hidden sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-4">
           {productWorkflowSteps.map((step, index) => (
             <motion.article
               key={step.title}
@@ -68,15 +68,6 @@ const ProductWorkflowSection = () => {
                 <step.icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-lime" />
                 <p className="text-xs leading-relaxed text-white/72">{step.description}</p>
               </div>
-
-              {index < productWorkflowSteps.length - 1 && (
-                <span
-                  className="absolute -right-4 top-1/2 hidden -translate-y-1/2 font-heading text-3xl font-extrabold text-brand-lime xl:inline"
-                  aria-hidden="true"
-                >
-                  ›
-                </span>
-              )}
             </motion.article>
           ))}
         </div>

@@ -1,5 +1,4 @@
 import { PageLayout } from "@/components/layout/PageLayout";
-import FloatingDemo from "@/components/FloatingDemo";
 import { SectionHeading } from "@/components/ui-custom/SectionHeading";
 import { Camera, Zap, Palette, Cloud, Globe } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -69,11 +68,12 @@ const features = [
 const FeaturesPage = () => {
   return (
     <PageLayout>
-      <section className="relative overflow-hidden border-b border-white/10 section-compact">
+      <section className="relative overflow-hidden page-hero-band">
         <div className="pointer-events-none absolute inset-0 section-glow" />
         <div className="page-container">
           <SectionHeading
             eyebrow="Product Features"
+            size="page"
             title={
               <>
                 A complete vehicle imaging{" "}
@@ -119,8 +119,6 @@ const FeaturesPage = () => {
           </div>
         </div>
       </section>
-
-      <FloatingDemo />
     </PageLayout>
   );
 };

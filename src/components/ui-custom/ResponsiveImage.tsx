@@ -7,6 +7,9 @@ interface ResponsiveImageProps {
   className?: string;
   imgClassName?: string;
   loading?: "lazy" | "eager";
+  fetchPriority?: "high" | "low" | "auto";
+  decoding?: "async" | "sync" | "auto";
+  onLoad?: () => void;
   /** Tailwind object-position classes applied to the img */
   objectPosition?: string;
   /** Breakpoint matching Tailwind md (768px) */
@@ -20,6 +23,9 @@ export function ResponsiveImage({
   className,
   imgClassName,
   loading = "lazy",
+  fetchPriority,
+  decoding = "async",
+  onLoad,
   objectPosition = "object-center",
   mobileBreakpoint = "(max-width: 767px)",
 }: ResponsiveImageProps) {
@@ -31,7 +37,9 @@ export function ResponsiveImage({
         alt={alt}
         className={cn("h-full w-full object-cover", objectPosition, imgClassName)}
         loading={loading}
-        decoding="async"
+        fetchPriority={fetchPriority}
+        decoding={decoding}
+        onLoad={onLoad}
       />
     </picture>
   );

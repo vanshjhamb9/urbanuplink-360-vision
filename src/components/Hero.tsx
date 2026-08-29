@@ -19,6 +19,15 @@ const HERO_TRANSITION_VH = 80;
 const HERO_HOLD_VH = 0;
 const HERO_SECTION_VH = 100 + HERO_TRANSITION_VH + HERO_HOLD_VH;
 
+function preloadImage(src: string): Promise<void> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve();
+    img.onerror = () => resolve();
+    img.src = src;
+  });
+}
+
 type HeroPinState = "before" | "active" | "after";
 
 const getHeroScrollState = (section: HTMLElement | null) => {
@@ -45,35 +54,52 @@ const getHeroScrollState = (section: HTMLElement | null) => {
   };
 };
 
-const AnimatedHeroBackground = ({ progress }: { progress: number }) => {
+const AnimatedHeroBackground = ({
+  progress,
+  outdoorSrc,
+  studioSrc,
+  studioReady,
+}: {
+  progress: number;
+  outdoorSrc: string;
+  studioSrc: string;
+  studioReady: boolean;
+}) => {
   const reducedMotion = useReducedMotion();
   const revealProgress = reducedMotion ? 1 : smoothProgress(progress);
+  const studioOpacity = studioReady ? revealProgress : 0;
 
   return (
     <div className="absolute inset-0" aria-hidden="true">
       <picture className="block h-full w-full">
-        <source media="(min-width: 768px)" srcSet={assets.hero.outdoorDesktop} />
+        <source media="(max-width: 767px)" srcSet={assets.hero.outdoorMobile} />
         <img
-          src={assets.hero.outdoorMobile}
+          src={outdoorSrc}
           alt=""
           className={heroImageClass}
           draggable={false}
+          loading="eager"
+          fetchPriority="high"
+          decoding="sync"
         />
       </picture>
 
       <div
         className="absolute inset-0 overflow-hidden transition-opacity duration-300 will-change-opacity"
         style={{
-          opacity: reducedMotion ? 1 : revealProgress,
+          opacity: reducedMotion ? (studioReady ? 1 : 0) : studioOpacity,
         }}
       >
         <picture className="block h-full w-full">
-          <source media="(min-width: 768px)" srcSet={assets.hero.studioDesktop} />
+          <source media="(max-width: 767px)" srcSet={assets.hero.studioMobile} />
           <img
-            src={assets.hero.studioMobile}
+            src={studioSrc}
             alt=""
             className={heroImageClass}
             draggable={false}
+            loading="eager"
+            fetchPriority="high"
+            decoding="sync"
           />
         </picture>
       </div>
@@ -85,7 +111,27 @@ const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [pinState, setPinState] = useState<HeroPinState>("before");
+  const [studioReady, setStudioReady] = useState(false);
+  const [outdoorSrc, setOutdoorSrc] = useState(assets.hero.outdoorDesktop);
+  const [studioSrc, setStudioSrc] = useState(assets.hero.studioDesktop);
   const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 768px)").matches;
+    const outdoor = desktop ? assets.hero.outdoorDesktop : assets.hero.outdoorMobile;
+    const studio = desktop ? assets.hero.studioDesktop : assets.hero.studioMobile;
+    setOutdoorSrc(outdoor);
+    setStudioSrc(studio);
+
+    let cancelled = false;
+    Promise.all([preloadImage(outdoor), preloadImage(studio)]).then(() => {
+      if (!cancelled) setStudioReady(true);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     let frame = 0;
@@ -112,9 +158,9 @@ const Hero = () => {
 
   const heroFrameClass =
     !reducedMotion && pinState === "active"
-      ? "fixed inset-0 z-10 h-[100svh] overflow-hidden"
+      ? "fixed inset-0 z-30 h-[100svh] overflow-hidden"
       : !reducedMotion && pinState === "after"
-        ? "absolute inset-x-0 bottom-0 z-10 h-[100svh] overflow-hidden"
+        ? "absolute inset-x-0 bottom-0 z-30 h-[100svh] overflow-hidden"
         : "relative z-10 h-[100svh] overflow-hidden";
 
   return (
@@ -125,7 +171,12 @@ const Hero = () => {
       aria-labelledby="hero-heading"
     >
       <div className={heroFrameClass}>
-        <AnimatedHeroBackground progress={scrollProgress} />
+        <AnimatedHeroBackground
+          progress={scrollProgress}
+          outdoorSrc={outdoorSrc}
+          studioSrc={studioSrc}
+          studioReady={studioReady}
+        />
 
         <div
           className="pointer-events-none absolute inset-0 z-[1]"

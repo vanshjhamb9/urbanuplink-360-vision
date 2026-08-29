@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { ResponsiveImage } from "@/components/ui-custom/ResponsiveImage";
@@ -5,13 +6,17 @@ import { IndustryProcessRail } from "@/components/industries/IndustryProcessRail
 import { MarketplaceComparison } from "@/components/industries/MarketplaceComparison";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
 import type { IndustryDefinition } from "@/lib/industries";
+import { cn } from "@/lib/utils";
 
 interface IndustrySectionProps {
   industry: IndustryDefinition;
+  /** Load banner immediately (first visible industry section) */
+  priorityBanner?: boolean;
 }
 
-export function IndustrySection({ industry }: IndustrySectionProps) {
+export function IndustrySection({ industry, priorityBanner = false }: IndustrySectionProps) {
   const { ref, visible } = useScrollReveal<HTMLElement>();
+  const [bannerReady, setBannerReady] = useState(!priorityBanner);
 
   return (
     <section
@@ -21,14 +26,22 @@ export function IndustrySection({ industry }: IndustrySectionProps) {
       aria-labelledby={`${industry.id}-heading`}
     >
       {/* Industry intro banner */}
-      <div className="relative min-h-[56vh] overflow-hidden md:min-h-[62vh]">
-        <div className="absolute inset-0">
+      <div className="relative isolate z-20 min-h-[56vh] overflow-hidden md:min-h-[62vh]">
+        <div
+          className={cn(
+            "absolute inset-0 transition-opacity duration-300",
+            bannerReady ? "opacity-100" : "opacity-0",
+          )}
+        >
           <ResponsiveImage
             desktopSrc={industry.bannerDesktop}
             mobileSrc={industry.bannerMobile}
             alt={industry.bannerAlt}
-            loading="lazy"
-            imgClassName="object-[center_25%] brightness-110 contrast-110 md:object-center"
+            loading={priorityBanner ? "eager" : "lazy"}
+            fetchPriority={priorityBanner ? "high" : undefined}
+            decoding={priorityBanner ? "sync" : "async"}
+            onLoad={() => setBannerReady(true)}
+            imgClassName="object-[center_38%] brightness-110 contrast-105 md:object-[72%_center]"
           />
         </div>
         <div
@@ -52,7 +65,7 @@ export function IndustrySection({ industry }: IndustrySectionProps) {
             </p>
             <h2
               id={`${industry.id}-heading`}
-              className="font-heading text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl"
+              className="font-heading text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-[2.75rem]"
             >
               {industry.headlineWhite}{" "}
               <span className="text-brand-lime">{industry.headlineAccent}</span>
@@ -75,7 +88,7 @@ export function IndustrySection({ industry }: IndustrySectionProps) {
       </div>
 
       {/* Problem → Process → Solution → Result */}
-      <div className="bg-brand-black section-shell">
+      <div className="relative z-10 bg-brand-black section-shell">
         <div className="page-container">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
             <motion.div

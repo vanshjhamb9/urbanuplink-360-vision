@@ -5,6 +5,7 @@ interface SectionHeadingProps {
   title: React.ReactNode;
   description?: string;
   align?: "left" | "center";
+  size?: "default" | "page";
   className?: string;
 }
 
@@ -13,12 +14,13 @@ export function SectionHeading({
   title,
   description,
   align = "center",
+  size = "default",
   className,
 }: SectionHeadingProps) {
   return (
     <div
       className={cn(
-        "max-w-3xl",
+        size === "page" ? "max-w-3xl" : "max-w-3xl",
         align === "center" && "mx-auto text-center",
         className,
       )}
@@ -28,7 +30,14 @@ export function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <h2 className="font-heading text-xl font-extrabold tracking-tight text-white sm:text-2xl md:text-[1.65rem] lg:text-3xl">
+      <h2
+        className={cn(
+          "font-heading font-extrabold tracking-tight text-white",
+          size === "page"
+            ? "text-2xl sm:text-3xl md:text-[2.35rem] lg:text-4xl"
+            : "text-xl sm:text-2xl md:text-[1.65rem] lg:text-3xl",
+        )}
+      >
         {title}
       </h2>
       {description && (

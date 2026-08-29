@@ -33,7 +33,7 @@ const CTA = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="mx-auto w-full max-w-lg rounded-2xl border border-white/10 bg-brand-black/45 p-5 text-center shadow-card backdrop-blur-xl sm:p-7"
+          className="w-full max-w-xl rounded-2xl border border-white/10 bg-brand-black/45 p-5 text-left shadow-card backdrop-blur-xl sm:p-7 md:max-w-lg lg:max-w-xl"
         >
           <h2
             id="cta-heading"
@@ -45,7 +45,7 @@ const CTA = () => {
           <p className="mt-4 text-sm text-muted-brand sm:mt-5 sm:text-base md:text-lg">
             {finalCtaCopy.description}
           </p>
-          <div className="mt-6 flex justify-center sm:mt-8">
+          <div className="mt-6 flex sm:mt-8">
             <GlowButton href={finalCtaCopy.primaryHref} variant="filled" className="w-full sm:w-auto">
               {finalCtaCopy.primaryCta}
             </GlowButton>

@@ -57,6 +57,6 @@ export const industryTeasers: IndustryTeaser[] = [
     headline: "Immersive exploration",
     description: "Create immersive environments that let customers explore vehicles beyond the traditional listing.",
     icon: Monitor,
-    href: "/use-cases#marketplace",
+    href: "/use-cases#detailing",
   },
 ];

@@ -20,7 +20,7 @@ function PhotoCell({
   const isAfter = variant === "after";
 
   return (
-    <div className={`relative overflow-hidden bg-[#141414] ${className ?? ""}`}>
+    <div className={`relative min-h-0 overflow-hidden bg-[#141414] ${className ?? ""}`}>
       <img
         src={photo.src}
         alt={photo.alt}
@@ -31,6 +31,7 @@ function PhotoCell({
         }`}
         style={{ objectPosition: photo.objectPosition ?? "center center" }}
         loading="lazy"
+        decoding="async"
       />
       <div
         className={`pointer-events-none absolute inset-0 ${
@@ -51,12 +52,12 @@ function PhotoGrid({ variant, photos }: { variant: "before" | "after"; photos: C
   );
 
   return (
-    <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
-      {cell(hero, "row-span-2 aspect-[4/5] rounded-xl sm:rounded-2xl")}
-      {cell(topRight, "aspect-[4/3] rounded-lg sm:rounded-xl")}
-      {cell(midRight, "aspect-[4/3] rounded-lg sm:rounded-xl")}
-      {cell(bottomLeft, "aspect-[4/3] rounded-lg sm:rounded-xl")}
-      {cell(bottomRight, "aspect-[4/3] rounded-lg sm:rounded-xl")}
+    <div className="grid min-h-[280px] flex-1 grid-cols-2 grid-rows-[1fr_1fr_1fr] gap-2 sm:min-h-[320px] sm:gap-2.5">
+      {cell(hero, "row-span-2 min-h-[140px] rounded-xl sm:rounded-2xl")}
+      {cell(topRight, "min-h-[68px] rounded-lg sm:min-h-[76px] sm:rounded-xl")}
+      {cell(midRight, "min-h-[68px] rounded-lg sm:min-h-[76px] sm:rounded-xl")}
+      {cell(bottomLeft, "min-h-[68px] rounded-lg sm:min-h-[76px] sm:rounded-xl")}
+      {cell(bottomRight, "min-h-[68px] rounded-lg sm:min-h-[76px] sm:rounded-xl")}
     </div>
   );
 }
@@ -81,7 +82,7 @@ function ComparisonCard({
       initial={{ opacity: 0, y: 24 }}
       animate={visible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, delay }}
-      className={`relative flex flex-col rounded-2xl border p-4 sm:rounded-3xl sm:p-5 ${
+      className={`relative flex h-full min-h-0 flex-col rounded-2xl border p-4 sm:rounded-3xl sm:p-5 ${
         isAfter
           ? "border-brand-lime/30 bg-gradient-to-b from-brand-lime/[0.06] to-[#0a0c0e] shadow-glow"
           : "border-white/10 bg-[#0a0c0e]"
@@ -93,9 +94,9 @@ function ComparisonCard({
         </span>
       )}
 
-      <header className="mb-4 flex items-center gap-2.5">
+      <header className="mb-4 flex shrink-0 items-center gap-2.5">
         <span
-          className={`flex h-9 w-9 items-center justify-center rounded-full border ${
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border ${
             isAfter
               ? "border-brand-lime/40 bg-brand-lime/15 text-brand-lime"
               : "border-white/15 bg-white/[0.04] text-white/50"
@@ -115,7 +116,7 @@ function ComparisonCard({
       <PhotoGrid variant={variant} photos={photos} />
 
       <p
-        className={`mt-4 text-center text-xs font-semibold sm:text-sm ${
+        className={`mt-4 shrink-0 text-center text-xs font-semibold sm:text-sm ${
           isAfter ? "text-brand-lime" : "text-white/40"
         }`}
       >
@@ -135,7 +136,7 @@ const ListingComparisonSection = () => {
       aria-labelledby="listing-comparison-heading"
     >
       <div className="pointer-events-none absolute inset-0 section-glow opacity-35" />
-      <div className="page-container">
+      <div className="page-container-wide">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
@@ -157,7 +158,7 @@ const ListingComparisonSection = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.1 }}
-          className="section-body mx-auto flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+          className="section-body flex flex-wrap items-center justify-center gap-2 sm:gap-3"
         >
           {listingComparisonCopy.badges.map((badge) => (
             <span
@@ -170,7 +171,7 @@ const ListingComparisonSection = () => {
           ))}
         </motion.div>
 
-        <div className="section-body mx-auto grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
+        <div className="section-body grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
           <ComparisonCard variant="before" visible={visible} delay={0.15} />
           <ComparisonCard variant="after" visible={visible} delay={0.22} />
         </div>

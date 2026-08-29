@@ -36,7 +36,7 @@ const TransformationSection = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={visible ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.1 }}
-          className="mx-auto mt-6 max-w-2xl text-center font-heading text-lg font-extrabold text-brand-lime md:text-xl"
+          className="section-body mx-auto max-w-2xl text-center font-heading text-lg font-extrabold text-brand-lime md:text-xl"
         >
           {shiftCopy.tagline}
         </motion.p>

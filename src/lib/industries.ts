@@ -94,7 +94,7 @@ export const industries: IndustryDefinition[] = [
     bannerDesktop: assets.banners.marketplace.desktop,
     bannerMobile: assets.banners.marketplace.mobile,
     bannerAlt:
-      "Vehicle presented in a premium studio showroom for marketplace listings",
+      "Kia Seltos presented in a premium studio environment for marketplace listings",
     process: [
       {
         title: "Capture on site",

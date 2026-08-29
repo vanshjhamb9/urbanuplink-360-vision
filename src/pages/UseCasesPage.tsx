@@ -2,14 +2,30 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import CTA from "@/components/CTA";
-import FloatingDemo from "@/components/FloatingDemo";
 import { IndustrySection } from "@/components/industries/IndustrySection";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { SectionHeading } from "@/components/ui-custom/SectionHeading";
+import { assets } from "@/lib/assets";
 import { industries } from "@/lib/industries";
+
+function preloadImage(src: string) {
+  const img = new Image();
+  img.src = src;
+}
 
 const UseCasesPage = () => {
   const location = useLocation();
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 768px)").matches;
+    industries.forEach((industry) => {
+      preloadImage(desktop ? industry.bannerDesktop : industry.bannerMobile);
+    });
+    preloadImage(assets.beforeAfter.beforeDesktop);
+    preloadImage(assets.beforeAfter.afterDesktop);
+    preloadImage(assets.beforeAfter.beforeMobile);
+    preloadImage(assets.beforeAfter.afterMobile);
+  }, []);
 
   useEffect(() => {
     if (!location.hash) return;
@@ -25,7 +41,7 @@ const UseCasesPage = () => {
 
   return (
     <PageLayout>
-      <section className="relative overflow-hidden border-b border-white/10 section-compact">
+      <section className="relative overflow-hidden page-hero-band">
         <div className="pointer-events-none absolute inset-0 section-glow" />
         <div className="page-container relative">
           <motion.div
@@ -35,6 +51,8 @@ const UseCasesPage = () => {
           >
             <SectionHeading
               eyebrow="Industries"
+              size="page"
+              align="left"
               title={
                 <>
                   Why Urban Uplink matters for{" "}
@@ -42,7 +60,6 @@ const UseCasesPage = () => {
                 </>
               }
               description="Each vertical has a different problem, process, and definition of success. Explore industry-specific workflows — not duplicated homepage screenshots."
-              align="left"
               className="max-w-3xl"
             />
 
@@ -64,12 +81,15 @@ const UseCasesPage = () => {
         </div>
       </section>
 
-      {industries.map((industry) => (
-        <IndustrySection key={industry.id} industry={industry} />
+      {industries.map((industry, index) => (
+        <IndustrySection
+          key={industry.id}
+          industry={industry}
+          priorityBanner={index === 0}
+        />
       ))}
 
       <CTA />
-      <FloatingDemo />
     </PageLayout>
   );
 };

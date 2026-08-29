@@ -27,8 +27,9 @@ export const assets = {
   },
   banners: {
     marketplace: {
-      desktop: `${base}/banners/marketplace/Marketplace Use Case Hero Banner desktop 2880 x 1200.webp`,
-      mobile: `${base}/banners/marketplace/Marketplace Use Case Hero Banner mobile 1080 x 1350 (4 isto 5).webp`,
+      /** Clean Kia studio — not the legacy Drive One composite banner */
+      desktop: `${base}/before-after/after-desktop.webp`,
+      mobile: `${base}/before-after/after-mobile.webp`,
     },
     insurance: {
       desktop: `${base}/banners/insurance/insurance Use Case Hero Banner desktop 2880 x 1200.webp`,
@@ -50,8 +51,8 @@ export const assets = {
   },
   useCases: {
     marketplace: {
-      desktop: `${base}/banners/marketplace/Marketplace Use Case Hero Banner mobile 1080 x 1350 (4 isto 5).webp`,
-      mobile: `${base}/banners/marketplace/Marketplace Use Case Hero Banner mobile 1080 x 1350 (4 isto 5).webp`,
+      desktop: `${base}/before-after/after-desktop.webp`,
+      mobile: `${base}/before-after/after-mobile.webp`,
       process: [
         `${base}/use-cases/marketplace/1. Main Feature Image (Card Style) marketplace mobile 930x 570.webp`,
         `${base}/use-cases/marketplace/2. Main Feature Image (Card Style) marketplace mobile 930x 570.webp`,
@@ -124,14 +125,14 @@ export const assets = {
     showroomMobile: `${base}/hero/studio-mobile.webp`,
     spinPreview: `${base}/showroom/Showroom Background 1.webp`,
     spinPreviewMobile: `${base}/showroom/Showroom Background 1.webp`,
-    publish: `${base}/marketplace/Listing grid mockup desktop.webp`,
-    publishMobile: `${base}/marketplace/Listing grid mockup mobile.webp`,
+    publish: `${base}/use-cases/fleet/4. Main Feature Image (Card Style) fleet management desktop 1240 x 760.webp`,
+    publishMobile: `${base}/use-cases/fleet/mobile/4. Main Feature Image (Card Style) fleet management mobile 930 x 570..webp`,
   },
   /** Homepage How It Works — same 5-step journey, no marketplace BMW process cards */
   productWorkflow: {
     capture: {
-      desktop: `${base}/use-cases/fleet/1. Main Feature Image (Card Style) fleet management desktop 1240 x 760.webp`,
-      mobile: `${base}/use-cases/fleet/mobile/1. Main Feature Image (Card Style) fleet management mobile 930 x 570..webp`,
+      desktop: `${base}/hero/outdoor-desktop.webp`,
+      mobile: `${base}/hero/outdoor-mobile.webp`,
     },
     clean: {
       desktop: `${base}/before-after/after-desktop.webp`,
@@ -147,14 +148,22 @@ export const assets = {
       mobile: `${base}/use-cases/detailing/mobile/4. Main Feature Image (Card Style) car detailing mobile 930x 570.webp`,
     },
     publish: {
-      desktop: `${base}/marketplace/Listing grid mockup desktop.webp`,
-      mobile: `${base}/marketplace/Listing grid mockup mobile.webp`,
+      desktop: `${base}/use-cases/fleet/4. Main Feature Image (Card Style) fleet management desktop 1240 x 760.webp`,
+      mobile: `${base}/use-cases/fleet/mobile/4. Main Feature Image (Card Style) fleet management mobile 930 x 570..webp`,
     },
   },
+  /** Real processed vehicle photos — not BMW UI process mockups */
+  studioGallery: [
+    `${base}/before-after/after-desktop.webp`,
+    `${base}/use-cases/detailing/3. Main Feature Image (Card Style) car detailing desktop 1318x 808.webp`,
+    `${base}/use-cases/detailing/4. Main Feature Image (Card Style) car detailing desktop 1318x 808.webp`,
+    `${base}/use-cases/fleet/2. Main Feature Image (Card Style) fleet management desktop 1240 x 760.webp`,
+    `${base}/use-cases/fleet/3. Main Feature Image (Card Style) fleet management desktop 1240 x 760.webp`,
+  ],
   marketplaceListingCards: [
-    `${base}/use-cases/marketplace/3. Main Feature Image (Card Style) marketplace mobile 930x 570.webp`,
-    `${base}/use-cases/marketplace/4. Main Feature Image (Card Style) marketplace mobile 930x 570.webp`,
-    `${base}/use-cases/marketplace/5. Main Feature Image (Card Style) marketplace mobile 930x 570.webp`,
+    `${base}/before-after/after-desktop.webp`,
+    `${base}/use-cases/detailing/2. Main Feature Image (Card Style) car detailing desktop 1318x 808.webp`,
+    `${base}/use-cases/fleet/1. Main Feature Image (Card Style) fleet management desktop 1240 x 760.webp`,
   ],
   cta: {
     desktop: `${base}/cta/background.webp`,
