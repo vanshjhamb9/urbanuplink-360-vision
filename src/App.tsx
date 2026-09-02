@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 
 const FeaturesPage = lazy(() => import("./pages/FeaturesPage"));
@@ -14,7 +14,6 @@ const TeamPage = lazy(() => import("./pages/TeamPage"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy"));
-const LearnMorePage = lazy(() => import("./pages/LearnMorePage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -38,7 +37,7 @@ const App = () => (
             <Route path="/use-cases" element={<UseCasesPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/team" element={<TeamPage />} />
-            <Route path="/learn-more" element={<LearnMorePage />} />
+            <Route path="/learn-more" element={<Navigate to="/" replace />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />

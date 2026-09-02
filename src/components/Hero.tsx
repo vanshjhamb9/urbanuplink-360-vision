@@ -5,7 +5,7 @@ import { heroCopy } from "@/lib/homepageContent";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
 const heroImageClass =
-  "h-full w-full object-cover brightness-105 contrast-105 object-[center_42%] md:object-[78%_center] lg:object-[82%_center] xl:object-[76%_center]";
+  "h-full w-full object-cover brightness-110 contrast-110 object-[center_42%] md:object-[78%_center] lg:object-[82%_center] xl:object-[76%_center]";
 
 const clamp = (value: number, min = 0, max = 1) =>
   Math.min(max, Math.max(min, value));
@@ -182,8 +182,8 @@ const Hero = () => {
           className="pointer-events-none absolute inset-0 z-[1]"
           aria-hidden="true"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-black/85 via-brand-black/50 to-transparent md:via-brand-black/40 md:to-transparent lg:via-brand-black/35" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/30 via-transparent to-brand-black/20 md:hidden" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-black/90 via-brand-black/45 to-transparent md:via-brand-black/25 md:to-transparent lg:via-brand-black/20 lg:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/25 via-transparent to-transparent md:hidden" />
         </div>
 
         <div className="page-container-wide relative z-10 flex min-h-[100svh] items-end pb-10 pt-[4.5rem] sm:items-center sm:pb-14 sm:pt-20 lg:pb-16 lg:pt-[4.75rem]">
@@ -200,10 +200,6 @@ const Hero = () => {
               {heroCopy.description}
             </p>
 
-            <p className="mt-3 text-xs font-semibold tracking-wide text-brand-lime/90 sm:text-sm">
-              {heroCopy.tagline}
-            </p>
-
             <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2.5 sm:mt-7 lg:gap-x-5">
               {heroCopy.features.map(({ icon: Icon, label }) => (
                 <div key={label} className="flex items-center gap-2 text-xs text-white/88 sm:text-sm">
@@ -216,7 +212,11 @@ const Hero = () => {
             </div>
 
             <div className="mt-6 flex flex-col items-stretch gap-3 sm:mt-7 sm:flex-row sm:items-center">
-              <GlowButton href={heroCopy.primaryHref} variant="filled" className="w-full sm:w-auto">
+              <GlowButton
+                href={heroCopy.primaryHref}
+                variant="filled"
+                className="w-full px-7 py-3 text-sm sm:w-auto"
+              >
                 {heroCopy.primaryCta}
               </GlowButton>
               <GlowButton href={heroCopy.secondaryHref} className="w-full sm:w-auto">

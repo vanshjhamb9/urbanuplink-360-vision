@@ -11,7 +11,7 @@ export function MarketplaceComparison({ content }: MarketplaceComparisonProps) {
   const { ref, visible } = useScrollReveal<HTMLElement>();
 
   return (
-    <section ref={ref} className="mt-12 space-y-10 md:mt-16 md:space-y-12">
+    <section ref={ref} className="mt-12 space-y-10 border-t border-white/8 pt-12 md:mt-16 md:space-y-12 md:pt-16">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={visible ? { opacity: 1, y: 0 } : {}}
@@ -30,16 +30,16 @@ export function MarketplaceComparison({ content }: MarketplaceComparisonProps) {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 gap-8 md:gap-10 lg:grid-cols-3 lg:gap-6 xl:gap-8">
+      <div className="grid grid-cols-1 items-stretch gap-6 md:gap-8 lg:grid-cols-3 lg:gap-6 xl:gap-8">
         {content.steps.map((step, index) => (
           <motion.div
             key={step.stepTitle}
             initial={{ opacity: 0, y: 20 }}
             animate={visible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: index * 0.08 }}
-            className="relative"
+            className="relative flex h-full flex-col"
           >
-            <div className="mb-4 flex items-start gap-3">
+            <div className="mb-4 flex min-h-[3.25rem] items-start gap-3">
               <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-lime/50 bg-brand-black font-heading text-xs font-extrabold text-brand-lime">
                 {String(index + 1).padStart(2, "0")}
               </span>
@@ -51,14 +51,14 @@ export function MarketplaceComparison({ content }: MarketplaceComparisonProps) {
               </div>
             </div>
 
-            <article className="overflow-hidden rounded-2xl border border-white/12 bg-[#111111] shadow-card">
-              <div className="aspect-[16/10] overflow-hidden border-b border-white/8 bg-black/30">
+            <article className="flex flex-1 flex-col overflow-hidden rounded-2xl border border-white/12 bg-[#111111] shadow-card">
+              <div className="relative aspect-[16/10] shrink-0 overflow-hidden border-b border-white/8 bg-[#0a0c0e]">
                 <picture>
                   <source media="(max-width: 767px)" srcSet={step.imageMobile} />
                   <img
                     src={step.imageDesktop}
                     alt={step.cardTitle}
-                    className="h-full w-full object-cover brightness-105 contrast-105 transition-transform duration-500 hover:scale-[1.02]"
+                    className="absolute inset-0 h-full w-full object-cover brightness-105 contrast-105 transition-transform duration-500 hover:scale-[1.02]"
                     style={{ objectPosition: step.objectPosition ?? "center center" }}
                     loading="eager"
                     fetchPriority={index === 0 ? "high" : "low"}
@@ -66,29 +66,20 @@ export function MarketplaceComparison({ content }: MarketplaceComparisonProps) {
                   />
                 </picture>
               </div>
-              <div className="space-y-3 p-4 md:p-5">
+              <div className="flex flex-1 flex-col space-y-3 p-4 md:p-5">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-lime/35 bg-brand-lime/[0.08]">
                   <step.icon className="h-4 w-4 text-brand-lime" strokeWidth={2} />
                 </span>
-                <div>
+                <div className="flex-1">
                   <h4 className="font-heading text-sm font-extrabold uppercase tracking-wide text-white">
                     {step.cardTitle}
                   </h4>
-                  <p className="mt-2 text-xs leading-relaxed text-white/60 sm:text-sm">
+                  <p className="mt-2 text-xs leading-relaxed text-white/65 sm:text-sm">
                     {step.cardDescription}
                   </p>
                 </div>
               </div>
             </article>
-
-            {index < content.steps.length - 1 && (
-              <span
-                className="absolute -right-3 top-[4.5rem] hidden font-heading text-2xl font-extrabold text-brand-lime xl:inline xl:-right-4"
-                aria-hidden="true"
-              >
-                ›
-              </span>
-            )}
           </motion.div>
         ))}
       </div>

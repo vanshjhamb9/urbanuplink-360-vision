@@ -1,11 +1,8 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import PainPointsSection from "@/components/PainPointsSection";
+import ListingGapSection from "@/components/ListingGapSection";
 import ListingComparisonSection from "@/components/ListingComparisonSection";
-import TransformationSection from "@/components/TransformationSection";
-import ProductWorkflowSection from "@/components/ProductWorkflowSection";
 import ValuePropositionSection from "@/components/ValuePropositionSection";
-import CoreProductSection from "@/components/CoreProductSection";
 import BackgroundRemovalShowcase from "@/components/BackgroundRemovalShowcase";
 import ThreeSixtyShowcase from "@/components/ThreeSixtyShowcase";
 import PlatformShowcaseSection from "@/components/PlatformShowcaseSection";
@@ -28,21 +25,15 @@ const Index = () => {
       <main id="main-content">
         {/* 01 — Hero */}
         <Hero />
-        {/* 02 — Problem */}
-        <PainPointsSection />
+        {/* 02 — Listing Gap workflow */}
+        <ListingGapSection />
         {/* 03 — Kia Seltos before / after background removal */}
         <BackgroundRemovalShowcase />
         {/* 04 — Listing comparison */}
         <ListingComparisonSection />
-        {/* 05 — Transformation */}
-        <TransformationSection />
-        {/* 06 — How It Works */}
-        <ProductWorkflowSection />
-        {/* 07 — Value */}
+        {/* 05 — Value */}
         <ValuePropositionSection />
-        {/* 08 — Core Product */}
-        <CoreProductSection />
-        {/* 09 — 360° Experience */}
+        {/* 06 — 360° Experience */}
         <ThreeSixtyShowcase />
         {/* 10 — Social Media */}
         <PlatformShowcaseSection />

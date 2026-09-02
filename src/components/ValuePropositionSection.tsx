@@ -31,7 +31,7 @@ const ValuePropositionSection = () => {
           />
         </motion.div>
 
-        <div className="section-body grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 lg:gap-4">
+        <div className="section-body grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
           {valueCopy.benefits.map((benefit, index) => (
             <motion.article
               key={benefit.title}

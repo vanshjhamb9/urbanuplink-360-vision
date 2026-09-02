@@ -20,6 +20,8 @@ export interface IndustryProcessStep {
   imageDesktop: string;
   imageMobile: string;
   icon?: LucideIcon;
+  showChannelIcons?: boolean;
+  objectPosition?: string;
 }
 
 export interface ListingGapStep {
@@ -75,7 +77,7 @@ export const industries: IndustryDefinition[] = [
     headlineWhite: "Every Listing Should Look Like It",
     headlineAccent: "Belongs in a Premium Showroom.",
     intro:
-      "Online marketplaces win when inventory looks consistent, premium, and trustworthy — even when photos start on a phone.",
+      "Turn everyday smartphone photos into professional inventory that generates more clicks, longer engagement and higher buyer confidence.",
     problemTitle: "The listing problem",
     problem:
       "Typical dealer photos are captured on mobile phones against busy yards, uneven lighting, and cluttered backgrounds. Listings look inconsistent, less premium, and harder for buyers to trust.",
@@ -94,37 +96,43 @@ export const industries: IndustryDefinition[] = [
     bannerDesktop: assets.banners.marketplace.desktop,
     bannerMobile: assets.banners.marketplace.mobile,
     bannerAlt:
-      "Kia Seltos presented in a premium studio environment for marketplace listings",
+      "Red SUV presented in a premium Drive One studio with before-and-after listing comparison",
     process: [
       {
         title: "Capture on site",
         description: "Dealers photograph vehicles with a smartphone.",
         imageDesktop: assets.productWorkflow.capture.desktop,
         imageMobile: assets.productWorkflow.capture.mobile,
+        objectPosition: "center 55%",
       },
       {
         title: "Clean presentation",
         description: "Backgrounds are removed and replaced with studio quality.",
         imageDesktop: assets.beforeAfter.afterDesktop,
         imageMobile: assets.beforeAfter.afterMobile,
+        objectPosition: "center center",
       },
       {
         title: "Listing-ready assets",
         description: "Outputs stay consistent across the inventory catalog.",
         imageDesktop: assets.productWorkflow.present.desktop,
         imageMobile: assets.productWorkflow.present.mobile,
+        objectPosition: "center 42%",
       },
       {
         title: "Buyer-facing experience",
         description: "Premium visuals support stronger listing perception.",
         imageDesktop: assets.productWorkflow.showcase.desktop,
         imageMobile: assets.productWorkflow.showcase.mobile,
+        objectPosition: "center 38%",
       },
       {
         title: "Published anywhere",
-        description: "Use the same assets across marketplaces and dealer sites.",
+        description: "Share to WhatsApp, Instagram, Facebook, web, and marketplaces from one capture.",
         imageDesktop: assets.productWorkflow.publish.desktop,
         imageMobile: assets.productWorkflow.publish.mobile,
+        objectPosition: "center top",
+        showChannelIcons: true,
       },
     ],
     listingGap: {
@@ -136,7 +144,7 @@ export const industries: IndustryDefinition[] = [
       steps: [
         {
           stepTitle: "Capture",
-          stepHint: "Photograph the vehicle with a smartphone.",
+          stepHint: "Real-world photos",
           cardTitle: "Real-world capture",
           cardDescription:
             "Guided mobile capture from your lot — consistent angles without studio equipment.",
@@ -147,8 +155,8 @@ export const industries: IndustryDefinition[] = [
         },
         {
           stepTitle: "Clean",
-          stepHint: "Remove distractions and clean the background.",
-          cardTitle: "Background removal",
+          stepHint: "Remove the clutter",
+          cardTitle: "Clean vehicle",
           cardDescription:
             "Automatically isolate the vehicle and remove cluttered yard backgrounds.",
           imageDesktop: assets.beforeAfter.afterDesktop,
@@ -158,8 +166,8 @@ export const industries: IndustryDefinition[] = [
         },
         {
           stepTitle: "Present",
-          stepHint: "Place the vehicle in premium digital environments.",
-          cardTitle: "Studio placement",
+          stepHint: "Studio-grade visuals",
+          cardTitle: "Premium experience",
           cardDescription:
             "Drop inventory into polished, purpose-built listing environments buyers trust.",
           imageDesktop: assets.productWorkflow.present.desktop,
@@ -184,10 +192,10 @@ export const industries: IndustryDefinition[] = [
       "Insurance workflows depend on clear vehicle documentation. Urban Uplink helps teams capture consistent evidence that supports inspection and claims processes.",
     problemTitle: "The documentation gap",
     problem:
-      "Inconsistent photos, incomplete angles, and unclear damage context slow inspections and create avoidable back-and-forth during claims.",
+      "Claims teams receive phone photos with inconsistent angles, poor lighting, and missing context. Inspectors spend more time chasing clarity than reviewing damage.",
     solutionTitle: "The Urban Uplink solution",
     solution:
-      "Standardize how vehicles are captured and presented so inspectors and claims teams can review condition with clearer, more consistent visual records.",
+      "Standardize field capture with guided imaging that produces clean, consistent vehicle records — easier for adjusters to review and share across the claim lifecycle.",
     resultTitle: "The result",
     result:
       "Cleaner documentation, easier review, and a more reliable visual trail for inspection and claim workflows — without inventing unsupported automation claims.",
@@ -241,10 +249,10 @@ export const industries: IndustryDefinition[] = [
       "Fleet and rental operators need a repeatable way to capture vehicle condition before and after every assignment.",
     problemTitle: "The accountability problem",
     problem:
-      "Without consistent before/after documentation, damage disputes are harder to resolve and condition records become fragmented across the fleet lifecycle.",
+      "Rental and fleet teams rely on rushed phone photos at checkout and return. When damage appears later, there is no clear before-and-after record to resolve disputes quickly.",
     solutionTitle: "The Urban Uplink solution",
     solution:
-      "Create a digital inspection workflow: capture condition at checkout, track the assignment, document return damage, and compare records with clear visual evidence.",
+      "Capture condition at handoff with the same guided workflow every time — then compare checkout and return visuals side by side with clear, audit-ready evidence.",
     resultTitle: "The result",
     result:
       "Stronger accountability, clearer damage conversations, and audit-ready visual records across the fleet.",
@@ -302,10 +310,10 @@ export const industries: IndustryDefinition[] = [
       "Detailing studios sell transformation. Customers need to see the before, the work, and the finished result — clearly enough to justify premium packages.",
     problemTitle: "The presentation problem",
     problem:
-      "When before/after proof is weak or inconsistent, customers struggle to appreciate the value of ceramic coating, paint protection, and premium detailing work.",
+      "Customers cannot see the transformation when before/after proof is shot on a phone in a dim bay. Premium packages look like every other listing — hard to justify the price.",
     solutionTitle: "The Urban Uplink solution",
     solution:
-      "Document the full detailing journey with professional visuals: before state, process, after result, and shareable documentation customers can trust.",
+      "Document the full detailing journey with studio-grade before, process, and after visuals customers can explore — and share on social without a separate photo shoot.",
     resultTitle: "The result",
     result:
       "A clear visual story that showcases craftsmanship, supports upsells, and gives customers a shareable record of the finished vehicle.",

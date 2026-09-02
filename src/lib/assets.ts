@@ -27,9 +27,8 @@ export const assets = {
   },
   banners: {
     marketplace: {
-      /** Clean Kia studio — not the legacy Drive One composite banner */
-      desktop: `${base}/before-after/after-desktop.webp`,
-      mobile: `${base}/before-after/after-mobile.webp`,
+      desktop: `${base}/banners/marketplace/Marketplace Use Case Hero Banner desktop 2880 x 1200.webp`,
+      mobile: `${base}/banners/marketplace/Marketplace Use Case Hero Banner mobile 1080 x 1350 (4 isto 5).webp`,
     },
     insurance: {
       desktop: `${base}/banners/insurance/insurance Use Case Hero Banner desktop 2880 x 1200.webp`,

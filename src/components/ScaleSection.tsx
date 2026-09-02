@@ -41,9 +41,6 @@ const ScaleSection = () => {
             }
             description={scaleCopy.description}
           />
-          <p className="section-body text-center font-heading text-lg font-extrabold text-brand-lime md:text-xl">
-            {scaleCopy.tagline}
-          </p>
         </motion.div>
       </div>
     </section>

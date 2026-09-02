@@ -12,6 +12,7 @@ export interface UseCaseBannerProps {
   imageDesktop: string;
   imageMobile: string;
   imageAlt: string;
+  priority?: boolean;
 }
 
 export function UseCaseBanner({
@@ -23,6 +24,7 @@ export function UseCaseBanner({
   imageDesktop,
   imageMobile,
   imageAlt,
+  priority = false,
 }: UseCaseBannerProps) {
   const { ref, visible } = useScrollReveal<HTMLElement>();
 
@@ -38,7 +40,9 @@ export function UseCaseBanner({
           desktopSrc={imageDesktop}
           mobileSrc={imageMobile}
           alt={imageAlt}
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : undefined}
+          decoding={priority ? "sync" : "async"}
           imgClassName="object-[center_20%] brightness-110 contrast-110 saturate-110 md:object-center"
         />
       </div>

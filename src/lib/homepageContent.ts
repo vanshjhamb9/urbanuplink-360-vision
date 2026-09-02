@@ -1,54 +1,49 @@
 import {
   Camera,
   Clock,
-  Globe,
   ImageOff,
   Layers,
-  Lightbulb,
-  Repeat,
+  RotateCcw,
   Sparkles,
-  Store,
   Sun,
   Users,
   Zap,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
 /** §1 — Hero */
 export const heroCopy = {
-  headline: "One Capture.",
-  headlineAccent: "Infinite Possibilities.",
+  headline: "Turn Every Vehicle Into",
+  headlineAccent: "Your Best Salesperson.",
   description:
-    "Turn every vehicle into a premium digital experience — ready for marketplaces, insurance, fleet, detailing and beyond.",
-  tagline: "Capture once. Transform automatically. Publish everywhere.",
-  primaryCta: "Explore Urban Uplink",
+    "Capture professional vehicle experiences using only your smartphone. AI transforms every vehicle into showroom-quality inventory that attracts more buyers and sells faster.",
+  primaryCta: "Get started",
   primaryHref: "/contact",
-  secondaryCta: "See How It Works",
-  secondaryHref: "#how-it-works",
+  secondaryCta: "See live demo",
+  secondaryHref: "#360-experience",
   features: [
-    { icon: Camera, label: "Guided capture" },
-    { icon: Sparkles, label: "Premium presentation" },
-    { icon: Layers, label: "Multi-channel output" },
-    { icon: Zap, label: "Ready in minutes" },
+    { icon: Camera, label: "No DSLR or Turntable Required" },
+    { icon: RotateCcw, label: "Interactive 360° Experience" },
+    { icon: Sparkles, label: "AI Studio Backgrounds" },
+    { icon: Clock, label: "Ready in Minutes" },
   ],
 };
 
 /** §2 — The Problem */
 export const problemCopy = {
-  eyebrow: "The Problem",
-  title: "A great vehicle deserves",
-  titleAccent: "better than a basic listing.",
+  eyebrow: "The Listing Gap",
+  title: "Great cars deserve",
+  titleAccent: "better listings.",
   intro:
-    "Most vehicles are captured once — but the images rarely do justice to what is being sold.",
+    "Typical dealer photos are shot on phones in busy yards with uneven lighting. Buyers see inconsistency — not the vehicle.",
   painPoints: [
-    { icon: Camera, title: "Inconsistent angles", description: "Every shoot looks different — buyers can't compare inventory fairly." },
-    { icon: ImageOff, title: "Distracting backgrounds", description: "Busy yards and uneven settings pull focus away from the vehicle." },
+    { icon: Camera, title: "Yard photos", description: "Mobile captures against cluttered lots make every listing look different." },
+    { icon: ImageOff, title: "Distracting backgrounds", description: "Busy settings pull focus away from the vehicle you're selling." },
     { icon: Sun, title: "Poor lighting", description: "Harsh shadows and flat photos fail to show the vehicle at its best." },
-    { icon: Clock, title: "Time-consuming editing", description: "Teams lose days waiting on retouching before listings go live." },
-    { icon: Users, title: "Different teams, different experiences", description: "Marketing, sales, and ops each create their own version of the truth." },
+    { icon: Clock, title: "Slow editing", description: "Teams wait days for retouching before listings can go live." },
+    { icon: Users, title: "Inconsistent output", description: "Marketing, sales, and ops each produce a different version of the same car." },
   ],
   closing: "The result?",
-  closingAccent: "Vehicles become listings instead of experiences.",
+  closingAccent: "Same vehicle. Different experience.",
 };
 
 /** §3 — The Shift */
@@ -68,17 +63,15 @@ export const shiftCopy = {
 
 /** §5 — Value Proposition */
 export const valueCopy = {
-  eyebrow: "The Value Proposition",
-  title: "Make every vehicle",
-  titleAccent: "work harder.",
+  eyebrow: "Why Urban Uplink",
+  title: "Studio quality",
+  titleAccent: "without the studio.",
   description:
-    "Urban Uplink helps automotive businesses create better vehicle experiences without adding more complexity to their workflow.",
+    "Replace manual editing and inconsistent yard photos with one guided capture workflow your whole team can run.",
   benefits: [
-    { icon: Layers, title: "More Consistency", description: "Every vehicle follows the same visual standard." },
-    { icon: Users, title: "More Engagement", description: "Give customers more reasons to stop, explore and enquire." },
-    { icon: Zap, title: "More Speed", description: "Reduce the time between capture and publication." },
-    { icon: Repeat, title: "More Reusability", description: "Create assets that work across multiple channels and use cases." },
-    { icon: Lightbulb, title: "More Value", description: "Turn one vehicle capture into multiple digital experiences." },
+    { icon: Layers, title: "Consistent listings", description: "Every vehicle follows the same visual standard across your inventory." },
+    { icon: Users, title: "More buyer engagement", description: "360° views and clean presentation keep shoppers on the listing longer." },
+    { icon: Zap, title: "Faster to market", description: "Go from lot capture to published listing in minutes, not days." },
   ],
 };
 
@@ -131,8 +124,8 @@ export const socialCopy = {
   titleAccent: "Endless content.",
   description:
     "Your vehicle imagery shouldn't stop at the listing. Turn the same digital assets into content for Instagram, Facebook, LinkedIn, WhatsApp, websites and campaigns.",
-  tagline: "Capture once. Create for every channel.",
-  cta: "Show Me What's Possible",
+  tagline: "Publish to WhatsApp, Instagram, Facebook, and your website from one capture.",
+  cta: "Get started",
   ctaHref: "/contact",
 };
 
@@ -141,25 +134,23 @@ export const useCasesCopy = {
   eyebrow: "Use Cases",
   title: "Built for the entire",
   titleAccent: "automotive ecosystem.",
-  description: "One platform. Multiple applications.",
-  cta: "Explore Solutions",
+  description: "Marketplaces, dealers, insurance, fleet, and detailing — one platform, tailored workflows.",
+  cta: "Explore use cases",
   ctaHref: "/use-cases",
 };
 
 /** §10 — Business Impact */
 export const impactCopy = {
-  eyebrow: "The Business Impact",
-  title: "Better vehicle presentation.",
+  eyebrow: "Business Impact",
+  title: "Better listings.",
   titleAccent: "Better outcomes.",
   description:
-    "When vehicles are easier to understand, easier to explore and easier to trust, customers spend more time engaging with them.",
-  intro: "Urban Uplink helps businesses move from:",
+    "When buyers can see, explore, and trust what they're looking at, enquiries go up and time-to-sale goes down.",
+  intro: "Teams move from:",
   shifts: [
-    { from: "More manual work", to: "More automation" },
-    { from: "Inconsistent images", to: "Consistent presentation" },
-    { from: "Basic listings", to: "Premium experiences" },
-    { from: "One-time content", to: "Reusable digital assets" },
-    { from: "Vehicle photos", to: "Vehicle experiences" },
+    { from: "Manual retouching", to: "Automated studio output" },
+    { from: "Inconsistent yard photos", to: "Premium presentation" },
+    { from: "One-time listing images", to: "Reusable channel assets" },
   ],
 };
 
@@ -169,18 +160,19 @@ export const scaleCopy = {
   title: "Built for one vehicle.",
   titleAccent: "Designed for thousands.",
   description:
-    "Whether you're managing a dealership inventory, a marketplace with thousands of listings or a distributed fleet, Urban Uplink creates a consistent visual standard across every vehicle.",
-  tagline: "One workflow. Every vehicle. Consistently.",
+    "Whether you manage a dealership lot, a marketplace catalog, or a distributed fleet — one workflow scales across every vehicle.",
 };
 
 /** §12 — Final CTA */
 export const finalCtaCopy = {
-  title: "Your vehicles are already valuable.",
-  titleAccent: "Make them look it.",
+  title: "Ready to make every listing",
+  titleAccent: "look professional?",
   description:
-    "Turn every capture into a digital asset that works harder across your business.",
-  primaryCta: "Transform Your Vehicle Experience",
+    "Give your team a faster way to capture, enhance, and publish vehicle inventory that builds buyer confidence.",
+  primaryCta: "Book a Demo",
   primaryHref: "/contact",
+  secondaryCta: "View Pricing",
+  secondaryHref: "/pricing",
   tagline: "Urban Uplink",
   subtagline: "Smarter tools. Greater impact.",
 };

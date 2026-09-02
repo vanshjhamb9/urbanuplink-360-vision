@@ -2,23 +2,30 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import CTA from "@/components/CTA";
+import { UseCaseBanner } from "@/components/UseCaseBanner";
 import { IndustrySection } from "@/components/industries/IndustrySection";
 import { PageLayout } from "@/components/layout/PageLayout";
-import { SectionHeading } from "@/components/ui-custom/SectionHeading";
 import { assets } from "@/lib/assets";
 import { industries } from "@/lib/industries";
+import { solutions } from "@/lib/solutions";
 
 function preloadImage(src: string) {
   const img = new Image();
   img.src = src;
 }
 
+const marketplaceHero = solutions[0];
+
 const UseCasesPage = () => {
   const location = useLocation();
 
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 768px)").matches;
+    preloadImage(
+      desktop ? marketplaceHero.imageDesktop : marketplaceHero.imageMobile,
+    );
     industries.forEach((industry) => {
+      if (industry.id === "marketplace") return;
       preloadImage(desktop ? industry.bannerDesktop : industry.bannerMobile);
     });
     preloadImage(assets.beforeAfter.beforeDesktop);
@@ -32,7 +39,6 @@ const UseCasesPage = () => {
     const id = location.hash.replace("#", "");
     const el = document.getElementById(id);
     if (el) {
-      // Allow layout to settle before scrolling to industry anchors
       requestAnimationFrame(() => {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       });
@@ -41,43 +47,27 @@ const UseCasesPage = () => {
 
   return (
     <PageLayout>
-      <section className="relative overflow-hidden page-hero-band">
-        <div className="pointer-events-none absolute inset-0 section-glow" />
-        <div className="page-container relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <SectionHeading
-              eyebrow="Industries"
-              size="page"
-              align="left"
-              title={
-                <>
-                  Why Urban Uplink matters for{" "}
-                  <span className="text-brand-lime">your industry</span>
-                </>
-              }
-              description="Each vertical has a different problem, process, and definition of success. Explore industry-specific workflows — not duplicated homepage screenshots."
-              className="max-w-3xl"
-            />
+      <UseCaseBanner {...marketplaceHero} priority />
 
-            <nav
-              className="section-body flex flex-wrap gap-2"
-              aria-label="Jump to industry"
-            >
-              {industries.map((industry) => (
-                <a
-                  key={industry.id}
-                  href={`#${industry.id}`}
-                  className="rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-xs font-semibold text-white/75 transition-colors hover:border-brand-lime/40 hover:text-brand-lime sm:text-sm"
-                >
-                  {industry.name}
-                </a>
-              ))}
-            </nav>
-          </motion.div>
+      <section className="relative border-b border-white/8 bg-brand-black section-compact">
+        <div className="page-container">
+          <motion.nav
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-wrap gap-2"
+            aria-label="Jump to use case"
+          >
+            {industries.map((industry) => (
+              <a
+                key={industry.id}
+                href={`#${industry.id}`}
+                className="rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-xs font-semibold text-white/75 transition-colors hover:border-brand-lime/40 hover:text-brand-lime sm:text-sm"
+              >
+                {industry.name}
+              </a>
+            ))}
+          </motion.nav>
         </div>
       </section>
 
@@ -85,7 +75,8 @@ const UseCasesPage = () => {
         <IndustrySection
           key={industry.id}
           industry={industry}
-          priorityBanner={index === 0}
+          hideBanner={industry.id === "marketplace"}
+          priorityBanner={industry.id === "insurance"}
         />
       ))}
 

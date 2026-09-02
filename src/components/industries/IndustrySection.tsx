@@ -12,9 +12,15 @@ interface IndustrySectionProps {
   industry: IndustryDefinition;
   /** Load banner immediately (first visible industry section) */
   priorityBanner?: boolean;
+  /** Skip the hero banner (e.g. when shown at page level) */
+  hideBanner?: boolean;
 }
 
-export function IndustrySection({ industry, priorityBanner = false }: IndustrySectionProps) {
+export function IndustrySection({
+  industry,
+  priorityBanner = false,
+  hideBanner = false,
+}: IndustrySectionProps) {
   const { ref, visible } = useScrollReveal<HTMLElement>();
   const [bannerReady, setBannerReady] = useState(!priorityBanner);
 
@@ -26,6 +32,7 @@ export function IndustrySection({ industry, priorityBanner = false }: IndustrySe
       aria-labelledby={`${industry.id}-heading`}
     >
       {/* Industry intro banner */}
+      {!hideBanner ? (
       <div className="relative isolate z-20 min-h-[56vh] overflow-hidden md:min-h-[62vh]">
         <div
           className={cn(
@@ -86,19 +93,22 @@ export function IndustrySection({ industry, priorityBanner = false }: IndustrySe
           </motion.div>
         </div>
       </div>
+      ) : null}
 
       {/* Problem → Process → Solution → Result */}
-      <div className="relative z-10 bg-brand-black section-shell">
+      <div
+        className={cn(
+          "relative z-10 bg-brand-black section-shell",
+          hideBanner && "border-t border-white/8 pt-4 md:pt-6",
+        )}
+      >
         <div className="page-container">
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-14">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={visible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.05 }}
             >
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-lime">
-                Industry Problem
-              </p>
               <h3 className="font-heading text-2xl font-extrabold text-white md:text-3xl">
                 {industry.problemTitle}
               </h3>
@@ -112,9 +122,6 @@ export function IndustrySection({ industry, priorityBanner = false }: IndustrySe
               animate={visible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.1 }}
             >
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-lime">
-                Urban Uplink Solution
-              </p>
               <h3 className="font-heading text-2xl font-extrabold text-white md:text-3xl">
                 {industry.solutionTitle}
               </h3>
@@ -124,11 +131,8 @@ export function IndustrySection({ industry, priorityBanner = false }: IndustrySe
             </motion.div>
           </div>
 
-          <div className="mt-12 md:mt-16">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-lime">
-              Process
-            </p>
-            <h3 className="mb-6 font-heading text-2xl font-extrabold text-white md:mb-8 md:text-3xl">
+          <div className="mt-12 border-t border-white/8 pt-12 md:mt-16 md:pt-16">
+            <h3 className="mb-8 font-heading text-2xl font-extrabold text-white md:text-3xl">
               How it works for {industry.name.toLowerCase()}
             </h3>
             <IndustryProcessRail steps={industry.process} />
@@ -156,7 +160,7 @@ export function IndustrySection({ industry, priorityBanner = false }: IndustrySe
               </p>
             </div>
             <GlowButton href="/contact" variant="filled" className="shrink-0">
-              Discuss {industry.name}
+              Book Demo
             </GlowButton>
           </motion.div>
         </div>

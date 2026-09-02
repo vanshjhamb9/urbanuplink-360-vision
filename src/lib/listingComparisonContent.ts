@@ -16,15 +16,15 @@ export const listingComparisonCopy = {
     { icon: MapPin, label: "Right From Your Lot" },
   ],
   before: {
-    label: "Other Dealers",
+    label: "Typical yard photo",
     icon: Eye,
-    caption: "Same flat photos everyone uses",
+    caption: "Same vehicle. Busy lot. Flat listing.",
   },
   after: {
-    label: "With Urban Uplink 360°",
+    label: "Studio-grade listing",
     icon: Trophy,
     badge: "Your Listing",
-    caption: "Buyers choose the listing they can explore",
+    caption: "Same vehicle. Different experience.",
   },
 };
 
