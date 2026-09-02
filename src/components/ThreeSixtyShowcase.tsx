@@ -102,10 +102,13 @@ const car360Images = [
 const showroomBackground = assets.showroom.spinBackground;
 
 /** Backdrop crop anchor — keeps the studio floor line aligned with the vehicle stage */
-const SPIN_BACKDROP_POSITION = "center 44%";
+const SPIN_BACKDROP_POSITION = "center 48%";
 
 /** Fixed stage aspect — hotspot % coords map to this box 1:1 with car images */
 const VEHICLE_STAGE_ASPECT = "1120 / 425";
+
+/** Zoom into car cutouts — source frames have transparent padding around the vehicle */
+const VEHICLE_CONTENT_SCALE = 1.5;
 
 const listingSpecs = [
   { icon: Calendar, label: "Year", value: "2023" },
@@ -351,13 +354,17 @@ const ThreeSixtyShowcase = () => {
                 }}
               >
                 {/* Vehicle stage — width-first; 1120×425 matches hotspot % coords 1:1 */}
-                <div className="absolute inset-x-4 top-8 bottom-28 z-10 flex items-end justify-center lg:bottom-32">
+                <div className="absolute inset-x-0 top-0 bottom-[4.25rem] z-10 flex items-end justify-center lg:bottom-[5rem]">
                   <div
                     ref={vehicleStageRef}
-                    className={`relative w-full max-w-[960px] ${
+                    className={`relative w-full ${
                       calibratorEnabled ? "border border-yellow-400/30" : ""
                     }`}
-                    style={{ aspectRatio: VEHICLE_STAGE_ASPECT }}
+                    style={{
+                      aspectRatio: VEHICLE_STAGE_ASPECT,
+                      transform: `scale(${VEHICLE_CONTENT_SCALE})`,
+                      transformOrigin: "50% 100%",
+                    }}
                   >
                   {!framesReady && (
                     <div className="absolute inset-0 z-30 flex items-center justify-center">
