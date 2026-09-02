@@ -108,7 +108,7 @@ const SPIN_BACKDROP_POSITION = "center 48%";
 const VEHICLE_STAGE_ASPECT = "1120 / 425";
 
 /** Zoom into car cutouts — source frames have transparent padding around the vehicle */
-const VEHICLE_CONTENT_SCALE = 1.5;
+const VEHICLE_CONTENT_SCALE = 1.2;
 
 const listingSpecs = [
   { icon: Calendar, label: "Year", value: "2023" },
