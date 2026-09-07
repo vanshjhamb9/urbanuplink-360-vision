@@ -176,7 +176,6 @@ export const industries: IndustryDefinition[] = [
           imageMobile: assets.beforeAfter.studioMobile,
           icon: Box,
           objectPosition: "center center",
-          imageScale: 1.4,
         },
       ],
       footerTagline: "Same vehicle. Different experience.",

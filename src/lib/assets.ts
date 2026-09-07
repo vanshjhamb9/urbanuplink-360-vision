@@ -13,9 +13,9 @@ export const assets = {
     beforeMobile: `${base}/before-after/before-mobile.webp`,
     afterMobile: `${base}/before-after/after-mobile.webp`,
     seltosPreview: `${base}/before-after/seltos.avif`,
-    /** Same Kia as before/after, composited onto a studio backdrop */
-    studioDesktop: `${base}/before-after/car-studio-bg.webp`,
-    studioMobile: `${base}/before-after/car-studio-bg.webp`,
+    /** Same Kia as before/after, composited onto a studio backdrop (framed to match) */
+    studioDesktop: `${base}/before-after/car-studio-present.webp`,
+    studioMobile: `${base}/before-after/car-studio-present.webp`,
   },
   showroom: {
     /** Primary 360 / studio backdrop — client showroom pack */
@@ -141,8 +141,8 @@ export const assets = {
       mobile: `${base}/before-after/after-mobile.webp`,
     },
     present: {
-      desktop: `${base}/before-after/car-studio-bg.webp`,
-      mobile: `${base}/before-after/car-studio-bg.webp`,
+      desktop: `${base}/before-after/car-studio-present.webp`,
+      mobile: `${base}/before-after/car-studio-present.webp`,
     },
     /** Detailing process card — vehicle in a finished presentation context */
     showcase: {
