@@ -33,6 +33,8 @@ export interface ListingGapStep {
   imageMobile: string;
   icon: LucideIcon;
   objectPosition?: string;
+  /** Zoom the card image so vehicle framing matches sibling steps */
+  imageScale?: number;
 }
 
 export interface ListingGapContent {
@@ -174,6 +176,7 @@ export const industries: IndustryDefinition[] = [
           imageMobile: assets.beforeAfter.studioMobile,
           icon: Box,
           objectPosition: "center center",
+          imageScale: 1.4,
         },
       ],
       footerTagline: "Same vehicle. Different experience.",

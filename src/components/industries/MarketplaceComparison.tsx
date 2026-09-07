@@ -58,8 +58,17 @@ export function MarketplaceComparison({ content }: MarketplaceComparisonProps) {
                   <img
                     src={step.imageDesktop}
                     alt={step.cardTitle}
-                    className="absolute inset-0 h-full w-full object-cover brightness-105 contrast-105 transition-transform duration-500 hover:scale-[1.02]"
-                    style={{ objectPosition: step.objectPosition ?? "center center" }}
+                    className={
+                      step.imageScale
+                        ? "absolute inset-0 h-full w-full origin-center object-cover brightness-105 contrast-105 transition-transform duration-500"
+                        : "absolute inset-0 h-full w-full object-cover brightness-105 contrast-105 transition-transform duration-500 hover:scale-[1.02]"
+                    }
+                    style={{
+                      objectPosition: step.objectPosition ?? "center center",
+                      ...(step.imageScale
+                        ? { transform: `scale(${step.imageScale})` }
+                        : {}),
+                    }}
                     loading="eager"
                     fetchPriority={index === 0 ? "high" : "low"}
                     decoding="sync"
