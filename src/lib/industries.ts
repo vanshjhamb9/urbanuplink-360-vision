@@ -170,10 +170,10 @@ export const industries: IndustryDefinition[] = [
           cardTitle: "Premium experience",
           cardDescription:
             "Drop inventory into polished, purpose-built listing environments buyers trust.",
-          imageDesktop: assets.productWorkflow.present.desktop,
-          imageMobile: assets.productWorkflow.present.mobile,
+          imageDesktop: assets.beforeAfter.studioDesktop,
+          imageMobile: assets.beforeAfter.studioMobile,
           icon: Box,
-          objectPosition: "center 40%",
+          objectPosition: "center center",
         },
       ],
       footerTagline: "Same vehicle. Different experience.",

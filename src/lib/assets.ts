@@ -13,6 +13,9 @@ export const assets = {
     beforeMobile: `${base}/before-after/before-mobile.webp`,
     afterMobile: `${base}/before-after/after-mobile.webp`,
     seltosPreview: `${base}/before-after/seltos.avif`,
+    /** Same Kia as before/after, composited onto a studio backdrop */
+    studioDesktop: `${base}/before-after/car-studio-bg.webp`,
+    studioMobile: `${base}/before-after/car-studio-bg.webp`,
   },
   showroom: {
     /** Primary 360 / studio backdrop — client showroom pack */
@@ -138,8 +141,8 @@ export const assets = {
       mobile: `${base}/before-after/after-mobile.webp`,
     },
     present: {
-      desktop: `${base}/use-cases/detailing/3. Main Feature Image (Card Style) car detailing desktop 1318x 808.webp`,
-      mobile: `${base}/use-cases/detailing/mobile/3. Main Feature Image (Card Style) car detailing mobile 930x 570.webp`,
+      desktop: `${base}/before-after/car-studio-bg.webp`,
+      mobile: `${base}/before-after/car-studio-bg.webp`,
     },
     /** Detailing process card — vehicle in a finished presentation context */
     showcase: {
