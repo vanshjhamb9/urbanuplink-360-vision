@@ -15,7 +15,7 @@ const smoothProgress = (value: number) => {
   return eased * eased * (3 - 2 * eased);
 };
 
-const HERO_TRANSITION_VH = 80;
+const HERO_TRANSITION_VH = 42;
 const HERO_HOLD_VH = 0;
 const HERO_SECTION_VH = 100 + HERO_TRANSITION_VH + HERO_HOLD_VH;
 

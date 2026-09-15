@@ -1,6 +1,7 @@
+import { Facebook, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
-import { navLinks } from "@/lib/brand";
+import { navLinks, socialLinks } from "@/lib/brand";
 
 const serviceLinks = [
   { label: "360 Spin Experience", href: "/pricing#360-spin" },
@@ -16,6 +17,11 @@ const legalLinks = [
   { label: "Terms of Service", href: "/terms-of-service" },
   { label: "Refund Policy", href: "/refund-policy" },
 ];
+
+const socialIcon = {
+  facebook: Facebook,
+  instagram: Instagram,
+} as const;
 
 const Footer = () => {
   return (
@@ -86,10 +92,28 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/10 pt-8 text-center md:text-left">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row">
           <p className="text-xs text-muted-brand">
             © {new Date().getFullYear()} Urban Uplink. All rights reserved.
           </p>
+          <ul className="flex items-center gap-3" aria-label="Social media">
+            {socialLinks.map((link) => {
+              const Icon = socialIcon[link.network];
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/12 text-white/70 transition-colors hover:border-brand-lime/40 hover:text-brand-lime"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </footer>

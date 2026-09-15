@@ -33,9 +33,15 @@ export function GlowButton({
     </>
   );
 
-  if (external) {
+  if (external || href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("#")) {
     return (
-      <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
+      <a
+        href={href}
+        className={classes}
+        {...(href.startsWith("http")
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+      >
         {content}
       </a>
     );

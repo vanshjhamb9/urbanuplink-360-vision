@@ -19,3 +19,17 @@ export const navLinks = [
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/team" },
 ] as const;
+
+/** Footer / social — only live profiles (X/LinkedIn URLs currently 404) */
+export const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/urban.uplink/",
+    network: "facebook" as const,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/urbanuplink",
+    network: "instagram" as const,
+  },
+] as const;

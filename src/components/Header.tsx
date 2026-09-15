@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-brand-black shadow-lg backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-brand-black">
         <div className="page-container-wide">
           <div className="relative flex h-16 items-center justify-between lg:h-[4.25rem]">
             <Link to="/" className="relative z-10 shrink-0" aria-label="Urban Uplink home">

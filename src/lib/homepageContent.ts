@@ -165,14 +165,27 @@ export const scaleCopy = {
 
 /** §12 — Final CTA */
 export const finalCtaCopy = {
-  title: "Ready to make every listing",
-  titleAccent: "look professional?",
+  title: "See How Urban Uplink",
+  titleAccent: "Simplifies Your Workflow",
   description:
-    "Give your team a faster way to capture, enhance, and publish vehicle inventory that builds buyer confidence.",
-  primaryCta: "Book a Demo",
-  primaryHref: "/contact",
-  secondaryCta: "View Pricing",
-  secondaryHref: "/pricing",
+    "Watch a short product demo to see the capture-to-listing workflow — then book a live call when you're ready.",
+  primaryCta: "Watch Video Demo",
+  primaryHref: "#360-experience",
+  secondaryCta: "Book a Demo",
+  secondaryHref: "/contact",
   tagline: "Urban Uplink",
   subtagline: "Smarter tools. Greater impact.",
 };
+
+/** §15 — Trust strip (under hero) */
+export const trustStrip = {
+  label: "Trusted by dealers, insurers, and fleets across India",
+  partners: [
+    "TRUE VALUE",
+    "MARUTI SUZUKI",
+    "Spinny",
+    "ACKO",
+    "mahindra",
+    "CARS24",
+  ],
+} as const;

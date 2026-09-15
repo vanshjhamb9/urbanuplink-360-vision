@@ -1,9 +1,9 @@
-import { cn } from "@/lib/utils";
 import logoIcon from "@/assets/logo-icon-cropped.png";
-import logoWordmark from "@/assets/logo-wordmark-cropped.png";
+import { cn } from "@/lib/utils";
 
 interface LogoProps {
   className?: string;
+  /** Kept for API compatibility — tagline is never rendered in chrome */
   showTagline?: boolean;
   size?: "sm" | "md" | "lg";
 }
@@ -11,22 +11,26 @@ interface LogoProps {
 const sizes = {
   sm: {
     icon: "h-9 w-9",
-    wordmark: "h-7 w-[8.5rem]",
-    gap: "gap-2",
+    word: "text-[1.05rem] leading-none tracking-tight",
+    gap: "gap-2.5",
   },
   md: {
-    icon: "h-11 w-11",
-    wordmark: "h-8 w-[9.75rem]",
-    gap: "gap-2.5",
+    icon: "h-10 w-10 sm:h-11 sm:w-11",
+    word: "text-[1.2rem] leading-none tracking-tight sm:text-[1.35rem]",
+    gap: "gap-2.5 sm:gap-3",
   },
   lg: {
     icon: "h-12 w-12",
-    wordmark: "h-9 w-[11rem]",
+    word: "text-[1.5rem] leading-none tracking-tight",
     gap: "gap-3",
   },
 };
 
-export function Logo({ className, showTagline = false, size = "md" }: LogoProps) {
+/**
+ * Text wordmark: white "urban" + lime "uplink" for dark-bg contrast.
+ * Icon sized to match wordmark height; tagline omitted at chrome scale.
+ */
+export function Logo({ className, size = "md" }: LogoProps) {
   const s = sizes[size];
 
   return (
@@ -36,15 +40,15 @@ export function Logo({ className, showTagline = false, size = "md" }: LogoProps)
         alt=""
         className={cn(s.icon, "shrink-0 object-contain")}
         aria-hidden="true"
+        draggable={false}
       />
-      <img
-        src={logoWordmark}
-        alt="Urban Uplink"
-        className={cn(
-          s.wordmark,
-          "shrink-0 object-contain object-left brightness-110 contrast-110",
-        )}
-      />
+      <span
+        className={cn("font-heading font-extrabold italic lowercase", s.word)}
+        aria-label="Urban Uplink"
+      >
+        <span className="text-white">urban</span>
+        <span className="text-brand-lime"> uplink</span>
+      </span>
     </div>
   );
 }
