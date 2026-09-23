@@ -30,20 +30,20 @@ export const listingComparisonCopy = {
 
 /** Typical amateur lot / listing photos */
 export const beforeGrid: ComparisonPhoto[] = [
-  { src: lotListingPhotos.hero, alt: "Vehicle on a crowded dealership lot", objectPosition: "center 55%" },
+  { src: lotListingPhotos.hero, alt: "Vehicle on a crowded dealership lot", objectPosition: "center center" },
   { src: lotListingPhotos.topRight, alt: "Outdoor photo with distracting background", objectPosition: "center center" },
-  { src: lotListingPhotos.midRight, alt: "Flat angle car photo in a parking lot", objectPosition: "center 40%" },
-  { src: lotListingPhotos.bottomLeft, alt: "Used car yard listing photo", objectPosition: "center 50%" },
-  { src: lotListingPhotos.bottomRight, alt: "Phone capture with harsh outdoor lighting", objectPosition: "center 45%" },
+  { src: lotListingPhotos.midRight, alt: "Flat angle car photo in a parking lot", objectPosition: "center center" },
+  { src: lotListingPhotos.bottomLeft, alt: "Used car yard listing photo", objectPosition: "center center" },
+  { src: lotListingPhotos.bottomRight, alt: "Phone capture with harsh outdoor lighting", objectPosition: "center center" },
 ];
 
 /** Urban Uplink processed studio vehicle photos */
 export const afterGrid: ComparisonPhoto[] = [
-  { src: studioListingPhotos[0], alt: "Fleet vehicle with professional studio presentation", objectPosition: "center 42%" },
-  { src: studioListingPhotos[1], alt: "Consistent fleet imagery on a premium backdrop", objectPosition: "center 40%" },
-  { src: studioListingPhotos[2], alt: "Insurance-ready vehicle documentation in studio", objectPosition: "center 38%" },
-  { src: studioListingPhotos[3], alt: "Polished vehicle photo for digital listings", objectPosition: "center 45%" },
-  { src: studioListingPhotos[4], alt: "Marketplace-ready studio vehicle presentation", objectPosition: "center 42%" },
+  { src: studioListingPhotos[0], alt: "Fleet vehicle with professional studio presentation", objectPosition: "center center" },
+  { src: studioListingPhotos[1], alt: "Consistent fleet imagery on a premium backdrop", objectPosition: "center center" },
+  { src: studioListingPhotos[2], alt: "Insurance-ready vehicle documentation in studio", objectPosition: "center center" },
+  { src: studioListingPhotos[3], alt: "Polished vehicle photo for digital listings", objectPosition: "center center" },
+  { src: studioListingPhotos[4], alt: "Marketplace-ready studio vehicle presentation", objectPosition: "center center" },
 ];
 
 export type BadgeItem = {

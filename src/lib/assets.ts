@@ -19,7 +19,7 @@ export const assets = {
   },
   showroom: {
     /** Primary 360 / studio backdrop — client showroom pack */
-    spinBackground: `${base}/showroom/Background 2.webp`,
+    spinBackground: `${base}/showroom/Background 1.webp`,
     background1: `${base}/showroom/Background 1.webp`,
     background2: `${base}/showroom/Background 2.webp`,
     background3: `${base}/showroom/Background 3.webp`,

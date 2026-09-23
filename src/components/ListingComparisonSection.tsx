@@ -7,6 +7,7 @@ import {
   listingComparisonCopy,
   type ComparisonPhoto,
 } from "@/lib/listingComparisonContent";
+import { cn } from "@/lib/utils";
 
 function PhotoCell({
   photo,
@@ -20,44 +21,48 @@ function PhotoCell({
   const isAfter = variant === "after";
 
   return (
-    <div className={`relative min-h-0 overflow-hidden bg-[#141414] ${className ?? ""}`}>
+    <div
+      className={cn(
+        "relative overflow-hidden bg-[#0e1012]",
+        className,
+      )}
+    >
       <img
         src={photo.src}
         alt={photo.alt}
-        className={`absolute inset-0 h-full w-full object-cover ${
-          isAfter
-            ? "brightness-110 contrast-105 saturate-105"
-            : "saturate-[0.85] contrast-[0.95]"
-        }`}
+        className={cn(
+          "absolute inset-0 h-full w-full object-cover",
+          isAfter ? "brightness-[1.03] contrast-[1.02]" : "saturate-[0.88] contrast-[0.96]",
+        )}
         style={{ objectPosition: photo.objectPosition ?? "center center" }}
         loading="lazy"
         decoding="async"
-      />
-      <div
-        className={`pointer-events-none absolute inset-0 ${
-          isAfter
-            ? "bg-gradient-to-t from-brand-black/25 via-transparent to-white/[0.03]"
-            : "bg-gradient-to-t from-black/35 to-transparent"
-        }`}
       />
     </div>
   );
 }
 
 function PhotoGrid({ variant, photos }: { variant: "before" | "after"; photos: ComparisonPhoto[] }) {
-  const [hero, topRight, midRight, bottomLeft, bottomRight] = photos;
+  const [hero, a, b, c, d] = photos;
 
   const cell = (photo: ComparisonPhoto, className: string) => (
     <PhotoCell photo={photo} variant={variant} className={className} />
   );
 
+  /**
+   * Aspect-matched mosaic:
+   * hero @ 5:4 (800×640) on top, four 16:9 thumbs (640×360) below.
+   * object-cover fills each cell without letterboxing or heavy crop.
+   */
   return (
-    <div className="grid min-h-[280px] flex-1 grid-cols-2 grid-rows-[1fr_1fr_1fr] gap-2 sm:min-h-[320px] sm:gap-2.5">
-      {cell(hero, "row-span-2 min-h-[140px] rounded-xl sm:rounded-2xl")}
-      {cell(topRight, "min-h-[68px] rounded-lg sm:min-h-[76px] sm:rounded-xl")}
-      {cell(midRight, "min-h-[68px] rounded-lg sm:min-h-[76px] sm:rounded-xl")}
-      {cell(bottomLeft, "min-h-[68px] rounded-lg sm:min-h-[76px] sm:rounded-xl")}
-      {cell(bottomRight, "min-h-[68px] rounded-lg sm:min-h-[76px] sm:rounded-xl")}
+    <div className="flex flex-col gap-2 sm:gap-2.5">
+      {cell(hero, "aspect-[5/4] w-full rounded-xl sm:rounded-2xl")}
+      <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
+        {cell(a, "aspect-video rounded-lg sm:rounded-xl")}
+        {cell(b, "aspect-video rounded-lg sm:rounded-xl")}
+        {cell(c, "aspect-video rounded-lg sm:rounded-xl")}
+        {cell(d, "aspect-video rounded-lg sm:rounded-xl")}
+      </div>
     </div>
   );
 }

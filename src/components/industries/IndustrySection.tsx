@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { ResponsiveImage } from "@/components/ui-custom/ResponsiveImage";
 import { IndustryProcessRail } from "@/components/industries/IndustryProcessRail";
+import { IndustryContrastCards } from "@/components/industries/IndustryContrastCards";
 import { MarketplaceComparison } from "@/components/industries/MarketplaceComparison";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
 import type { IndustryDefinition } from "@/lib/industries";
@@ -103,33 +104,15 @@ export function IndustrySection({
         )}
       >
         <div className="page-container">
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-14">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={visible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.05 }}
-            >
-              <h3 className="font-heading text-2xl font-extrabold text-white md:text-3xl">
-                {industry.problemTitle}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/70 md:text-base">
-                {industry.problem}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={visible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.1 }}
-            >
-              <h3 className="font-heading text-2xl font-extrabold text-white md:text-3xl">
-                {industry.solutionTitle}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/70 md:text-base">
-                {industry.solution}
-              </p>
-            </motion.div>
-          </div>
+          <IndustryContrastCards
+            problemTitle={industry.problemTitle}
+            problem={industry.problem}
+            problemImage={industry.problemImage}
+            solutionTitle={industry.solutionTitle}
+            solution={industry.solution}
+            solutionImage={industry.solutionImage}
+            visible={visible}
+          />
 
           <div className="mt-12 border-t border-white/8 pt-12 md:mt-16 md:pt-16">
             <h3 className="mb-8 font-heading text-2xl font-extrabold text-white md:text-3xl">

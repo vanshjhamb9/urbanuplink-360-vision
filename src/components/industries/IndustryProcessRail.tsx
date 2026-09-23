@@ -25,7 +25,7 @@ export function IndustryProcessRail({
     <div ref={ref} className="relative">
       <div
         className={cn(
-          "grid grid-cols-1 items-stretch gap-4 sm:gap-5",
+          "grid grid-cols-1 items-stretch gap-5 sm:gap-6",
           gridColsClass(steps.length),
         )}
       >
@@ -37,18 +37,13 @@ export function IndustryProcessRail({
             transition={{ duration: 0.55, delay: index * 0.07 }}
             className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/12 bg-white/[0.035]"
           >
-            <div
-              className={cn(
-                "relative shrink-0 overflow-hidden border-b border-white/8 bg-[#0a0c0e]",
-                compact ? "aspect-[16/10]" : "aspect-[16/10]",
-              )}
-            >
+            <div className="relative aspect-video shrink-0 overflow-hidden border-b border-white/8 bg-[#0a0c0e]">
               <picture>
                 <source media="(max-width: 767px)" srcSet={step.imageMobile} />
                 <img
                   src={step.imageDesktop}
                   alt={step.title}
-                  className="absolute inset-0 h-full w-full object-cover brightness-105 contrast-105 transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="absolute inset-0 h-full w-full object-cover"
                   style={{ objectPosition: step.objectPosition ?? "center center" }}
                   loading="lazy"
                   decoding="async"
@@ -73,11 +68,11 @@ export function IndustryProcessRail({
                 {step.description}
               </p>
 
-              <div className="mt-4 min-h-[5.5rem]">
-                {step.showChannelIcons ? (
+              {step.showChannelIcons ? (
+                <div className="mt-4">
                   <ChannelIconRow className="gap-1.5" size="sm" />
-                ) : null}
-              </div>
+                </div>
+              ) : null}
             </div>
           </motion.article>
         ))}

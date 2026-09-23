@@ -99,16 +99,16 @@ const car360Images = [
   car360_33, // 960°
 ];
 
-const showroomBackground = assets.showroom.spinBackground;
+const showroomBackground = assets.showroom.background1;
 
-/** Backdrop crop anchor — keeps the studio floor line aligned with the vehicle stage */
-const SPIN_BACKDROP_POSITION = "center 48%";
+/** Balanced crop of white studio Background 1 — floor line under the vehicle */
+const SPIN_BACKDROP_POSITION = "center 55%";
 
 /** Fixed stage aspect — hotspot % coords map to this box 1:1 with car images */
 const VEHICLE_STAGE_ASPECT = "1120 / 425";
 
 /** Zoom into car cutouts — source frames have transparent padding around the vehicle */
-const VEHICLE_CONTENT_SCALE = 1.2;
+const VEHICLE_CONTENT_SCALE = 1.15;
 
 const listingSpecs = [
   { icon: Calendar, label: "Year", value: "2023" },
@@ -302,46 +302,48 @@ const ThreeSixtyShowcase = () => {
   return (
     <section
       id="360-experience"
-      className="relative z-20 overflow-hidden bg-brand-black section-shell"
+      className="relative z-20 overflow-hidden bg-brand-black py-10 md:py-12 lg:py-8 lg:pt-[4.25rem]"
     >
-      <div className="pointer-events-none absolute inset-0 section-glow opacity-60" />
-      <div className="page-container">
-        <SectionHeading
-          eyebrow={threeSixtyCopy.eyebrow}
-          title={
-            <>
-              {threeSixtyCopy.title}{" "}
-              <span className="text-brand-lime">{threeSixtyCopy.titleAccent}</span>
-            </>
-          }
-          description={threeSixtyCopy.description}
-          className="max-w-2xl md:mx-auto md:text-center"
-        />
-        <p className="mx-auto mt-4 max-w-xl text-center text-sm font-semibold text-brand-lime/90 md:text-base">
-          {threeSixtyCopy.tagline}
-        </p>
-        <p className="mx-auto mt-1 max-w-xl text-center text-xs text-white/45">
-          {threeSixtyCopy.footnote}
-        </p>
+      <div className="pointer-events-none absolute inset-0 section-glow opacity-40" />
+      <div className="page-container-wide px-4 sm:px-6 lg:pb-3">
+        <div>
+          <SectionHeading
+            eyebrow={threeSixtyCopy.eyebrow}
+            title={
+              <>
+                {threeSixtyCopy.title}{" "}
+                <span className="text-brand-lime">{threeSixtyCopy.titleAccent}</span>
+              </>
+            }
+            description={threeSixtyCopy.description}
+            className="max-w-2xl md:mx-auto md:text-center"
+          />
+          <p className="mx-auto mt-2 max-w-xl text-center text-sm font-semibold text-brand-lime/90 md:mt-3 md:text-base">
+            {threeSixtyCopy.tagline}
+          </p>
+          <p className="mx-auto mt-1 max-w-xl text-center text-xs text-white/45">
+            {threeSixtyCopy.footnote}
+          </p>
+        </div>
 
-        <div className="section-body mx-auto overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] shadow-card backdrop-blur-xl lg:rounded-[1.25rem]">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
-            {/* Left: 360 Viewer */}
-            <div className="relative min-h-[min(58svh,520px)] overflow-hidden border-b border-white/10 lg:min-h-[min(68svh,620px)] lg:border-b-0 lg:border-r">
-              {/* Client showroom background — 16:9 crop aligned to vehicle floor */}
-              <div className="absolute inset-0 z-0">
+        {/* Studio height matches listing on desktop (stretch) — no aspect on grid item */}
+        <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-[#0a0c0e] shadow-card md:mt-5 lg:mt-3 lg:rounded-[1.25rem]">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-stretch">
+            {/* Grid track: min-w-0 only — height comes from row stretch on lg */}
+            <div className="min-w-0 border-b border-white/10 lg:border-b-0 lg:border-r lg:border-white/10">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#f4f4f4] lg:aspect-auto lg:h-full lg:min-h-[28rem]">
+              <div className="absolute inset-0 z-0 overflow-hidden bg-white">
                 <img
                   src={showroomBackground}
-                  className="h-full w-full object-cover brightness-110 contrast-100"
+                  className="h-full w-full object-cover"
                   style={{ objectPosition: SPIN_BACKDROP_POSITION }}
                   alt=""
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-brand-black/20" />
               </div>
 
               <div
                 ref={containerRef}
-                className="perspective-1000 absolute inset-0 z-10 cursor-grab touch-none active:cursor-grabbing"
+                className="perspective-1000 absolute inset-0 z-10 min-w-0 cursor-grab touch-none active:cursor-grabbing"
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
@@ -353,11 +355,11 @@ const ThreeSixtyShowcase = () => {
                   applyMomentum();
                 }}
               >
-                {/* Vehicle stage — width-first; 1120×425 matches hotspot % coords 1:1 */}
-                <div className="absolute inset-x-0 top-0 bottom-[4.25rem] z-10 flex items-end justify-center lg:bottom-[5rem]">
+                {/* Stage clipped inside studio so scale(1.15) cannot paint into listing */}
+                <div className="absolute inset-x-0 top-0 bottom-[4.5rem] z-10 flex items-end justify-center overflow-hidden pb-1 lg:bottom-[5rem]">
                   <div
                     ref={vehicleStageRef}
-                    className={`relative w-full ${
+                    className={`relative w-[90%] max-w-full ${
                       calibratorEnabled ? "border border-yellow-400/30" : ""
                     }`}
                     style={{
@@ -381,7 +383,7 @@ const ThreeSixtyShowcase = () => {
                         key={index}
                         src={img}
                         alt={`Angle ${Math.round(frameToAngle(index))}°`}
-                        className={`absolute inset-0 h-full w-full brightness-125 contrast-110 drop-shadow-[0_22px_44px_rgba(0,0,0,0.34)] ${
+                        className={`absolute inset-0 h-full w-full brightness-110 contrast-105 drop-shadow-[0_18px_36px_rgba(0,0,0,0.22)] ${
                           isActive ? "z-10 opacity-100" : "pointer-events-none z-0 opacity-0"
                         }`}
                         loading={index === 0 ? "eager" : "lazy"}
@@ -393,7 +395,18 @@ const ThreeSixtyShowcase = () => {
                   {/* Hotspots Overlay */}
                   {!calibratorEnabled &&
                     visibleHotspots.map((spot) => {
-                      const tooltipRight = spot.position.x > 55;
+                      // Stage is overflow-clipped + scaled; prefer the side with room.
+                      const placeLeft = spot.position.x >= 40;
+                      const placeAbove = spot.position.y >= 72;
+                      const placeBelow = spot.position.y <= 22;
+
+                      const tooltipPlacement = placeAbove
+                        ? "bottom-full left-1/2 mb-2.5 -translate-x-1/2"
+                        : placeBelow
+                          ? "top-full left-1/2 mt-2.5 -translate-x-1/2"
+                          : placeLeft
+                            ? "right-full top-1/2 mr-2.5 -translate-y-1/2"
+                            : "left-full top-1/2 ml-2.5 -translate-y-1/2";
 
                       return (
                         <button
@@ -425,11 +438,7 @@ const ThreeSixtyShowcase = () => {
                               <div className="h-1.5 w-1.5 rounded-full bg-brand-black/70" />
                             </div>
                             <div
-                              className={`pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded-xl border border-white/10 bg-brand-black/90 px-3 py-2 text-left text-xs font-bold text-white opacity-0 shadow-card backdrop-blur transition-opacity group-hover:opacity-100 ${
-                                tooltipRight
-                                  ? "right-full mr-3"
-                                  : "left-full ml-3"
-                              }`}
+                              className={`pointer-events-none absolute z-30 w-max max-w-[11rem] rounded-xl border border-white/10 bg-brand-black/90 px-3 py-2 text-left text-xs font-bold leading-snug text-white opacity-0 shadow-card backdrop-blur transition-opacity group-hover:opacity-100 sm:max-w-[12.5rem] ${tooltipPlacement}`}
                             >
                               <span className="text-white">{spot.label}</span>
                               <span className="mt-0.5 block font-medium text-white/55">
@@ -456,25 +465,23 @@ const ThreeSixtyShowcase = () => {
                 </div>
 
                 {/* Controls Overlay */}
-                <div className="pointer-events-none absolute bottom-6 left-5 right-5 z-30 flex items-center justify-between">
-                  {/* Rotation Indicator */}
-                  <div className="pointer-events-auto flex items-center gap-3 rounded-full border border-white/10 bg-brand-black/70 px-4 py-2 text-white shadow-card backdrop-blur-xl">
-                     <RotateCcw className="h-4 w-4 text-white/70" />
-                     <div className="h-1.5 w-28 overflow-hidden rounded-full bg-white/10">
+                <div className="pointer-events-none absolute bottom-3 left-4 right-4 z-30 flex items-center justify-between lg:bottom-[5.25rem]">
+                  <div className="pointer-events-auto flex items-center gap-3 rounded-full border border-black/10 bg-white/85 px-3 py-1.5 text-brand-black shadow-sm backdrop-blur-xl sm:px-4 sm:py-2">
+                     <RotateCcw className="h-4 w-4 text-brand-black/55" />
+                     <div className="h-1.5 w-24 overflow-hidden rounded-full bg-black/10 sm:w-28">
                         <div 
-                          className="h-full rounded-full bg-white/80 transition-all duration-100"
+                          className="h-full rounded-full bg-brand-black/75 transition-all duration-100"
                           style={{ width: `${(rotationAngle / 360) * 100}%` }}
                         />
                      </div>
-                     <span className="hidden text-xs font-semibold text-white/60 sm:inline">
+                     <span className="hidden text-xs font-semibold text-brand-black/55 sm:inline">
                        {Math.round(frameToAngle(currentImageIndex))}°
                      </span>
                   </div>
 
-                   {/* Play/Pause */}
                    <button
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/90 text-brand-black transition-transform hover:scale-105"
+                    className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-brand-black shadow-sm transition-transform hover:scale-105 sm:h-11 sm:w-11"
                     aria-label={isPlaying ? "Pause 360 rotation" : "Play 360 rotation"}
                   >
                     {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="ml-1 h-5 w-5" />}
@@ -484,26 +491,26 @@ const ThreeSixtyShowcase = () => {
                 {/* Navigation Arrows */}
                 <button 
                   onClick={handlePrevious}
-                  className="absolute left-4 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-brand-black/70 text-white shadow-card backdrop-blur transition-all hover:scale-110 hover:border-brand-lime/40 hover:text-brand-lime active:scale-95 md:flex"
+                  className="absolute left-4 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white/90 text-brand-black shadow-sm backdrop-blur transition-all hover:scale-110 hover:border-brand-lime/50 hover:text-brand-lime active:scale-95 md:flex"
                   aria-label="Previous 360 angle"
                 >
                   ←
                 </button>
                 <button 
                   onClick={handleNext}
-                  className="absolute right-4 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-brand-black/70 text-white shadow-card backdrop-blur transition-all hover:scale-110 hover:border-brand-lime/40 hover:text-brand-lime active:scale-95 md:flex"
+                  className="absolute right-4 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white/90 text-brand-black shadow-sm backdrop-blur transition-all hover:scale-110 hover:border-brand-lime/50 hover:text-brand-lime active:scale-95 md:flex"
                   aria-label="Next 360 angle"
                 >
                   →
                 </button>
               </div>
               
-              {/* Thumbnails (Static for visual) */}
-              <div className="absolute bottom-0 left-0 right-0 hidden grid-cols-4 gap-3 border-t border-white/10 bg-brand-black/72 p-4 backdrop-blur-xl lg:grid">
+              {/* Thumbnails */}
+              <div className="absolute bottom-0 left-0 right-0 hidden grid-cols-4 gap-2 border-t border-black/8 bg-white/88 p-2.5 backdrop-blur-xl lg:grid">
                 {[0, 2, 8, 10].map((idx) => (
                   <div 
                     key={idx} 
-                    className="aspect-video cursor-pointer overflow-hidden rounded-xl border border-white/10 bg-white/5 opacity-70 transition-all hover:scale-105 hover:border-brand-lime/40 hover:opacity-100"
+                    className="aspect-[16/9] cursor-pointer overflow-hidden rounded-lg border border-black/8 bg-[#f4f4f4] opacity-80 transition-all hover:scale-105 hover:border-brand-lime/50 hover:opacity-100"
                     onClick={() => {
                       setIsPlaying(false);
                       setCurrentImageIndex(idx);
@@ -514,10 +521,11 @@ const ThreeSixtyShowcase = () => {
                   </div>
                 ))}
               </div>
+              </div>
             </div>
 
-            <div className="flex flex-col justify-between border-t border-white/10 bg-[#0a0c0e] p-6 sm:p-8 lg:border-t-0 lg:border-l">
-              <div className="space-y-6">
+            <div className="flex min-h-0 min-w-0 flex-col justify-between gap-3 bg-[#0a0c0e] p-4 sm:p-5 lg:overflow-y-auto lg:p-6">
+              <div className="space-y-3">
                 <div className="flex items-start justify-between gap-4">
                   <span className="rounded-full border border-brand-lime/25 bg-brand-lime/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-brand-lime">
                     Featured
@@ -531,18 +539,18 @@ const ThreeSixtyShowcase = () => {
                 </div>
 
                 <div>
-                  <h3 className="font-heading text-xl font-extrabold tracking-tight text-white sm:text-2xl">
+                  <h3 className="font-heading text-lg font-extrabold tracking-tight text-white sm:text-xl">
                     Certified Mid-Size SUV
                   </h3>
-                  <p className="mt-1.5 text-sm text-white/50">
+                  <p className="mt-0.5 text-sm text-white/50">
                     Automatic · Verified · 360° enabled
                   </p>
                 </div>
 
-                <dl className="grid grid-cols-2 gap-x-4 gap-y-3 border-y border-white/8 py-4">
+                <dl className="grid grid-cols-2 gap-x-3 gap-y-2 border-y border-white/8 py-2.5">
                   {listingSpecs.map(({ icon: Icon, label, value }) => (
-                    <div key={label} className="flex items-center gap-2.5">
-                      <Icon className="h-4 w-4 shrink-0 text-brand-lime/80" strokeWidth={1.75} />
+                    <div key={label} className="flex items-center gap-2">
+                      <Icon className="h-3.5 w-3.5 shrink-0 text-brand-lime/80" strokeWidth={1.75} />
                       <div className="min-w-0">
                         <dt className="text-[10px] font-medium uppercase tracking-wide text-white/35">
                           {label}
@@ -558,18 +566,18 @@ const ThreeSixtyShowcase = () => {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
-                  className="rounded-xl border border-white/10 bg-white/[0.03] p-4"
+                  className="rounded-xl border border-white/10 bg-white/[0.03] p-3"
                 >
                   <p className="text-sm font-bold text-white">{selectedHotspot.label}</p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-white/60">
+                  <p className="mt-1 text-sm leading-relaxed text-white/60">
                     {selectedHotspot.description}
                   </p>
-                  <p className="mt-3 text-xs text-white/40">
+                  <p className="mt-1.5 text-xs text-white/40">
                     Tap a hotspot on the vehicle to explore details.
                   </p>
                 </motion.div>
 
-                <div className="flex items-start gap-3 rounded-xl border border-brand-lime/15 bg-brand-lime/[0.06] px-4 py-3">
+                <div className="flex items-start gap-2.5 rounded-xl border border-brand-lime/15 bg-brand-lime/[0.06] px-3 py-2">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-lime" />
                   <p className="text-xs leading-relaxed text-white/55">
                     Passed our 140-point inspection. Every angle verified in the
@@ -578,21 +586,21 @@ const ThreeSixtyShowcase = () => {
                 </div>
               </div>
 
-              <div className="mt-8 space-y-3">
+              <div className="space-y-2">
                 <GlowButton href="/contact" variant="filled" className="w-full justify-center">
                   Book a Demo
                 </GlowButton>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
-                    className="flex items-center justify-center gap-2 rounded-xl border border-white/10 py-2.5 text-sm font-semibold text-white/70 transition-colors hover:border-white/20 hover:text-white"
+                    className="flex items-center justify-center gap-2 rounded-xl border border-white/10 py-2 text-sm font-semibold text-white/70 transition-colors hover:border-white/20 hover:text-white"
                   >
                     <Heart className="h-4 w-4" />
                     Save
                   </button>
                   <button
                     type="button"
-                    className="flex items-center justify-center gap-2 rounded-xl border border-white/10 py-2.5 text-sm font-semibold text-white/70 transition-colors hover:border-white/20 hover:text-white"
+                    className="flex items-center justify-center gap-2 rounded-xl border border-white/10 py-2 text-sm font-semibold text-white/70 transition-colors hover:border-white/20 hover:text-white"
                   >
                     <Share2 className="h-4 w-4" />
                     Share

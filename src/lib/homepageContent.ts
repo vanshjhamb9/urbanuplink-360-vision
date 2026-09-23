@@ -168,7 +168,7 @@ export const finalCtaCopy = {
   title: "See How Urban Uplink",
   titleAccent: "Simplifies Your Workflow",
   description:
-    "Watch a short product demo to see the capture-to-listing workflow — then book a live call when you're ready.",
+    "Watch a short product demo to see the capture-to-listing workflow. Then book a live call when you're ready.",
   primaryCta: "Watch Video Demo",
   primaryHref: "#360-experience",
   secondaryCta: "Book a Demo",

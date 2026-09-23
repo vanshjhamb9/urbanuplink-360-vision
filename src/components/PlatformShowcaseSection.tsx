@@ -13,21 +13,28 @@ import {
 } from "@/lib/platformShowcaseContent";
 import { cn } from "@/lib/utils";
 
-/** Shared image well — every card uses the same pixel height */
-const CARD_IMAGE_WELL =
-  "relative h-[168px] w-full shrink-0 overflow-hidden bg-[#060809] sm:h-[184px] md:h-[200px]";
+/** Fills remaining card height (Source / Marketplace / 360 / Website). */
+const CARD_IMAGE_WELL_FILL =
+  "relative min-h-[160px] w-full flex-1 overflow-hidden bg-[#0a0c0e] sm:min-h-[180px] md:min-h-[200px]";
+
+/** Fixed 16:9 for the 4 social cards — matches BMW masters, no over-crop. */
+const CARD_IMAGE_WELL_VIDEO =
+  "relative aspect-video w-full shrink-0 overflow-hidden bg-[#0a0c0e]";
 
 function PreviewImage({
   src,
   alt,
   objectFit,
   objectPosition,
+  scale = 1,
   className,
 }: {
   src: string;
   alt: string;
   objectFit: "cover" | "contain";
   objectPosition: string;
+  /** Slight punch-in only — keep the full vehicle readable */
+  scale?: number;
   className?: string;
 }) {
   return (
@@ -37,11 +44,14 @@ function PreviewImage({
       loading="lazy"
       draggable={false}
       className={cn(
-        "absolute inset-0 h-full w-full",
+        "absolute inset-0 h-full w-full origin-center",
         objectFit === "contain" ? "object-contain" : "object-cover",
         className,
       )}
-      style={{ objectPosition }}
+      style={{
+        objectPosition,
+        transform: scale === 1 ? undefined : `scale(${scale})`,
+      }}
     />
   );
 }
@@ -69,11 +79,13 @@ function OutputCard({
   visible,
   delay,
   className,
+  imageWellClassName = CARD_IMAGE_WELL_FILL,
 }: {
   preview: OutputPreview;
   visible: boolean;
   delay: number;
   className?: string;
+  imageWellClassName?: string;
 }) {
   return (
     <motion.article
@@ -86,12 +98,13 @@ function OutputCard({
       )}
     >
       <CardHeader preview={preview} />
-      <div className={CARD_IMAGE_WELL}>
+      <div className={imageWellClassName}>
         <PreviewImage
           src={preview.image}
           alt={preview.imageAlt}
           objectFit={preview.objectFit}
           objectPosition={preview.objectPosition}
+          scale={preview.scale}
         />
       </div>
     </motion.article>
@@ -154,12 +167,13 @@ const PlatformShowcaseSection = () => {
                   6 outputs <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
-              <div className={CARD_IMAGE_WELL}>
+              <div className={CARD_IMAGE_WELL_FILL}>
                 <PreviewImage
                   src={sourceVehicle.image}
                   alt={sourceVehicle.alt}
                   objectFit={sourceVehicle.objectFit}
                   objectPosition={sourceVehicle.objectPosition}
+                  scale={sourceVehicle.scale}
                 />
               </div>
               <div className="flex items-center justify-between border-t border-white/8 px-4 py-2.5">
@@ -192,6 +206,7 @@ const PlatformShowcaseSection = () => {
                 preview={preview}
                 visible={visible}
                 delay={0.14 + index * 0.04}
+                imageWellClassName={CARD_IMAGE_WELL_VIDEO}
               />
             ))}
           </div>

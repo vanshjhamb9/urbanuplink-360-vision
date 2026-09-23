@@ -14,7 +14,7 @@ export const lotListingPhotos = {
 export const studioListingPhotos = homepageSectionAssets.listingComparison.afterGrid;
 
 export const showroomBackdrop = assets.showroom.spinBackground;
-export const SHOWROOM_POSITION = "center 44%";
+export const SHOWROOM_POSITION = "center 55%";
 
 export type StudioPlacement = {
   width: string;

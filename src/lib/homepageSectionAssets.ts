@@ -1,15 +1,33 @@
 import { assets } from "@/lib/assets";
-import whatsappCreative from "@/assets/image (3).webp";
-import websiteCreative from "@/assets/image (4).webp";
-import instagramCreative from "@/assets/image (5).webp";
 
-const lot = "/assets/comparison/lot";
+/** Listing comparison — hero @ 800x640, small cells @ 640x360 */
+import beforeHero from "@/assets/BandA/Before 800x640/1.800x640.webp";
+import beforeTopRight from "@/assets/BandA/before 640x360/2.640x360.webp";
+import beforeMidRight from "@/assets/BandA/before 640x360/3.640x360.webp";
+import beforeBottomLeft from "@/assets/BandA/before 640x360/4.640x360.webp";
+import beforeBottomRight from "@/assets/BandA/before 640x360/5.640x360.webp";
+import afterHero from "@/assets/BandA/After 800x640/1.800x640.webp";
+import afterTopRight from "@/assets/BandA/After 640x360/2.640x360.webp";
+import afterMidRight from "@/assets/BandA/After 640x360/3.640x360.webp";
+import afterBottomLeft from "@/assets/BandA/After 640x360/4.640x360.webp";
+import afterBottomRight from "@/assets/BandA/After 640x360/5.640x360.webp";
+
+/** Platform showcase — same BMW, four studio angles */
+import bmwFrontStudio from "@/assets/social-media/BMW_01_front_studio.png";
+import bmwFrontThreeQuarter from "@/assets/social-media/BMW_02_front_three_quarter.png";
+import bmwRearStudio from "@/assets/social-media/BMW_03_rear_studio.png";
+import bmwSideProfile from "@/assets/social-media/BMW_04_side_profile.png";
+import bmw360Spin from "@/assets/social-media/ChatGPT Image Sep 23, 2026, 09_03_04 PM.png";
 
 function assertUniqueSlots(slots: Record<string, string>) {
   const pathToSlot = new Map<string, string>();
   for (const [slot, path] of Object.entries(slots)) {
     const existing = pathToSlot.get(path);
     if (existing) {
+      /** Social slots intentionally reuse the same BMW master across channels */
+      if (slot.startsWith("social.") && existing.startsWith("social.")) {
+        continue;
+      }
       throw new Error(
         `Duplicate homepage asset "${path}" in slots "${existing}" and "${slot}"`,
       );
@@ -23,7 +41,6 @@ const dm = assets.useCases.detailing.process.mobile;
 const f = assets.useCases.fleet.process.desktop;
 const fm = assets.useCases.fleet.process.mobile;
 const mp = assets.useCases.marketplace.process;
-const id = assets.useCases.insurance.process.desktop;
 
 /** Strict one-image-per-slot registry for the homepage */
 export const homepageSectionAssets = {
@@ -42,13 +59,19 @@ export const homepageSectionAssets = {
   },
   listingComparison: {
     beforeGrid: [
-      `${lot}/lot-1.jpg`,
-      `${lot}/lot-2.jpg`,
-      `${lot}/lot-3.jpg`,
-      `${lot}/lot-4.jpg`,
-      `${lot}/lot-5.jpg`,
+      beforeHero,
+      beforeTopRight,
+      beforeMidRight,
+      beforeBottomLeft,
+      beforeBottomRight,
     ],
-    afterGrid: [f[0], f[2], id[0], id[1], mp[2]],
+    afterGrid: [
+      afterHero,
+      afterTopRight,
+      afterMidRight,
+      afterBottomLeft,
+      afterBottomRight,
+    ],
   },
   productWorkflow: {
     capture: {
@@ -74,19 +97,21 @@ export const homepageSectionAssets = {
   },
   platformShowcase: {
     sourceCapture: {
-      image: assets.hero.studioDesktop,
+      image: bmwFrontStudio,
       alt: "Studio master file — one clean capture for every channel",
-      objectPosition: "center center",
+      objectPosition: "center 48%",
       objectFit: "cover" as const,
+      scale: 1.15,
     },
     channels: {
-      marketplace: assets.marketplace.listingDesktop,
-      instagram: instagramCreative,
-      story: assets.banners.detailing.mobile,
-      whatsapp: whatsappCreative,
-      facebook: assets.useCases.insurance.process.desktop[2],
-      website: websiteCreative,
-      spin: assets.marketplace.cardDesktop,
+      marketplace: bmwFrontThreeQuarter,
+      instagram: bmwFrontStudio,
+      story: bmwRearStudio,
+      /** Compact angle reads better than full side in narrow social wells */
+      whatsapp: bmwFrontThreeQuarter,
+      facebook: bmwFrontStudio,
+      website: bmwSideProfile,
+      spin: bmw360Spin,
     },
   },
   cta: {

@@ -13,6 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { assets } from "@/lib/assets";
+import publishAnywhereImage from "@/assets/social-media/ChatGPT Image Sep 23, 2026, 09_03_04 PM.png";
 
 export interface IndustryProcessStep {
   title: string;
@@ -49,6 +50,13 @@ export interface ListingGapContent {
   footerAccent: string;
 }
 
+export interface IndustryContrastImage {
+  desktop: string;
+  mobile: string;
+  alt: string;
+  objectPosition?: string;
+}
+
 export interface IndustryDefinition {
   id: string;
   name: string;
@@ -60,6 +68,8 @@ export interface IndustryDefinition {
   problem: string;
   solutionTitle: string;
   solution: string;
+  problemImage: IndustryContrastImage;
+  solutionImage: IndustryContrastImage;
   resultTitle: string;
   result: string;
   features: { icon: LucideIcon; label: string }[];
@@ -86,6 +96,18 @@ export const industries: IndustryDefinition[] = [
     solutionTitle: "The Urban Uplink solution",
     solution:
       "Urban Uplink transforms everyday smartphone photos into studio-grade inventory visuals with clean backgrounds, consistent presentation, and interactive 360 experiences ready for marketplace channels.",
+    problemImage: {
+      desktop: assets.beforeAfter.beforeDesktop,
+      mobile: assets.beforeAfter.beforeMobile,
+      alt: "Typical yard photo with cluttered dealership background",
+      objectPosition: "center 45%",
+    },
+    solutionImage: {
+      desktop: assets.beforeAfter.afterDesktop,
+      mobile: assets.beforeAfter.afterMobile,
+      alt: "Studio-grade vehicle listing with clean background",
+      objectPosition: "center center",
+    },
     resultTitle: "The result",
     result:
       "Professional listings that feel premium, build buyer confidence, and present inventory with visual consistency across every vehicle.",
@@ -130,10 +152,11 @@ export const industries: IndustryDefinition[] = [
       },
       {
         title: "Published anywhere",
-        description: "Share to WhatsApp, Instagram, Facebook, web, and marketplaces from one capture.",
-        imageDesktop: assets.productWorkflow.publish.desktop,
-        imageMobile: assets.productWorkflow.publish.mobile,
-        objectPosition: "center top",
+        description:
+          "Share to WhatsApp, Instagram, Facebook, web, and marketplaces from one capture.",
+        imageDesktop: publishAnywhereImage,
+        imageMobile: publishAnywhereImage,
+        objectPosition: "center 50%",
         showChannelIcons: true,
       },
     ],
@@ -149,7 +172,7 @@ export const industries: IndustryDefinition[] = [
           stepHint: "Real-world photos",
           cardTitle: "Real-world capture",
           cardDescription:
-            "Guided mobile capture from your lot — consistent angles without studio equipment.",
+            "Guided mobile capture from your lot. Consistent angles without studio equipment.",
           imageDesktop: assets.beforeAfter.beforeDesktop,
           imageMobile: assets.beforeAfter.beforeMobile,
           icon: Camera,
@@ -197,10 +220,22 @@ export const industries: IndustryDefinition[] = [
       "Claims teams receive phone photos with inconsistent angles, poor lighting, and missing context. Inspectors spend more time chasing clarity than reviewing damage.",
     solutionTitle: "The Urban Uplink solution",
     solution:
-      "Standardize field capture with guided imaging that produces clean, consistent vehicle records — easier for adjusters to review and share across the claim lifecycle.",
+      "Standardize field capture with guided imaging that produces clean, consistent vehicle records. Easier for adjusters to review and share across the claim lifecycle.",
+    problemImage: {
+      desktop: assets.useCases.insurance.process.desktop[0],
+      mobile: assets.useCases.insurance.process.mobile[0],
+      alt: "Inconsistent field photos for insurance documentation",
+      objectPosition: "center 40%",
+    },
+    solutionImage: {
+      desktop: assets.useCases.insurance.process.desktop[2],
+      mobile: assets.useCases.insurance.process.mobile[2],
+      alt: "Clean, consistent insurance vehicle documentation",
+      objectPosition: "center 42%",
+    },
     resultTitle: "The result",
     result:
-      "Cleaner documentation, easier review, and a more reliable visual trail for inspection and claim workflows — without inventing unsupported automation claims.",
+      "Cleaner documentation, easier review, and a more reliable visual trail for inspection and claim workflows, without inventing unsupported automation claims.",
     features: [
       { icon: Camera, label: "Inspection Ready" },
       { icon: FileText, label: "Damage Documentation" },
@@ -217,6 +252,7 @@ export const industries: IndustryDefinition[] = [
         imageDesktop: assets.useCases.insurance.process.desktop[0],
         imageMobile: assets.useCases.insurance.process.mobile[0],
         icon: Camera,
+        objectPosition: "center 40%",
       },
       {
         title: "Organize evidence",
@@ -224,6 +260,7 @@ export const industries: IndustryDefinition[] = [
         imageDesktop: assets.useCases.insurance.process.desktop[1],
         imageMobile: assets.useCases.insurance.process.mobile[1],
         icon: FileText,
+        objectPosition: "center 42%",
       },
       {
         title: "Process visuals",
@@ -231,6 +268,7 @@ export const industries: IndustryDefinition[] = [
         imageDesktop: assets.useCases.insurance.process.desktop[2],
         imageMobile: assets.useCases.insurance.process.mobile[2],
         icon: Sparkles,
+        objectPosition: "center 42%",
       },
       {
         title: "Support the claim",
@@ -238,6 +276,7 @@ export const industries: IndustryDefinition[] = [
         imageDesktop: assets.useCases.insurance.process.desktop[3],
         imageMobile: assets.useCases.insurance.process.mobile[3],
         icon: Shield,
+        objectPosition: "center 40%",
       },
     ],
   },
@@ -254,7 +293,19 @@ export const industries: IndustryDefinition[] = [
       "Rental and fleet teams rely on rushed phone photos at checkout and return. When damage appears later, there is no clear before-and-after record to resolve disputes quickly.",
     solutionTitle: "The Urban Uplink solution",
     solution:
-      "Capture condition at handoff with the same guided workflow every time — then compare checkout and return visuals side by side with clear, audit-ready evidence.",
+      "Capture condition at handoff with the same guided workflow every time. Then compare checkout and return visuals side by side with clear, audit-ready evidence.",
+    problemImage: {
+      desktop: assets.useCases.fleet.process.desktop[0],
+      mobile: assets.useCases.fleet.process.mobile[0],
+      alt: "Rushed fleet checkout photos without clear documentation",
+      objectPosition: "center 40%",
+    },
+    solutionImage: {
+      desktop: assets.useCases.fleet.process.desktop[3],
+      mobile: assets.useCases.fleet.process.mobile[3],
+      alt: "Clear before-and-after fleet damage comparison",
+      objectPosition: "center 42%",
+    },
     resultTitle: "The result",
     result:
       "Stronger accountability, clearer damage conversations, and audit-ready visual records across the fleet.",
@@ -276,6 +327,7 @@ export const industries: IndustryDefinition[] = [
         imageDesktop: assets.useCases.fleet.process.desktop[0],
         imageMobile: assets.useCases.fleet.process.mobile[0],
         icon: Camera,
+        objectPosition: "center 40%",
       },
       {
         title: "Client/driver takes it for the ride",
@@ -283,6 +335,7 @@ export const industries: IndustryDefinition[] = [
         imageDesktop: assets.useCases.fleet.process.desktop[1],
         imageMobile: assets.useCases.fleet.process.mobile[1],
         icon: Users,
+        objectPosition: "center 42%",
       },
       {
         title: "Vehicle is returned with damage",
@@ -291,6 +344,7 @@ export const industries: IndustryDefinition[] = [
         imageDesktop: assets.useCases.fleet.process.desktop[2],
         imageMobile: assets.useCases.fleet.process.mobile[2],
         icon: AlertTriangle,
+        objectPosition: "center 45%",
       },
       {
         title: "Identify damage with clear comparison",
@@ -299,6 +353,7 @@ export const industries: IndustryDefinition[] = [
         imageDesktop: assets.useCases.fleet.process.desktop[3],
         imageMobile: assets.useCases.fleet.process.mobile[3],
         icon: Search,
+        objectPosition: "center 42%",
       },
     ],
   },
@@ -309,13 +364,25 @@ export const industries: IndustryDefinition[] = [
     headlineWhite: "Make Every Detail",
     headlineAccent: "Worth Paying For.",
     intro:
-      "Detailing studios sell transformation. Customers need to see the before, the work, and the finished result — clearly enough to justify premium packages.",
+      "Detailing studios sell transformation. Customers need to see the before, the work, and the finished result clearly enough to justify premium packages.",
     problemTitle: "The presentation problem",
     problem:
-      "Customers cannot see the transformation when before/after proof is shot on a phone in a dim bay. Premium packages look like every other listing — hard to justify the price.",
+      "Customers cannot see the transformation when before/after proof is shot on a phone in a dim bay. Premium packages look like every other listing, hard to justify the price.",
     solutionTitle: "The Urban Uplink solution",
     solution:
-      "Document the full detailing journey with studio-grade before, process, and after visuals customers can explore — and share on social without a separate photo shoot.",
+      "Document the full detailing journey with studio-grade before, process, and after visuals customers can explore and share on social without a separate photo shoot.",
+    problemImage: {
+      desktop: assets.useCases.detailing.process.desktop[0],
+      mobile: assets.useCases.detailing.process.mobile[0],
+      alt: "Dim bay phone photos that fail to show detailing transformation",
+      objectPosition: "center 40%",
+    },
+    solutionImage: {
+      desktop: assets.useCases.detailing.process.desktop[2],
+      mobile: assets.useCases.detailing.process.mobile[2],
+      alt: "Studio-grade detailing after presentation",
+      objectPosition: "center 42%",
+    },
     resultTitle: "The result",
     result:
       "A clear visual story that showcases craftsmanship, supports upsells, and gives customers a shareable record of the finished vehicle.",
@@ -333,24 +400,28 @@ export const industries: IndustryDefinition[] = [
         description: "Capture the starting condition clearly.",
         imageDesktop: assets.useCases.detailing.process.desktop[0],
         imageMobile: assets.useCases.detailing.process.mobile[0],
+        objectPosition: "center 40%",
       },
       {
         title: "Detailing process",
         description: "Document the work as it happens.",
         imageDesktop: assets.useCases.detailing.process.desktop[1],
         imageMobile: assets.useCases.detailing.process.mobile[1],
+        objectPosition: "center 42%",
       },
       {
         title: "After vehicle",
         description: "Show the finished result in a premium presentation.",
         imageDesktop: assets.useCases.detailing.process.desktop[2],
         imageMobile: assets.useCases.detailing.process.mobile[2],
+        objectPosition: "center 42%",
       },
       {
         title: "Report & share",
         description: "Deliver documentation customers can keep and share.",
         imageDesktop: assets.useCases.detailing.process.desktop[3],
         imageMobile: assets.useCases.detailing.process.mobile[3],
+        objectPosition: "center 40%",
       },
     ],
   },

@@ -158,28 +158,25 @@ const imageServicePlans: ServicePlan[] = [
     name: "360 Spin Package",
     icon: RotateCcw,
     description:
-      "Interactive vehicle spins with hosted viewer, marketplace embedding, and dealership-ready walkaround experiences.",
+      "Interactive vehicle spins with feature hotspots, walkaround video downloads, and dealership-ready backgrounds.",
     unit: "Car",
     pricing: {
       monthly: {
         price: "249",
         standard: "500",
-        packageTotal: "12,450",
+        packageTotal: "1,245",
         savingsPercent: 50,
       },
       annually: {
         price: "199",
         standard: "249",
-        packageTotal: "1,19,400",
+        packageTotal: "11,940",
         savingsPercent: 20,
       },
     },
     features: [
+      "Up to 5 Cars / Month",
       "Upload Workflow",
-      "Hosted 360° Viewer",
-      "Marketplace Embedding",
-      "Dealer Website Embed",
-      "AI Photography Mobile App (Offline Mode)",
       "Feature Hotspots in 360 Spin",
       "Download 360 Walkaround Video",
       "Custom Background with Dealership Logo",
@@ -680,7 +677,7 @@ const PricingPage = () => {
 
                         <p className="text-xs text-muted-foreground">
                           Billed {isAnnual ? "Annually" : "Monthly"}
-                          {service.id === "360-spin" ? " · Max 50 Cars / Month" : ""}
+                          {service.id === "360-spin" ? " · Max 5 Cars / Month" : ""}
                         </p>
                       </div>
 
