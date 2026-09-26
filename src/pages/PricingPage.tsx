@@ -84,7 +84,7 @@ const plans: Plan[] = [
     features: [
       "Up to 50 Vehicles / Month",
       "Mobile Capture App",
-      "AI Background Enhancement",
+      "AI BG Removal",
       "AI Background Replacement",
       "Upload up to 12 Images Per Vehicle",
       "Email Support",
@@ -158,7 +158,7 @@ const imageServicePlans: ServicePlan[] = [
     name: "360 Spin Package",
     icon: RotateCcw,
     description:
-      "Interactive vehicle spins with feature hotspots, walkaround video downloads, and dealership-ready backgrounds.",
+      "Interactive vehicle spins with walkaround video downloads and dealership-ready backgrounds.",
     unit: "Car",
     pricing: {
       monthly: {
@@ -177,7 +177,6 @@ const imageServicePlans: ServicePlan[] = [
     features: [
       "Up to 5 Cars / Month",
       "Upload Workflow",
-      "Feature Hotspots in 360 Spin",
       "Download 360 Walkaround Video",
       "Custom Background with Dealership Logo",
       "License Plate Masking",
@@ -249,12 +248,12 @@ const comparisonFeatures: {
   enterprise: ComparisonValue;
 }[] = [
   { feature: "Cars Included", starter: "50 / Month", pro: "200 / Month", enterprise: "Unlimited" },
-  { feature: "AI Enhancement", starter: true, pro: true, enterprise: true },
+  { feature: "AI BG Removal", starter: true, pro: true, enterprise: true },
   { feature: "AI Background Replacement", starter: true, pro: true, enterprise: true },
   { feature: "License Plate Masking", starter: true, pro: true, enterprise: true },
   { feature: "360 Viewer", starter: true, pro: true, enterprise: true },
-  { feature: "360 Spin Package", starter: "₹249 / car", pro: "Add-on", enterprise: "Custom" },
-  { feature: "Walkaround Video", starter: true, pro: true, enterprise: true },
+  { feature: "360 Spin Package", starter: "Add ₹249 / car", pro: "Add ₹249 / car", enterprise: "Custom" },
+  { feature: "Walkaround Video", starter: "Add ₹249 / car", pro: "Add ₹249 / car", enterprise: "Add ₹249 / car" },
   { feature: "Offline App", starter: true, pro: true, enterprise: true },
   { feature: "Processing", starter: "Standard", pro: "Priority", enterprise: "Priority" },
   { feature: "Custom Branding", starter: false, pro: true, enterprise: true },
