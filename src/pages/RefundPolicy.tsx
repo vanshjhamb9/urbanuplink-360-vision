@@ -96,6 +96,8 @@ const RefundPolicy = () => {
               billing error has occurred, please contact us at:
             </p>
             <p>
+              <strong>Urban Uplink Private Limited</strong>
+              <br />
               Email:{" "}
               <a
                 href="mailto:admin@urbanuplink.ai"
@@ -104,6 +106,18 @@ const RefundPolicy = () => {
               >
                 admin@urbanuplink.ai
               </a>
+              <br />
+              Phone:{" "}
+              <a
+                href="tel:+919632747166"
+                className="text-primary hover:underline"
+              >
+                +91 9632747166
+              </a>
+              <br />
+              Address: C/o WeWork Salarpuria Symbiosis, Ground floor,
+              Bannerghatta Road, Arekere Village, Begur Hobli, Bengaluru,
+              Karnataka 560076
             </p>
             <p>
               We will review all concerns promptly and communicate

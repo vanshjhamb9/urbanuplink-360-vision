@@ -13,11 +13,33 @@ export const brand = {
   },
 } as const;
 
+/** Legal entity + public contact details */
+export const company = {
+  legalName: "Urban Uplink Private Limited",
+  shortName: "Urban Uplink",
+  cin: "U62020KA2025PTC196899",
+  email: "admin@urbanuplink.ai",
+  supportEmail: "admin@urbanuplink.ai",
+  careersEmail: "admin@urbanuplink.ai",
+  phone: "+91 9632747166",
+  phoneHref: "tel:+919632747166",
+  website: "https://www.urbanuplink.ai",
+  websiteLabel: "www.urbanuplink.ai",
+  calendlyUrl: "https://calendly.com/admin-urbanuplink",
+  address: {
+    line1: "C/o WeWork Salarpuria Symbiosis",
+    line2: "Ground floor, Bannerghatta Road, Arekere Village",
+    line3: "Begur Hobli, Bengaluru, Karnataka 560076",
+    short: "WeWork Salarpuria Symbiosis, Bannerghatta Road, Bengaluru",
+  },
+} as const;
+
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Use cases", href: "/use-cases" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/team" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 /** Footer / social — only live profiles (X/LinkedIn URLs currently 404) */

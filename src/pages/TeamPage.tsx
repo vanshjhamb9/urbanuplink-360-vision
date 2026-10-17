@@ -3,6 +3,7 @@ import FloatingDemo from "@/components/FloatingDemo";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
 import { SectionHeading } from "@/components/ui-custom/SectionHeading";
 import { PageLayout } from "@/components/layout/PageLayout";
+import { company } from "@/lib/brand";
 
 const team = [
   {
@@ -114,7 +115,7 @@ const TeamPage = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-transparent" />
                   <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
                     <a
-                      href="mailto:hello@urbanuplink.com"
+                      href={`mailto:${company.email}`}
                       className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-brand-black/80 text-white backdrop-blur hover:border-brand-lime/40"
                       aria-label={`Email ${member.name}`}
                     >
@@ -178,7 +179,7 @@ const TeamPage = () => {
               automotive innovation.
             </p>
             <div className="mt-6 flex justify-center">
-              <GlowButton href="mailto:careers@urbanuplink.com" variant="filled">
+              <GlowButton href={`mailto:${company.careersEmail}`} variant="filled">
                 View Open Positions
               </GlowButton>
             </div>

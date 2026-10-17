@@ -6,6 +6,7 @@ import { IndustryProcessRail } from "@/components/industries/IndustryProcessRail
 import { IndustryContrastCards } from "@/components/industries/IndustryContrastCards";
 import { MarketplaceComparison } from "@/components/industries/MarketplaceComparison";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
+import { company } from "@/lib/brand";
 import type { IndustryDefinition } from "@/lib/industries";
 import { cn } from "@/lib/utils";
 
@@ -142,7 +143,7 @@ export function IndustrySection({
                 {industry.result}
               </p>
             </div>
-            <GlowButton href="/contact" variant="filled" className="shrink-0">
+            <GlowButton href={company.calendlyUrl} variant="filled" className="shrink-0">
               Book Demo
             </GlowButton>
           </motion.div>

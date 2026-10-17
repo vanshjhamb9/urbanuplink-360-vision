@@ -16,6 +16,7 @@ import { SectionHeading } from "@/components/ui-custom/SectionHeading";
 import { threeSixtyCopy } from "@/lib/homepageContent";
 import { assets } from "@/lib/assets";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
+import { company } from "@/lib/brand";
 import {
   angleToFrame,
   frameToAngle,
@@ -587,7 +588,7 @@ const ThreeSixtyShowcase = () => {
               </div>
 
               <div className="space-y-2">
-                <GlowButton href="/contact" variant="filled" className="w-full justify-center">
+                <GlowButton href={company.calendlyUrl} variant="filled" className="w-full justify-center">
                   Book a Demo
                 </GlowButton>
                 <div className="grid grid-cols-2 gap-2">

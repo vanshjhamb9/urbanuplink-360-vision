@@ -9,6 +9,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import { company } from "@/lib/brand";
 
 /** §1 — Hero */
 export const heroCopy = {
@@ -16,8 +17,8 @@ export const heroCopy = {
   headlineAccent: "Your Best Salesperson.",
   description:
     "Capture professional vehicle experiences using only your smartphone. AI transforms every vehicle into showroom-quality inventory that attracts more buyers and sells faster.",
-  primaryCta: "Get started",
-  primaryHref: "/contact",
+  primaryCta: "Book a Demo",
+  primaryHref: company.calendlyUrl,
   secondaryCta: "See live demo",
   secondaryHref: "#360-experience",
   features: [
@@ -125,8 +126,8 @@ export const socialCopy = {
   description:
     "Your vehicle imagery shouldn't stop at the listing. Turn the same digital assets into content for Instagram, Facebook, LinkedIn, WhatsApp, websites and campaigns.",
   tagline: "Publish to WhatsApp, Instagram, Facebook, and your website from one capture.",
-  cta: "Get started",
-  ctaHref: "/contact",
+  cta: "Book a Demo",
+  ctaHref: company.calendlyUrl,
 };
 
 /** §9 — Use Cases */
@@ -172,7 +173,7 @@ export const finalCtaCopy = {
   primaryCta: "Watch Video Demo",
   primaryHref: "#360-experience",
   secondaryCta: "Book a Demo",
-  secondaryHref: "/contact",
+  secondaryHref: company.calendlyUrl,
   tagline: "Urban Uplink",
   subtagline: "Smarter tools. Greater impact.",
 };

@@ -5,6 +5,7 @@ import FloatingDemo from "@/components/FloatingDemo";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
 import { SectionHeading } from "@/components/ui-custom/SectionHeading";
 import { PageLayout } from "@/components/layout/PageLayout";
+import { company } from "@/lib/brand";
 
 const pillars = [
   {
@@ -80,7 +81,7 @@ const LearnMorePage = () => {
               <GlowButton href="/use-cases" variant="filled">
                 Explore Industries
               </GlowButton>
-              <GlowButton href="/contact">Book a Demo</GlowButton>
+              <GlowButton href={company.calendlyUrl}>Book a Demo</GlowButton>
             </div>
           </motion.div>
         </div>

@@ -145,11 +145,11 @@ const PrivacyPolicy = () => {
               operational purposes. You may delete your account anytime via your
               dashboard or by contacting{" "}
               <a
-                href="mailto:hello@urbanuplink.ai"
+                href="mailto:admin@urbanuplink.ai"
                 className="text-primary hover:underline"
                 data-testid="link-account-deletion-email"
               >
-                hello@urbanuplink.ai
+                admin@urbanuplink.ai
               </a>
               . Deleted data is removed, though anonymized information may
               remain for analytics.
@@ -205,6 +205,10 @@ const PrivacyPolicy = () => {
             <p>
               <strong>Ms. Rekha Krishnamurthy</strong>
               <br />
+              Urban Uplink Private Limited
+              <br />
+              CIN: U62020KA2025PTC196899
+              <br />
               Email:{" "}
               <a
                 href="mailto:admin@urbanuplink.ai"
@@ -213,6 +217,18 @@ const PrivacyPolicy = () => {
               >
                 admin@urbanuplink.ai
               </a>
+              <br />
+              Phone:{" "}
+              <a
+                href="tel:+919632747166"
+                className="text-primary hover:underline"
+              >
+                +91 9632747166
+              </a>
+              <br />
+              Address: C/o WeWork Salarpuria Symbiosis, Ground floor,
+              Bannerghatta Road, Arekere Village, Begur Hobli, Bengaluru,
+              Karnataka 560076
             </p>
             <p>
               We aim to resolve all privacy-related issues promptly and

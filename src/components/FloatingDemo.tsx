@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
+import { company } from "@/lib/brand";
 
 /** Don't overlap hero / industry banners — show after user scrolls past the first viewport */
 const SCROLL_REVEAL_VH = 1.05;
@@ -26,7 +27,7 @@ const FloatingDemo = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-40 animate-in fade-in slide-in-from-bottom-5 duration-700">
-      <GlowButton href="/contact" variant="filled" className="shadow-glow">
+      <GlowButton href={company.calendlyUrl} variant="filled" className="shadow-glow">
         Book a Demo
       </GlowButton>
     </div>

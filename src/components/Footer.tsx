@@ -1,7 +1,7 @@
-import { Facebook, Instagram } from "lucide-react";
+import { Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Logo } from "@/components/brand/Logo";
-import { navLinks, socialLinks } from "@/lib/brand";
+import { company, navLinks, socialLinks } from "@/lib/brand";
 
 const serviceLinks = [
   { label: "360 Spin Experience", href: "/pricing#360-spin" },
@@ -28,7 +28,7 @@ const Footer = () => {
     <footer className="relative overflow-hidden border-t border-white/10 bg-brand-black section-compact">
       <div className="pointer-events-none absolute inset-0 section-glow opacity-40" />
       <div className="page-container">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5">
           <div className="sm:col-span-2 lg:col-span-1">
             <Logo size="md" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-brand">
@@ -90,12 +90,51 @@ const Footer = () => {
               ))}
             </ul>
           </div>
+
+          <div>
+            <h4 className="mb-4 font-heading text-sm font-extrabold uppercase tracking-wider text-white">
+              Contact
+            </h4>
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href={`mailto:${company.email}`}
+                  className="flex items-start gap-2 text-sm text-muted-brand transition-colors hover:text-brand-lime"
+                >
+                  <Mail className="mt-0.5 h-4 w-4 shrink-0" />
+                  <span>{company.email}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={company.phoneHref}
+                  className="flex items-start gap-2 text-sm text-muted-brand transition-colors hover:text-brand-lime"
+                >
+                  <Phone className="mt-0.5 h-4 w-4 shrink-0" />
+                  <span>{company.phone}</span>
+                </a>
+              </li>
+              <li className="flex items-start gap-2 text-sm text-muted-brand">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
+                <span>
+                  {company.address.line1}
+                  <br />
+                  {company.address.line2}
+                  <br />
+                  {company.address.line3}
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row">
-          <p className="text-xs text-muted-brand">
-            © {new Date().getFullYear()} Urban Uplink. All rights reserved.
-          </p>
+          <div className="text-center md:text-left">
+            <p className="text-xs text-muted-brand">
+              © {new Date().getFullYear()} {company.legalName}. All rights reserved.
+            </p>
+            <p className="mt-1 text-[11px] text-white/35">CIN {company.cin}</p>
+          </div>
           <ul className="flex items-center gap-3" aria-label="Social media">
             {socialLinks.map((link) => {
               const Icon = socialIcon[link.network];

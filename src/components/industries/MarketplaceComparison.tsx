@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
+import { company } from "@/lib/brand";
 import type { ListingGapContent } from "@/lib/industries";
 
 interface MarketplaceComparisonProps {
@@ -124,7 +125,7 @@ export function MarketplaceComparison({ content }: MarketplaceComparisonProps) {
             How Urban Uplink-processed inventory appears across multiple listings
           </p>
         </div>
-        <GlowButton href="/contact" variant="filled" className="w-full shrink-0 sm:w-auto">
+        <GlowButton href={company.calendlyUrl} variant="filled" className="w-full shrink-0 sm:w-auto">
           Book a Demo
         </GlowButton>
       </motion.div>

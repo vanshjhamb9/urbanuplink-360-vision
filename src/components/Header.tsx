@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/brand/Logo";
 import { GlowButton } from "@/components/ui-custom/GlowButton";
-import { navLinks } from "@/lib/brand";
+import { company, navLinks } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 
 const Header = () => {
@@ -66,14 +66,14 @@ const Header = () => {
             </nav>
 
             <div className="relative z-10 hidden items-center lg:flex">
-              <GlowButton href="/contact" variant="filled" className="px-5 py-2.5 text-sm">
+              <GlowButton href={company.calendlyUrl} variant="filled" className="px-5 py-2.5 text-sm">
                 Book Demo
               </GlowButton>
             </div>
 
             <div className="flex items-center gap-2 max-[380px]:gap-1 lg:hidden">
               <GlowButton
-                href="/contact"
+                href={company.calendlyUrl}
                 variant="filled"
                 className="hidden px-4 py-2 text-xs min-[381px]:inline-flex"
               >
@@ -150,7 +150,7 @@ const Header = () => {
               </ul>
 
               <div className="mt-auto border-t border-white/10 pt-6">
-                <GlowButton href="/contact" variant="filled" className="w-full">
+                <GlowButton href={company.calendlyUrl} variant="filled" className="w-full">
                   Book Demo
                 </GlowButton>
               </div>

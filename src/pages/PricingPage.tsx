@@ -23,6 +23,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { company } from "@/lib/brand";
 
 type BillingPeriod = "monthly" | "annually";
 
@@ -92,7 +93,7 @@ const plans: Plan[] = [
       "Dashboard Access",
     ],
     cta: "Start Free Trial",
-    ctaHref: "/contact",
+    ctaHref: company.calendlyUrl,
     popular: false,
   },
   {
@@ -125,7 +126,7 @@ const plans: Plan[] = [
       "Dashboard Access",
     ],
     cta: "Start Free Trial",
-    ctaHref: "/contact",
+    ctaHref: company.calendlyUrl,
     popular: true,
   },
   {
@@ -147,7 +148,7 @@ const plans: Plan[] = [
       "Custom Workflows",
     ],
     cta: "Book a Demo",
-    ctaHref: "https://calendly.com/admin-urbanuplink/30min",
+    ctaHref: company.calendlyUrl,
     popular: false,
   },
 ];
@@ -695,7 +696,13 @@ const PricingPage = () => {
 
                     <CardFooter className="mt-auto border-t border-border/40 bg-background/40 pt-6 backdrop-blur-sm">
                       <Button className="w-full" variant="outline" size="lg" asChild>
-                        <a href="/contact">{service.cta}</a>
+                        <a
+                          href={company.calendlyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {service.cta}
+                        </a>
                       </Button>
                     </CardFooter>
                   </Card>
@@ -716,7 +723,7 @@ const PricingPage = () => {
               </div>
               <Button size="lg" variant="secondary" className="min-w-[200px]" asChild>
                 <a
-                  href="https://calendly.com/admin-urbanuplink/30min"
+                  href={company.calendlyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -6,7 +6,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { SectionHeading } from "@/components/ui-custom/SectionHeading";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { GlowButton } from "@/components/ui-custom/GlowButton";
+import { company } from "@/lib/brand";
+import { Calendar, Mail, Phone, MapPin, Send } from "lucide-react";
 
 import { useToast } from "@/components/ui/use-toast";
 
@@ -64,20 +66,23 @@ const ContactPage = () => {
     {
       icon: Mail,
       title: "Email Us",
-      details: "hello@urbanuplink.com",
+      details: company.email,
+      href: `mailto:${company.email}`,
       description: "For general inquiries and support",
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: "+91 80 1234 5678",
-      description: "Mon-Fri from 9am to 6pm IST",
+      details: company.phone,
+      href: company.phoneHref,
+      description: "Mon–Fri from 9am to 6pm IST",
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      details: "Indiranagar, Bangalore",
-      description: "Karnataka, India",
+      details: company.address.line1,
+      href: undefined as string | undefined,
+      description: `${company.address.line2}, ${company.address.line3}`,
     },
   ];
 
@@ -111,14 +116,37 @@ const ContactPage = () => {
                 </h2>
                 <p className="text-sm leading-relaxed text-muted-brand md:text-base">
                   Ready to upgrade your visual documentation? Reach out to us
-                  through any of these channels.
+                  through any of these channels, or book a live demo.
                 </p>
               </div>
 
+              <div className="rounded-2xl border border-brand-lime/25 bg-brand-lime/[0.08] p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-brand-lime/30 bg-brand-lime/15">
+                    <Calendar className="h-6 w-6 text-brand-lime" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="mb-1 text-lg font-semibold text-white">
+                      Book a Demo
+                    </h4>
+                    <p className="mb-4 text-sm text-muted-brand">
+                      Schedule a live walkthrough of Urban Uplink on Calendly.
+                    </p>
+                    <GlowButton
+                      href={company.calendlyUrl}
+                      variant="filled"
+                      className="w-full justify-center sm:w-auto"
+                    >
+                      Open Calendly
+                    </GlowButton>
+                  </div>
+                </div>
+              </div>
+
               <div className="grid gap-6">
-                {contactInfo.map((item, index) => (
+                {contactInfo.map((item) => (
                   <Card
-                    key={index}
+                    key={item.title}
                     className="border-white/10 bg-gradient-card transition-colors hover:border-brand-lime/30"
                   >
                     <CardContent className="flex items-start gap-4 p-6">
@@ -129,9 +157,18 @@ const ContactPage = () => {
                         <h4 className="mb-1 text-lg font-semibold text-white">
                           {item.title}
                         </h4>
-                        <p className="mb-1 font-medium text-white/90">
-                          {item.details}
-                        </p>
+                        {item.href ? (
+                          <a
+                            href={item.href}
+                            className="mb-1 block font-medium text-white/90 transition-colors hover:text-brand-lime"
+                          >
+                            {item.details}
+                          </a>
+                        ) : (
+                          <p className="mb-1 font-medium text-white/90">
+                            {item.details}
+                          </p>
+                        )}
                         <p className="text-sm text-muted-brand">
                           {item.description}
                         </p>
@@ -141,17 +178,9 @@ const ContactPage = () => {
                 ))}
               </div>
 
-              <div className="rounded-2xl border border-brand-lime/15 bg-brand-lime/[0.05] p-6">
-                <p className="font-heading text-base font-extrabold text-white">
-                  Trusted by dealerships &amp; operators
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-white/65">
-                  &ldquo;Urban Uplink revolutionized how we showcase our inventory.&rdquo;
-                </p>
-                <p className="mt-3 text-xs text-white/45">
-                  — Dealer partner, marketplace listing team
-                </p>
-              </div>
+              <p className="text-xs text-white/40">
+                {company.legalName} · CIN {company.cin}
+              </p>
             </div>
 
             {/* Contact Form Side */}
