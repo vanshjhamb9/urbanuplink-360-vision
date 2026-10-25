@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import TrustStrip from "@/components/TrustStrip";
 import ListingGapSection from "@/components/ListingGapSection";
 import ListingComparisonSection from "@/components/ListingComparisonSection";
 import ValuePropositionSection from "@/components/ValuePropositionSection";
@@ -26,8 +25,6 @@ const Index = () => {
       <main id="main-content">
         {/* 01 — Hero */}
         <Hero />
-        {/* 15 — Trust strip */}
-        <TrustStrip />
         {/* 02 — Listing Gap workflow */}
         <ListingGapSection />
         {/* 03 — Kia Seltos before / after background removal */}

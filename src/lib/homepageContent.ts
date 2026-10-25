@@ -177,16 +177,3 @@ export const finalCtaCopy = {
   tagline: "Urban Uplink",
   subtagline: "Smarter tools. Greater impact.",
 };
-
-/** §15 — Trust strip (under hero) */
-export const trustStrip = {
-  label: "Trusted by dealers, insurers, and fleets across India",
-  partners: [
-    "TRUE VALUE",
-    "MARUTI SUZUKI",
-    "Spinny",
-    "ACKO",
-    "mahindra",
-    "CARS24",
-  ],
-} as const;
